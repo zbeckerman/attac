@@ -1,0 +1,682 @@
+/* REXX script to colonize a planet for good and evil players. */
+/* Written by earth for ATTAC TCP/IP Helper */
+/* http://www.tw-attac.com  */
+
+
+Call ZocRespond "Option? (A,D,", "A20^M" 
+Call ZocRespond "Avoid this sector in the", "N"
+CALL ZocRespond "[Pause]", " "
+CALL ZocRespond "make this jump blind?", "n"
+
+
+/*
+  attac_arg1 = sector
+  attac_arg2 = sector2
+  attac_arg3 = cycles
+  attac_arg4 = planet to put cargo on
+  attac_arg5 = keep - what we are buying
+  attac_arg6 = wayToTerra
+  attac_arg7 = wayFromTerra
+  attac_arg8 = fueltotake
+  attac_arg9 = takefuelfromplanet
+  attac_arg10 = worstFactor
+  attac_arg11 = haggleType
+*/
+
+haggleType = attac_arg11
+if haggleType="ATTAC_ARG11" then do
+  haggleType= ZocRequest("What type of Haggling are we using?", "Worst Price", "Best Price", "Asking Price")
+end
+
+warp1 = "Regular Warping"
+warp2 = "Transwarp"
+warp3 = "Planetary Transport"
+callerresult=0
+
+/* Stop colonizer if you see this */
+/* BadPeople = "[4]," */
+BadPeople = "[put a corp number here],"
+
+sector = attac_arg1
+IF sector = "ATTAC_ARG1" THEN DO
+  CALL ZocSend "d"
+  CALL ZocWait "]:["
+  sector = GrabIt("]")
+END
+
+sector2 = attac_arg2
+IF sector2 = "ATTAC_ARG2" THEN DO
+    sector2 = ZocAsk("What sector is the port in?", "")
+END
+
+cycles = attac_arg3
+IF cycles = "ATTAC_ARG3" THEN DO
+  cycles = ZocAsk("How many cycles should we do?", "")
+  IF cycles < 1 THEN DO
+    SIGNAL Abend
+  END
+END
+call ATTAC_SetCounterMax(cycles)
+
+keep = attac_arg5
+IF keep = "ATTAC_ARG5" THEN DO
+    keep= ZocRequest("What are we Selling here?", "Fuel Ore", "Organics", "Equipment")
+END
+
+if attac_arg10 = "ATTAC_ARG10" THEN attac_arg10 = "140"
+
+CALL ZocSend "i"
+CALL ZocWait("Total Holds    : ")
+total_holds = GrabIt(" ")
+
+sectortotal = ATTAC_GetTotalSectors() 
+IF sectortotal = "" THEN sectortotal = ZocAsk("How many sectors are in this game?", sectortotal) 
+IF sectortotal = "" THEN SIGNAL Abend
+
+IF sector ^= sector2 THEN DO
+  ptthere = attac_arg6
+  IF ptthere = "ATTAC_ARG6" then do
+	ptthere = ZocRequest("How do you want to move there?", warp1, warp2, warp3)
+	IF ptthere = "" THEN SIGNAL Abend
+  END
+
+  ptback = attac_arg7
+  IF ptback = "ATTAC_ARG7" then do
+	ptback = ZocRequest("How do you want to moveback?", warp1, warp2)
+  	IF ptback = "" THEN SIGNAL Abend
+  END
+END
+
+
+CALL ZocSend "l"
+NoPScan = ZocWaitMux("free cargo holds", "Registry#")
+CALL ZocSend "q^M"
+
+IF sector ^= sector2 THEN DO
+  CALL ZocSend "1^M"
+  call attac_message("Checking for Transwarp Drive")
+  hasTwarpDrive = ZocWaitMux("shortest path","engage the TransWarp")
+  if hasTwarpDrive=1 then do
+    CALL ZocSend "NN"
+    call attac_message("Active Transwarp drive found")
+  end
+  else do
+   CALL ZocSend "N"
+   call attac_message("No active transwarp drive found")
+  end
+end
+
+planet = attac_arg9
+
+IF planet="ATTAC_ARG9" THEN planet=""
+
+IF sector ^= sector2 THEN DO
+  IF ptthere = warp2 | ptthere = warp3 | ptback = warp2 THEN DO
+    IF NoPScan = 1 THEN DO
+      IF planet = "" then DO
+	      planet = ZocAsk("Get fuel from which planet?", "")
+	      IF planet = "" THEN DO
+	        SIGNAL Abend
+  	      END
+      END
+    END
+  END
+END
+
+drop = attac_arg4
+IF drop = "ATTAC_ARG4" then DO
+  drop = ZocAsk("Take cargo from which planet?", planet)
+  IF drop = "" THEN DO
+    SIGNAL Abend
+  END
+END
+
+
+IF sector = sector2 | (ptthere = warp1 & ptback = warp1) THEN DO
+  planet = drop
+END 
+
+if keep = "Fuel Ore" then group=1
+if keep = "Organics" then group=2
+if keep = "Equipment" then group=3
+
+/* this is so we can automatically stop the colonizer if we see an enemy */
+stopme = 0
+fuel = 0
+IF sector ^=sector2 THEN DO
+  IF attac_arg8 = "ATTAC_ARG8" | attac_arg8= "AUTO" THEN DO
+    IF ptthere = warp2 | ptback = warp2 THEN DO
+      CALL ZocSend "c"
+      call ZocWait "Computer activated"
+    END
+    IF ptthere = warp2 THEN DO
+      CALL ZocSend "f"
+      CALL ZocSend sector
+      CALL ZocSend "^M"
+      CALL ZocSend sector2
+      call ZocClearBuffer()
+      CALL ZocSend "^M"
+      CALL ZocWait "shortest path ("
+      CALL ZocWait " hops,"
+      data = zoclastline()
+      data = substr(data, 1, length(data)-6)
+      fuel = fuel + (data *3)
+    END
+
+    IF ptback = warp2 THEN DO
+      CALL ZocSend "f"
+      CALL ZocSend sector2
+      CALL ZocSend "^M"
+      CALL ZocSend sector
+      call ZocClearBuffer()
+      CALL ZocSend "^M"
+      CALL ZocWait "shortest path ("
+      CALL ZocWait " hops,"
+      data = zoclastline()
+      data = substr(data, 1, length(data)-6)
+      fuel = fuel + (data *3)
+      CALL ZocSend "q"
+      call ZocWait "<Computer deactivated>"
+    END
+    ELSE IF ptthere = warp2 & ptback = warp1 THEN DO 
+      CALL ZocSend "q"
+      call ZocWait "<Computer deactivated>"	
+    END
+  END
+  ELSE DO
+    fuel = attac_arg8
+  END
+END
+
+cycle=0
+
+DO until cycle = cycles
+  CALL ZocSend "l"
+
+  IF NoPScan = 1 THEN DO
+    CALL ZocSend drop
+    CALL ZocSend "^M"
+  END
+  CALL ZocWait "free cargo holds."
+  CALL ZocSend "tnt"
+  call ZocClearBuffer()
+  CALL ZocSend group
+  CALL ZocSend total_holds-fuel
+  CALL ZocSend "^M"
+  if cycle>0 then do
+    result1 = ZocWaitMux("load"," aren't that many")
+    if result1 = 1 then do
+      call attac_message("You aren't that many on the planet")
+      exit
+    end
+  end
+
+  if callerresult=3 then do
+	/* minumum amount at port was reached. exit */
+        exit
+  end
+
+
+  IF planet <> drop THEN DO
+    CALL ZocSend "q"
+    CALL ZocSend "l"
+    IF NoPScan = 1 THEN DO
+      CALL ZocSend planet
+      CALL ZocSend "^M"
+    END
+    CALL ZocWait "free cargo holds."
+  END
+
+  IF sector ^= sector2 THEN DO
+
+    IF ptthere = warp2 | ptback=warp2 THEN DO
+      CALL ZocSend "tnt1"
+      CALL ZocSend fuel || "^M"
+      CALL ZocWait "your ship"
+    END
+    IF ptthere = warp1 THEN DO
+      CALL ZocSend "q"
+      CALL ZocWait "Blasting off from"
+      CALL ZocSend("M" || sector2 || "^M")
+      result1 = ZocWaitMux("the TransWarp drive?","Engage the Autopilot?","Sector  : " || sector2)
+      if result1 = 0 THEN DO
+        CALL ZocSend "ne"
+ 	call zocwait "Arriving sector"
+      END
+      if result1 = 1 THEN DO
+        CALL ZocSend "e"
+ 	call zocwait "Arriving sector"
+      END
+      if result1 = 2 THEN DO
+	/* nothing */
+	CALL ZocSend ""
+      END
+    END
+
+    IF ptthere = warp2 THEN DO
+      CALL ZocSend "q"
+      CALL ZocWait "Blasting off from"
+
+      CALL ZocSend("M" || sector2 || "^M")
+      if hasTwarpDrive = 1 THEN DO
+        CALL ZocSend "y"
+        CALL ZocWait "Locating beam pinpointed"
+        CALL ZocSend "y"
+        CALL ZocWait "Warps to Sector"
+      END
+      else do
+        call attac_message("You cannnot select transwarp drive if you do not have one")
+        exit
+      end
+    END
+    IF ptthere = warp3 THEN DO
+      CALL ZocSend "c"
+      CALL ZocWait "Citadel treasury"
+      CALL ZocSend "b"
+      CALL ZocWait "has a range of"
+      CALL ZocSend sector2 || "^M"
+      CALL ZocWait "Locating beam pinpointed"
+      CALL ZocSend "y"
+
+      result = ZocWaitMux("Warps to Sector", BadPeople)
+      IF result = 1 THEN DO
+       stopme = 1
+       result = ZocWait("Warps to Sector")
+      END
+      IF result = 640 THEN SIGNAL Abend
+
+    END
+  END
+  ELSE DO
+    CALL ZocSend "q"
+    CALL ZocWait "Blasting off from"
+  END 
+
+  if keep = "Fuel Ore" then buyType="FUELORE"
+  if keep = "Organics" then buyType="ORGANICS"
+  if keep = "Equipment" then buyType="EQUIPMENT"
+
+  callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType, total_holds-fuel, total_holds, total_holds)
+
+  /* break out of loop if done */
+  if callerresult =1 then do
+    dead=0
+  end
+
+  /* keep cycling here when  you get rejected */
+  do while dead=1
+    dead = 0
+    call ATTAC_Message("Your offer was just rejected at port " || sector1)
+    callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType, total_holds-fuel, total_holds, total_holds)
+    /* break out of loop if done */
+    if callerresult = 1 then do
+      dead = 0
+    end
+  end
+
+  CALL ATTAC_UpdateCounter(1)
+
+
+  IF sector ^= sector2 THEN DO
+    CALL ZocSend("M" || sector || "^M")
+
+    IF ptback = warp1 THEN DO
+      result = ZocWaitMux("the TransWarp drive?","Engage the Autopilot?","Sector  : " || sector)
+      SELECT
+        WHEN result = 0 THEN DO
+          CALL ZocSend "ne"
+ 	  call zocwait "Arriving sector"
+        END
+        WHEN result = 1 THEN DO
+          CALL ZocSend "e"
+ 	  call zocwait "Arriving sector"
+        END
+        WHEN result = 2 THEN DO
+	  /* nothing */
+        END
+      END
+    END
+    IF ptback = warp2 THEN DO
+      if hasTwarpDrive = 1 THEN DO
+        CALL ZocSend "y"
+        CALL ZocWait "Locating beam pinpointed"
+        CALL ZocSend "y"
+        CALL ZocWait "Warps to Sector"
+      END
+      else do
+        call attac_message("You cannot select transwarp drive if you do not have one")
+        exit
+      end
+    END
+  end
+
+  cycle = cycle+1
+END
+
+CALL ZocSend "l"
+IF NoPScan = 1 THEN DO
+  CALL ZocSend drop
+  CALL ZocSend "^M"
+END
+CALL ZocSend "tnt"
+CALL ZocSend group
+CALL ZocSend "^M"
+result1 = ZocWaitMux("load"," aren't that many")
+if result1 = 1 then do
+  call attac_message("You aren't that many on the planet")
+  exit
+end
+
+CALL ZocSend "q"
+CALL ZocSend "d"
+EXIT
+
+PORTANDTRADE:
+  buying = arg(1)
+  CALL ZocSend "pt"
+
+     /* turn check */
+  result= ZocWaitMux("deducted, ","Commerce report for")
+  if result=0 then do
+    turns = GrabIt(" ")
+    IF turns < 10 THEN x = 1
+  end
+
+  do while result<3
+    result= ZocWaitMux("Ore do you want","Organics do you want","Equipment do you want","Agreed,","Command")   
+    SELECT         
+      WHEN result=0 THEN x=1         
+      WHEN result=1 THEN x=2         
+      WHEN result=2 THEN x=3
+      OTHERWISE x=4    
+    END    
+
+    SELECT 
+      WHEN x=1 & buying = "Fuel Ore" THEN call ZocSend "^M"
+      WHEN x=2 & buying = "Organics" THEN call ZocSend "^M"
+      WHEN x=3 & buying = "Equipment" THEN call ZocSend "^M"
+      WHEN x=4 THEN result=3
+      OTHERWISE call ZocSend "0^M" 
+    END
+  END
+
+  call zocwait " them for "
+
+  offer1=GETITALL(0,0)
+
+  if haggleType="Worst Price" then do
+     z=BUYHAGGLEWORST(offer1)
+  end
+  else if haggleType="Best Price" then do
+     z=BUYHAGGLEBEST(offer1)
+  end 
+  else if haggleType="Asking Price" then do
+     Call ZocSend offer1 ||"^M"
+  end
+  else do
+     Call ZocSend "^M"
+  end 
+
+
+  call zocwait "Command ["
+
+
+return
+
+Abend:
+  CALL ZocMsgBox "Script ended abnormally.", 1
+  EXIT
+
+RunLikeHell:
+  CALL ZocMsgBox "Script stopped since someone from corp #" || BadPeople || " is online.", 1
+  EXIT
+
+GrabIt:
+  ARG delimiter
+  it = ""
+  CALL ZocWait delimiter
+  buffer = ZocLastLine()
+  DO ptr = 1 TO LENGTH(buffer)
+    ch = SUBSTR(buffer, ptr, 1)
+    IF ch <> delimiter THEN DO
+      IF ch <> "," THEN it = it || ch
+    END
+  END
+RETURN it
+
+gety:
+  xy = ZocCursor()
+  PARSE VALUE xy WITH x y
+  return y
+
+getx:
+  xy = ZocCursor()
+  PARSE VALUE xy WITH x y
+  return x
+
+_stripnum2: /* strip everything but numerals */
+ stnum=""
+ do sti=1 to length(arg(1))
+  stchar=substr(arg(1),sti,1)
+  if _in(stchar,1,2,3,4,5,6,7,8,9,0) then stnum=stnum||stchar
+ end /* do */
+return stnum
+
+_in:
+ ir=0
+ ii=2
+
+ if (arg(1)=="") | (arg(2)=="") then idone=1
+ else idone=0
+
+ do while \idone
+  if arg(1)==arg(ii) then do
+   ir=1
+   idone=1
+  end /* if */
+  ii=ii+1
+  if arg(ii)=="" then idone=1
+ end /* do while */
+return ir
+
+_quit:
+EXIT
+
+
+GETITALL:
+holdfinal=""
+  call zocwait " cre"
+  holds=zoclastline()
+  holds = substr(holds, 1, length(holds)-4)
+  DO addchar=1 to length(holds)
+    holdsit=substr(holds,addchar,1)
+    if holdsit<>"," then holdfinal=holdfinal||holdsit
+  END
+RETURN holdfinal
+                                                          
+
+BUYHAGGLEWORST:
+offer1=arg(1)
+
+haggle106=offer1*(attac_arg10)/100-1 
+haggle106=trunc(haggle106,0)
+haggle105=offer1*(attac_arg10-3)/100-1 
+haggle105=trunc(haggle105,0)
+haggle104=offer1*(attac_arg10-6)/100-1 
+haggle104=trunc(haggle104,0)
+haggle103=offer1*(attac_arg10-12)/100-1 
+haggle103=trunc(haggle103,0)
+haggle102=offer1*(attac_arg10-15)/100-1 
+haggle102=trunc(haggle102,0)
+haggle101=offer1*(100/100)-1
+haggle101=trunc(haggle101,0)
+
+call zocsend haggle106
+call zocsend "^M"
+
+a=3
+DO WHILE a<>0
+result= ZocWaitMux("We'll buy them for", "You have", "we're not int", "final offer","Your offer [")
+SELECT
+        WHEN result=0 THEN x=1
+        WHEN result=1 THEN x=2
+        WHEN result=2 THEN x=3
+        WHEN result=3 THEN x=4
+        WHEN result=4 THEN x=5
+end
+
+if x=1 then DO
+        if a=4 then do
+        call zocsend haggle105
+        call zocsend "^M"
+        end
+        if a=3 then do
+        call zocsend haggle104
+        call zocsend "^M"
+        end
+        if a=2 then do
+        call zocsend haggle103
+        call zocsend "^M"
+        end
+        if a=1 then do
+        call zocsend haggle102
+        call zocsend "^M"
+        end
+        if a=0 then do
+        call zocsend haggle101
+        call zocsend "^M"
+        end
+a=a-1
+end
+
+if x=2 then do
+        a=0
+        return(0)
+        end
+if x=3 then do
+        return(0)
+        dead=1
+end
+if x=4 then do
+        call zocsend haggle103
+        call zocsend "^M"
+        return(0)
+end
+if x=5 then do
+	/* lower the worst percent */
+	attac_arg10 = attac_arg10-5
+	haggle106=offer1*(attac_arg10)/100-1 
+	haggle106=trunc(haggle106,0)
+	
+	call zocsend haggle106
+	call zocsend "^M"
+end
+
+END
+
+RETURN(0)
+
+
+BUYHAGGLEBEST:                 
+
+offer1=arg(1) 
+haggle106=offer1*94/100-1 
+haggle106=trunc(haggle106,0) 
+haggle105=offer1*95/100-1 
+haggle105=trunc(haggle105,0) 
+haggle104=offer1*96/100-1 
+haggle104=trunc(haggle104,0) 
+haggle103=offer1*97/100-1 
+haggle103=trunc(haggle103,0) 
+haggle102=offer1*98/100-1 
+haggle102=trunc(haggle102,0) 
+haggle101=offer1*99/100-1 
+haggle101=trunc(haggle101,0)  
+haggle100=offer1*(100/100)
+haggle100=trunc(haggle100,0)  
+
+IF attac_arg5=1 THEN DO
+  call zocsend haggle100
+  call zocsend "^M"  
+  a=1
+END
+ELSE DO
+  call zocsend haggle105 
+  call zocsend "^M" 
+  a=3 
+END
+
+DO WHILE a<>0 
+	result= ZocWaitMux("You have", "Your offer [", "We're not int") 
+	SELECT         
+		WHEN result=0 THEN x=2         
+		WHEN result=1 THEN x=1         
+		WHEN result=2 THEN x=3 
+	end  
+
+	if x=1 then DO         
+		if a=4 then do         
+			call zocsend haggle105         
+			call zocsend "^M"         
+		end         
+		if a=3 then do         
+			call zocsend haggle104         
+			call zocsend "^M"         
+		end         
+		if a=2 then do         
+			call zocsend haggle103         
+			call zocsend "^M"         
+		end         
+		if a=1 then do         
+			call zocsend haggle102         
+			call zocsend "^M"         
+		end         
+		if a=0 then do         
+			call zocsend haggle101         
+			call zocsend "^M"         
+		end 
+		
+		a=a-1 
+	end  
+
+	if x=2 then do         
+		a=0 	
+		dead=0         
+		return(0)         
+	end 
+
+	if x=3 then do   	
+		c=0   
+		d=0   
+		result= ZocWaitMux("Command [TL=", "Organics do you want", "Equipment do you want")   
+		SELECT         
+			WHEN result=0 THEN c=1         
+			WHEN result=1 THEN c=2         
+			WHEN result=2 THEN c=3   
+		end   
+		
+		if c=2 then do    
+			call ZocSend "0^M"    
+			result= ZocWaitMux("Command [TL=", "Equipment do you want")    
+			SELECT         
+				WHEN result=0 THEN d=1         
+				WHEN result=1 THEN d=2    
+			end    
+			
+			if d=2 then do     
+				call ZocSend "0^M"    
+			end		   
+		end   
+	
+		if c=3 then do     
+			call ZocSend "0^M"     
+		end    
+	
+		a=0   
+		dead=1   
+		return(0) 
+	end  
+
+END  
+
+RETURN(0)     

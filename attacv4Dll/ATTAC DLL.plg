@@ -1,0 +1,81 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ATTAC DLL - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP6C.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "TWATTAC_EXPORTS" /Fp"Debug/ATTAC DLL.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Data\home\zbeckerman\tradewars\attacv4Dll\AbEnds.cpp"
+"D:\Data\home\zbeckerman\tradewars\attacv4Dll\ATTAC.c"
+"D:\Data\home\zbeckerman\tradewars\attacv4Dll\ATTACCRC.c"
+"D:\Data\home\zbeckerman\tradewars\attacv4Dll\Globals.cpp"
+"D:\Data\home\zbeckerman\tradewars\attacv4Dll\TWBFind.cpp"
+"D:\Data\home\zbeckerman\tradewars\attacv4Dll\TWBubble.cpp"
+"D:\Data\home\zbeckerman\tradewars\attacv4Dll\TWSector.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP6C.tmp" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP6D.tmp" with contents
+[
+ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:yes /pdb:"Debug/ATTACv4.pdb" /debug /machine:I386 /out:"debug\ATTACv4.dll" /implib:"Debug/ATTACv4.lib" /pdbtype:sept 
+.\Debug\AbEnds.obj
+.\Debug\ATTAC.obj
+.\Debug\ATTACCRC.obj
+.\Debug\Globals.obj
+.\Debug\TWBFind.obj
+.\Debug\TWBubble.obj
+.\Debug\TWRemaps.obj
+.\Debug\TWSector.obj
+.\Debug\TWWarp.obj
+.\Debug\ATTAC.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP6D.tmp"
+<h3>Output Window</h3>
+Compiling...
+AbEnds.cpp
+ATTAC.c
+ATTACCRC.c
+Globals.cpp
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(21) : warning C4091: 'typedef ' : ignored on left of 'struct TWSectorData' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(31) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinaryHeader' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(38) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinarySectorData' when no variable is declared
+TWBFind.cpp
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(21) : warning C4091: 'typedef ' : ignored on left of 'struct TWSectorData' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(31) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinaryHeader' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(38) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinarySectorData' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twbfind.cpp(319) : warning C4244: '=' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+TWBubble.cpp
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(21) : warning C4091: 'typedef ' : ignored on left of 'struct TWSectorData' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(31) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinaryHeader' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(38) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinarySectorData' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twbubble.cpp(406) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twbubble.cpp(414) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+TWSector.cpp
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(21) : warning C4091: 'typedef ' : ignored on left of 'struct TWSectorData' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(31) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinaryHeader' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.hpp(38) : warning C4091: 'typedef ' : ignored on left of 'struct TWBinarySectorData' when no variable is declared
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(331) : warning C4244: '=' : conversion from 'unsigned long' to 'unsigned short', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(348) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(531) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(534) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(538) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(544) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(547) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(549) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(587) : warning C4244: 'argument' : conversion from 'unsigned long' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(598) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(612) : warning C4018: '<' : signed/unsigned mismatch
+d:\data\home\zbeckerman\tradewars\attacv4dll\twsector.cpp(624) : warning C4244: 'argument' : conversion from 'unsigned short' to 'unsigned char', possible loss of data
+Linking...
+   Creating library Debug/ATTACv4.lib and object Debug/ATTACv4.exp
+
+
+
+<h3>Results</h3>
+ATTACv4.dll - 0 error(s), 27 warning(s)
+</pre>
+</body>
+</html>

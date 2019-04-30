@@ -1,0 +1,11 @@
+zev-server,192.168.1.101,No Registration Id,1.0.1,TWXSyncServer,No,No,Sun May 08 16:59:11 2005
+zev-server,192.168.1.101,No Registration Id,1.0.1,TWXSyncServer,No,No,Sun May 08 16:59:51 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Sun May 08 17:02:50 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Sun May 08 19:26:15 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Sun May 08 23:58:20 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Tue May 10 00:40:02 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Tue May 10 19:45:11 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Tue May 10 22:21:53 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Wed May 11 00:00:22 2005
+zev-server,192.168.1.101,earth's TWXSync Server,1.0.2,TWXSyncServer,No,No,Wed May 11 00:03:22 2005
+zev-server,192.168.1.101,,2.3.4,ATTAC,No,No,Wed Jun 01 19:33:28 2005

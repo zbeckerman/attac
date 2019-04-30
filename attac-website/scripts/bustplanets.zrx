@@ -1,0 +1,124 @@
+/* BP.txt Planet Bust for Exp */
+/* By DigiTalis - Wolfpack!   */
+/* For Zoc 3.13+              */
+/* Modified by earth for ATTAC version 3.x.x */
+/* ATTAC - Tradewars TCP/IP Helper with user-defined scripting ==> http://www.tw-attac.com */
+
+exitflag= 0
+sectflag= 0
+emptyflag= 0
+nomoney= 0
+
+/* Ask if user wants to run BP */
+askppt= ZocMsgBox("Do you wish to run the PlanetBust Script?",2)
+
+IF askppt="##NO##" THEN DO
+   ZocMsgBox("Planet Busting Script Not Run", 0)
+   SIGNAL endit
+end
+
+Call ZocSend "D"
+
+do while nomoney=0
+   call buygds
+   call create
+   call blow
+   call attac_updatecounter(1)
+end
+SIGNAL endit
+/* This is the Buying routine */
+buygds:
+sellflag= 0
+ZocSend "D"
+
+CALL ZocRespond "Command [TL=", "P"
+timeout= ZocWait("Command [TL=")
+CALL ZocRespond "Command [TL="
+
+CALL ZocRespond "Enter your choice", "S"
+timeout= ZocWait("Enter your choice")
+CALL ZocRespond "Enter your choice"
+
+CALL ZocRespond "[Pause]", "^M"
+timeout= ZocWait("[Pause]")
+CALL ZocRespond "[Pause]"
+
+CALL ZocRespond "<StarDock> Where to? (?=Help)", "H"
+timeout= ZocWait("<StarDock> Where to? (?=Help)")
+CALL ZocRespond "<StarDock> Where to? (?=Help)"
+
+CALL ZocRespond "<Hardware Emporium> So what are you looking for", "A"
+timeout= ZocWait("<Hardware Emporium> So what are you looking for (?)")
+CALL ZocRespond "<Hardware Emporium> So what are you looking for"
+
+CALL ZocRespond "How many Atomic Detonators do you want", "1^M"
+timeout= ZocWait("How many Atomic Detonators do you want")
+CALL ZocRespond "How many Atomic Detonators do you want"
+
+CALL ZocRespond "<Hardware Emporium> So what are you looking for", "T"
+timeout= ZocWait("<Hardware Emporium> So what are you looking for (?)")
+CALL ZocRespond "<Hardware Emporium> So what are you looking for"
+
+CALL ZocRespond "How many Genesis Torpedoes do you want", "1^M"
+timeout= ZocWait("How many Genesis Torpedoes do you want")
+CALL ZocRespond "How many Genesis Torpedoes do you want"
+
+CALL ZocRespond "<Hardware Emporium> So what are you looking for", "Q"
+timeout= ZocWait("<Hardware Emporium> So what are you looking for (?)")
+CALL ZocRespond "<Hardware Emporium> So what are you looking for"
+
+CALL ZocRespond "<StarDock> Where to? (?=Help)", "Q"
+timeout= ZocWait("<StarDock> Where to? (?=Help)")
+CALL ZocRespond "<StarDock> Where to? (?=Help)"
+
+return
+
+create:
+ZocSend "D"
+
+CALL ZocRespond "Command [TL=", "U"
+timeout= ZocWait("Command [TL=")
+CALL ZocRespond "Command [TL="
+
+CALL ZocRespond "Do you wish to launch one (Y/N)", "Y"
+timeout= ZocWait("Do you wish to launch one (Y/N)")
+CALL ZocRespond "Do you wish to launch one (Y/N)"
+
+CALL ZocRespond "What do you want to name this planet?", "Command [TL=^M"
+timeout= ZocWait("What do you want to name this planet?")
+CALL ZocRespond "What do you want to name this planet?"
+
+CALL ZocRespond "Should this be a (C)orporate planet or (P)ersonal planet?", "P"
+timeoute= ZocWait("Should this be a (C)orporate planet or (P)ersonal planet?")
+CALL ZocRespond "Should this be a (C)orporate planet or (P)ersonal planet?"
+
+return
+blow:
+
+CALL ZocRespond "Command [TL=", "L"
+timeout= ZocWait("Command [TL=")
+CALL ZocRespond "Command [TL="
+
+Call ZocSend "95^M"
+
+CALL ZocRespond "Planet command", "Z"
+timeout= ZocWait("Planet command")
+CALL ZocRespond "Planet command"
+
+CALL ZocRespond "Planetary Attack Command [Q]", "D"
+timeout= ZocWait("Planetary Attack Command [Q]")
+CALL ZocRespond "Planetary Attack Command [Q]"
+
+CALL ZocRespond "<DANGER> Are you sure you want to do this?", "Y"
+timeout= ZocWait("<DANGER> Are you sure you want to do this?")
+CALL ZocRespond "<DANGER> Are you sure you want to do this?"
+
+CALL ZocRespond "[Pause]", "^M"
+timeout= ZocWait("[Pause]")
+CALL ZocRespond "[Pause]"
+
+return
+
+endit:
+EXIT
+

@@ -1,0 +1,326 @@
+
+
+---------------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<TWXSync version="1">
+  <Session id="5C5A9DFC-A0A8-4229-850B-8698A1DA8C30"/>
+  <Update>
+    <SectorData>
+      <Sector nr="1" updated="1115829656">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>2</Warp>
+          <Warp>3</Warp>
+          <Warp>4</Warp>
+          <Warp>5</Warp>
+          <Warp>6</Warp>
+          <Warp>7</Warp>
+        </Warps>
+        <Port updated="0">
+          <Name>Sol</Name>
+          <Class>0</Class>
+        </Port>
+        <Density>1168</Density>
+      </Sector>
+      <Sector nr="2" updated="1115683856">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>1</Warp>
+          <Warp>3</Warp>
+          <Warp>7</Warp>
+          <Warp>8</Warp>
+          <Warp>9</Warp>
+          <Warp>10</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>Aralen</Name>
+          <Class>1</Class>
+          <FuelOre>
+            <Amount>10550</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>3400</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>2800</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Density>101</Density>
+      </Sector>
+      <Sector nr="3" updated="1115683856">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>1</Warp>
+          <Warp>2</Warp>
+          <Warp>4</Warp>
+        </Warps>
+        <Density>1</Density>
+      </Sector>
+      <Sector nr="4" updated="1115683856">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>1</Warp>
+          <Warp>3</Warp>
+          <Warp>5</Warp>
+          <Warp>18252</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>Pennington</Name>
+          <Class>1</Class>
+          <FuelOre>
+            <Amount>1380</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>1310</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>2680</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Density>101</Density>
+      </Sector>
+      <Sector nr="5" updated="1115683856">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>1</Warp>
+          <Warp>4</Warp>
+          <Warp>6</Warp>
+          <Warp>7077</Warp>
+        </Warps>
+        <Density>1</Density>
+      </Sector>
+      <Sector nr="6" updated="1115683856">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>1</Warp>
+          <Warp>5</Warp>
+          <Warp>7</Warp>
+          <Warp>12151</Warp>
+          <Warp>12159</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>Armscor Annex</Name>
+          <Class>2</Class>
+          <FuelOre>
+            <Amount>2920</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>860</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>2450</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Density>101</Density>
+      </Sector>
+      <Sector nr="7" updated="1115683856">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>1</Warp>
+          <Warp>2</Warp>
+          <Warp>6</Warp>
+          <Warp>8</Warp>
+          <Warp>2964</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>Delalt</Name>
+          <Class>2</Class>
+          <FuelOre>
+            <Amount>2610</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>562</Amount>
+            <Percentage>65</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>631</Amount>
+            <Percentage>72</Percentage>
+          </Equipment>
+        </Port>
+        <Density>101</Density>
+      </Sector>
+      <Sector nr="8" updated="1115599389">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>2</Warp>
+          <Warp>7</Warp>
+          <Warp>5712</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>New Reorx</Name>
+          <Class>5</Class>
+          <FuelOre>
+            <Amount>2210</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>2870</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>1050</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Density>101</Density>
+      </Sector>
+      <Sector nr="9" updated="1115356910">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>2</Warp>
+          <Warp>10</Warp>
+          <Warp>2776</Warp>
+          <Warp>16943</Warp>
+        </Warps>
+        <Density>1</Density>
+      </Sector>
+      <Sector nr="10" updated="1115357415">
+        <Space>The Federation</Space>
+        <Beacon>FedSpace, FedLaw Enforced</Beacon>
+        <Warps>
+          <Warp>2</Warp>
+          <Warp>9</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>Jarnus II</Name>
+          <Class>3</Class>
+          <FuelOre>
+            <Amount>800</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>1020</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>960</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Density>139</Density>
+      </Sector>
+      <Sector nr="12" updated="1115599194">
+        <Space>uncharted space</Space>
+        <Warps>
+          <Warp>18036</Warp>
+          <Warp>19733</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>Craven Major</Name>
+          <Class>6</Class>
+          <FuelOre>
+            <Amount>2970</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>2520</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>1310</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Fighters discovered="1115599194">
+          <Amount>1</Amount>
+          <Type>Defensive</Type>
+          <Owner corp="true">1</Owner>
+        </Fighters>
+        <Density>105</Density>
+      </Sector>
+      <Sector nr="15" updated="1115395053">
+        <Warps/>
+        <Fighters discovered="1115395053">
+          <Amount>1</Amount>
+          <Type>Defensive</Type>
+          <Owner corp="true">1</Owner>
+        </Fighters>
+      </Sector>
+      <Sector nr="16" updated="1115081256">
+        <Warps/>
+        <Fighters discovered="1115081256">
+          <Amount>1</Amount>
+          <Type>Defensive</Type>
+          <Owner corp="true">1</Owner>
+        </Fighters>
+      </Sector>
+      <Sector nr="17" updated="1115691676">
+        <Space>uncharted space</Space>
+        <Warps>
+          <Warp>6782</Warp>
+          <Warp>19319</Warp>
+        </Warps>
+        <Port updated="1115656573">
+          <Name>Maximin Major</Name>
+          <Class>6</Class>
+          <FuelOre>
+            <Amount>2770</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>1000</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>960</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Fighters discovered="1115691676">
+          <Amount>1</Amount>
+          <Type>Defensive</Type>
+          <Owner corp="true">1</Owner>
+        </Fighters>
+        <Density>105</Density>
+      </Sector>
+      <Sector nr="18" updated="1115571148">
+        <Space>uncharted space</Space>
+        <Warps>
+          <Warp>12528</Warp>
+        </Warps>
+        <Port updated="1115601792">
+          <Name>Drude II</Name>
+          <Class>2</Class>
+          <FuelOre>
+            <Amount>1400</Amount>
+            <Percentage>100</Percentage>
+          </FuelOre>
+          <Organics>
+            <Amount>1540</Amount>
+            <Percentage>100</Percentage>
+          </Organics>
+          <Equipment>
+            <Amount>2930</Amount>
+            <Percentage>100</Percentage>
+          </Equipment>
+        </Port>
+        <Fighters discovered="1115571148">
+          <Amount>1</Amount>
+          <Type>Defensive</Type>
+          <Owner corp="true">1</Owner>
+        </Fighters>
+        <Density>105</Density>
+      </Sector>
+    </SectorData>
+  </Update>
+</TWXSync>

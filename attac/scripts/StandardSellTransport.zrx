@@ -1,0 +1,383 @@
+/* REXX (CREATED BY ZOC LEARN MODE) */
+
+/*
+  attac_arg1 = ship1
+  attac_arg2 = password1
+  attac_arg3 = type1
+  attac_arg4 = planet1
+  attac_arg5 = ship2
+  attac_arg6 = password2
+  attac_arg7 = type2
+  attac_arg8 = planet2
+  attac_arg9 = ship3
+  attac_arg10 = password3
+  attac_arg11 = type3
+  attac_arg12 = planet3
+  attac_arg13 = ship4
+  attac_arg14 = password4
+  attac_arg15 = type4
+  attac_arg16 = planet4
+  attac_arg17 = cycles
+  attac_arg18 = stealing
+  attac_arg19 = stealFactor
+*/
+
+CALL ZocTimeout 3600
+Call ZocRespond "Option? (A,D,", "A999^M"
+Call ZocRespond "Avoid this sector in the", "N"
+CALL ZocRespond "Stop in this sector", "N"
+CALL ZocRespond "[Pause]", "^M"
+
+count_port_upgrades = 0   /* initialize this to 0 */
+
+sectortotal = ATTAC_GetTotalSectors()
+IF sectortotal="" THEN DO
+  sectortotal = ZocAsk("How many sectors are in this game?", sectortotal)
+  IF sectortotal = "" THEN SIGNAL Abend
+END
+
+
+  ship1 = attac_arg1
+  password1 = attac_arg2
+  type1 = attac_arg3
+  planet1 = attac_arg4
+  ship2 = attac_arg5
+  password2 = attac_arg6
+  type2 = attac_arg7
+  planet2 = attac_arg8
+  ship3 = attac_arg9
+  password3 = attac_arg10
+  type3 = attac_arg11
+  planet3 = attac_arg12
+  ship4 = attac_arg13
+  password4 = attac_arg14
+  type4 = attac_arg15
+  planet4 = attac_arg16
+
+  cycles = attac_arg17
+  IF cycles = "ATTAC_ARG17" THEN cycles=9999
+
+  stealing = attac_arg18
+
+  steal_factor = attac_arg19
+  IF steal_factor = "ATTAC_ARG19" then steal_factor=30
+
+call ATTAC_SetCounterMax(cycles)
+
+IF ship1 = "SHIP1" THEN DO
+  ship1 = ZocAsk("What is the first ship number?","")
+  password1 = ZocAsk("What is that ship's Password (leave blank if no password)?","")
+  type1 = "SELL"
+END
+
+IF ship2 = "SHIP2" THEN DO
+  ship2 = ZocAsk("What is the second ship number?","")
+  password2 = ZocAsk("What is that ship's Password (leave blank if no password)?","")
+  type2 = "SELL"
+END
+
+
+call zocsend "i"
+CALL ZocWait("Rank and Exp   : ")
+exp = GrabIt(" ")
+call zocwait("Total Holds    : ")
+total_holds = GrabIt(" ")
+call zocwait "- "
+call zocwait "="
+holdsstring= zoclastline()
+myholds = substr(holdsstring, 1, length(holdsstring)-1)
+
+if (lower(myholds) \="equipment") then do
+  call attac_message ("You must fill your holds with equipment")
+  exit
+end
+
+if lower(myholds) = "fuel ore" then buyType="FUELORE"
+if lower(myholds) = "organics" then buyType="ORGANICS"
+if lower(myholds) = "equipment" then buyType="EQUIPMENT"
+
+cycle=0
+DO UNTIL cycle = cycles
+
+  IF type1 = "SELL" THEN DO
+    callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+
+    /* break out of loop if done */
+    if callerresult =1 then do
+      dead=0
+    end
+
+    /* keep cycling here when  you get rejected */
+    do while dead=1
+      dead = 0
+      call ATTAC_Message("Your offer was just rejected at port")
+      callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+      /* break out of loop if done */
+      if callerresult = 1 then do
+        dead = 0
+      end
+    end
+  END
+  IF type1 = "DUMP" THEN DO
+    DUMPTOPLANET(planet1)
+  END
+
+  z=STEAL(holdz)
+  do while z=2
+    z=STEAL(holdz)
+  end
+
+  if z=1 then do
+    call attac_message ("Busted")
+    exit 
+  end
+
+  CALL SHIPTRANSPORT(ship2, password2)
+
+  IF type2 = "SELL" THEN DO
+    callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+
+    /* break out of loop if done */
+    if callerresult =1 then do
+      dead=0
+    end
+
+    /* keep cycling here when  you get rejected */
+    do while dead=1
+      dead = 0
+      call ATTAC_Message("Your offer was just rejected at port")
+      callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+      /* break out of loop if done */
+      if callerresult = 1 then do
+        dead = 0
+      end
+    end
+  END
+  IF type2 = "DUMP" THEN DO
+    DUMPTOPLANET(planet2)
+  END
+
+  z=STEAL(holdz)
+  do while z=2
+    z=STEAL(holdz)
+  end
+
+  if z=1 then do
+    call attac_message ("Busted")
+    exit 
+  end
+
+  IF ship3 ^= "" & ship3 ^= "SHIP3" & ship3 ^="ATTAC_ARG9" THEN DO
+    CALL SHIPTRANSPORT(ship3, password3)
+
+    IF type3 = "SELL" THEN DO
+      callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+
+      /* break out of loop if done */
+      if callerresult =1 then do
+        dead=0
+      end
+
+      /* keep cycling here when  you get rejected */
+      do while dead=1
+        dead = 0
+        call ATTAC_Message("Your offer was just rejected at port " || sector1)
+        callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+        /* break out of loop if done */
+        if callerresult = 1 then do
+          dead = 0
+        end
+      end
+    END
+    IF type3 = "DUMP" THEN DO
+      DUMPTOPLANET(planet3)
+    END
+
+    z=STEAL(holdz)
+    if z=1 then do
+      call attac_message ("Busted")
+      exit 
+    end
+  END
+
+  IF ship4 ^= "" & ship4 ^= "SHIP4" & ship4 ^="ATTAC_ARG13" THEN DO
+
+    CALL SHIPTRANSPORT(ship4, password4)
+
+    IF type4 = "SELL" THEN DO
+      callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+
+      /* break out of loop if done */
+      if callerresult =1 then do
+        dead=0
+      end
+
+      /* keep cycling here when  you get rejected */
+      do while dead=1
+        dead = 0
+        call ATTAC_Message("Your offer was just rejected at port " || sector1)
+        callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+        /* break out of loop if done */
+        if callerresult = 1 then do
+          dead = 0
+        end
+      end
+    END
+    IF type4 = "DUMP" THEN DO
+      DUMPTOPLANET(planet4)
+    END
+
+    z=STEAL(holdz)
+    if z=1 then do
+      call attac_message ("Busted")
+      exit 
+    end
+  END
+
+  CALL SHIPTRANSPORT(ship1, password1)  
+
+  call zocsend "i"
+  call zocwait "Credits"
+  CALL ATTAC_UpdateCounter(1)
+  cycle = cycle + 1
+END
+
+exit
+
+
+SHIPTRANSPORT:
+  shipnumber=arg(1)
+  pass=arg(2)
+  CALL ZocSend "x"
+  CALL ZocWait ("Exit Transporter")
+  CALL ZocSend shipnumber || "^M"
+  result = ZocWaitMux("Security code accepted","Enter the password for")
+  IF result = 1 THEN DO
+    call ZocSend pass || "^M"
+    result = ZocWaitMux("Security code accepted","SECURITY BREACH")
+    if result =1 then do
+      call attac_message("'" || pass || "' is an invalid password for ship number " || shipnumber)
+      exit
+    end
+  END
+  CALL ZocSend "q"
+  CALL ZocWait ("Command [TL=")
+
+RETURN ""
+
+DUMPTOPLANET:
+  planet=arg(1)
+
+  CALL ZocSend "l"
+  result = ZocWaitMux("free cargo holds", "Registry#")
+
+  IF result=1 THEN DO
+    CALL ZocSend planet || "^M"
+    CALL ZocWait ("free cargo holds")
+  END
+
+  CALL ZocSend "tnl3"
+  call ZocSend "^Mq"
+  call zocwait "Blasting off"
+RETURN myHolds
+
+
+
+GETITALL:
+holdfinal=""
+call zocwait "]"
+holds=zoclastline()
+DO addchar=1 to length(holds)
+        holdsit=substr(holds,addchar,1)
+        if holdsit<>"]" then DO
+          if holdsit<>"," then holdfinal=holdfinal||holdsit
+        end
+END
+RETURN holdfinal
+                                                          
+
+
+STEAL:
+holdz=arg(1)
+call zocsend "pr"
+call zocsend "^M"
+call zocsend "s"
+result = zocwaitmux("Which product?", "Suddenly you're Busted")
+select
+	WHEN result=0 then fakebust=0
+	when result=1 then fakebust=1
+end
+
+if fakebust=1 then do
+  return(1)
+end 
+
+call zocsend "3"
+call ZocWait "to swipe? ["
+call ZocWait "]"
+
+holdsstring= zoclastline()
+total_holds = substr(holdsstring, 1, length(holdsstring)-1)
+
+if exp / steal_factor > total_holds then do
+  amountToSteal = total_holds
+end
+else do
+  amountToSteal = exp/steal_factor
+  amountToSteal=trunc(amountToSteal,0) 
+end
+
+call zocsend amountToSteal
+
+call zocsend "^M"
+result = zocwaitmux("Success!","Suddenly you're Busted","aren't that many holds","aren't enough holds")
+select
+	WHEN result=0 then bust=0
+	when result=1 then bust=1
+	when result=2 then bust=2
+	when result=3 then bust=2
+end
+
+if bust=0 then do
+ call ZocWait "Command [TL="
+ count_port_upgrades=0
+end
+if bust=1 then do 
+ count_port_upgrades=0
+ return(1)
+end
+if bust=2 then do
+	count_port_upgrades=count_port_upgrades+1
+        call zocsend "o3"
+	result = zocwaitmux("(0 max,","0 to quit")
+	if result=0 then do
+	  call zocsend "0^M"
+	  call attac_message ("This port has fallen below amount to steal and port cannot be upgraded further... Moving on to next port")
+	  RETURN (1)
+	end
+        call zocsend "1^Mq"
+	if count_port_upgrades > 5 then do
+          return(1)
+        end	
+	  RETURN(2)
+end
+RETURN(0)
+
+
+GrabIt:
+  ARG delimiter
+  it = ""
+  DO FOREVER
+    CALL ZocWait(delimiter)
+    buffer = ZocLastLine()
+    IF LENGTH(buffer) > 1 THEN DO
+      DO ptr = 1 TO LENGTH(buffer)
+        ch = SUBSTR(buffer, ptr, 1)
+        IF ch <> delimiter THEN DO
+          IF ch <> "," THEN it = it || ch
+        END
+      END
+      LEAVE
+    END
+  END
+RETURN it

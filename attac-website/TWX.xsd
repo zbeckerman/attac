@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="TWX">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Header">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Created">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Date" type="xs:int"/>
+                    <xs:element name="By" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Game">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string"/>
+                    <xs:element name="Host" type="xs:string"/>
+                    <xs:element name="Port" type="xs:int"/>
+                    <xs:element name="Version" type="xs:string" minOccurs="0"/>
+                    <xs:element name="MBBS" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="Gold" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="Sectors" type="xs:int"/>
+                    <xs:element name="StarDock" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Class0Port" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TraderData">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Trader" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Experience" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Alignment" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Corporation" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Rank" type="xs:int" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute name="updated" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CorporationData">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Corporation" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string" minOccurs="0"/>
+                    <xs:element name="CEO" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Rank" type="xs:int" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute name="nr" type="xs:int" use="required"/>
+                  <xs:attribute name="updated" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ShipData">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ship" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Type" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Brand" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Fighters" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Shields" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Holds" type="xs:int" minOccurs="0"/>
+                    <xs:element name="FuelOre" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Organics" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Equipment" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Colonists" type="xs:int" minOccurs="0"/>
+                    <xs:element name="TurnsPerWarp" type="xs:int" minOccurs="0"/>
+                    <xs:element name="TransWarpDrive" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:boolean">
+                            <xs:attribute name="ships" type="xs:int" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="DensityScanner" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="HoloScanner" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="PlanetScanner" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="PsychProbe" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="EtherProbes" type="xs:int" minOccurs="0"/>
+                    <xs:element name="MarkerBeacons" type="xs:int" minOccurs="0"/>
+                    <xs:element name="PhotonMissiles" type="xs:int" minOccurs="0"/>
+                    <xs:element name="GenesisTorpedos" type="xs:int" minOccurs="0"/>
+                    <xs:element name="AtomicDetonators" type="xs:int" minOccurs="0"/>
+                    <xs:element name="MineDisruptors" type="xs:int" minOccurs="0"/>
+                    <xs:element name="ArmidMines" type="xs:int" minOccurs="0"/>
+                    <xs:element name="LimpetMines" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Corbomite" type="xs:int" minOccurs="0"/>
+                    <xs:element name="CloakingDevices" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Owner" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="corp" type="xs:boolean" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="User" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="corp" type="xs:boolean" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Sector" type="xs:int" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute name="nr" type="xs:int" use="required"/>
+                  <xs:attribute name="updated" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PlanetData">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Planet" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Class" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Level" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Upgrading" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:boolean">
+                            <xs:attribute name="finished" type="xs:int" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Fighters" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Shields" type="xs:int" minOccurs="0"/>
+                    <xs:element name="FuelOre" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                          <xs:element name="Colonists" type="xs:int" minOccurs="0"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Organics" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                          <xs:element name="Colonists" type="xs:int" minOccurs="0"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Equipment" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                          <xs:element name="Colonists" type="xs:int" minOccurs="0"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Treasury" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Transporter" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:boolean">
+                            <xs:attribute name="hops" type="xs:int" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="MilitaryReaction" type="xs:int" minOccurs="0"/>
+                    <xs:element name="QCannonAtmosphere" type="xs:int" minOccurs="0"/>
+                    <xs:element name="QCannonSector" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Creator" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="corp" type="xs:boolean" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Owner" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="corp" type="xs:boolean" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Sector" type="xs:int" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute name="nr" type="xs:int" use="required"/>
+                  <xs:attribute name="updated" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SectorData">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Sector" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Space" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Beacon" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Warps" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Warp" type="xs:int" minOccurs="0" maxOccurs="6"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Port" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name" type="xs:string" minOccurs="0"/>
+                          <xs:element name="Class" type="xs:int" minOccurs="0"/>
+                          <xs:element name="UnderConstruction" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:boolean">
+                                  <xs:attribute name="finished" type="xs:int" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Destroyed" type="xs:boolean" minOccurs="0"/>
+                          <xs:element name="FuelOre" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                                <xs:element name="Percentage" type="xs:int" minOccurs="0"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Organics" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                                <xs:element name="Percentage" type="xs:int" minOccurs="0"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Equipment" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                                <xs:element name="Percentage" type="xs:int" minOccurs="0"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="updated" type="xs:int" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Fighters" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                          <xs:element name="Type" type="xs:string" minOccurs="0"/>
+                          <xs:element name="Owner" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute name="corp" type="xs:boolean" use="required"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="discovered" type="xs:int" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ArmidMines" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                          <xs:element name="Owner" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute name="corp" type="xs:boolean" use="required"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="LimpetMines" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Amount" type="xs:int" minOccurs="0"/>
+                          <xs:element name="Owner" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute name="corp" type="xs:boolean" use="required"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Density" type="xs:int" minOccurs="0"/>
+                    <xs:element name="Anomaly" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="NavHaz" type="xs:int" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute name="nr" type="xs:int" use="required"/>
+                  <xs:attribute name="updated" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:int" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

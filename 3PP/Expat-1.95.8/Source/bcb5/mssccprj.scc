@@ -1,0 +1,33 @@
+SCC = This is a Source Code Control file
+
+[elements.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA
+
+[expat.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA
+
+[expatw.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA
+
+[expatw_static.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA
+
+[expat_static.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA
+
+[makefile.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA
+
+[outline.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA
+
+[xmlwf.mak]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/bcb5", ZBMAAAAA

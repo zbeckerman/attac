@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TWXSync version="1"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+<Session id="7f184820-f296-469c-9b81-885e305b3e4c"/>
+<Result code="200" text="OK"/><Update>
+  <Header>
+    <Created>
+      <Date>1119156282</Date>
+      <By>TWXSync</By>
+    </Created>
+    <Game>
+      <Sectors>5000</Sectors>
+      <StarDock>673</StarDock>
+      <Class0Port>3233</Class0Port>
+    </Game>
+  </Header>
+  <TraderData>
+  </TraderData>
+  <SectorData>
+  <Sector nr="1167" updated="1119155790">
+	  <Warps>
+	    <Warp>567</Warp>
+	    <Warp>644</Warp>
+	    <Warp>1139</Warp>
+	    <Warp>3406</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  </SectorData>
+
+</Update>
+</TWXSync>

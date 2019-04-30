@@ -1,0 +1,232 @@
+/* REXX (CREATED BY ZOC LEARN MODE) */
+
+CALL ZocTimeout 3600
+
+SAY ""
+SAY ""
+SAY "SST script will steal in current sector first."
+SAY "What is the ship number of the ship you're going to?"
+PULL SHIP2
+say ""
+say ""
+SAY "What is the ship number of the ship you're currently in?"
+PULL SHIP1
+
+
+
+DO 10000
+CALL ZocSend "pt"
+
+call zocwait "sell ["
+holds1=GETITALL(0,0)
+
+call zocsend "^M"
+call zocwait "our offer ["
+offer1=GETITALL(0,0)
+
+z=SELLHAGGLE(offer1)
+z=SKIPBUY(0)
+z=STEAL(holds1)
+
+call zocsend "x"
+result= ZocWaitMux("ship to beam to (Q=Quit) ", "[Pause]")
+SELECT
+        WHEN result=0 THEN x=1
+        WHEN result=1 THEN x=2
+end
+if x=1 then DO
+call zocsend SHIP2
+end
+if x=2 then DO
+call zocsend "^M"
+call zocsend SHIP2
+end
+
+call zocsend "^M"
+call zocwait "Security code accepted"
+
+call zocsend "q^M"
+call zocwait "Command"
+call zocsend "#"
+
+CALL ZocSend "pt"
+call zocwait "sell ["
+holds2=GETITALL(0,0)
+call zocsend "^M"
+call zocwait "our offer ["
+offer2=GETITALL(0,0)
+
+z=SELLHAGGLE(offer2)
+z=SKIPBUY(0)
+z=STEAL(holds2)
+
+
+call zocsend "x"
+result= ZocWaitMux("ship to beam to (Q=Quit) ", "[Pause]")
+SELECT
+        WHEN result=0 THEN x=1
+        WHEN result=1 THEN x=2
+end
+if x=1 then DO
+call zocsend SHIP1
+end
+if x=2 then DO
+call zocsend "^M"
+call zocsend SHIP1
+end
+call zocsend "^M"
+call zocwait "Security code accepted"
+call zocwait "ship to beam to (Q=Quit)"
+call zocsend "q^M"
+call zocwait "Command"
+
+END
+
+exit
+
+
+
+
+
+GETITALL:
+holdfinal=""
+call zocwait "]"
+holds=zoclastline()
+DO addchar=1 to length(holds)
+        holdsit=substr(holds,addchar,1)
+        if holdsit<>"]" then DO
+          if holdsit<>"," then holdfinal=holdfinal||holdsit
+        end
+END
+RETURN holdfinal
+                                                          
+
+SELLHAGGLE:
+               
+offer1=arg(1)
+haggle106=offer1%(94/100)-1
+haggle106=trunc(haggle106,0)
+haggle105=offer1%(95/100)-1
+haggle105=trunc(haggle105,0)
+haggle104=offer1%(96/100)-1
+haggle104=trunc(haggle104,0)
+haggle103=offer1%(97/100)-1
+haggle103=trunc(haggle103,0)
+haggle102=offer1%(98/100)-1
+haggle102=trunc(haggle102,0)
+haggle101=offer1%(99/100)-1
+haggle101=trunc(haggle101,0)
+
+call zocsend haggle106
+call zocsend "^M"
+
+a=4
+DO WHILE a<>0
+result= ZocWaitMux("We'll buy them", "You have", "we're not int", "final offer")
+SELECT
+        WHEN result=0 THEN x=1
+        WHEN result=1 THEN x=2
+        WHEN result=2 THEN x=3
+        WHEN result=3 THEN x=4
+end
+
+if x=1 then DO
+        if a=4 then do
+        call zocsend haggle105
+        call zocsend "^M"
+        end
+        if a=3 then do
+        call zocsend haggle104
+        call zocsend "^M"
+        end
+        if a=2 then do
+        call zocsend haggle103
+        call zocsend "^M"
+        end
+        if a=1 then do
+        call zocsend haggle102
+        call zocsend "^M"
+        end
+        if a=0 then do
+        call zocsend haggle101
+        call zocsend "^M"
+        end
+a=a-1
+end
+
+if x=2 then do
+        a=0
+        return(0)
+        end
+if x=3 then do
+        return(0)
+        dead=1
+end
+if x=4 then do
+        call zocsend haggle103
+        call zocsend "^M"
+        return(0)
+end
+
+END
+
+RETURN(0) 
+
+
+SKIPBUY:
+result= ZocWaitMux("o you want to buy", "Command")
+SELECT
+        WHEN result=0 THEN x="1"
+        WHEN result=1 THEN x="2"
+end
+if x=1 then call zocsend "0^M"
+if x=2 then RETURN(0)
+
+result= ZocWaitMux("o you want to buy", "Command")
+SELECT
+        WHEN result=0 THEN x="1"
+        WHEN result=1 THEN x="2"
+end
+if x=1 then call zocsend "0^M"
+if x=2 then RETURN(0)
+RETURN(0)
+
+STEAL:
+holdz=arg(1)
+call zocsend "pr"
+call zocsend "^M"
+call zocsend "s3"
+call zocsend holdz
+call zocsend "^M"
+result = zocwaitmux("Success!","Suddenly you're Bust","aren't that many holds")
+select
+WHEN result=0 then bust=0
+when result=1 then bust=1
+when result=2 then bust=2
+end
+if bust=1 then exit
+if bust=2 then do
+	zocsend "o31^Mq"
+	call zocwait "]:["
+	call zocsend "pr"
+	call zocsend "^M"
+	call zocsend "s3"
+	call zocsend holdz
+	call zocsend "^M"
+	result = zocwaitmux("Success!","Suddenly you're Bust")
+	select
+	WHEN result=0 then bust=0
+	when result=1 then bust=1
+	end
+	if bust=1 then exit
+	end
+RETURN(0)
+
+
+
+
+
+
+
+
+

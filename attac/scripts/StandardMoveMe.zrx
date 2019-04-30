@@ -1,0 +1,13 @@
+/* rexx */
+
+Call ZocRespond("Your fighters: ", "A99^M")
+Call ZocRespond "Avoid this sector in the", "N"
+
+sector=zocask("Which sector are we moving to?")
+if sector="##CANCEL##" then do
+  call attac_message("Script Cancelled")
+  exit
+end
+
+call MoveMe_ATTAC_LIBRARY(sector, 0, 0, 0)
+exit

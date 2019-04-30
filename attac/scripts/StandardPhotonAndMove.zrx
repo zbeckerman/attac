@@ -1,0 +1,42 @@
+/* 
+  Photon and Move
+  By: earth for ATTAC http://www.tw-attac.com
+*/
+
+sectortotal = ATTAC_GetTotalSectors() 
+IF sectortotal = "" THEN DO
+	sectortotal = ZocAsk("How many sectors are in this game?", sectortotal) 
+END
+
+move= ZocAsk("Which Sector Should we Photon (must be adjacent)?", "")
+if move="##CANCEL##" | move="" then do
+  call attac_message("Script Cancelled")
+  exit
+end
+
+call ZocSend "CP"
+
+CALL ZocWait ("Photon Missiles left")
+
+  call ZocSend "y"
+  call ZocSend move
+  call ZocSend "^M"
+
+  result = ZocWaitMux("Wave Duration","That is not an adjacent sector")
+  IF result=1 THEN DO
+    call ZocSend "qq"
+    call attac_message ("Invalid sector. it is not adjacent")
+    exit
+  END
+
+  call ZocSend "Q"
+  call ZocSend move
+
+  if sectortotal>5000 then do    
+	call zocsend "^M"   
+  end   
+  else do     
+	if move <= 599 then do      
+		call zocsend "^M"     
+	end   
+  end

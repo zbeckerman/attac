@@ -1,0 +1,41 @@
+maintained by earth and Peanut
+ATTAC version 4
+www.tw-attac.com
+tradewars@hotmail.com
+----------------------------------------------------------------------
+
+Version 4 BETA 3
+- ether probe data wasnt parsing data into DB and was locking the status updates
+- sending a blank fedcomm/private message was locking keyboard, now fixed
+- Fixed shortcuts so datafiles stay with exe now, not shortcut
+- TWX fixes to import/export
+- added ATTAC_GetStardockSector() as rexx command
+- Alpha Centuari sector was being overwritten by SD
+- Fixed Internal Queue.  Shouldn't be anymore "Glib-Error:  Cannot alloc -43 bytes"
+- Fixed Script not breaking on ESC while in ZocWait[Mux] (2 times...)
+- Fixed blind twarp wouldnt let you cloak
+- Added protection for typing invalid keys at SD.
+- added self destruct protection
+- Enhanced ATTAC_Message to make it more configurable
+- Fixed g_string bug
+- Rewrote queue for a cleaner interface and implementation
+- Fixed zocwriteln() to send end of line instead of error
+- Rewrote thread implementation for speed and to remove glib errors
+- Added lower and upper ZOC functions
+- Added zocsynctime for compatibility - does nothing
+- Added Script Packs and most of the internal scripts
+- ESC now resets all internal scripts as well as REXX Scripts
+- Disconnect now works
+
+Version 4 BETA 2 
+- Fixed async errors
+- Fixed registration errors. registration was not validating certain users.
+- Fix bug that you couldnt read the log or clear avoids due to blind twarp protection
+- Fix memory bug that crashed attac if you did not enter data in nearest fighter and clicked Find.
+- fixes to rexx engine. specifically to zocwait function.
+- removed some of the debugging comments.
+- added attac icon to all forms
+- added logging
+
+Version 4 BETA 1
+- first release

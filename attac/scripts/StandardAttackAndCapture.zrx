@@ -1,0 +1,29 @@
+/* rexx */
+
+totalTraders=0
+theResult=0
+
+call zocsend "D"
+call zocwait "Traders : "
+
+do while theResult=0
+   call zocwait ", w/ "
+   data = zoclastline()
+   data = substr(data, 1, length(data)-5)
+
+   call zocwait "ftrs,"
+   figs = zoclastline()
+   figs = substr(figs, 1, length(figs)-6)
+
+   traders.totalTraders = data || " with " || figs || " fighters"
+   totalTraders=totalTraders+1
+
+   theResult=ZocWaitMux(")^M          ","Warps to Sector")
+end
+
+counter=0
+
+do while counter<totalTraders
+  call attac_message(traders.counter)
+  counter=counter+1
+end

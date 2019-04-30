@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TWXSync version="1"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+<Session id="7f184820-f296-469c-9b81-885e305b3e4c"/>
+<Result code="200" text="OK"/><Update>
+  <Header>
+    <Created>
+      <Date>1119189582</Date>
+      <By>TWXSync</By>
+    </Created>
+    <Game>
+      <Sectors>5000</Sectors>
+      <StarDock>673</StarDock>
+      <Class0Port>3233</Class0Port>
+    </Game>
+  </Header>
+  <TraderData>
+  </TraderData>
+  <SectorData>
+  </SectorData>
+
+</Update>
+</TWXSync>

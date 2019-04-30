@@ -1,0 +1,242 @@
+/* REXX */
+/* written for ATTAC TCP/IP Helper version 3.x.x */   
+
+sectortotal = ATTAC_GetTotalSectors() 
+IF sectortotal = "" THEN DO
+	sectortotal = ZocAsk("How many sectors are in this game?", sectortotal) 
+END
+IF sectortotal = "" THEN SIGNAL Abend
+
+/*
+  attac_arg1 = sector1
+  attac_arg2 = buying2
+  attac_arg3 = buying1
+  attac_arg4 = cycles
+  attac_arg5 = forcenohaggle
+  attac_arg6 = minPortAmount
+*/
+
+sector1 = attac_arg1
+IF sector1 = "ATTAC_ARG1" THEN DO
+	sector1 = ZocAsk("What sector are we trading with?","")
+END
+
+IF sector1 = "" THEN SIGNAL Abend
+
+dead=0 
+
+buying2 = attac_arg2
+IF buying2 = "ATTAC_ARG2" THEN DO
+	buying2= ZocRequest("What are we buying in the current sector you are in?", "Fuel Ore", "Organics", "Equipment") 
+END
+IF buying2 = "" THEN SIGNAL Abend
+
+buying1 = attac_arg3
+IF buying1 = "ATTAC_ARG3" THEN DO
+	buying1= ZocRequest("What are we buying in sector " || sector1, "Fuel Ore", "Organics", "Equipment")  
+END
+IF buying1 = "" THEN SIGNAL Abend
+
+cycles = attac_arg4
+IF cycles = "ATTAC_ARG4" THEN DO
+	cycles = 9999
+END
+
+worldHaggle=attac_arg5
+if worldHaggle="ATTAC_ARG5" then do  
+  result= ZocRequest("Are we Haggling?", "Yes", "No")
+  if result="Yes" then do
+    worldHaggle=1
+  end
+  else do
+    worldHaggle=0
+  end
+end
+else do
+  if worldHaggle=0 then do
+     worldHaggle=1
+  end
+  else do
+     worldHaggle=0
+  end
+end
+
+minPortAmount = attac_arg6
+IF minPortAmount = "ATTAC_ARG6" THEN DO
+	minPortAmount = "    0%"
+end
+else do
+	if length(minPortAmount)=1 then do
+		minPortAmount = "    " || minPortAmount 
+	end
+	else do
+		minPortAmount = "   " || minPortAmount 
+ 	end
+END
+
+minPortAmount  = STRIP(minPortAmount , 'B','%')
+minPortAmount  = STRIP(minPortAmount , 'B',' ')
+minAmountReached=0
+
+call zocsend "i" 
+call zocwait "Total Holds    : " 
+call zocwait " - " 
+call zocwait "=" 
+holdsstring= zoclastline() 
+myholds = substr(holdsstring, 1, length(holdsstring)-1)  
+call zocsend "d" 
+call zocwait ", Class "
+call zocwait ")" 
+portstring= zoclastline() 
+porttype2 = GETPORTTYPE(substr(portstring, 4,3)) 
+call zocwait "]:[" 
+sector2=GETITALL(0,0)  
+if porttype2=-1 then do  
+	call ATTAC_Message("Invalid Port Type in sector " || sector2)  
+	exit 
+end  
+
+/* sector2 is the sector we start in and porttype2 is the port in sector2    buying2 is what we are buying from sector2. buying1 is what we are buying in sector1 */  
+/* this is the main loop which does the port trading */ 
+cycle=0
+
+buyType=""
+if buying2 = "Fuel Ore" then do
+  buyType=buyType || "FUELORE"
+  buying2General="FUELORE"
+end
+if buying2 = "Organics" then do 
+  buyType=buyType || "ORGANICS"
+  buying2General="ORGANICS"
+end
+if buying2 = "Equipment" then do 
+  buyType=buyType || "EQUIPMENT"
+  buying2General="EQUIPMENT"
+end
+
+if buying1 = "Fuel Ore" then do
+  buyType=buyType || "FUELORE"
+  buying1General="FUELORE"
+end
+if buying1 = "Organics" then do 
+  buyType=buyType || "ORGANICS"
+  buying1General="ORGANICS"
+end
+if buying1 = "Equipment" then do 
+  buyType=buyType || "EQUIPMENT"
+  buying1General="EQUIPMENT"
+end
+
+DO until cycle= cycles
+	dead=0   
+
+        callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST",buying2General,"-1","-1","-1",buyType)
+
+        /* break out of loop if done */
+        if callerresult =1 then do
+          dead=0
+        end
+
+        /* keep cycling here when  you get rejected */
+        do while dead=1
+          dead = 0
+          call ATTAC_Message("Your offer was just rejected at port " || sector2)
+          callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST",buying2General,"-1","-1","-1",buyType)
+          /* break out of loop if done */
+          if callerresult = 1 then do
+            dead = 0
+          end
+        end
+
+        if callerresult=3 then do
+	  /* minumum amount at port was reached. exit */
+          exit
+        end
+
+	
+	/* send second sector and get the port info */    
+	call zocsend sector1   
+	if sectortotal>5000 then do    
+		call zocsend "^M"   
+	end   
+	else do     
+		if sector1 <= 599 then do      
+			call zocsend "^M"     
+		end   
+	end     
+
+	dead=0    
+	/* here is the normal port */   
+
+
+        callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST",buying1General,"-1","-1","-1",buyType)
+
+        /* break out of loop if done */
+        if callerresult =1 then do
+          dead=0
+        end
+
+        /* keep cycling here when  you get rejected */
+        do while dead=1
+          dead = 0
+          call ATTAC_Message("Your offer was just rejected at port " || sector1)
+          callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST",buying1General,"-1","-1","-1",buyType)
+          /* break out of loop if done */
+          if callerresult = 1 then do
+            dead = 0
+          end
+        end    
+
+        if callerresult=3 then do
+	  /* minumum amount at port was reached. exit */
+          exit
+        end
+
+	call zocsend sector2   
+	if sectortotal>5000 then do    
+		call zocsend "^M"   
+	end   
+	else do     
+		if sector2 <= 599 then do      
+			call zocsend "^M"     
+		end   
+	end   
+
+	CALL ATTAC_UpdateCounter(1)
+	cycle = cycle + 1
+END  
+
+exit    
+
+GETPORTTYPE: 
+type = arg(1) 
+
+if type="BBS" then   RETURN 1  
+if type="BSB" then   RETURN 2  
+if type="SBB" then   RETURN 3  
+if type="SSB" then   RETURN 4  
+if type="SBS" then   RETURN 5  
+if type="BSS" then   RETURN 6  
+if type="SSS" then   RETURN 7  
+if type="BBB" then   RETURN 8  
+
+RETURN -1  
+
+GETITALL: 
+holdfinal="" 
+call zocwait "]" 
+holds=zoclastline() 
+
+DO addchar=1 to length(holds)         
+	holdsit=substr(holds,addchar,1)         
+	if holdsit<>"]" then DO           
+		if holdsit<>"," then holdfinal=holdfinal||holdsit         
+	end 
+END 
+
+RETURN holdfinal                 
+
+
+Abend:
+exit
+RETURN

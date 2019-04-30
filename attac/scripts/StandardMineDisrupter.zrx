@@ -1,0 +1,67 @@
+/* rexx */
+
+cycle=0
+
+sector = ATTAC_ARG1
+cycles = ATTAC_ARG2
+
+if sector = "ATTAC_ARG1" then do
+  sector= ZocAsk("What is the sector to launch disruptor to?","")
+  if sector="##CANCEL##" then do
+    ZocNotify "Script Cancelled"
+    signal endit
+  end
+end
+
+if cycles = "ATTAC_ARG2" then do
+  cycles = ZocAsk("How many cycles should we run for?")
+  if cycles="##CANCEL##" then do
+    ZocNotify "Script Cancelled"
+    signal endit
+  end
+end
+call ATTAC_SetCounterMax(cycles)
+
+CALL ZocSend "c"
+
+DO until cycle=cycles
+
+  CALL ZocSend "w"
+  result = ZocWaitMux("Disruptors left","You do not have")
+  if result = 1 then do
+    call attac_message ("You do not have any mine disrupters")
+    call zocsend "q"
+    signal endit
+  end
+
+  CALL ZocSend "y"
+  CALL ZocSend SECTOR
+  CALL ZocSend "^M"
+  result = zocwaitmux("You destroyed all","There were no mines","That is not an adjacent sector","Computer command [TL=")
+  if result=0 then do
+    call zocsend "q"
+    signal done
+  end
+  if result=1 then do
+    call attac_message ("There are no mines in sector " ||sector)
+    call zocsend "q"
+    signal endit
+  end
+  if result=2 then do
+    call attac_message (sector || " is not an adjacent sector")
+    call zocsend "qq"
+    signal endit
+  end
+
+  cycle=cycle+1
+END
+
+CALL ZocSend "Q"
+
+signal endit
+
+done:
+call attac_message("All Mines Disrupted in sector "|| sector)
+
+endit:
+exit

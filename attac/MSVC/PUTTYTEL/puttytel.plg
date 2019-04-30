@@ -1,0 +1,217 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: puttytel - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/win_res.res" /i "\Data\home\zbeckerman\tradewars\attac\attac_src" /d "_DEBUG" "C:\Data\home\zbeckerman\tradewars\attac\attac_src\win_res.rc"" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP234.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "MEMWATCH" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "WIN32S_COMPAT" /D "_NO_OLDNAMES" /D "NO_MULTIMON" /D "ATTAC_CODE" /D NUMBERRELEASE=4 /D NUMBERMAJOR=1 /D NUMBERMINOR=11 /D RELEASE=4.1.11 /D REGINARELEASE="Rexx Version 3.3 (Apr 05 2004 13:59:00)" /Fp"Debug/puttytel.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\attacGUI.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\attacUtils.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\autoupdate.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\bubbleFinder.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\cim.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\encrypt.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\encryptScripts.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\hash.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\info.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\linklist.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\map.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\mapqueue.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\parsedatathread.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\queue.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\remoteConnection.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\rexx.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\shortestPath.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\statusthread.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\structs.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\twx.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\twxSync.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\util.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\writeMemory.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\xml.c"
+"C:\Data\home\zbeckerman\tradewars\attac\attac_src\ztm.c"
+"C:\Data\home\zbeckerman\tradewars\3PP\MemWatch-2.7.1\memwatch.c"
+"C:\Data\home\zbeckerman\tradewars\attac\cmdline.c"
+"C:\Data\home\zbeckerman\tradewars\attac\config.c"
+"C:\Data\home\zbeckerman\tradewars\attac\dialog.c"
+"C:\Data\home\zbeckerman\tradewars\attac\ldisc.c"
+"C:\Data\home\zbeckerman\tradewars\attac\ldiscucs.c"
+"C:\Data\home\zbeckerman\tradewars\attac\logging.c"
+"C:\Data\home\zbeckerman\tradewars\attac\misc.c"
+"C:\Data\home\zbeckerman\tradewars\attac\nocproxy.c"
+"C:\Data\home\zbeckerman\tradewars\attac\pproxy.c"
+"C:\Data\home\zbeckerman\tradewars\attac\printing.c"
+"C:\Data\home\zbeckerman\tradewars\attac\proxy.c"
+"C:\Data\home\zbeckerman\tradewars\attac\raw.c"
+"C:\Data\home\zbeckerman\tradewars\attac\rlogin.c"
+"C:\Data\home\zbeckerman\tradewars\attac\settings.c"
+"C:\Data\home\zbeckerman\tradewars\attac\sizetip.c"
+"C:\Data\home\zbeckerman\tradewars\attac\telnet.c"
+"C:\Data\home\zbeckerman\tradewars\attac\terminal.c"
+"C:\Data\home\zbeckerman\tradewars\attac\tree234.c"
+"C:\Data\home\zbeckerman\tradewars\attac\unicode.c"
+"C:\Data\home\zbeckerman\tradewars\attac\version.c"
+"C:\Data\home\zbeckerman\tradewars\attac\wcwidth.c"
+"C:\Data\home\zbeckerman\tradewars\attac\wincfg.c"
+"C:\Data\home\zbeckerman\tradewars\attac\winctrls.c"
+"C:\Data\home\zbeckerman\tradewars\attac\windefs.c"
+"C:\Data\home\zbeckerman\tradewars\attac\windlg.c"
+"C:\Data\home\zbeckerman\tradewars\attac\window.c"
+"C:\Data\home\zbeckerman\tradewars\attac\winmisc.c"
+"C:\Data\home\zbeckerman\tradewars\attac\winnet.c"
+"C:\Data\home\zbeckerman\tradewars\attac\winstore.c"
+"C:\Data\home\zbeckerman\tradewars\attac\winutils.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP234.tmp" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP235.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /Zi /Od /D "MEMWATCH" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "WIN32S_COMPAT" /D "_NO_OLDNAMES" /D "NO_MULTIMON" /D "ATTAC_CODE" /D NUMBERRELEASE=4 /D NUMBERMAJOR=1 /D NUMBERMINOR=11 /D RELEASE=4.1.11 /D REGINARELEASE="Rexx Version 3.3 (Apr 05 2004 13:59:00)" /Fp"Debug/puttytel.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Data\home\zbeckerman\tradewars\attac\be_nossh.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP235.tmp" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP236.tmp" with contents
+[
+comctl32.lib imm32.lib winmm.lib ws2_32.lib ..\..\..\releaseDlls\libexpat.lib ..\..\..\releaseDlls\regina.lib ..\..\..\TWCommon\Debug\TWCommon.lib ..\..\..\attacv4Dll\Debug\ATTACv4.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/attac.pdb" /debug /machine:I386 /out:"..\..\attac.exe" /pdbtype:sept 
+.\Debug\attacGUI.obj
+.\Debug\attacUtils.obj
+.\Debug\autoupdate.obj
+.\Debug\bubbleFinder.obj
+.\Debug\cim.obj
+.\Debug\encrypt.obj
+.\Debug\encryptScripts.obj
+.\Debug\hash.obj
+.\Debug\info.obj
+.\Debug\linklist.obj
+.\Debug\map.obj
+.\Debug\mapqueue.obj
+.\Debug\parsedatathread.obj
+.\Debug\queue.obj
+.\Debug\remoteConnection.obj
+.\Debug\rexx.obj
+.\Debug\shortestPath.obj
+.\Debug\statusthread.obj
+.\Debug\structs.obj
+.\Debug\twx.obj
+.\Debug\twxSync.obj
+.\Debug\util.obj
+.\Debug\writeMemory.obj
+.\Debug\xml.obj
+.\Debug\ztm.obj
+.\Debug\memwatch.obj
+.\Debug\be_nossh.obj
+.\Debug\cmdline.obj
+.\Debug\config.obj
+.\Debug\dialog.obj
+.\Debug\ldisc.obj
+.\Debug\ldiscucs.obj
+.\Debug\logging.obj
+.\Debug\misc.obj
+.\Debug\nocproxy.obj
+.\Debug\pproxy.obj
+.\Debug\printing.obj
+.\Debug\proxy.obj
+.\Debug\raw.obj
+.\Debug\rlogin.obj
+.\Debug\settings.obj
+.\Debug\sizetip.obj
+.\Debug\telnet.obj
+.\Debug\terminal.obj
+.\Debug\tree234.obj
+.\Debug\unicode.obj
+.\Debug\version.obj
+.\Debug\wcwidth.obj
+.\Debug\wincfg.obj
+.\Debug\winctrls.obj
+.\Debug\windefs.obj
+.\Debug\windlg.obj
+.\Debug\window.obj
+.\Debug\winmisc.obj
+.\Debug\winnet.obj
+.\Debug\winstore.obj
+.\Debug\winutils.obj
+.\Debug\win_res.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP236.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+attacGUI.c
+attacUtils.c
+autoupdate.c
+bubbleFinder.c
+cim.c
+encrypt.c
+c:\data\home\zbeckerman\tradewars\attac\attac_src\encrypt.c(408) : warning C4244: '=' : conversion from 'short ' to 'char ', possible loss of data
+c:\data\home\zbeckerman\tradewars\attac\attac_src\encrypt.c(529) : warning C4244: '=' : conversion from 'unsigned long ' to 'char ', possible loss of data
+c:\data\home\zbeckerman\tradewars\attac\attac_src\encrypt.c(531) : warning C4244: '=' : conversion from 'unsigned long ' to 'char ', possible loss of data
+encryptScripts.c
+hash.c
+c:\data\home\zbeckerman\tradewars\attac\attac_src\hash.c(29) : warning C4244: '=' : conversion from 'double ' to 'int ', possible loss of data
+info.c
+linklist.c
+map.c
+mapqueue.c
+parsedatathread.c
+queue.c
+remoteConnection.c
+rexx.c
+c:\data\home\zbeckerman\tradewars\attac\attac_src\rexx.c(2734) : warning C4101: 'fetch' : unreferenced local variable
+shortestPath.c
+statusthread.c
+structs.c
+twx.c
+twxSync.c
+util.c
+writeMemory.c
+xml.c
+ztm.c
+memwatch.c
+cmdline.c
+config.c
+dialog.c
+ldisc.c
+ldiscucs.c
+logging.c
+misc.c
+nocproxy.c
+pproxy.c
+printing.c
+proxy.c
+raw.c
+rlogin.c
+settings.c
+sizetip.c
+telnet.c
+c:\data\home\zbeckerman\tradewars\attac\telnet.c(579) : warning C4013: 'close' undefined; assuming extern returning int
+terminal.c
+tree234.c
+unicode.c
+version.c
+wcwidth.c
+wincfg.c
+winctrls.c
+windefs.c
+windlg.c
+window.c
+winmisc.c
+winnet.c
+winstore.c
+winutils.c
+Compiling...
+be_nossh.c
+Linking...
+LINK : fatal error LNK1104: cannot open file "..\..\..\TWCommon\Debug\TWCommon.lib"
+Error executing link.exe.
+
+
+
+<h3>Results</h3>
+attac.exe - 1 error(s), 6 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,52 @@
+/* REXX ColonistMover */
+/* For ATTAC Tradewars TCP/IP Helper - http://www.tw-attac.com */
+
+CALL ZocTimeout 60
+
+cycles= ZocAsk("How many times to run? (-1 for infinite)", "-1")
+planet1= ZocAsk("Planet to Move From?", "0")||"^M"
+planet2= ZocAsk("Planet to Move To?", "0")||"^M"
+cycle= "0"
+
+if cycles= "-1" then do
+DO forever
+    call getcolos
+    call dumpcolos
+    CALL ATTAC_UpdateCounter(1)
+end
+end
+
+call ZocSend "D"
+
+DO until cycle= cycles
+    call getcolos
+    call dumpcolos
+    cycle= cycle + 1
+    CALL ATTAC_UpdateCounter(1)
+END
+EXIT
+
+
+
+
+/* Get Product */
+getcolos:
+
+timeout= ZocWait("Command [TL=")
+CALL ZocSend "l"
+CALL ZocSend planet1
+
+CALL ZocSend "SNT1^MQ"
+
+return
+
+/* Dump Product */
+dumpcolos:
+
+timeout= ZocWait("Command [TL=")
+CALL ZocSend "l"
+CALL ZocSend planet2
+
+CALL ZocSend "SNL1^MQ"
+
+return

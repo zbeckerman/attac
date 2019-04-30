@@ -1,0 +1,11 @@
+/* REXX */
+
+call ZocLogname("Test.log")
+call ZocLogging 1
+call ZocSend("I")
+call ZocWait("]:[")
+call ZocSend("D")
+call ZocWait("]:[")
+call ZocSend("V")
+call ZocWait("]:[")
+call ZocLogging 0

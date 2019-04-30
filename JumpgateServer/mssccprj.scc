@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[TWXSyncServer.dsp]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/TWXSyncServer", OUTAAAAA
+
+[AuthenticationServer.dsp]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/AuthenticationServer", RXTAAAAA

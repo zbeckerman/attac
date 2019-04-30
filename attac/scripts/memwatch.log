@@ -1,0 +1,24 @@
+
+============= MEMWATCH 2.71 Copyright (C) 1992-1999 Johan Lindh =============
+
+Started at Wed Feb 18 22:25:10 2004
+
+Modes: __STDC__ 64-bit mwDWORD==(unsigned long)
+mwROUNDALLOC==8 sizeof(mwData)==32 mwDataSize==32
+
+
+Stopped at Wed Feb 18 22:25:10 2004
+
+unfreed: <9> attac_src/encrypt.c(404), 1024 bytes at 003FEE98  	{88 85 85 0E 02 34 CA 8A A7 DC 5B EE 44 82 F9 37 .....4....[.D..7}
+unfreed: <8> attac_src/encrypt.c(404), 1024 bytes at 003FEA60  	{50 2C 3D FE 5E 6D 21 75 15 88 79 98 55 25 58 35 P,=.^m!u..y.U%X5}
+unfreed: <7> attac_src/encrypt.c(404), 1024 bytes at 003FE628  	{AA 3A 92 EF C5 77 0C 4E E8 03 A8 DA A5 64 64 9E .:...w.N.....dd.}
+unfreed: <6> attac_src/encrypt.c(404), 1024 bytes at 003FE1F0  	{E1 A5 18 16 9E 44 02 34 12 22 07 42 0D 23 9B 80 .....D.4.".B.#..}
+unfreed: <5> attac_src/encrypt.c(402), 16 bytes at 003F2660  	{F0 E1 3F 00 28 E6 3F 00 60 EA 3F 00 98 EE 3F 00 ..?.(.?.`.?...?.}
+unfreed: <4> attac_src/encrypt.c(401), 72 bytes at 003F25D8  	{73 72 7B CD 75 8A BB AB 1D 84 7B 58 4D C8 12 0C sr{.u.....{XM...}
+
+Memory usage statistics (global):
+ N)umber of allocations made: 9
+ L)argest memory usage      : 120420
+ T)otal of all alloc() calls: 120420
+ U)nfreed bytes totals      : 4184
+MEMWATCH detected 6 anomalies

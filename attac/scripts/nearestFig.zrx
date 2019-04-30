@@ -1,0 +1,65 @@
+
+
+tsector = ZocASK("What is Target Sector?",1)
+
+figSector=subClosestFig(tsector,1)
+
+CALL ATTAC_Message("This is the sector:" || figSector)
+
+Exit
+
+
+subClosestFig:
+tsector=arg(1)
+nexthop = arg(2)
+
+cFig=0
+iresult = ATTAC_HasSectorFig(tsector)
+
+CALL ATTAC_Message("0 tsector:" || tsector || " iresult:" || iresult)
+
+IF iresult = 0 THEN DO
+CALL ATTAC_Message("a Return tsector:" || tsector || " iresult:" || 
+
+iresult)
+RETURN(tsector)
+CALL ATTAC_Message("b Return tsector:" || tsector || " iresult:" || 
+
+iresult)
+END
+ELSE DO
+warp_count = ATTAC_Get_Sector_Info(tsector) 
+DO warp = 1 to warp_count 
+CALL ATTAC_Message("1 Next Hop:" || nexthop || " Sector:" || tsector || " Warp:" || warp)
+cFig=ATTAC_HasSectorFig(ATTAC_Get_Sector_Info(tsector, warp))
+if cFig = 0 then do
+CALL ATTAC_Message("c Return tsector:" || tsector || " iresult:" || 
+
+iresult)
+RETURN(ATTAC_Get_Sector_Info(tsector, warp))
+CALL ATTAC_Message("d Return tsector:" || tsector || " iresult:" || 
+
+iresult)
+end
+
+end
+end
+
+
+CALL ATTAC_Message("2 Next Hop:" || nexthop || " Sector:" || tsector)
+
+if nexthop = 1 then do
+warp_count = ATTAC_Get_Sector_Info(tsector) 
+DO warp = 1 to warp_count 
+cFig=subClosestFig(ATTAC_Get_Sector_Info(tsector, warp),1)
+if cFig > 2 then do
+CALL ATTAC_Message("e Return tsector:" || tsector || " cfig:" || cFig)
+RETURN(cFig)
+CALL ATTAC_Message("f Return tsector:" || tsector || " cfig:" || cFig)
+end
+
+end
+end
+
+
+RETURN(-1)

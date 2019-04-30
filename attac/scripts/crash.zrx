@@ -1,0 +1,5 @@
+/* rexx */
+  
+testx = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","BEST","-1","-1","-1","BEST")
+
+attac_message("x: "|| testx)

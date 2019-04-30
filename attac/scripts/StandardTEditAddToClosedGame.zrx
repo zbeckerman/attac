@@ -1,0 +1,91 @@
+/* rexx */
+ReachedEndOfFile = 0
+password="password"
+
+result=ZocRequest("Do you want to leave the password blank Or enter a standard password for each player?","Blank Password","Standard Password")
+IF result = "##CANCEL##" THEN DO
+ call attac_message("Script Cancelled")
+ exit
+END
+
+if result = "Blank Password" then do
+  password=""
+end
+else do
+  password = ZocAsk("What password should i use for all the players", "password")
+  IF result = "##CANCEL##" THEN DO
+    call attac_message("Script Cancelled")
+    exit
+  END
+end
+
+file_name = ZocGetFilename("What file contains the player names?")
+call attac_message("Using " || file_name)
+IF STREAM(file_name, "C", "QUERY EXISTS") = "" THEN DO
+ call attac_message("Invalid Filename. Script Cancelled")
+ exit
+END
+
+
+/* open file stream */
+CALL STREAM(file_name, "C", "OPEN READ")
+
+/* check end of file */
+IF STREAM(file_name, "S") \= "READY" THEN DO
+  ReachedEndOfFile = 1
+END 
+
+do while ReachedEndOfFile = 0
+  line = LINEIN(file_name)
+
+  if line ^="" then do
+    /* run code here */
+    call zocsend "c"
+    result=zocwaitmux("Enter User Name :","This isn't a closed game")
+    if result=1 then do
+      call zocsend "^M"
+      call attac_message("Script Ended. You can only add users to closed games")
+      exit
+    end
+    call zocsend (line || "^M")
+    result = zocwaitmux("Password (case sensitive)?","Name is already used.")
+    do while result=1
+      call attac_message ("The name " || line || " is already in use. Skipping it")
+
+      line = LINEIN(file_name)
+
+      IF STREAM(file_name, "S") \= "READY" THEN DO
+        ReachedEndOfFile = 1
+        LEAVE
+      END 
+
+      call zocsend (line || "^M")
+      result = zocwaitmux("Password (case sensitive)?","Name is already used.")
+    end
+    if ReachedEndOfFile=0 then do
+      call zocsend (password || "^M")
+      call zocwait ("? (Y/N) [N] :")
+      call zocsend ("y")
+      call zocwait ("Trade Wars 2002 Editor")
+      if password="" then do
+        call attac_message("Added " || line || " with blank password")
+      end
+      else do
+        call attac_message("Added " || line || " with password " || password)
+      end
+    end
+    else do
+      call zocsend "temp123456^M^M^M"
+    end
+    /* check end of file */
+  end
+
+  IF STREAM(file_name, "S") \= "READY" THEN DO
+    ReachedEndOfFile = 1
+  END 
+end 
+
+call attac_message ("STOPPED: Reached End of file " || file_name)
+CALL STREAM(file_name, "C", "CLOSE")
+
+exit

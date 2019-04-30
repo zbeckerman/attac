@@ -1,0 +1,17 @@
+SCC = This is a Source Code Control file
+
+[expat.dsp]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/lib", HDMAAAAA
+
+[expatw.dsp]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/lib", HDMAAAAA
+
+[expatw_static.dsp]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/lib", HDMAAAAA
+
+[expat_static.dsp]
+SCC_Aux_Path = "D:\vss"
+SCC_Project_Name = "$/TRADEWARS/3PP/Expat-1.95.8/Source/lib", HDMAAAAA

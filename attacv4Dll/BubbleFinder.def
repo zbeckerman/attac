@@ -1,0 +1,3 @@
+LIBRARY		BubbleFinder
+EXPORTS
+	findATTACBubbles								@132

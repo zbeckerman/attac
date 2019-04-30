@@ -1,0 +1,164 @@
+/* rexx script - just a comment */
+
+call zocnotify("Start Script At TEDIT Prompt Below:^M^M(Trade Wars 2002 Editor (?=Help) [?] :)")
+percent = ZocAsk("What percent are we setting the ports at?","50")
+
+if percent="##CANCEL##" then do
+  call attac_Message ("Script Cancelled")
+  exit
+end
+
+mbbs = ZocRequest("Is this a MBBS Game?","Yes","No")
+if mbbs="##CANCEL##" then do
+  call attac_Message ("Script Cancelled")
+  exit
+end
+if mbbs = "Yes" then mbbs = 2
+if mbbs = "No" then mbbs = 1
+
+cycles=0
+
+call zocsend "^M"
+call zocwait("Trade Wars 2002 Editor")
+call zocsend "P1^M"
+call zocwait("Port ID: (0=Abort)  (0 to ")
+call zocwait(")")
+data = zoclastline()
+portamount = removeComma(substr(data, 1, length(data)-1))
+
+portamount = ZocAsk("How Many Ports are we updating?",portamount)
+
+call ATTAC_SetCounterMax(portamount)
+
+do while cycles < portamount
+  call zocwait ("Port number: ")
+  call zocwait ("^M")
+  data = zoclastline()
+  portnumber = substr(data, 1, length(data)-1)
+
+  call zocwait ("<A> Name: ")
+  call zocwait ("^M")
+  data = zoclastline()
+  portname = substr(data, 1, length(data)-1)
+
+  call zocwait ("<B> Class: ")
+  call zocwait ("^M")
+  data = zoclastline()
+  portclass = substr(data, 1, length(data)-1)
+
+  if portnumber<=4 then do
+    call attac_message ("Skipping " || portname)
+  end
+  else if portclass=0 then do
+    call attac_message ("Skipping port slot number " || portnumber || " since there is no port here")
+  end
+  else do
+    call attac_message ("Working on " || portname)
+ 	/* set the productivity */
+	/* fuel ore */
+    call zocsend "f"
+    call zocwait ("for ore  (0 to ")
+    call zocwait (")")
+    data = zoclastline()
+    maxprod = trunc((removeComma(substr(data, 1, length(data)-1))) / mbbs)
+
+    if length(trunc(maxprod*(percent/100)))<length(maxprod) then do
+      call zocsend (trunc(maxprod*(percent/100)) || "^M")
+    end
+    else do
+      call zocsend (trunc(maxprod*(percent/100)))
+    end
+
+    call zocwait ("Port editor:")
+
+	/* organics */
+    call zocsend "g"
+    call zocwait ("for organics  (0 to ")
+    call zocwait (")")
+    data = zoclastline()
+    maxprod = trunc((removeComma(substr(data, 1, length(data)-1))) / mbbs)
+
+    if length(trunc(maxprod*(percent/100)))<length(maxprod) then do
+      call zocsend (trunc(maxprod*(percent/100)) || "^M")
+    end
+    else do
+      call zocsend (trunc(maxprod*(percent/100)))
+    end
+    call zocwait ("Port editor:")
+
+	/* equipment */
+    call zocsend "h"
+    call zocwait ("for equipment  (0 to ")
+    call zocwait (")")
+    data = zoclastline()
+    maxprod = trunc((removeComma(substr(data, 1, length(data)-1))) / mbbs)
+
+    if length(trunc(maxprod*(percent/100)))<length(maxprod) then do
+      call zocsend (trunc(maxprod*(percent/100)) || "^M")
+    end
+    else do
+      call zocsend (trunc(maxprod*(percent/100)))
+    end
+    call zocwait ("Port editor:")
+
+	/* set the actual amounts */
+	/* fuel ore */
+    call zocsend "c"
+    call zocwait ("of ore  (0 to ")
+    call zocwait (")")
+    data = zoclastline()
+    maxprod = removeComma(substr(data, 1, length(data)-1))
+
+    if portclass=3 | portclass=4 | portclass=5 | portclass=7 then do
+	call zocsend (trunc(maxprod))
+    end
+    else do
+	call zocsend ("0^M")
+    end
+    call zocwait ("Port editor:")
+
+	/* organics */
+    call zocsend "d"
+    call zocwait ("of organics  (0 to ")
+    call zocwait (")")
+    data = zoclastline()
+    maxprod = removeComma(substr(data, 1, length(data)-1))
+
+    if portclass=2 | portclass=4 | portclass=6 | portclass=7 then do
+	call zocsend (trunc(maxprod))
+    end
+    else do
+	call zocsend ("0^M")
+    end
+    call zocwait ("Port editor:")
+
+	/* equipment */
+    call zocsend "e"
+    call zocwait ("of equipment  (0 to ")
+    call zocwait (")")
+    data = zoclastline()
+    maxprod = removeComma(substr(data, 1, length(data)-1))
+
+    if portclass=1 | portclass=5 | portclass=6 | portclass=7 then do
+	call zocsend (trunc(maxprod))
+    end
+    else do
+	call zocsend ("0^M")
+    end
+    call zocwait ("Port editor:")
+  end
+  call zocsend ">"  
+  cycles = cycles + 1
+  call attac_updatecounter()
+end
+call zocsend ("x")
+exit
+
+removeComma:
+holdfinal=""
+holds=arg(1)
+DO addchar=1 to length(holds)
+  holdsit=substr(holds,addchar,1)
+  if holdsit<>"," then holdfinal=holdfinal||holdsit
+END
+RETURN holdfinal

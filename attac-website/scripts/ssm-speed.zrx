@@ -1,0 +1,356 @@
+/* REXX (CREATED BY ZOC LEARN MODE) */
+
+CALL ZocTimeout 3600
+Call ZocRespond "Option? (A,D,", "A999^M"
+Call ZocRespond "Avoid this sector in the", "N"
+CALL ZocRespond "Stop in this sector", "N"
+
+sectortotal = ATTAC_GetTotalSectors()
+sectortotal = ZocAsk("How many sectors are in this game?", sectortotal)
+IF sectortotal = "" THEN SIGNAL Abend
+
+SAY ""
+SAY ""
+SAY "What Sector do you want to steal at after stealing in this one? "
+PULL SECTOR2
+
+call zocsend "^M"
+call zocwait "]:["
+sector1=GETITALL(0,0)
+
+ call zocsend "d"
+ call MoveToStarDock
+ call GetEquipment
+/*
+DO 10000
+CALL ZocSend "pt"
+
+call zocwait "sell ["
+holds1=GETITALL(0,0)
+
+call zocsend "^M"
+call zocwait "our offer ["
+offer1=GETITALL(0,0)
+
+z=SELLHAGGLE(offer1)
+z=STEAL(holds1)
+call attac_message (z)
+if z=1 then do
+ call attac_message ("Busted")
+ call MoveToStarDock
+ exit 
+end
+
+call zocsend sector2
+
+if sectortotal>5000 then do
+ call zocsend "^M"
+end
+else do
+  if sector2 <= 599 then do
+    call zocsend "^M"
+  end
+end 
+
+call zocwait "Command [TL="
+
+CALL ZocSend "pt"
+call zocwait "sell ["
+holds2=GETITALL(0,0)
+call zocsend "^M"
+call zocwait "our offer ["
+offer2=GETITALL(0,0)
+
+z=SELLHAGGLE(offer2)
+z=STEAL(holds2)
+call attac_message (z)
+if z=1 then do
+ call attac_message ("Busted")
+ call MoveToStarDock
+ exit 
+end
+
+call zocsend sector1
+
+if sectortotal>5000 then do
+ call zocsend "^M"
+end
+else do
+  if sector1 <= 599 then do
+    call zocsend "^M"
+  end
+end 
+
+call zocwait "Command [TL="
+
+END
+*/
+exit
+
+
+
+
+
+GETITALL:
+holdfinal=""
+call zocwait "]"
+holds=zoclastline()
+DO addchar=1 to length(holds)
+        holdsit=substr(holds,addchar,1)
+        if holdsit<>"]" then DO
+          if holdsit<>"," then holdfinal=holdfinal||holdsit
+        end
+END
+RETURN holdfinal
+                                                          
+
+SELLHAGGLE:
+               
+offer1=arg(1)
+haggle106=offer1%(94/100)-1
+haggle106=trunc(haggle106,0)
+haggle105=offer1%(95/100)-1
+haggle105=trunc(haggle105,0)
+haggle104=offer1%(96/100)-1
+haggle104=trunc(haggle104,0)
+haggle103=offer1%(97/100)-1
+haggle103=trunc(haggle103,0)
+haggle102=offer1%(98/100)-1
+haggle102=trunc(haggle102,0)
+haggle101=offer1%(99/100)-1
+haggle101=trunc(haggle101,0)
+
+call zocsend haggle105
+call zocsend "^M"
+
+a=3
+DO WHILE a<>0
+result= ZocWaitMux("You have", "Your offer [", "We're not int")
+SELECT
+        WHEN result=0 THEN x=2
+        WHEN result=1 THEN x=1
+        WHEN result=2 THEN x=3
+end
+
+if x=1 then DO
+        if a=4 then do
+        call zocsend haggle105
+        call zocsend "^M"
+        end
+        if a=3 then do
+        call zocsend haggle104
+        call zocsend "^M"
+        end
+        if a=2 then do
+        call zocsend haggle103
+        call zocsend "^M"
+        end
+        if a=1 then do
+        call zocsend haggle102
+        call zocsend "^M"
+        end
+        if a=0 then do
+        call zocsend haggle101
+        call zocsend "^M"
+        end
+a=a-1
+end
+
+if x=2 then do
+  c=0
+  d=0
+  e=0
+  result= ZocWaitMux("Command [TL=", "Fuel Ore do you want", "Organics do you want", "Equipment do you want")
+  SELECT
+        WHEN result=0 THEN c=1
+        WHEN result=1 THEN c=2
+        WHEN result=2 THEN c=3
+        WHEN result=3 THEN c=4
+  end
+  if c=2 then do
+   call ZocSend "0^M"
+   result= ZocWaitMux("Command [TL=", "Organics do you want", "Equipment do you want")
+   SELECT
+         WHEN result=0 THEN d=1
+         WHEN result=1 THEN d=2
+         WHEN result=2 THEN d=3
+   end
+   if d=2 then do
+    call ZocSend "0^M"
+    result= ZocWaitMux("Command [TL=", "Equipment do you want")
+    SELECT
+        WHEN result=0 THEN e=1
+        WHEN result=1 THEN e=2
+    end
+    if e=2 then do
+     call ZocSend "0^M"
+    end		
+   end		
+   if d=3 then do
+    call ZocSend "0^M"
+   end		
+  end
+  if c=3 then do
+   call ZocSend "0^M"
+   result= ZocWaitMux("Command [TL=", "Equipment do you want")
+   SELECT
+         WHEN result=0 THEN d=1
+         WHEN result=1 THEN d=2
+   end
+   if d=2 then do
+    call ZocSend "0^M"
+   end		
+  end
+  if c=4 then do
+    call ZocSend "0^M"  
+  end
+  a=0
+  dead=0
+  return(0)
+end 
+if x=3 then do
+  c=0
+  d=0
+  result= ZocWaitMux("Command [TL=", "Organics do you want", "Equipment do you want")
+  SELECT
+        WHEN result=0 THEN c=1
+        WHEN result=1 THEN c=2
+        WHEN result=2 THEN c=3
+  end
+  if c=2 then do
+   result= ZocWaitMux("Command [TL=", "Equipment do you want")
+   SELECT
+         WHEN result=0 THEN d=1
+         WHEN result=1 THEN d=2
+   end
+   if d=2 then do
+    call ZocSend "0^M"
+   end		
+  end
+  if c=3 then do
+    call ZocSend "0^M"  
+  end
+  a=0
+  dead=1
+  return(0)
+end
+
+END
+
+RETURN(0) 
+
+STEAL:
+holdz=arg(1)
+call zocsend "pr"
+call zocsend "^M"
+call zocsend "s3"
+call zocsend holdz
+call zocsend "^M"
+result = zocwaitmux("Success!","Suddenly you're Busted","aren't that many holds")
+select
+	WHEN result=0 then bust=0
+	when result=1 then bust=1
+	when result=2 then bust=2
+end
+if bust=1 then do 
+ return(1)
+end
+if bust=2 then do
+        zocsend "o31^Mq"
+        call zocwait "]:["
+        call zocsend "pr"
+        call zocsend "^M"
+        call zocsend "s3"
+        call zocsend holdz
+        call zocsend "^M"
+        result = zocwaitmux("Success!","Suddenly you're Bust")
+        select
+        WHEN result=0 then bust=0
+        when result=1 then bust=1
+        end
+        if bust=1 then return(1)
+        end
+RETURN(0)
+
+
+
+
+MoveToStarDock:
+
+  call zocwait "Command [TL="
+
+  stardock=4010
+  call ZocSend stardock
+
+  if sectortotal>5000 then do
+   call zocsend "^M"
+  end
+  else do
+    if stardock <= 599 then do
+      call zocsend "^M"
+    end
+  end 
+
+  result = ZocWaitMux("engage the TransWarp drive", "xpress")
+  if result=0 then do
+    call ZocSend "N"
+    call ZocWait "xpress"
+  end
+  call ZocSend "E"
+
+  call zocwait "Command [TL="
+ 
+  call zocSend "PS"
+
+  result = ZocWaitMux("[Pause]", "<StarDock> Wh")
+  if result=0 then do
+    call ZocSend "^M"
+    call ZocWait "<StarDock> Wh"
+  end
+
+  call ZocSend "SPA"
+   
+
+  call ZocWait "credits / next hold          "
+  call ZocWait "^M"
+  holdsstring= zoclastline()
+  myholds = substr(holdsstring, 5, 3)
+/*  call attac_message ("AA" || myholds || "BB") */
+  call ZocSend myholds
+  call ZocSend "^M"
+  call ZocSend "Y"
+  call ZocSend "QQQ"
+ 
+ call zocwait "Command [TL="
+
+return
+
+
+GetEquipment:
+ equipmentport=1075
+ call ZocSend equipmentport
+
+ if sectortotal>5000 then do
+  call zocsend "^M"
+ end
+ else do
+   if equipmentport <= 599 then do
+     call zocsend "^M"
+   end
+ end 
+
+ result = ZocWaitMux("engage the TransWarp drive", "xpress", "Command [TL=")
+ if result=0 then do
+   call ZocSend "N"
+   call ZocWait "xpress"
+ end
+ 
+ if result ^=2 then do
+  call ZocSend "E"
+  call zocwait "Command [TL="
+ end
+
+ call zocSend "PT^M^M"
+
+return
+

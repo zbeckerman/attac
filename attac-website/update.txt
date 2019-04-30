@@ -1,0 +1,21 @@
+4.1.7^ATTAC Version 4.1.7 has been released!
+
+New features are...
+
+* World Trade now skips avoided sectors
+* World Trade does not jettison cargo if it can resell it to next port
+* Export text files is now fixed.
+* Auto Update Notification of new version of ATTAC
+* Fixed GUI so that the Credits/Figs amount appear correctly all the time
+* Fixed Buy/Dump so that the haggling works properly again
+* Fixed REXX so it does not crash if library.zrx file did not exist
+* Fixed Auto-Explorer so that it reaches all sectors even after you run ZTM
+* Fixed World Trade so that a density/holo scanner is not required.
+* Added changable route sector to Show Pair Port and Show Evil Pairs
+* Added Show One Way Warps
+* Map shows One Way Warps with directed arrows
+* Map shows Dead Ends with Dashed Circles
+* If the .atc file has the incorrect size, the valid backup file automatically replaces it
+* Other bug fixes
+
+Go to http://www.tw-attac.com to download the newest version

@@ -1,0 +1,256 @@
+/* Created by earth */
+
+CALL ZocTimeout 60
+call ZocRespond "[Pause]", "^M"
+
+sectortotal = ATTAC_GetTotalSectors() 
+IF sectortotal = "" THEN sectortotal = ZocAsk("How many sectors are in this game?", sectortotal) 
+IF sectortotal = "" THEN SIGNAL Abend
+
+/*
+  attac_arg1 = option_choice
+  attac_arg2 = file
+  attac_arg3 = class0_option
+  attac_arg4 = class9_option
+  attac_arg5 = beacons_option
+  attac_arg6 = fighters_option
+  attac_arg7 = mines_option
+  attac_arg8 = navhaz_option
+  attac_arg9 = planets_option
+  attac_arg10 = ships_option
+  attac_arg11 = traders_option
+  attac_arg12 = cycles_option
+
+*/
+
+  option_choice = attac_arg1
+  file = attac_arg2
+  class0_option = attac_arg3
+  class9_option = attac_arg4
+  beacons_option = attac_arg5
+  fighters_option = attac_arg6
+  mines_option = attac_arg7
+  navhaz_option = attac_arg8
+  planets_option = attac_arg9
+  ships_option = attac_arg10
+  traders_option = attac_arg11
+  cycles_option = attac_arg12
+
+
+filename = "ether_analysis.txt"
+
+if option_choice="ATTAC_ARG1" THEN DO
+	option_choice = zocrequest("Which type of ether probing are you using?", "UNEXPLORED", "RANDOM", "FILE") 
+end
+
+if option_choice="FILE" then do
+  if file="ATTAC_ARG2" then do
+    file = ZocAsk("What file are we using?","")
+
+    IF STREAM(file, "C", "QUERY EXISTS") = "" THEN DO
+      call attac_message("Invalid Filename")
+      exit
+    END
+  end
+end
+
+movingsector=0
+sector=0
+sector=getNextSector()
+cycle=0
+if cycles_option="ATTAC_ARG12" then cycles=4000
+
+CALL STREAM filename, "C", "OPEN WRITE"
+CALL LINEOUT filename, "TIME: " || date(W) || " " || date(U) || " " || time(N)
+
+call ATTAC_SetCounterMax(cycles)
+
+Do until cycle = cycles
+	call zocsend "e"
+        result=ZocWaitMux("Ether Probe loaded in","You do not have any Ether Probes","powering up")
+	SELECT        
+		WHEN result=0 then x=1
+      		WHEN result=1 then x=2
+      		WHEN result=2 then x=3
+	end
+	if x=1 then do 
+	        call attac_message("Firing at sector: " || sector)
+		call zocsend sector
+		call zocsend "^M"
+
+		y=10
+		do while y>4
+			result=ZocWaitMux("Probe Self Destructs", "Probe Destroyed!", "powering up","*** Error","Probe entering sector : ",", Class 0","Beacon  : ","Fighters:","Mines   :","NavHaz  :","Planets :","Ships   :","Traders :",", Class 9","Launch aborted.")
+			SELECT        
+				WHEN result=0 then y=1
+		   	   	WHEN result=1 then y=2
+	      			WHEN result=1 then y=3
+				WHEN result=3 then y=4
+				WHEN result=4 then y=5
+				WHEN result=5 then y=6
+				WHEN result=6 then y=7
+				WHEN result=7 then y=8
+				WHEN result=8 then y=9
+				WHEN result=9 then y=10
+				WHEN result=10 then y=11
+				WHEN result=11 then y=12
+				WHEN result=12 then y=13
+				WHEN result=13 then y=14
+				WHEN result=14 then y=1
+				OTHERWISE y=3
+			end
+			if y=1 then DO
+				sector=getNextSector()
+			end
+			if y=2 then DO
+				CALL LINEOUT filename, "Info: Probe Destroyed in sector " || sector
+				sector=getNextSector()
+			end
+			if y=3 then do
+				CALL LINEOUT filename, "Attacked: Someone just attacked us. Landing at Stardock"
+				CALL STREAM filename, "C", "CLOSE"
+				call zocsend "ps"
+				result = zocwaitmux("Pause","<Stardock>")
+				if result=0 then call zocsend "^M"
+				exit
+			end
+			if y=4 then do
+				CALL LINEOUT filename, "Info: No route to sector " || sector
+				call zocsend "n"
+				sector=getNextSector()
+			end
+			if y=5 then do
+				call zocwait "^M"
+				movingsector = zoclastline()
+				movingsector = SUBSTR(movingsector, 1, LENGTH(movingsector) - 1)
+			end
+			if y=6 & class0_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Class 0 Port: " || movingsector || " - " || data
+			end
+			if y=7 & beacons_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Beacon: " || movingsector || " - " || data
+			end
+			if y=8 & fighters_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Fighters: " || movingsector || " - " || data
+			end
+			if y=9 & mines_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Armid Mines: " || movingsector || " - " || data
+			end
+			if y=10 & navhaz_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "NavHaz: " || movingsector || " - " || data
+			end
+			if y=11 & planets_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Planets: " || movingsector || " - " || data
+			end
+			if y=12 & ships_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Unmanned Ship: " || movingsector || " - " || data
+			end
+			if y=13 & traders_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Traders: " || movingsector || " - " || data
+			end
+			if y=14 & class9_option ^= "NO" then do
+				call zocwait "^M"
+				data = zoclastline()
+				data = SUBSTR(data, 1, LENGTH(data) - 1)
+				CALL LINEOUT filename, "Class 9 Port: " || movingsector || " - " || data
+			end
+		end
+	end
+	if x=2 then do
+		call getMoreProbes()
+		sector=getNextSector()
+	end
+	if x=3 then do
+		CALL LINEOUT filename, "Someone just attacked us. Landing at Stardock"
+		CALL STREAM filename, "C", "CLOSE"
+		call zocsend "^M^Mps"
+		exit
+	end
+	call attac_updatecounter(1)
+	cycle=cycle+1
+	
+	if sector > sectortotal then do
+		call attac_message("The Sector we are firing at exceeds sector total")
+		exit
+	end
+
+end
+
+if option_choice="FILE" then do
+  CALL STREAM file, "C", "CLOSE"
+END
+
+CALL STREAM filename, "C", "CLOSE"
+exit
+
+getNextSector:
+if option_choice ="UNEXPLORED" then do
+  warps=0
+  unexploredSector=0
+  do while unexploredSector=0
+	sector=sector+1
+	if sector>sectortotal then do
+	  call attac_message("No unexplored sectors left. Script Completed")
+	  exit
+	end
+	warps = ATTAC_Get_Sector_Info(sector)
+	if warps=0 then do
+		unexploredSector=1
+	end
+  end
+end
+else if option_choice="RANDOM" then do
+   sector = random(sectortotal-1)
+   sector = sector +1
+end
+else if option_choice="FILE" then do
+  sector = LINEIN(file)
+  if sector = "" then do
+    call attac_message ("No more sectors in file " || file)
+    exit
+  end
+end
+return(sector)
+
+
+getMoreProbes:
+ call zocsend "ps"
+ result = zocwaitmux("Pause","<Stardock>")
+ if result=0 then call zocsend "^M"
+ call zocsend "h"
+ call zocwait "You have"
+ call zocsend "e"
+ call ZocWait ("do you want (Max ")
+ call zocwait ")"
+ probeCount=ZocLastLine()
+ probeCount = substr(probeCount, 1, length(probeCount)-1)
+
+ call zocsend probeCount ||"^M"
+ call zocwait "You have"
+ call zocsend "QQ"
+ call zocwait "blast off from"
+return

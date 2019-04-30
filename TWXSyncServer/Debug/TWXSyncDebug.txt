@@ -1,0 +1,172 @@
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 200
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 200
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 862
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1349
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1072
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1108
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1410
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1410
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 200
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 438
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1390
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1348
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1352
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1820
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 912
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 856
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1354
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 920
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1386
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 467
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 466
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 467
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 465
+
+
+------------TWC_TWXSync_Decode---------------
+Bad Packet crc32 Invalid: Length 1329
+
+
+------------XML_Parse---------------
+XML Parse Error: <?xml version="1.0" encoding="UTF-8"?>
+<TWXSync version="1">
+<Login id="7f184820-f296-469c-9b81-885e305b3e4c" user="<<saturn>>" password="test" helper="ATTAC Release 4.1.10 (Jun 20 2005 20:32:10)"/>
+ </TWXSync>
+Error is:XML parse error at line 3: not well-formed (invalid token)
+
+
+------------XML_Parse---------------
+XML Parse Error: <?xml version="1.0" encoding="UTF-8"?>
+<TWXSync version="1">
+<Login id="7f184820-f296-469c-9b81-885e305b3e4c" user="<<saturn>>" password="test" helper="ATTAC Release 4.1.10 (Jun 20 2005 20:32:10)"/>
+ </TWXSync>
+Error is:XML parse error at line 3: not well-formed (invalid token)

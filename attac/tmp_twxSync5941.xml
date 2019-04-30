@@ -1,0 +1,1755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TWXSync version="1"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+<Session id="7f184820-f296-469c-9b81-885e305b3e4c"/>
+<Result code="200" text="OK"/><Update>
+  <Header>
+    <Created>
+      <Date>1119008054</Date>
+      <By>TWXSync</By>
+    </Created>
+    <Game>
+      <Sectors>5000</Sectors>
+      <StarDock>673</StarDock>
+      <Class0Port>3233</Class0Port>
+    </Game>
+  </Header>
+  <TraderData>
+  </TraderData>
+  <SectorData>
+  <Sector nr="19" updated="1118318009">
+	  <Warps>
+	    <Warp>1963</Warp>
+	    <Warp>2325</Warp>
+	    <Warp>3627</Warp>
+	  </Warps>
+	  <Port updated="1118318008">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13130</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="40" updated="1118020014">
+	  <Port updated="1118317937">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="41" updated="1118020030">
+	  <Port updated="1118317955">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="43" updated="1118317977">
+	  <Warps>
+	    <Warp>4076</Warp>
+	    <Warp>4682</Warp>
+	  </Warps>
+	  <Port updated="1118317978">
+	    <Class>7</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="51" updated="1118318092">
+	  <Warps>
+	    <Warp>1271</Warp>
+	    <Warp>1478</Warp>
+	    <Warp>2980</Warp>
+	    <Warp>3453</Warp>
+	    <Warp>3820</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="57" updated="1118020239">
+	  <Port updated="1118318172">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="60" updated="1118318207">
+	  <Warps>
+	    <Warp>2109</Warp>
+	    <Warp>3324</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="182" updated="1118021008">
+	  <Port updated="1118318002">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="248" updated="1118318213">
+	  <Warps>
+	    <Warp>4214</Warp>
+	    <Warp>4260</Warp>
+	    <Warp>4540</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="366" updated="1118318101">
+	  <Warps>
+	    <Warp>2771</Warp>
+	    <Warp>2788</Warp>
+	    <Warp>2936</Warp>
+	    <Warp>3285</Warp>
+	  </Warps>
+	  <Port updated="1118318101">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13024</Amount>
+	      <Percentage>99</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13024</Amount>
+	      <Percentage>99</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13130</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="404" updated="1118020199">
+	  <Port updated="1118318127">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="488" updated="1118318058">
+	  <Warps>
+	    <Warp>2034</Warp>
+	    <Warp>3140</Warp>
+	    <Warp>4052</Warp>
+	    <Warp>4644</Warp>
+	    <Warp>4817</Warp>
+	  </Warps>
+	  <Density>4817</Density>
+  </Sector>
+  <Sector nr="585" updated="1118020020">
+	  <Port updated="1118317943">
+	    <Class>5</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="623" updated="1118020009">
+	  <Port updated="1118317931">
+	    <Class>5</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="667" updated="1118317958">
+	  <Warps>
+	    <Warp>939</Warp>
+	    <Warp>1262</Warp>
+	    <Warp>1582</Warp>
+	    <Warp>2098</Warp>
+	    <Warp>2334</Warp>
+	    <Warp>2526</Warp>
+	  </Warps>
+	  <Density>2526</Density>
+  </Sector>
+  <Sector nr="696" updated="1118318215">
+	  <Warps>
+	    <Warp>2250</Warp>
+	    <Warp>3382</Warp>
+	    <Warp>4540</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="772" updated="1118021355">
+	  <Port updated="1118318177">
+	    <Class>8</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="879" updated="1118317985">
+	  <Warps>
+	    <Warp>1472</Warp>
+	    <Warp>2523</Warp>
+	    <Warp>3355</Warp>
+	  </Warps>
+  </Sector>
+  <Sector nr="898" updated="1118317988">
+	  <Warps>
+	    <Warp>1451</Warp>
+	    <Warp>2232</Warp>
+	    <Warp>4428</Warp>
+	  </Warps>
+  </Sector>
+  <Sector nr="906" updated="1118318039">
+	  <Warps>
+	    <Warp>111</Warp>
+	    <Warp>614</Warp>
+	    <Warp>929</Warp>
+	    <Warp>1991</Warp>
+	    <Warp>4579</Warp>
+	    <Warp>4843</Warp>
+	  </Warps>
+	  <Port updated="1118318039">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>4843</Density>
+  </Sector>
+  <Sector nr="970" updated="1118233795">
+	  <Port updated="1118318111">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1062" updated="1118020182">
+	  <Port updated="1118318109">
+	    <Class>6</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1066" updated="1118020222">
+	  <Port updated="1118318155">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1069" updated="1118020227">
+	  <Port updated="1118318160">
+	    <Class>7</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1151" updated="1118020168">
+	  <Port updated="1118318094">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1167" updated="1118317924">
+	  <Warps>
+	    <Warp>567</Warp>
+	    <Warp>644</Warp>
+	    <Warp>1139</Warp>
+	    <Warp>3406</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="1196" updated="1118020249">
+	  <Port updated="1118318183">
+	    <Class>6</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1212" updated="1118020224">
+	  <Port updated="1118318156">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1271" updated="1118318198">
+	  <Warps>
+	    <Warp>51</Warp>
+	    <Warp>1151</Warp>
+	    <Warp>3303</Warp>
+	    <Warp>3872</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="1301" updated="1118020200">
+	  <Port updated="1118318128">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1405" updated="1118318065">
+	  <Warps>
+	    <Warp>617</Warp>
+	    <Warp>2034</Warp>
+	    <Warp>2313</Warp>
+	    <Warp>2797</Warp>
+	    <Warp>3473</Warp>
+	  </Warps>
+	  <Port updated="1118318065">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>3473</Density>
+  </Sector>
+  <Sector nr="1417" updated="1118317908">
+	  <Warps>
+	    <Warp>1679</Warp>
+	    <Warp>2846</Warp>
+	    <Warp>2872</Warp>
+	    <Warp>2879</Warp>
+	    <Warp>4087</Warp>
+	    <Warp>4997</Warp>
+	  </Warps>
+	  <Port updated="1118317908">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13061</Amount>
+	      <Percentage>99</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13060</Amount>
+	      <Percentage>99</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+	  <Density>4087</Density>
+  </Sector>
+  <Sector nr="1451" updated="1118317990">
+	  <Warps>
+	    <Warp>690</Warp>
+	    <Warp>898</Warp>
+	    <Warp>1354</Warp>
+	    <Warp>4175</Warp>
+	    <Warp>1437</Warp>
+	    <Warp>1845</Warp>
+	  </Warps>
+	  <Port updated="1118317990">
+	    <Class>5</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>8699</Amount>
+	      <Percentage>66</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>8693</Amount>
+	      <Percentage>66</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>4175</Density>
+  </Sector>
+  <Sector nr="1520" updated="1118020259">
+	  <Port updated="1118318194">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1556" updated="1118020186">
+	  <Port updated="1118318113">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="1592" updated="1118317907">
+	  <Warps>
+	    <Warp>3391</Warp>
+	    <Warp>3767</Warp>
+	    <Warp>1716</Warp>
+	    <Warp>2940</Warp>
+	    <Warp>3113</Warp>
+	    <Warp>4498</Warp>
+	  </Warps>
+	  <Port updated="1118317907">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+	  <Density>4539</Density>
+  </Sector>
+  <Sector nr="1716" updated="1118317908">
+	  <Warps>
+	    <Warp>1592</Warp>
+	    <Warp>3053</Warp>
+	    <Warp>3824</Warp>
+	    <Warp>4015</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="1764" updated="1118318220">
+	  <Warps>
+	    <Warp>2250</Warp>
+	    <Warp>2367</Warp>
+	    <Warp>2571</Warp>
+	    <Warp>2907</Warp>
+	  </Warps>
+	  <Port updated="1118318220">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>2907</Density>
+  </Sector>
+  <Sector nr="1963" updated="1118318010">
+	  <Warps>
+	    <Warp>19</Warp>
+	    <Warp>967</Warp>
+	    <Warp>2839</Warp>
+	    <Warp>3307</Warp>
+	    <Warp>3440</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="1999" updated="1118020383">
+	  <Port updated="1118318130">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="2034" updated="1118020138">
+	  <Port updated="1118318060">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="2055" updated="1118317945">
+	  <Warps>
+	    <Warp>3097</Warp>
+	    <Warp>4490</Warp>
+	    <Warp>585</Warp>
+	    <Warp>3494</Warp>
+	  </Warps>
+	  <Port updated="1118317945">
+	    <Class>5</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>3494</Density>
+  </Sector>
+  <Sector nr="2085" updated="1118020294">
+	  <Port updated="1118318232">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13095</Amount>
+	      <Percentage>99</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13014</Amount>
+	      <Percentage>99</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13020</Amount>
+	      <Percentage>99</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="2098" updated="1118317957">
+	  <Warps>
+	    <Warp>41</Warp>
+	    <Warp>667</Warp>
+	    <Warp>1599</Warp>
+	  </Warps>
+	  <Density>1599</Density>
+  </Sector>
+  <Sector nr="2101" updated="1118317904">
+	  <Warps>
+	    <Warp>2316</Warp>
+	    <Warp>2356</Warp>
+	    <Warp>2588</Warp>
+	    <Warp>4997</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="2109" updated="1118318205">
+	  <Warps>
+	    <Warp>60</Warp>
+	    <Warp>4043</Warp>
+	  </Warps>
+	  <Port updated="1118318205">
+	    <Class>8</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="2142" updated="1118318053">
+	  <Warps>
+	    <Warp>2183</Warp>
+	    <Warp>3566</Warp>
+	    <Warp>4200</Warp>
+	    <Warp>4511</Warp>
+	    <Warp>4740</Warp>
+	  </Warps>
+	  <Density>4740</Density>
+	  <LastBust trader="test">4740</LastBust>
+  </Sector>
+  <Sector nr="2158" updated="1118318187">
+	  <Warps>
+	    <Warp>3641</Warp>
+	    <Warp>3691</Warp>
+	    <Warp>4032</Warp>
+	  </Warps>
+	  <Density>4032</Density>
+	  <LastBust trader="test">4032</LastBust>
+  </Sector>
+  <Sector nr="2185" updated="1118317942">
+	  <Warps>
+	    <Warp>2272</Warp>
+	    <Warp>3819</Warp>
+	    <Warp>98</Warp>
+	    <Warp>585</Warp>
+	    <Warp>623</Warp>
+	    <Warp>963</Warp>
+	  </Warps>
+	  <Port updated="1118317942">
+	    <Class>7</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>2900</Density>
+  </Sector>
+  <Sector nr="2236" updated="1118020118">
+	  <Port updated="1118318036">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="2523" updated="1118317986">
+	  <Warps>
+	    <Warp>422</Warp>
+	    <Warp>879</Warp>
+	    <Warp>4428</Warp>
+	  </Warps>
+  </Sector>
+  <Sector nr="2569" updated="1118318179">
+	  <Warps>
+	    <Warp>772</Warp>
+	    <Warp>851</Warp>
+	    <Warp>2700</Warp>
+	    <Warp>2948</Warp>
+	  </Warps>
+	  <Density>2700</Density>
+	  <LastBust trader="test">2948</LastBust>
+  </Sector>
+  <Sector nr="2700" updated="1118318180">
+	  <Warps>
+	    <Warp>58</Warp>
+	    <Warp>736</Warp>
+	    <Warp>892</Warp>
+	    <Warp>1632</Warp>
+	    <Warp>2569</Warp>
+	    <Warp>2920</Warp>
+	  </Warps>
+	  <Density>1632</Density>
+	  <LastBust trader="test">2569</LastBust>
+  </Sector>
+  <Sector nr="2771" updated="1118318051">
+	  <Warps>
+	    <Warp>366</Warp>
+	    <Warp>1427</Warp>
+	    <Warp>2142</Warp>
+	    <Warp>3270</Warp>
+	    <Warp>3687</Warp>
+	    <Warp>4442</Warp>
+	  </Warps>
+	  <Port updated="1118318051">
+	    <Class>8</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="2846" updated="1118317912">
+	  <Warps>
+	    <Warp>618</Warp>
+	    <Warp>1417</Warp>
+	    <Warp>3940</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="2856" updated="1118318077">
+	  <Warps>
+	    <Warp>654</Warp>
+	    <Warp>1065</Warp>
+	    <Warp>2964</Warp>
+	    <Warp>3687</Warp>
+	    <Warp>4641</Warp>
+	    <Warp>4986</Warp>
+	  </Warps>
+	  <Port updated="1118318077">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>4986</Density>
+	  <LastBust trader="test">4986</LastBust>
+  </Sector>
+  <Sector nr="2919" updated="1118318029">
+	  <Warps>
+	    <Warp>329</Warp>
+	    <Warp>1495</Warp>
+	    <Warp>3918</Warp>
+	  </Warps>
+	  <Port updated="1118318029">
+	    <Class>4</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="2964" updated="1118020154">
+	  <Port updated="1118318079">
+	    <Class>6</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3026" updated="1118317962">
+	  <Warps>
+	    <Warp>4332</Warp>
+	    <Warp>4655</Warp>
+	    <Warp>6</Warp>
+	    <Warp>3535</Warp>
+	    <Warp>3593</Warp>
+	    <Warp>4792</Warp>
+	  </Warps>
+	  <Port updated="1118317962">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13084</Amount>
+	      <Percentage>99</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13085</Amount>
+	      <Percentage>99</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>4792</Density>
+  </Sector>
+  <Sector nr="3140" updated="1118020135">
+	  <Port updated="1118318056">
+	    <Class>8</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3178" updated="1118020146">
+	  <Port updated="1118318072">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3182" updated="1118020171">
+	  <Port updated="1118318097">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3198" updated="1118317982">
+	  <Warps>
+	    <Warp>3006</Warp>
+	    <Warp>3355</Warp>
+	    <Warp>817</Warp>
+	  </Warps>
+	  <Port updated="1118317983">
+	    <Class>4</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3278" updated="1118020217">
+	  <Port updated="1118318145">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3324" updated="1118318208">
+	  <Warps>
+	    <Warp>60</Warp>
+	    <Warp>479</Warp>
+	    <Warp>2351</Warp>
+	    <Warp>3413</Warp>
+	    <Warp>4688</Warp>
+	    <Warp>4826</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="3349" updated="1118317970">
+	  <Warps>
+	    <Warp>42</Warp>
+	    <Warp>349</Warp>
+	    <Warp>576</Warp>
+	    <Warp>994</Warp>
+	    <Warp>1088</Warp>
+	    <Warp>2831</Warp>
+	  </Warps>
+	  <Density>2831</Density>
+  </Sector>
+  <Sector nr="3355" updated="1118317984">
+	  <Warps>
+	    <Warp>879</Warp>
+	    <Warp>1496</Warp>
+	    <Warp>2103</Warp>
+	    <Warp>2226</Warp>
+	    <Warp>3198</Warp>
+	    <Warp>248</Warp>
+	  </Warps>
+	  <Density>3198</Density>
+  </Sector>
+  <Sector nr="3371" updated="1118318019">
+	  <Warps>
+	    <Warp>1185</Warp>
+	    <Warp>1516</Warp>
+	    <Warp>1992</Warp>
+	    <Warp>3089</Warp>
+	    <Warp>3546</Warp>
+	    <Warp>4355</Warp>
+	  </Warps>
+	  <Density>4355</Density>
+  </Sector>
+  <Sector nr="3399" updated="1118019997">
+	  <Port updated="1118317919">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13020</Amount>
+	      <Percentage>99</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13021</Amount>
+	      <Percentage>99</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3406" updated="1118317920">
+	  <Warps>
+	    <Warp>1167</Warp>
+	    <Warp>2193</Warp>
+	    <Warp>3437</Warp>
+	  </Warps>
+	  <Port updated="1118317920">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="3413" updated="1118318210">
+	  <Warps>
+	    <Warp>3324</Warp>
+	    <Warp>3831</Warp>
+	    <Warp>4214</Warp>
+	    <Warp>4727</Warp>
+	    <Warp>4985</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+	  <Density>4985</Density>
+  </Sector>
+  <Sector nr="3437" updated="1118020547">
+	  <Port updated="1118317916">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3453" updated="1118318089">
+	  <Warps>
+	    <Warp>51</Warp>
+	    <Warp>1093</Warp>
+	    <Warp>3587</Warp>
+	    <Warp>3978</Warp>
+	    <Warp>4307</Warp>
+	  </Warps>
+	  <Port updated="1118318089">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+	  <Density>4307</Density>
+	  <LastBust trader="test">4307</LastBust>
+  </Sector>
+  <Sector nr="3494" updated="1118020022">
+	  <Port updated="1118317946">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3568" updated="1118019994">
+	  <Port updated="1118317912">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3593" updated="1118317960">
+	  <Warps>
+	    <Warp>881</Warp>
+	    <Warp>1122</Warp>
+	    <Warp>1262</Warp>
+	    <Warp>2487</Warp>
+	    <Warp>3026</Warp>
+	  </Warps>
+	  <Density>3026</Density>
+  </Sector>
+  <Sector nr="3732" updated="1118318154">
+	  <Warps>
+	    <Warp>533</Warp>
+	    <Warp>1066</Warp>
+	    <Warp>1705</Warp>
+	    <Warp>3995</Warp>
+	  </Warps>
+	  <Port updated="1118318154">
+	    <Class>4</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>3995</Density>
+	  <LastBust trader="test">1705</LastBust>
+  </Sector>
+  <Sector nr="3756" updated="1118021005">
+	  <Port updated="1118317999">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="3918" updated="1118318027">
+	  <Warps>
+	    <Warp>2397</Warp>
+	    <Warp>2919</Warp>
+	    <Warp>2948</Warp>
+	    <Warp>3546</Warp>
+	    <Warp>4967</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="3960" updated="1118318202">
+	  <Warps>
+	    <Warp>175</Warp>
+	    <Warp>889</Warp>
+	    <Warp>1147</Warp>
+	    <Warp>4043</Warp>
+	    <Warp>4058</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+	  <Density>4043</Density>
+  </Sector>
+  <Sector nr="4037" updated="1118317994">
+	  <Warps>
+	    <Warp>3309</Warp>
+	    <Warp>3471</Warp>
+	    <Warp>3756</Warp>
+	    <Warp>3999</Warp>
+	    <Warp>4175</Warp>
+	    <Warp>1552</Warp>
+	  </Warps>
+	  <Port updated="1118317994">
+	    <Class>4</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Density>4175</Density>
+  </Sector>
+  <Sector nr="4043" updated="1118318203">
+	  <Warps>
+	    <Warp>171</Warp>
+	    <Warp>2109</Warp>
+	    <Warp>3960</Warp>
+	  </Warps>
+	  <Port updated="1118318203">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="4073" updated="1118019824">
+	  <Port updated="1118318170">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4076" updated="1118020050">
+	  <Port updated="1118317980">
+	    <Class>4</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4175" updated="1118317992">
+	  <Warps>
+	    <Warp>1451</Warp>
+	    <Warp>1489</Warp>
+	    <Warp>4037</Warp>
+	  </Warps>
+	  <Port updated="1118317992">
+	    <Class>2</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>8952</Amount>
+	      <Percentage>68</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>8951</Amount>
+	      <Percentage>68</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="4214" updated="1118318211">
+	  <Warps>
+	    <Warp>248</Warp>
+	    <Warp>1365</Warp>
+	    <Warp>2048</Warp>
+	    <Warp>3413</Warp>
+	  </Warps>
+	  <Port updated="1118318211">
+	    <Class>6</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="4236" updated="1118020189">
+	  <Port updated="1118318116">
+	    <Class>4</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4428" updated="1118317987">
+	  <Warps>
+	    <Warp>630</Warp>
+	    <Warp>898</Warp>
+	    <Warp>1810</Warp>
+	    <Warp>2523</Warp>
+	  </Warps>
+  </Sector>
+  <Sector nr="4476" updated="1118020007">
+	  <Port updated="1118317928">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4511" updated="1118020133">
+	  <Port updated="1118318054">
+	    <Class>6</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4540" updated="1118318214">
+	  <Warps>
+	    <Warp>248</Warp>
+	    <Warp>696</Warp>
+	    <Warp>1976</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="4618" updated="1118318167">
+	  <Warps>
+	    <Warp>56</Warp>
+	    <Warp>859</Warp>
+	    <Warp>2702</Warp>
+	    <Warp>3428</Warp>
+	    <Warp>4023</Warp>
+	    <Warp>4801</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  <Sector nr="4635" updated="1118020004">
+	  <Port updated="1118317922">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4659" updated="1118020116">
+	  <Port updated="1118318032">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4711" updated="1118020047">
+	  <Port updated="1118317973">
+	    <Class>4</Class>
+	    <FuelOre>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4938" updated="1118019948">
+	  <Port updated="1118318224">
+	    <Class>1</Class>
+	    <FuelOre>
+	      <Amount>13039</Amount>
+	      <Percentage>99</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13040</Amount>
+	      <Percentage>99</Percentage>
+	    </Equipment>
+	  </Port>
+  </Sector>
+  <Sector nr="4945" updated="1118318074">
+	  <Warps>
+	    <Warp>971</Warp>
+	    <Warp>1628</Warp>
+	    <Warp>1712</Warp>
+	    <Warp>1937</Warp>
+	    <Warp>3178</Warp>
+	    <Warp>4986</Warp>
+	  </Warps>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+	  <Density>105</Density>
+  </Sector>
+  <Sector nr="4997" updated="1118317906">
+	  <Warps>
+	    <Warp>1417</Warp>
+	    <Warp>2101</Warp>
+	  </Warps>
+	  <Port updated="1118317906">
+	    <Class>3</Class>
+	    <FuelOre>
+	      <Amount>13077</Amount>
+	      <Percentage>99</Percentage>
+	    </FuelOre>
+	    <Organics>
+	      <Amount>13100</Amount>
+	      <Percentage>100</Percentage>
+	    </Organics>
+	    <Equipment>
+	      <Amount>13077</Amount>
+	      <Percentage>99</Percentage>
+	    </Equipment>
+	  </Port>
+	  <Fighters>
+	    <Amount>1</Amount>
+	    <Type>Toll</Type>
+	    <Owner corp="true">2</Owner>
+	  </Fighters>
+  </Sector>
+  </SectorData>
+
+</Update>
+</TWXSync>

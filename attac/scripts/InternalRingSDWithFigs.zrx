@@ -1,0 +1,15 @@
+/* Ring SD With Figs  1.0 */
+/* Written by earth for ATTAC TCP/IP Helper www.tw-attac.com */
+
+CALL ZocRespond "Avoid this sector in the future? (Y", "N"
+CALL ZocRespond "Option? (", "AY99^M"
+CALL ZocRespond "age the TransWarp drive?", "N"
+CALL ZocRespond "Stop in this sector", "N"
+
+sectortotal=ATTAC_GetTotalSectors()
+
+sdSector = ATTAC_GetStardockSector()
+
+call RingSectorWithFigs_ATTAC_LIBRARY(sdSector, 30, "P", "D")
+
+call MoveMe_ATTAC_LIBRARY(sdSector, 0)

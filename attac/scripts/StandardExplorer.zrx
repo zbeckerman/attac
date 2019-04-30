@@ -1,0 +1,410 @@
+/* REXX */
+
+Call ZocRespond("Your fighters: ", "A99^M") 
+Call ZocRespond("engage the TransWarp drive", "N")
+Call ZocRespond("Stop in this sector (Y,", "N")
+
+
+UnexploredSector=0
+previoustotal=0
+numavoids=0
+porttype=0
+respondTollFigs=0
+respondDefensiveFigs=0
+haggle=1
+planetAvoid=0
+skipSector=0
+
+exploreAllSectors = ATTAC_ARG12
+if exploreAllSectors = "ATTAC_ARG12" then exploreAllSectors=0
+
+/* get the sector to start at */
+startsector = ATTAC_ARG1
+if startsector="ATTAC_ARG1" then do
+  startsector=ZocAsk("Start exploring which sector?","1")
+end
+
+/* find out of we are trading */
+tradePorts = ATTAC_ARG2
+if tradePorts="ATTAC_ARG2" then do
+  tradePorts=ZocMsgBox("Trade while Exploring?",2)
+end
+
+if tradePorts="##YES##" then do 
+   trademove=1
+   call getholds()
+   
+   worldHaggle = ATTAC_ARG3
+
+   if worldHaggle="ATTAC_ARG3" then do
+     tradeHaggle=ZocRequest("Haggle?","Yes","No")
+     SELECT
+       when tradeHaggle="Yes" then worldHaggle=1
+       when tradeHaggle="No" then worldHaggle=0
+       otherwise do
+	 worldHaggle=0
+       end
+     END
+   end
+end
+if tradePorts="##NO##" then do
+   trademove=0
+end 
+
+/* do we avoid planets and limpits */
+avoidPlanets = ATTAC_ARG4
+if avoidPlanets = "ATTAC_ARG4" then avoidPlanets=1
+
+avoidingNFigs = ATTAC_ARG5
+if avoidingNFigs = "ATTAC_ARG5" then avoidingNFigs=1
+
+avoidfignum = ATTAC_ARG6
+if avoidfignum = "ATTAC_ARG6" & avoidingNFigs=1 then do
+  avoidfignum=ZocAsk("Avoid sectors with more than how many fighters? (0=do not avoid)","0")
+end
+
+if avoidingNFigs=0 then avoidfignum=0
+
+dropFigsCheck = ATTAC_ARG7
+if dropFigsCheck="ATTAC_ARG7" then dropFigsCheck=1
+
+if dropFigsCheck=0 then do
+  dfig=0
+end
+else do
+  theResult = ATTAC_ARG8
+  if theResult = "ATTAC_ARG8" then do
+    theResult=ZocRequest("Drop Fighters while exploring?","No","At Ports","Everywhere")
+  end
+  SELECT
+    when theResult="No" then dfig=0
+    when theResult="At Ports" then dfig=1
+    when theResult="Everywhere" then dfig=2
+    otherwise do
+      call attac_message ("Script Cancelled. Invalid Fighter Option")
+      exit
+    end
+  END
+
+  figDropAmount = ATTAC_ARG9
+  if figDropAmount = "ATTAC_ARG9" then figDropAmount = 1
+
+  if dfig>0 then do
+    theResult = ATTAC_ARG10
+    if theResult="ATTAC_ARG10" then do
+      theResult=ZocRequest("What type of fighters do you want to drop?","Defensive","Offensive","Toll")
+    END
+
+    SELECT
+      when theResult="Defensive" then typeFig=2
+      when theResult="Offensive" then typeFig=3
+      when theResult="Toll" then typeFig=1
+      otherwise do
+        call attac_message ("Script Cancelled. Fighter Drop Type Error")
+        exit
+      end
+    END
+
+    theResult = ATTAC_ARG11
+    if theResult="ATTAC_ARG11" then do
+      theResult=ZocRequest("What will own these fighters?","Corporate","Personal")
+    END
+    SELECT
+      when theResult="Corporate" then ownerFig="C"
+      when theResult="Personal" then ownerFig="P"
+      otherwise do
+        call attac_message ("Script Cancelled. Fighter Owner Error")
+        exit
+      end
+    END
+  END
+end
+sectortotal=ATTAC_GetTotalSectors()
+stardock = ATTAC_GetStardockSector()
+hasPort=0
+holoScan=0
+
+do exploresector=startsector to sectortotal
+  skipSector=0
+  if ATTAC_IsSectorAvoided(exploresector)=1 then do
+    call ATTAC_Message("Skipping " || exploresector || " since it is on your avoid list")
+  end
+  else if ATTAC_Get_Sector_Info(exploresector) = 0 | ATTAC_IsSectorExplored(exploresector) = 0 | exploreAllSectors=1 then do
+    call ATTAC_Message("Working on " || exploresector)
+    
+    call fillsectorarray(exploresector)		
+    holoScan=1
+    if holoScan=1 then call doholoScan(0, thissector.2)
+
+    if (UnexploredSector=1 | exploreAllSectors=1) & skipSector=0 then do		
+      do innerloop = 2 to previoustotal		
+	call zocclearbuffer()
+	planetAvoid=0
+        call ZocSend(thissector.innerloop)	
+        call checksizeenter(thissector.innerloop)
+        sector1 = thissector.innerloop
+        sector2 = thissector.innerloop
+	hasPort=0
+        theResult4 = ZocWaitMux("]:[" || thissector.innerloop || "]","Ports   : ","Planets : ","Avoid this sector in the","(Under Construction -")
+
+        do while theResult4>0
+          if theResult4=1 then do
+	    hasPort=1
+ 	    isDestroyed=ZocWaitMux(", Class ","<=-DANGER-=>")
+ 	    if isDestroyed=0 then do
+ 	      call zocwait ")" 
+  	      portstring= zoclastline() 
+	      porttype = GETPORTTYPE(substr(portstring, 4,3)) 
+	    end
+	    else do  
+   	      hasPort=0
+ 	    end
+ 	    if porttype<=0 then do
+	      hasPort=0
+	    end
+	  end
+          if theResult4=2 then do
+ 	    if avoidPlanets=1 then do
+  	      planetAvoid=thissector.innerloop
+            end
+          end
+          if theResult4=3 then do
+            call ZocClearBuffer()
+            call ZocSend "N"
+          end
+          if theResult4=4 then do
+	    hasPort=0            
+          end
+          
+          theResult4 = ZocWaitMux("]:[" || thissector.innerloop || "]","Ports   : ","Planets : ","Avoid this sector in the","(Under Construction -")
+	end
+
+/*
+        tresult = ZocWaitMux("- (",") -","1^M","2^M","3^M","4^M","5^M","6^M","7^M","8^M","9^M","0^M")
+        if tresult=0 | tresult=1 then holoScan=1 
+*/
+	holoScan=1
+
+
+	sectorCount= densityScan(thissector.innerloop)
+	i=0
+	avoidingAdjacent=0
+	do while i < sectorCount
+	  /* scanarray = 1-sector 2-density 3-warps 4-navhaz 5-anom */
+	  if scanarray.2.i >=500 then do
+/*
+            avoidarray.numavoids=scanarray.1.i
+            numavoids=numavoids+1
+	    avoidingAdjacent=avoidingAdjacent+1
+*/
+	    holoScan=1
+	  end
+	  else if scanarray.4.i >0 then do
+            avoidarray.numavoids=scanarray.1.i
+            numavoids=numavoids+1	
+	    avoidingAdjacent=avoidingAdjacent+1
+	  end
+	  else if scanarray.5.i ="Y" then do
+            avoidarray.numavoids=scanarray.1.i
+            numavoids=numavoids+1
+	    avoidingAdjacent=avoidingAdjacent+1
+	  end
+	  i=i+1
+	end
+	if avoidingAdjacent =sectorCount then do
+	  call attac_message ("No valid sectors to warp to")
+	  exit
+	end
+
+        if holoScan=1 then call doholoScan(thissector.innerloop, thissector.innerloop)
+
+ 	if trademove = 1 & hasPort=1 then do
+	  dead=0
+          callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","BEST","-1","-1","-1","BEST")
+
+          /* break out of loop if done */
+          if callerresult =1 then do
+            dead=0
+          end
+
+         /* keep cycling here when  you get rejected */
+         do while dead=1
+           dead = 0
+           call ATTAC_Message("Your offer was just rejected at port " || thissector.innerloop)
+           callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","BEST","-1","-1","-1","BEST")
+           /* break out of loop if done */
+           if callerresult = 1 then do
+             dead = 0
+           end
+         end
+	end
+
+        if dfig=1 then do
+          ptype=ATTAC_Get_Port_info(thissector.innerloop,"TYPE")
+          if _in(ptype,1,2,3,4,5,6,7,8) then call dropfigs(thissector.innerloop)
+        end
+        if dfig=2 then call Dropfigs(thissector.innerloop)
+        if innerloop^=previoustotal then next=innerloop+1
+        i=0
+        do while i<numavoids
+	  if avoidarray.i=thissector.next & thissector.next>0 then do
+	    call attac_message("Skipping " || exploresector || " since " || thissector.next || " is in the path and it is not a safe sector")
+            innerloop=previoustotal
+	  end
+	  i=i+1
+        end
+
+        if (avoidfignum>0 & planetAvoid>1) | planetAvoid>0 then do
+          call avoidsector(planetAvoid)		
+          innerloop=previoustotal			
+          avoidarray.numavoids=thissector.next	
+          numavoids=numavoids+1			
+        end
+      end
+    end
+  end 
+end
+
+call attac_message("No more sectors to explore")
+exit
+
+FillSectorArray:			
+  sector = arg(1)
+  call ZocClearBuffer
+  call ZocSend("C")
+  call ZocWait("Computer activated")
+  call ZocSend("F")
+  call ZocSend("^M" || sector || "^M")
+  theResult =ZocWaitMux("The shortest path","Error","So what's the point?")
+  if theResult=1 then do 									
+    unexploredSector=0
+    call zocsend "nq" 
+    return(0)
+  end 
+  if theResult=2 then do 									
+    skipSector=1
+    call zocsend "q" 
+    return(0)
+  end 
+  CALL ZocWait ("is:")			
+  do i = 1 to previousTotal		
+    thissector.i = 0 		
+  end 
+  unexploredSector=0 
+  previousTotal = 0 
+  DO FOREVER 
+    theResult = ZocWaitMux(" > ", " >^M", "Computer command") 
+    SELECT 
+     WHEN theResult = 0 THEN x=1 
+     WHEN theResult = 1 THEN x=1 
+     WHEN theResult = 2 THEN x=2
+     OTHERWISE x=2
+    END 
+    if x=1 then do 
+      tmpString="" 
+      finalString="" 
+      previousTotal = previousTotal + 1 
+      tmpString = zoclastline() 
+      tmpString = substr(tmpString, 1, length(tmpString)-3)
+      DO addchar=1 to length(tmpString) 
+        holdsit=substr(tmpString,addchar,1) 
+        if holdsit<>"(" & holdsit<>")" & holdsit<>" " & holdsit<>"^M" then DO 
+          finalString=finalString||holdsit 
+        end 
+        else do 
+          unexploredSector=1 
+        end 
+      END 
+    thissector.previousTotal = finalString 
+    end 
+    if x=2 then do 
+      previousTotal = previousTotal + 1 
+      thissector.previousTotal = sector 
+      LEAVE 
+    end
+    i=0
+    do while i<numavoids
+	if avoidarray.i=finalString  then do
+	  unexploredSector=1
+	  call attac_message("Skipping " || sector || " since " || avoidarray.i || " is in the path and it is not a safe sector")
+	  LEAVE
+	end
+	i=i+1
+    end
+  END 
+  call ZocSend("Q")
+  Call ZocWait("Computer deactivated")
+return 
+
+
+DropFigs:						/* function drops fighters in current sector */
+  sectorFig = arg(1)
+  /* not your fig or an allied fig */
+  if ATTAC_HasSectorFig(sectorFig) ^=0 & ATTAC_HasSectorFig(sectorFig) ^= 2 then do 
+    if sectorFig > 10 & sectorFig ^= stardock then do 
+      call ZocSend("f")
+      theResult=zocwaitmux("not under your control","defending this sector")
+      if theResult=1 then do
+        call ZocSend(figDropAmount || "^M")
+
+        if typeFig=1 then Call ZocSend (ownerFig || "T") 
+        if typeFig=2 then Call ZocSend (ownerFig || "D") 
+        if typeFig=3 then Call ZocSend (ownerFig || "O")
+
+        call ZocWait "close support" 
+      end
+    end
+  end 
+return 
+
+
+
+
+clearavoidarray:
+  call ZocSend("C")
+  do clearing=1 to numavoids
+    Call ZocSend("V0^MYN" || avoidarray.clearing || "^M")
+    call ZocWait("has been cleared")
+  end
+  call ZocSend("Q")
+  numavoids=0
+return
+
+
+
+GETPORTTYPE: 
+portType = arg(1) 
+
+if portType="BBS" then   RETURN 1  
+if portType="BSB" then   RETURN 2  
+if portType="SBB" then   RETURN 3  
+if portType="SSB" then   RETURN 4  
+if portType="SBS" then   RETURN 5  
+if portType="BSS" then   RETURN 6  
+if portType="SSS" then   RETURN 7  
+if portType="BBB" then   RETURN 8  
+
+RETURN -1 
+
+
+
+Getholds:     /* Prodtype- 1-total 2-fuel 3-org 4-equip 5-colo 6-empty */
+  theResults=0
+  call ZocSend("i")
+  call ZocWait("Total Holds    : ")
+  call ZocWait(" - ")
+  tempstr1=ZocLastLine()
+  DO tempi = 1 to 6 
+    prodtype.tempi=0
+  End
+  prodtype.1=justnums(tempstr1)
+  DO until theResults=5
+    theResults=ZocWaitMux("Fuel Ore=","Organics=","Equipment","Colonists","Empty=","Fighters")
+    call ZocWaitMux(" ","^M")
+    tempstr2=ZocLastLine()
+    place=theResults+2
+    prodtype.place=justnums(tempstr2)
+  END
+return
+
+

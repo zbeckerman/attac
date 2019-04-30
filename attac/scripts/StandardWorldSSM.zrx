@@ -1,0 +1,588 @@
+/* REXX (CREATED BY ZOC LEARN MODE) */
+/* written by earth and Peanut for ATTAC TCP/IP Helper version 3.x.x */
+
+numavoids=0
+stardock = 673           /* where SD is */
+classZero = 6322          /* where the class 0 port is */
+count_port_upgrades = 0   /* initialize this to 0 */
+money_cnt = 0             /* our current amount of cash */
+holdz = 0                 /* initialize holds */ 
+planetsector = 12       /* where we sleep and drop off cash */
+planetnumber = 4         /* planet to sleep on */
+expmultiplier = 21        /* experience multiplier */
+twarpsector = 11        /* must drop a fig in this sector. it is where we go after we drop cash */
+equipmentport = 12      /* where we refuel equipment after being busted */
+fuelport = 12           /* where we load up on fuel to drop off cash at home */
+buyType="EQUIPMENT"
+
+Call ZocRespond("Your fighters: ", "A99^M")
+call zoctimeout "60"
+
+stardock = attac_arg1
+IF stardock = "ATTAC_ARG1" THEN DO
+    stardock = ZocAsk("Where is stardock?", ATTAC_GetStardockSector())
+END
+
+classZero = attac_arg2
+IF classZero = "ATTAC_ARG2" THEN DO
+    classZero = ZocAsk("Where is a Class 0 port?", "0")
+END
+
+MoveToClassZero = attac_arg3
+IF MoveToClassZero = "ATTAC_ARG3" THEN DO
+  MoveToClassZero = ZocRequest("Where would you like to refurb?", "SD at sector " ||   stardock, "Class 0 at sector " || classZero)
+  if MoveToClassZero = "Class 0 at sector " || classZero THEN DO
+    MoveToClassZero = 1
+  end
+  if MoveToClassZero ^= 1 then do
+    MoveToClassZero = 0
+  end
+end
+
+planetsector = attac_arg4
+IF planetsector = "ATTAC_ARG4" THEN DO
+    planetsector = ZocAsk("Where sector is the planet in that we drop off the cash?", "")
+END
+
+planetnumber = attac_arg5
+IF planetnumber = "ATTAC_ARG5" THEN DO
+    planetnumber = ZocAsk("Where planet number are we dropping cash on?", "")
+END
+
+equipmentport = attac_arg6
+IF equipmentport = "ATTAC_ARG6" THEN DO
+    equipmentport = ZocAsk("Where is the Equipment refurb port?", "")
+END
+
+fuelport = attac_arg7
+IF fuelport = "ATTAC_ARG7" THEN DO
+    fuelport = ZocAsk("Where is the Fuel port to twarp home to drop off cash?", "")
+END
+
+twarpsector = attac_arg8
+IF twarpsector = "ATTAC_ARG8" THEN DO
+    twarpsector = ZocAsk("Where sector is safe to twarp to?", "")
+END
+
+money_cnt_total = attac_arg9
+IF money_cnt_total = "ATTAC_ARG9" THEN DO
+    money_cnt_total = ZocAsk("How many times should i run before returning money?", "5")
+END
+
+timestorun = attac_arg10
+IF timestorun = "ATTAC_ARG10" THEN DO
+    timestorun = ZocAsk("How many times should i run?", "500")
+END
+
+expmultiplier = attac_arg11
+IF expmultiplier = "ATTAC_ARG11" THEN DO
+    expmultiplier = ZocAsk("What is the steal factor?", "21")
+END
+
+dropMines=0
+dropMineType=""
+dropMineOwner=""
+dropMineAmount=""
+
+dropFigs= attac_arg12
+if dropFigs="ATTAC_ARG12" then do
+  result= ZocRequest("Do you want to drop figs?", "Yes", "No")
+  if result="Yes" then do
+    dropFigs=1
+  end
+  else do
+    dropFigs=0
+  end
+end
+
+if dropFigs=1 then do
+  dropFigAmount=attac_arg13
+  if dropFigAmount="ATTAC_ARG13" then do  
+    dropFigAmount = ZocAsk("How many figs are we dropping?", "1")
+  end
+
+  dropFigOwner=attac_arg14
+  if dropFigOwner="ATTAC_ARG14" then do  
+    result= ZocRequest("Who is the fig owner?", "Corporate", "Personal")
+    if result="Corporate" then do
+      dropFigOwner="C"
+    end
+    else do
+      dropFigOwner="P"
+    end
+  end
+
+  dropFigType=attac_arg15
+  if dropFigType="ATTAC_ARG15" then do  
+    result= ZocRequest("Who is the fig owner?", "Offensive", "Defensive", "Toll")
+    if result="Offensive" then do
+      dropFigType="O"
+    end
+    else if result="Defensive" then do
+      dropFigType="D"
+    end
+    else do
+      dropFigType="T"
+    end
+  end
+end
+
+/* hardcoded data */
+min_turns=200
+
+trade_ships="Y"
+/*
+trade_ships = ZocMsgBox("Would you like your corp members to be able to trade ships with you?", 2)
+IF trade_ships = "##YES##" THEN trade_ships = "Y"
+IF trade_ships = "##NO##" THEN trade_ships = "N"
+*/
+
+call zocsend "i"
+CALL ZocWait("Rank and Exp   : ")
+exp = GrabIt(" ")
+call zocwait("Total Holds    : ")
+total_holds = GrabIt(" ")
+call zocwait "- "
+call zocwait "="
+holdsstring= zoclastline()
+myholds = substr(holdsstring, 1, length(holdsstring)-1)
+call zocwait "]:["
+call zocwait "]"
+cursector= zoclastline()
+cursector = substr(cursector, 1, length(cursector)-1)
+
+if (lower(myholds) \="equipment") then do
+	call GetEquipment (cursector)
+end
+
+holdz=total_holds
+
+call ATTAC_Message("Status: Total Holds='" || total_holds || "' Experience='" || exp || "' Equipment Port='" || equipmentport || "'")
+call ATTAC_SetCounterMax(timestorun)
+
+do timestorun
+
+  IF exp < total_holds * expmultiplier THEN DO
+    holdz = trunc(exp/expmultiplier)
+    CALL ATTAC_Message("Experience is below optimal level. Stealing " || holdz || ", and you have " || total_holds)
+  END
+
+  tmp1 = ATTAC_GetBestEvilPairPort(1)
+  parse var tmp1 sector1 sector2
+
+  if (sector1=0 | sector2=0) then do
+	call attac_message("There are no valid sectors. First Run CIM, the run World SSM")
+	exit
+  end
+
+  CALL ATTAC_Message("Stealing at sectors " || sector1 || " and " || sector2)
+
+  CALL ATTAC_UpdateCounter(1)
+
+  did_sector.sector1 = 1
+  did_sector.sector2 = 1
+
+  firsttime=0
+  numberoftimes = 0
+
+  result=MoveMe_ATTAC_LIBRARY(sector2, 0, dropFigs, dropMines, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount)
+  IF result = 1 THEN DO
+    /* MOVE SOMEWHERE SAFE! */
+    EXIT
+  END
+  ELSE IF result = 2 THEN DO
+    numberoftimes = -1
+  END
+
+  /* this is the main loop which does the port trading */
+  DO FOREVER
+    /* if sector is avoided, get a new one */
+    if numberoftimes=-1 then do
+      numberoftimes=0
+      LEAVE
+    end
+
+    scanSector1="1"
+    scanSector2="1"
+
+    callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+
+    /* break out of loop if done */
+    if callerresult =1 then do
+      dead=0
+    end
+
+    /* keep cycling here when  you get rejected */
+    do while dead=1
+      dead = 0
+      call ATTAC_Message("Your offer was just rejected at port " || sector2)
+      callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+      /* break out of loop if done */
+      if callerresult = 1 then do
+        dead = 0
+      end
+    end
+
+    z=STEAL(holdz)
+    do while z=2
+      z=STEAL(holdz)
+    end
+
+    if z=1 then do
+      CALL REFURB_AND_GET_EQUIPMENT()
+      LEAVE
+    end
+
+	/* only drop figs the first time */    
+    if firsttime=0 then do
+      result=MoveMe_ATTAC_LIBRARY(sector1, 0, dropFigs, dropMines, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount, scanSector1)
+    end
+    else do
+      result=MoveMe_ATTAC_LIBRARY(sector1, 0, 0, 0, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount, scanSector1)
+    end
+    scanSector1="0"
+
+    IF result = 2 THEN DO
+      numberoftimes = 0
+      LEAVE
+    END
+    firsttime=1
+    callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+
+    /* break out of loop if done */
+    if callerresult =1 then do
+      dead=0
+    end
+
+    /* keep cycling here when  you get rejected */
+    do while dead=1
+      dead = 0
+      call ATTAC_Message("Your offer was just rejected at port " || sector1)
+      callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","NONE","-1","-1","-1",buyType)
+      /* break out of loop if done */
+      if callerresult = 1 then do
+        dead = 0
+      end
+    end
+
+    z=STEAL(holdz)
+    do while z=2
+      z=STEAL(holdz)
+   end
+
+    if z = 1 then do
+      CALL REFURB_AND_GET_EQUIPMENT()
+      LEAVE 
+    end
+
+	/* we dont drop figs here since we already dropped them */
+    result=MoveMe_ATTAC_LIBRARY(sector2, 0, 0, 0, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount, scanSector2)
+    scanSector2="0"
+    IF result = 2 THEN DO
+      numberoftimes = 0
+      LEAVE
+    END
+
+  end  /*end main loop */
+
+end
+
+
+exit
+
+ReturnHomeAndSleep:
+  CALL GetFuel
+  if MoveToClassZero ^= 0 THEN DO
+    call MoveToClassZero()
+  END
+  if MoveToClassZero = 0 THEN DO
+    call MoveToStarDock()
+  END
+
+  result=MoveMe_ATTAC_LIBRARY(planetSector, 1, 0, 0)
+
+  CALL ZocSend("L")
+  result = ZocWaitMux("free cargo holds", "Registry#")
+  if result=1 then do
+     call zocsend planetnumber ||"^M"
+  end
+  call zocwait "free cargo holds"
+  CALL ZocSend("CRY")
+  CALL ZocSend(trade_ships)
+RETURN
+
+ReturnHomeAndDropMoney:
+  CALL ATTAC_Message("Returning home and dropping off money.")
+  CALL GetFuel
+  if MoveToClassZero ^= 0 THEN DO
+    call MoveToClassZero()
+  END
+  if MoveToClassZero = 0 THEN DO
+    call MoveToStarDock()
+  END
+
+  result=MoveMe_ATTAC_LIBRARY(planetSector, 1, 0, 0)
+
+  CALL ZocSend("L")
+  result = ZocWaitMux("free cargo holds", "Registry#")
+  if result=1 then do
+     call zocsend planetnumber ||"^M"
+  end
+
+  CALL ZocSend("CTT")
+  CALL ZocWait("You have ")
+  creds = GrabIt(" ")
+  creds = creds - 200000
+  call ZocSend(creds || "^M")
+  CALL ZocSend("QMNT^MQ")
+  CALL ZocWait("Blasting off from");
+
+  if (twarpsector^=planetsector) then do
+    result=MoveMe_ATTAC_LIBRARY(twarpsector, 1, 0, 0)
+  end 
+  call ZocSend("JY")
+  call ZocWaitMux("jettisoned.","Command [TL=")
+
+RETURN
+
+
+GrabIt:
+  ARG delimiter
+  it = ""
+  DO FOREVER
+    CALL ZocWait(delimiter)
+    buffer = ZocLastLine()
+    IF LENGTH(buffer) > 1 THEN DO
+      DO ptr = 1 TO LENGTH(buffer)
+        ch = SUBSTR(buffer, ptr, 1)
+        IF ch <> delimiter THEN DO
+          IF ch <> "," THEN it = it || ch
+        END
+      END
+      LEAVE
+    END
+  END
+RETURN it
+
+
+MoveToStarDock:
+
+  call ATTAC_Message("Refurb'ing at StarDock in sector " || stardock)
+
+  result=MoveMe_ATTAC_LIBRARY(stardock, 0, dropFigs, dropMines, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount)
+ 
+  call zocSend "PS"
+  a=0
+
+  result = ZocWaitMux("[Pause]", "<StarDock> Wh", "removal? : (Y/N)")
+  SELECT
+       WHEN result=0 THEN a=1
+       WHEN result=1 THEN a=2
+       WHEN result=2 THEN a=3
+  end
+
+  if a=3 then do
+   call ZocSend "Y"
+   call ZocWait "<StarDock> Wh"
+  end
+  if a=1 then do
+    call ZocSend "^M"
+    result = ZocWaitMux("<StarDock> Wh", "removal? : (Y/N)")
+    if result=1 then do
+      call ZocSend "Y"
+      call ZocWait "<StarDock> Wh"
+    end
+  end
+
+  call ZocSend "SPA"
+   
+
+  call ZocWait "credits / next hold          "
+  call ZocWait "^M"
+  holdsstring= zoclastline()
+  myholds = substr(holdsstring, 5, 3)
+
+  call ZocSend myholds
+  call ZocSend "^M"
+  call ZocSend "Y"
+  call ZocSend "QQQ"
+ 
+ call zocwait "blast off from"
+
+return
+
+MoveToClassZero:
+
+  call ATTAC_Message("Refurb'ing at Class 0 port in sector "  || classZero)
+
+  result=MoveMe_ATTAC_LIBRARY(classZero, 0, dropFigs, dropMines, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount)
+
+  call zocSend "PT"
+  a=0
+
+  result = ZocWaitMux("[Pause]", "Commerce report for:", "removal? : (Y/N)")
+  SELECT
+       WHEN result=0 THEN a=1
+       WHEN result=1 THEN a=2
+       WHEN result=2 THEN a=3
+  end
+
+  if a=3 then do
+   call ZocSend "Y"
+   call ZocWait "Commerce report for:"
+  end
+  if a=1 then do
+    call ZocSend "^M"
+    result = ZocWaitMux("Commerce report for:", "removal? : (Y/N)")
+    if result=1 then do
+      call ZocSend "Y"
+      call ZocWait "Commerce report for:"
+    end
+  end
+
+  call ZocSend "A"
+
+  call ZocWait "credits / next hold          "
+  call ZocWait "^M"
+  holdsstring= zoclastline()
+  myholds = substr(holdsstring, 5, 3)
+
+  call ZocSend myholds
+  call ZocSend "^M"
+  call ZocSend "Y"
+  call ZocSend "Q"
+
+return
+
+
+GetEquipment:
+  thesector=arg(1)
+  IF thesector ^=equipmentport THEN DO
+    result=MoveMe_ATTAC_LIBRARY(equipmentport, 0, dropFigs, dropMines, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount)
+  END
+
+  if sector > 10 & sector ^= stardock then do
+    call zocsend "jy"
+  end
+  buyType="EQUIPMENT"
+  callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("NONE",buyType,"-1","-1","-1",buyType)
+return
+
+GetFuel:
+  CALL ATTAC_Message("Getting Fuel from port in sector " || fuelport)
+
+  result=MoveMe_ATTAC_LIBRARY(fuelport, 0, dropFigs, dropMines, dropFigType, dropFigOwner, dropFigAmount, dropMineType, dropMineOwner, dropMineAmount)
+
+  call ZocSend("JY")
+
+  buyType1="FUELORE"
+  callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("NONE",buyType1,"-1","-1","-1",buyType1)
+
+  CALL ZocSend("D")
+
+return
+
+STEAL:
+holdz=arg(1)
+call zocsend "pr^Ms"
+result = zocwaitmux("Equipment", "Suddenly you're Busted")
+select
+	WHEN result=0 then fakebust=0
+	when result=1 then fakebust=1
+end
+
+if fakebust=1 then do
+  return(1)
+end 
+
+call zocsend "3" || holdz || "^M"
+
+result = zocwaitmux("Success!","Suddenly you're Busted","aren't that many holds","aren't enough holds")
+select
+	WHEN result=0 then bust=0
+	when result=1 then bust=1
+	when result=2 then bust=2
+	when result=3 then bust=2
+end
+if bust=0 then do
+ call ZocWait "Command [TL="
+ count_port_upgrades=0
+end
+if bust=1 then do 
+ count_port_upgrades=0
+ return(1)
+end
+if bust=2 then do
+	count_port_upgrades=count_port_upgrades+1
+        call zocsend "o3"
+	result = zocwaitmux("(0 max,","0 to quit")
+	if result=0 then do
+	  call zocsend "0^M"
+	  call attac_message ("This port has fallen below amount to steal and port cannot be upgraded further... Moving on to next port")
+	  call attac_message ("The Message screen will display busted!!, but ATTAC will not register a bust. This just kicks you out of this specific port.")
+	  RETURN (1)
+	end
+        call zocsend "1^Mq"
+	if count_port_upgrades > 5 then do
+          return(1)
+        end	
+	  RETURN(2)
+end
+RETURN(0)
+
+
+
+
+REFURB_AND_GET_EQUIPMENT:
+    call attac_message ("Busted!!!")
+    
+    if planetsector>0 & planetnumber>0 then do
+      money_cnt = money_cnt + 1
+    end
+
+    if money_cnt = money_cnt_total then do
+      call ReturnHomeAndDropMoney
+      money_cnt = 0
+    end
+    else do
+     if MoveToClassZero ^= 0 THEN DO
+      call MoveToClassZero()
+     END
+     if MoveToClassZero = 0 THEN DO
+      call MoveToStarDock()
+     END
+    end
+
+    CALL ZocSend("I")
+    CALL ZocWait("Rank and Exp   : ")
+    exp = GrabIt(" ")
+    CALL ZocWait("Current Sector : ")
+    CALL ZocWait("^M")
+    cursector = ZocLastLine()
+    cursector = SUBSTR(turnsleft, 1, LENGTH(turnsleft) - 1)
+    CALL ZocWait("Turns left     : ")
+    CALL ZocWait("^M")
+    turnsleft = ZocLastLine()
+    turnsleft = SUBSTR(turnsleft, 1, LENGTH(turnsleft) - 1)
+
+    IF exp < total_holds * expmultiplier THEN DO
+      holdz = trunc(exp/expmultiplier)
+      CALL ATTAC_Message("Experience is below optimal level. Stealing " || holdz || ", and you have " || total_holds)
+    END
+    IF turnsleft < min_turns THEN DO
+      if planetsector>0 & planetnumber>0 then do
+        CALL ZocBeep()
+        CALL ATTAC_Message("Too few turns left. Returning Home to sleep")
+        CALL ReturnHomeAndSleep()
+        EXIT
+      end
+      else do
+        call GetEquipment (cursector)  
+        CALL ATTAC_Message("Too few turns left. Stopping WorldSSM Script")
+        exit
+      end
+    END
+
+    call GetEquipment (cursector)
+
+return

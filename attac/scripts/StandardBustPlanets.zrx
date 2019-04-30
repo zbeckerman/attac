@@ -1,0 +1,109 @@
+/* Written by earth for ATTAC v4 */ 
+/* ATTAC - Tradewars TCP/IP Helper with user-defined scripting ==> http://www.tw-attac.com */  
+
+
+cycle=0 
+
+randomName = attac_arg1
+if randomName = "ATTAC_ARG1" THEN do
+  randomName="ATTAC Planet Bust - tw-attac.com"
+end
+
+cycles = attac_arg2
+if cycles = "ATTAC_ARG2" THEN do
+  cycles = zocask("How many cycles do you want to run?","10")
+end
+
+call ATTAC_SetCounterMax(cycles)
+
+call zocsend "I"
+isOnCorp = ZocWaitMux("Credits        :","Corp           #")
+
+
+do while cycle<cycles    
+	call buyTorpedos
+	call createPlanets
+	call blowupPlanets 
+	call attac_updatecounter(1)   
+	cycle=cycle+1 
+end 
+
+SIGNAL endit   
+
+
+/* Buy Genesis Torpedos */ 
+
+buyTorpedos:  
+  call zocSend "PS"
+  a=0
+
+  result = ZocWaitMux("[Pause]", "<StarDock> Wh", "removal? : (Y/N)")
+  SELECT
+       WHEN result=0 THEN a=1
+       WHEN result=1 THEN a=2
+       WHEN result=2 THEN a=3
+  end
+
+  if a=3 then do
+   call ZocSend "Y"
+   call ZocWait "<StarDock> Wh"
+  end
+  if a=1 then do
+    call ZocSend "^M"
+    result = ZocWaitMux("<StarDock> Wh", "removal? : (Y/N)")
+    if result=1 then do
+      call ZocSend "Y"
+      call ZocWait "<StarDock> Wh"
+    end
+  end
+
+  call ZocSend "HA1^MT1^M"
+  call ZocSend "QQ"
+  call ZocWait "blast off from"
+
+return  
+
+/* Create Planets */ 
+
+createPlanets:  
+CALL ZocSend "UY" 
+result2= ZocWaitMux("to abort","you want to name")
+if result2=0 then do
+  call zocsend "n"
+  call ZocWait("you want to name")
+end
+call zocsend randomName"^M"
+if isOnCorp=1 then do
+	call ZocSend "c"
+end  
+
+return 
+
+/* Blow up Planets */ 
+
+blowupPlanets:  
+  call ZocSend "l"
+  presult =ZocWaitMux("Registry#","free cargo holds")
+
+  do while presult=0
+    presult = ZocWaitMux(" <", randomName, "Land on which planet")
+    if presult = 1 then do
+      planetNumber = zoclastline()
+      positionRightBracket = pos(">", planetnumber)
+      if positionRightBracket>0 then do
+        planetNumber = substr(planetNumber, 1, positionRightBracket-1)
+      end
+      call ZocSend planetNumber || "^M"
+    end
+    if presult = 2 then do
+      call attac_message("Someone destroyed the planet we created. Landing on Stardock and ending script")
+      call zocSend "QPS"
+    end
+  end
+
+  CALL ZocSend "ZDY" 
+  call ZocWait "Warps to Sector"  
+return  
+
+endit: 
+EXIT  

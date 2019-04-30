@@ -1,0 +1,122 @@
+/*              Rob - move - Rob                                   */
+/* first Zocscript written by Chris Gale for ATTAC TRADEWARS HELPER*/
+/* ATTAC - the best helper available from http://www.tw-attac.com  */
+/*         script does not support non adjacent ports              */
+
+/* get port 1 and port 2 for the move, and experience multiplier  */
+
+Call Zocsend "d"
+timeout=Zocwait "sector  : "
+call zocwait " in"
+port1=zoclastline()
+port1=substr(port1,10,5)
+
+port2=ZocAsk("Which sector would you like to rob from next?","")
+mult=Zocask("experience multiplier? <1-9>","3")
+
+
+robthis=GETEXP(0)
+
+/* da loop       */
+DO 10000
+   Call Zocsend " p r ^M r"
+   call Zocwait "excess of "
+   rob=onhand(robthis)
+   Call robcredits
+   Call zocsend port2
+   call zocsend "^M"
+   Call Zocwait "Command"
+
+   call zocsend " p r ^M r"
+   call Zocwait "excess of "
+   rob=onhand(robthis)
+   call robcredits
+   call zocsend port1
+   call zocsend "^M"
+   call Zocwait "Command"
+
+END
+robcredits:
+
+call Zocsend rob
+call zocsend "^M"
+
+result= Zocwaitmux("Success","Suddenly")
+     if result=1 then do
+           Call ZocBeep(3)
+           Call Zocnotify "Busted!!!"
+           signal endit
+     end
+timeout=Zocwait "receive "
+Call Zocwait "exp"
+expad=zoclastline()
+expad=substr(expad,16,3)
+robthis=robthis+(expad*mult)
+
+return(0)
+
+
+
+GETEXP:
+call ZocSend "i"
+expfinal=""
+Call ZocWait "points"
+Call zocsend " "
+exp=zoclastline()
+DO addchar=17 to (length(exp)-6)
+        exptmp=substr(exp,addchar,1)
+        if exptmp<>" " then DO
+          if exptmp<>"," then expfinal=expfinal||exptmp
+
+
+        end
+END
+
+
+robbing=trunc((expfinal*mult),0)
+return robbing
+
+
+/* find out what the port has in credits */
+
+onhand:
+robit=arg(1)
+creditfinal=""
+call Zocwait "cred"
+credit=zoclastline()
+
+do addchar=1 to (length(credit)-4)
+        credtmp=substr(credit,addchar,1)
+        if credtmp<>" " then DO
+           if credtmp<>"," then creditfinal=creditfinal||credtmp
+        end
+END
+
+/* find out if there's enough to bother robbing  */
+
+if creditfinal="0" then do
+          call Zocbeep(3)
+          call Zocnotify "No Credits left!!"
+          call Zocsend "0^M"
+          signal endit
+end
+if robit>creditfinal then do
+          robit=creditfinal
+
+          if robit<2000 then do
+              call Zocbeep(3)
+              Call Zocnotify "Not enough credits!!"
+              call Zocsend "0^M"
+              signal endit
+          end
+end
+
+return robit
+
+
+
+
+
+endit:
+
+exit

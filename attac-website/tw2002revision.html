@@ -1,0 +1,967 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+    
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    
+  <meta name="Author" content="earth">
+    
+  <meta name="GENERATOR" content="Mozilla/4.77 [en] (Windows NT 5.0; U) [Netscape]">
+    
+  <meta name="KeyWords" content="Tradewars, helper, attac, twars, tw, tw2002, eis, twgs, twx, twxsync">
+  <title>ATTAC TCP/IP Helper</title>
+</head>
+  <body text="#ffffff" bgcolor="#000000" link="#ffff00" vlink="#c0c0c0" alink="#c0ffc0">
+ &nbsp; 
+<center>
+<table cellspacing="0" width="800">
+ <tbody>
+    <tr>
+ <td align="Center" valign="Top" colspan="2"><img src="attac-main.jpg" height="60" width="600">
+      </td>
+ </tr>
+  <tr>
+ <td colspan="2" align="Center"><a href="index.html"><img src="home-top.gif" border="0" height="27" width="150">
+      </a>
+      <a href="tradewars.html"><img src="tradewars-info-top.gif" border="0" height="27" width="150">
+      </a>
+      <a href="mailto:tradewars@hotmail.com"><img src="contact-us-top.gif" border="0" height="27" width="150">
+      </a>
+ <br>
+ 
+      <hr size="1" width="100%"></td>
+ </tr>
+  <tr>
+ <td align="Left" valign="Top" width="150" background="left_column_lace.gif"><img src="products-off.gif" height="25" width="150">
+      <a href="attac-for-windows.html"><img src="attac-for-windows-off.gif" border="0" height="17" width="150"></a>
+         <a href="twxsync.html"><img src="twxsync.gif" border="0" height="17" width="150"></a>
+      <img src="information-off.gif" height="25" width="150">
+      <a href="what-is-attac.html"><img src="what-is-attac-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="feature-list.html"><img src="feature-list-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="screen-shots.html"><img src="screen-shots-off.gif" border="0" height="17" width="150">
+      </a>
+      <img src="purchase-off.gif" height="25" width="150">
+      <a href="purchase.html"><img src="register-attac-off.gif" border="0" height="17" width="150">
+      </a>
+      <img src="download-off.gif" height="25" width="150">
+      <a href="download.html"><img src="attac-v4-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="scripting.html"><img src="user-scripts-off.gif" border="0" height="17" width="150">
+      </a>
+      <img src="support-off.gif" height="25" width="150">
+      <a href="onlinehelp.html"><img src="onlinehelp-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="http://network54.com/Hide/Forum/27576"><img src="forum.gif" border="0" height="17" width="150">
+      </a>
+      <a href="rexxsupport.html"><img src="rexx-documentation-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="twx.html"><img src="twx-data-format-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="faq.html"><img src="faq-off.gif" border="0" height="17" width="150">
+      </a>
+      </td>
+  <td align="Left" valign="Top" width="650">
+
+<!-- enter code here --><a href="mailto:jpritch@eisonline.com">John
+Pritchett</a> <font color="#FF6600"><a href="http://www.eisonline.com">Epic
+Interactive Strategy&nbsp;</a></font>
+<p><a href="http://www.eisonline.com/TWGS">TW Game Server</a>
+<br><a href="http://www.eisonline.com/TradeWars">Trade Wars 2002</a>
+<br><a href="http://www.eisonline.com/TradeWarsGold">Trade Wars Gold</a>
+<br><a href="http://www.eisonline.com/PCGallery">Online Gallery</a>
+<br><a href="http://www.eisonline.com/JPritch">Online Resume</a>
+<br><a href="http://www.martech.net">Martech Software</a>
+<p><font color="#66FFFF"><font size=+1>Revision history for v3</font></font>
+<br>Pending - v3.11&nbsp;
+<p>Fixed planet landing bug: when destroyed by a quasar cannon (atmos),
+a player still had to face fighters in the escape pod. This has been fixed
+so that the player is repelled as soon as the quasar destroys the main
+ship.&nbsp;
+<p>Fixed problems with "abort" operation. When aborting paged displays,
+the abort now exits the procedure instead of simply discontinuing the display
+of the output.&nbsp;
+<p>Fixed bug with Gold Merchant Cruiser and Marauders that have been modified
+from the standard settings. Players would be started in these ships with
+holds and fighters greater than the max allowed if these maximums were
+set to below the normal starting values.&nbsp;
+<p>Fixed 0 turn load colonists bug&nbsp;
+<p>Fixed Ferrengi attack 0 fig bug&nbsp;
+<p>Optimized planet and port updates. These are not committed to disk for
+Grimy Trader scans or CIM (port) or computer and corporate displays (planet).&nbsp;
+<p>Wrote new, more efficient timing routine.&nbsp;
+<p>Created a new mode for multitasking called Adaptive. If an OS is a preemptive
+multitasking system (Win95/98/NT/OS2) then the default mode will be adaptive.
+If the OS is cooperative, then the default mode will be cooperative. With
+adaptive multitasking mode, the program determines if the idle call is
+returning in a reasonable length of time and doesn't always go idle if
+it is not. This is intended to solve problems with Win95 because it tends
+to take as much as a second to return the CPU to an application that is
+running in the background.&nbsp;
+<p>Fixed a bug that allowed invincible sector figs (sorry, no details on
+this one).&nbsp;
+<p>Split the configuration record into a global file that pertains to all
+games and local files that are specific to each game. The files are TWGLOB.DAT
+and TWCFIG.DAT.&nbsp;
+<p>In TEDIT, General Editors One and Two, each field indicates whether
+it is a local or global setting. When running multiple games, the global
+changes will effect ALL games, but the local settings will only effect
+individual games. This is ONLY in the case when multiple game data sets
+are running from a single Trade Wars installation (as with TWGS).&nbsp;
+<p>In the process of splitting these records, I reorganized and expanded
+them. Both are 4096 bytes with 3923 left in TWGLOB.DAT and 3910 left in
+TWCFIG.DAT for future configuration fields. Plus, each record has a 32
+bit flag field for true/false settings with 5 used in TWGLOB.DAT and 10
+used in TWCFIG.DAT. This should leave plenty of room for future expansion
+;)&nbsp;
+<p>Bigbang now remembers your last settings. You can choose to reset to
+defaults or revert to the last settings after you have made changes.&nbsp;
+<p>Bigbang now uses a random seed for the universe generation. If the settings
+are the same and this seed is the same, the universe will be the same.
+This makes universes repeatable.&nbsp;
+<p>EXTERN and NONPSERV are now aware of data versions and will automatically
+update to the lastest data when older data is detected.&nbsp;
+<p>Ferrengal can be made invincible. This will allow it to be used as in
+capture-the-flag type games.&nbsp;
+<p>Added several items to the "S" screen at startup menu.&nbsp;
+<p>Added Explored Sectors, Unexplored Sectors, Set Avoid and Clear Avoid
+to CIM menu.&nbsp;
+<p>Fixed maintenance delete problems that were turning player assets to
+rogue.&nbsp;
+<p>Added Observer mode for gameops to observe their games without being
+able to effect the game or be effected by the players.&nbsp;
+<p>Added * global (replaces the Boss Key) to list all global keys.&nbsp;
+<p>Added MBBS compatibility mode. This mode puts several settings into
+effect (they cannot be altered) that represent deviations of the HVS version
+from the Martech version.&nbsp;
+<p>Port robbing formula Port stealing formula MegaRob bug emulation 100%
+Planetary Trading 32000 max port production Daily bust clearing&nbsp;
+<p>V screen stats are only updated once per hour.&nbsp;
+<p>Fixed timing bug that allowed players online at midnight to get a free
+days worth of production (sorry!)&nbsp;
+<p>Fixed "no turns left" bug when removing colonists from planet with unlimited
+turns.&nbsp;
+<p>Added several items to a new General Editor page (I). Hardware costs
+and a few other prices can be set from this page. Rob and steal factor
+values can be set here also.&nbsp;
+<p>Added Radiation Halflife Lifetime setting to General Editor Three. This
+allows the gameop to specify the cycle for Radiation clearing. When the
+radiation is cleared, ports can be rebuilt. StarDock and the class 0 ports
+will be rebuilt automatically by the Feds when the radiation has cleared.&nbsp;
+<p>For Gold games, SD and class 0 ports increase in strength when they
+are rebuilt.&nbsp;
+<p>Added hidden start menu function for displaying a raw game stats file.
+This function is triggered by the * command.&nbsp;
+<p>Fixed cheat that allowed players to determine the type of a planet being
+GTorped before committing to the action. This allowed players to GTorp
+only the planet types they wanted.&nbsp;
+<br>&nbsp;
+<p>TWGS Release - v3.10&nbsp;
+<p>Fixed a bug that allowed two players to log in to the game as the same
+player.&nbsp;
+<p>GOLD: Fixed a bug that allowed some Gold ships to sell back for more
+than they were purchased for. This change results in ships being sold back
+for somewhat more than in previous versions if they have the same number
+of holds as they started with. The resale value is decreased if you have
+less holds than the ship had when it was sold and increased based on the
+hold value for any holds over the initial number. The base holds of a ship
+are considered to be part of the package and are not priced according to
+the usual rules for hold value.&nbsp;
+<p>Fixed a bug that caused your own Planetary Interdictor to hold you from
+retreating from hostile figs in sector.&nbsp;
+<p>Sol, Alpha Centauri, Rylos, and Stargate Alpha I are now reconstructed
+by the Feds when the radiation runs out. This is currently set to 14 days
+but I intend to make this configurable in the future. Destroying these
+ports will become increasing difficult as they are destroyed and rebuilt.&nbsp;
+<p>GOLD: Added "Reset" option to ship, planet and alien editors. This allows
+the gameop to always return the standard ships, planets and aliens to their
+standard settings.&nbsp;
+<br>&nbsp;
+<p>11/13/98 - v3.09&nbsp;
+<p>Added Ether Probe move delay option, configurable from TEDIT. This will
+allow sysops to slow down the use of Ether Probes. This will alter the
+play of the game, especially early on, but might be useful for some games
+that are overloaded by too much E-Probe activity.&nbsp;
+<p>Fixed problem with move delay that was using too much CPU.&nbsp;
+<p>Changes to Corporate ships.&nbsp;
+<p>A Corp ship (Requires Corp status to fly) can't be set to personal.
+To keep someone in your corporation out of your ship, set the password.&nbsp;
+<p>If a corporation goes extinct, the ship you are flying will remain in
+your possession, but once you leave the ship you won't have access to it
+again.&nbsp;
+<p>Corporate ships abandoned when the corporation goes extinct will be
+owned by "defunct Corp". To capture a "defunct Corp" ship, you must be
+a member of a corporation.&nbsp;
+<p>In standard Trade Wars, CEO ships can never be exchanged in a Citadel.
+With Gold, Corporate ships (not CEO) can be exchanged, but only between
+members of the same corporation.&nbsp;
+<p>GOLD: Corporate ships can't be purchased by non-corp players.&nbsp;
+<p>GOLD: Menus for ships and planets will only offer the next page option
+if more ships or planets than can be displayed exist.&nbsp;
+<p>GOLD: Only active ships and planets are shown in the game.&nbsp;
+<p>GOLD BIGBANG: was clearing the active flag for all ships, planets and
+aliens, requiring you to go back and reset them all to on. This is no longer
+being done.&nbsp;
+<p>GOLD BIGBANG: Added option to clear all ships, planets, and aliens to
+inactive.&nbsp;
+<p>GOLD: Deleted records are not removed automatically when BIGBANG is
+run. They must be removed manually. You can copy a ship to a deleted spot,
+then remove the original ship to fill in gaps.&nbsp;
+<p>GOLD: Added AI setting of Protective. When a player attacks an alien
+with this setting, that alien and all others of the same race in the same
+sector will attack back.&nbsp;
+<p>GOLD: Added AI setting of Banding. Can now specify how many are typically
+in a group, and the aliens will tend to move around in these clusters.&nbsp;
+<p>GOLD: Modified the spawning profile tab in the Alien Editor. The new
+features give much more insight into how the aliens will appear in the
+game depending on the parameters you select.&nbsp;
+<p>GOLD: Added a new option to the Alien Resource menu to sample the available
+ships for the alien race. This takes the guesswork out of determining what
+ships will be available at what time in the game.&nbsp;
+<p>GOLD: 0 days until a ship rating is available now means that the rating
+will always be available instead of meaning that the maximum experience
+for day 0 is the threshold for gaining access to a ship of this rating.
+From day 1 on, the threshold is defined as the maximum possible experience
+for that day.&nbsp;
+<p>GOLD: Fixed several general problems with Gold and the Nonplayer server.&nbsp;
+<p>GOLD: Added "anomalous alien" setting. If enabled, there's a one percent
+chance per event that an alien will be spawned as if it was from 100 to
+200 days more advanced.&nbsp;
+<p>GOLD: Unique aliens are now displayed with a gold name instead of red
+or cyan for good or evil.&nbsp;
+<p>GOLD: GRUDGES!!!!! All Gold alien races now have the option of carrying
+a grudge against players who destroys one of their own. Here's how it works.
+Grudges are only maintained while the server is active, so shutting it
+down and restarting it will clear the grudges. If there are enough complaints
+about this, I'll see about saving the grudges to a the alien record. The
+severity of the grudge is determined by your place on the grudge list.
+Newer grudges are put at the top of the list and are more severe. Only
+ten grudges are maintained, so when a grudge reaches the bottom of the
+list it drops off (is forgotten). Whenever an alien attacks a begrudged
+player, the force of the attack is increased by the grudge level. Lastly,
+grudges are only created when a player destroys an alien IN VIEW OF one
+of the same race. If a player destroys a lone alien, no grudge will result.
+If one alien views the massacre, he will broadcast it to all other aliens
+in that race and they will ALL hold a grudge.&nbsp;
+<p>GOLD: Aliens can regenerate. Regeneration occurs each time an alien
+attempts to move, and the fighters and shields of the alien will regenerate
+toward the average value for the current day.&nbsp;
+<p>EXTERN: Planet collisions are now generating NavHaz.&nbsp;
+<p>EXTERN: Planet collisions now works correctly, even with online players
+involved.&nbsp;
+<p>EtherProbe now uses avoids again.&nbsp;
+<p>Game now differentiates between "on planet" and "in citadel".&nbsp;
+<p>When a player enters or exits the citadel, other players in the citadel
+will receive a message.&nbsp;
+<p>Fighters in sector without a planet is limited to 50K. Fighters in sector
+with a planet is limited to 2,000,000,000. This was reversed and the upper
+limit for planets was set to 2,000,000. All fixed now!&nbsp;
+<p>Added "&lt;;> Scan Current Ship" option to computer menu. This command
+will display information about any ship you are flying, even if it's of
+an alien origin (Ferrengi, for example).&nbsp;
+<p>If a player drops carrier during the initialization routine, the records
+won't be committed.&nbsp;
+<p>When towing a player into a hostile sector, if the tower is destroyed
+on entering the sector, the towee is returned to the previous sector.&nbsp;
+<p>Two game sessions with the same player cannot be active at the same
+time. When a new game attempts to start it will kick off the old game.&nbsp;
+<p>Modified the message system to fix a bug that caused messages to be
+missed.&nbsp;
+<p>EXTERN now runs in "multitask" mode if a player is in the game, and
+will run faster if no player is in the game.&nbsp;
+<p>EXTERN: In an attempt to avoid the ship pointer bug, EXTERN now checks
+to see if the ship occupied by a player who's about to be terminated from
+inactivity is not being used by any other players. If it's being used,
+the ship is not deactivated.&nbsp;
+<p>Fixed index bug: When swapping ships in Citadel, the offline player
+was being put into the other ship but the ship was being set to "unoccupied"
+status.&nbsp;
+<p>Fixed index bug: When TEDIT and EXTERN would access certain ships, they
+would turn on the occupied and active flags. This is no longer the case.&nbsp;
+<p>Fixed Shipyard bug: Two corp players could sell the same ship.&nbsp;
+<p>Fixed Tricron: Now works with multiple players. Tricron stats are updated
+after each game to reflect games played by other players.&nbsp;
+<p>GOLD: When you're flying a FedShip without enough experience, you can
+be stopped by the Feds. Your ship will be forfeit and you will be demoted
+to start of the previous rank.&nbsp;
+<p>EXTERN: When evil port busts are not cleared because EXTERN doesn't
+run, they will clear the next time EXTERN is run. Before, if you had the
+bust clears set for every 7 days, and on the 7th day EXTERN didn't run
+for some reason, the busts wouldn't clear for 14 days. Now it will clear
+on the 8th day, and the next clear will be right on schedule. That means
+that if EXTERN didn't run for 3 days, then the busts get cleared, they'll
+be scheduled to clear again in 4 days instead of 7 to get back on track.&nbsp;
+<p>EXTERN: Port's weren't upgrading properly because I wasn't updating
+the planets in the sector before checking for product. It's fixed now.&nbsp;
+<p>Fixed "Visible while at SD" bug. This actually worked for any port.
+A player who was on a port could be forced to take-off and become visible
+to others while the online player believed he/she was still on port. This
+has resulted in many player deaths.&nbsp;
+<p>TEDIT Corp editor, was only accepting first character of inputs.&nbsp;
+<p>TEDIT Added Sysop setting for users. This will allow a player to have
+sysop capabilities regardless of the sysop level supplied by the drop file.
+For local and Internet connections, this is the only way to have sysop
+access.&nbsp;
+<p>CIM will abort as soon as an abortive key is pressed. Previously, there
+was no way to abort these reports.&nbsp;
+<p>NONPSERV: Aliens are effected by planetary interdictor generators.&nbsp;
+<p>Ships can't interdict while cloaked or on a planet or port.&nbsp;
+<br>&nbsp;
+<p>04/05/98 - v3.08 released&nbsp;
+<p>Added "password entry" option. Intended for local games, this feature
+requires a player to maintain a password and will maintain the integrity
+of each players account.&nbsp;
+<p>Added "closed game" option. Intended for tightly moderated games for
+both BBS and non-BBS based games. Using the new "Closed Game List" facility
+in TEDIT, sysop's can maintain a list of players allowed to play a given
+game. This should limit many forms of cheating, particularly dupe accounts.&nbsp;
+<p>Fixed some problems for WinNT users running the DPMI version.&nbsp;
+<p>Fixed a problem with the user data file being created from BigBang.&nbsp;
+<br>&nbsp;
+<p>03/26/98 - v3.07 released&nbsp;
+<p>Forget the minor revisions. Gary doesn't like it. All releases will
+be v3.07, v3.08, etc. They'll just come more frequently.&nbsp;
+<p>Fixed problem created by v3.06b that caused players to go into sector
+10000 after being destroyed and reentering.&nbsp;
+<p>Removed SHARED.DLL. Was more trouble than it was worth. This increases
+the size of each DPMI session by about 40K, which shouldn't cause any problem.&nbsp;
+<p>Fixed problem with Alien spawing (standard, not Gold) that allowed Aliens
+in very old games to have HUGE fighters, shields, corbo, etc.&nbsp;
+<br>&nbsp;
+<p>03/21/98 - v3.06b released&nbsp;
+<p>Fixed bug that was corrupting data when capturing an alien&nbsp;
+<p>Fixed bug that was corrupting data when podding a player&nbsp;
+<p>Fixed bug that was allowing an online player to continue playing after
+being killed.&nbsp;
+<p>Fixed bug that caused CIM to lock up if online player in CIM was killed,
+podded, or towed.&nbsp;
+<p>Added "^" global for entering Computer Interrogation Mode.&nbsp;
+<br>&nbsp;
+<p>03/18/98 - v3.06&nbsp;
+<p>Added Gold expansion functionality.&nbsp;
+<p>Added math-coprocessor emulation to DPMI release.&nbsp;
+<p>Fixed "runtime 200" error for fast computers.&nbsp;
+<p>Fixed a bug that caused ships and/or players to be flagged as "on a
+planet" when they aren't, or flagged as not "on a planet" when they are.
+The result was that they were invisible in the sector, but visible to scanners,
+or vice versa.&nbsp;
+<p>Rewrote the underlying output functions in an effort to consolidate
+all output routines. Results are&nbsp;
+<br>&nbsp; More efficient ANSI streams&nbsp;
+<br>&nbsp; Increased functionality in output formatting&nbsp;
+<br>&nbsp; Better support for non-standard page lengths, including 43.&nbsp;
+<p>Fixed TWTRADER.TXT and TWTRADER.ANS reports for Trader ranking. I don't
+know how long these haven't worked, but they work fine now.&nbsp;
+<p>Fixed problem with BUFFER= command line option.&nbsp;
+<p>Fixed the bound check on "Enter Corp" entry. It was allowing corp numbers
+greater than 50.&nbsp;
+<p>Fixed problem with capturing Alien and Ferrengi ships.&nbsp;
+<p>Fixed problem with DPMI version FOSSIL support.&nbsp;
+<p>Fixed bug that was causing only positive alignment aliens to be spawned.&nbsp;
+<p>Fixed similar bug that was causing Alien corbomite values to be either
+65535 or 0.&nbsp;
+<p>Rewrote the mail system. The previous system has been causing slowdowns
+and lockups, particularly when the mail file has grown beyond 500K. The
+new system is much more efficient and compact.&nbsp;
+<p>Removed experimental "Persistent Info Display" option. The "quick-stats"
+line will now only appear when the "/" key is pressed.&nbsp;
+<p>When transporting a planet, all online players on the planet will stay
+on the planet. This bug was causing players to be invisible in a sector
+(they were flagged as on a planet).&nbsp;
+<p>When a corp is dispanded, planets and ships in the CEOs sector will
+become the property of the CEO, as with Figs, Armid and Limpet mines. Outside
+the sector, planets will become Rogue and ships will become Abandoned.&nbsp;
+<p>EXTERN now processes deleted players as if the player was quitting his/her
+corp. This should solve the problem of "orphaned" corps with no CEO.&nbsp;
+<p>Fixed Ether Probe bug. The probe would self-distruct if it couldn't
+find a path to the destination. The probe was usually unable to find a
+path because of avoids set by the user. The probe now ignores avoids.&nbsp;
+<p>Can't retreat from fighters if an Interdictor Generator is present on
+a planet in the sector. You can if an IC is in the sector, though.&nbsp;
+<p>Fixed bug that caused fighter report to show sectors with 0 fighters.&nbsp;
+<br>&nbsp;
+<p>11/09/97 - v3.05 released&nbsp;
+<p>Fixed bug that allowed transfer of fighters and shields as a player
+was selling ships at stardock.&nbsp;
+<p>Fixed problem with lag time tracking on Win95 systems.&nbsp;
+<p>Fighter, shield, mine corp transfers now allow 12 digits.&nbsp;
+<p>When attacking an unoccupied ship, attack routine now detects when a
+player transports into the ship and handles the attack accordingly.&nbsp;
+<p>Corp transfers no longer display cloaked players.&nbsp;
+<p>Q-Cannon atmosphere attack was malfunctioning in two ways. First, it
+was firing at sector levels, and second, it wasn't destroying fighters.&nbsp;
+<p>Messages were being displayed while a player was at a port. These messages
+could cause malfunctions with scripts and helpers. They have been turned
+off. Communications will still be displayed. They should be turned off
+by the player.&nbsp;
+<p>Photon Missile update:&nbsp;
+<p>Photon Missiles are now functioning for multiple players. Due to an
+oversight, the Photon Missile effect was only active for the player that
+launched the missile (a carry-over from the single-player v2). Now the
+effect exists for all players, regardless of the launcher.&nbsp;
+<p>The player launching a Photon missile will receive notification of the
+duration at 10 second intervals, and at 5 seconds left, no matter what
+sector he/she is in.&nbsp;
+<p>All players in the sector of the launching player receive a notification
+that the missile was launched.&nbsp;
+<p>All players in the sector of the Photon blast will receive the same
+updates as the launcher (10 second intervals, 5 seconds left).&nbsp;
+<p>Displaying the sector will show that a Photon blast has recently occurred,
+and the duration of the effect.&nbsp;
+<p>A player may launch more than one Photon Missile, but can only track
+the last Missile launched. That means that the only way to gauge the duration
+of a Photon after launching another one is to enter the sector and check
+the Display.&nbsp;
+<p>Photon Missiles can't be purchased from StarDock if they're disabled
+in the game.&nbsp;
+<p>Fixed problem with attacking a ship with a Planetary Interdictor active.
+When the ship attempted to flee, the game would become unstable.&nbsp;
+<p>Fixed bug that allowed pick-up/drop-off of colonists > 255 on your planet.&nbsp;
+<p>Added TEDIT option to alter the Port regeneration rate. Values range
+from 1% to 200% per day. Standard is 5%, which is the rate that ports regenerate
+in all previous versions.&nbsp;
+<p>Added global key&nbsp;</>to display quick reference of player info.
+Also, under computer, personal settings, setting option 7, "Persistent
+info display" to on will cause the&nbsp;</>key to toggle this display on
+or off. When on, it will be displayed at the top of the screen.&nbsp;
+<p>Limit of 2 pods per user per day is now enforced as in MBBS. This means
+a player can only be "podded" twice per day. The third time results in
+death, even if the ship has a pod.&nbsp;
+<p>Added a new user configuration option (C/N/8) to turn all event messages
+off.&nbsp;
+<p>Added option to TEDIT to enable or disable multiple Photon missiles
+for a single player. By default, a player may only have one missile active
+at a time.&nbsp;
+<p>Computer/Known Universe, List Avoids now formats properly to screen
+width, and includes CR at end of line.&nbsp;
+<p>Course list now has a CR at end of each line.&nbsp;
+<p>Fixed problem with day of week reporting in time functions.&nbsp;
+<p>Embezzle busts are cleared nightly now, except for the very last bust.&nbsp;
+<p>A setting in TEDIT now determines the frequency of bust clearing. It
+defaults to nightly, but can be set as high as every 28th day.&nbsp;
+<p>T'Khasi Orion can now carry a Holo Scanner.&nbsp;
+<p>Ferrengi Assault Trader can now carry a Density or Holo Scanner.&nbsp;
+<p>Transport menu now offers the ability to get more detailed information
+about any of the ships listed.&nbsp;
+<p>"Backtrack Key" is now only "&lt;" instead of "&lt;" or ",".&nbsp;
+<p>Fixed "dupe" names. Before, someone could be in the game with BBS name
+"A" and alias "B", while another player was in the game under BBS name
+"B". This is no longer possible.&nbsp;
+<p>When a player reenters the game in a Scout Marauder, he/she gets the
+minimum of 250 figs, or the Initial Fighters value, instead of up to 2500
+figs.&nbsp;
+<p>Made logic change to time routine that MIGHT have been causing some
+problems. When reading the time, the routine reads date, then time, and
+then determines the total seconds since the game started. If the date gets
+read, then the clock rolls over to midnight in the instant before the time
+gets read, the time would be interpreted as 24 hours earlier. In this event,
+the timing would be thrown of for that Tick. In rare cases, this could
+cause the "inactivity timeout" to trigger. The new approach doesn't have
+this problem, and is more efficient.&nbsp;
+<p>EXTERN now cleans up the message file of any mail left in the mail file
+for various reasons. Mail is deleted if the destination player is inactive,
+or if the time of the message is over the "days til deletion" value set
+to delete old players.&nbsp;
+<p>Ship's can't interdict from ANY FedSpace sector.&nbsp;
+<p>Fixed problem with "Last Ported" reporting. Any update of the port was
+setting the last ported time, when it should only be set when a ship physically
+ports there.&nbsp;
+<p>Attack is aborted if enemy docks or lands while you are attacking.&nbsp;
+<p>Added hidden global, &lt;|>, to toggle silence mode. This will simplify
+the task of turning off messages while scripts and helpers are running.&nbsp;
+<p>Last bust clear operation is reported in Game Settings screen on startup
+menu&nbsp;
+<p>07/17/97 - v3.04 released&nbsp;
+<p>Reworked bug fix from v3.03 release. See * item in that section. Several
+new problems appeared after making this change, so I have made another
+attempt at solving the problem.&nbsp;
+<p>Added file error reporting to help clarify startup problems.&nbsp;
+<br>&nbsp;
+<p>07/01/97 - v3.03 released&nbsp;
+<p>Port reports 0 buy/sell, 0% of max until open.&nbsp;
+<p>Port opens with 0% buy/sell. Regeneration begins at the moment of port
+opening.&nbsp;
+<p>If EXTERN detects port DaysTillComplete less than 0, it sets to 0. Before,
+if was incrementing if less than 0. I could not see any use of negative
+values here.&nbsp;
+<p>Sector entries of 599 or less require 4th digit. 600 and above are auto-CR.
+This is identical behavior to pre-v3 door releases.&nbsp;
+<p>When Corporate Planet Scan was called from within a Citadel, the current
+planet pointer was not being reset on exit from Corp menu. This caused
+planet records to become confused in some cases. This has been fixed.&nbsp;
+<p>Transfering to another ship without password doesn't ask.&nbsp;
+<p>Transfering to another ship sets your ship to allow ship transfers.&nbsp;
+<p>Can now blind-transwarp with ship in tow.&nbsp;
+<p>Robbing text is now "...siphon the funds out and..." as in MBBS.&nbsp;
+<p>Transport list handles abort properly.&nbsp;
+<p>Added SHARE command line parameter. Calling with the SHARE override
+causes TW2002 to skip the share detection routine and assume SHARE is loaded.&nbsp;
+<p>Added message for EtherProbe entering sector. Need more detail on how
+to handle this event.&nbsp;
+<p>* Made file-access change with potential to effect multiple areas of
+the game. Certain combinations of accesses were causing information to
+be lost. This change will fix that problem, but could conceivably introduce
+some other problem(s).&nbsp;
+<p>Fixed combat bug, not losing any fighters, caused by the previous error.&nbsp;
+<p>Can now recover credits for destroying ships other than escape pod and
+marauder.&nbsp;
+<p>Fixed bug in buy-ship routine that wasn't committing the credits to
+the user record properly. This is the source of the profitable ship trade
+bug.&nbsp;
+<p>Changed file access mode of overlay to DENYNONE. This was causing the
+error 150 when the overlay wasn't loaded into EMS.&nbsp;
+<p>Fixed bug that caused the corp attack failsafe to trigger for non-corp
+unnocupied ships.&nbsp;
+<p>Fixed bug that was reporting personal ship as corp ship destroyed in
+log file.&nbsp;
+<p>Fixed bug that was allowing unmanned ships to flee a sector after an
+attack even if an interdictor generator is present.&nbsp;
+<p>Fixed bug that was reading the sysop level incorrectly from the drop
+file.&nbsp;
+<p>Fixed various bugs that allowed planets to appear as both corporate
+and personal.&nbsp;
+<p>Fixed a bug with the "landing planet list" that was corrupting planet
+records.&nbsp;
+<p>Input is echoed in CIM.&nbsp;
+<br>&nbsp;
+<p>06/01/97 - v3.02 released&nbsp;
+<p>Attacking with 0 ships is no longer allowed!&nbsp;
+<p>Removed SHARE detection for OS2 machines.&nbsp;
+<p>EXTERN: Fixed GP resulting from delete player routine.&nbsp;
+<p>EXTERN: Won't evict players who are online at the time.&nbsp;
+<p>EXTERN: Only counts offline players when counting the number of ships
+left in a Fed sector overnight.&nbsp;
+<p>Conversion of message file with 0 records doesn't generate division
+by 0.&nbsp;
+<p>Scan defaults to Density when 0 turns left.&nbsp;
+<p>Long course plots are not longer truncated at 160 characters.&nbsp;
+<p>Reporting correct ship type when destroying Aliens.&nbsp;
+<p>Atmosphere Quasar attack is now reported.&nbsp;
+<p>Destroying a corp owned ship, whether occupied or not, will go into
+the logs as Corp# instead of by the pilot's name.&nbsp;
+<p>You can now change ownership and posture of fighters without adding
+or removing them from a sector.&nbsp;
+<p>Fixed an Error 204 in the program exit procedure. This was causing many
+other errors to be reported as Error 204. They will now be reported properly.&nbsp;
+<p>Added LastSectRobbed to user record so this value will persist between
+game sessions. This will fix the ability to exit the game and reenter to
+rob the same port twice in a row. Should slow down the Steal-Sell cycle.&nbsp;
+<p>Removed 15 unnused characters from the ship record shipname field.&nbsp;
+<p>Removed unnused fields from Sector record.&nbsp;
+<p>Fixed a bug that was preventing Planet Upgrades from being committed
+to the data file under certain circumstances. This could be responsible
+for the occasional planet that doesn't seem to be upgrading.&nbsp;
+<p>TEDIT: Zero entry allowed for sector warps.&nbsp;
+<p>TEDIT: Port production values can be negative.&nbsp;
+<p>TEDIT: &lt; and > step through the ports displayed under Port Edit.&nbsp;
+<p>TEDIT: Planet production rates are displayed properly.&nbsp;
+<p>Data conversion from v2 to v3.01 loses all mine owner information. This
+has been fixed for conversion from v2 to v3.02, but conversion from v3.01
+to v3.02 won't repair the lost owner information. Conversion from v3.00
+to v3.02 works fine.&nbsp;
+<p>Travels and Avoids data was not being written properly to the data file,
+causing some sector information to be lost after quitting the game. This
+has been fixed.&nbsp;
+<p>Converting from v3.00 or v3.01 data will clear all avoids due to the
+above problem.&nbsp;
+<p>Revised drop file read procedure to handle unexpected data more gracefully.&nbsp;
+<p>Added DATA= parameter to assign a default directory for the data files
+at runtime. This directory will be overridden by a non-default node-specific
+data directory. Works for TW2002 and TEDIT.&nbsp;
+<p><ENTER>now interrupts all processes that can be interrupted by&nbsp;<SPACE>.
+Long displays, auto-pilot warping, etc. are effected.&nbsp;
+<p>Changed the way TW handles the input buffer. Now, long displays that
+check for&nbsp;<ENTER>or&nbsp;<SPACE>to interrupt them won't read and discard
+all keypresses waiting in the input buffer. As a result, keyboard macros
+and helpers will function more smoothly. A negative result is that only
+the first character in the buffer will be checked for the display interrupt
+keys. If another character gets into the buffer first, then the display
+can't be interrupted.&nbsp;
+<p>Addressed several problems with DESQview. A maximum 5000 sector game
+should now run in a typical DESQview window leaving enough memory for processing.
+Sessions with many scarce conventional ram may only be able to run a smaller
+universe.&nbsp;
+<p>Fixed an error with the Fossil support that caused all ports to appear
+as port 1 (oops). This should improve the Fossil support somewhat.&nbsp;
+<p>Sector entries from 0-599 accept a four digit entry, but entries from
+600 to 999 auto-return. This is identical to previous Trade Wars behavior.&nbsp;
+<br>&nbsp;
+<p>04/16/97 - v3.01 released&nbsp;
+<p>Added periodic online verification. Each player online checks the next
+player online in order by user record number. This check occurs every five
+minutes. If the player being checked does not reply in 10 seconds, then
+the player is removed from the online list, and some cleanup takes place
+(like removing the player from a planet on which he/she cannot remain).&nbsp;
+<p>Added a flag to User record to indicate that the player is online. If
+the program finishes properly, this flag will be set to off. If, on startup,
+this flag is on, then some cleanup takes place (like removing the player
+from a planet on which he/she cannot remain).&nbsp;
+<p>Added a low level primary record justification to commit and put procedures.&nbsp;
+<p>Added a check of the Online flag in the message file at the beginning
+of each processing interval. If the flag is off, then it is turned back
+on. This is a self-correction in case, for any reason, you fail to reply
+to an Online Verification message.&nbsp;
+<p>Fixed pointer error with Fossil communications. Fossil is working again.&nbsp;
+<p>Fixed problem with left-padded field display when field contains ansi
+sequences.&nbsp;
+<p>Revamped TWSMF.DAT message file. This file now cleans itself up as it
+is used. Should result in much smaller TWSMF.DAT files in general, and
+quicker access to messages.&nbsp;
+<p>Fixed yet another invincible planet bug.&nbsp;
+<p>Tri-cron won't be interrupted by messages.&nbsp;
+<p>Fixed guarded planet bug that caused the next planet you attempted to
+land on to show as the planet that was guarded.&nbsp;
+<p>Fixed combat routine to handle case of 0 fighters and >0 shields.&nbsp;
+<p>Conversion routine detects the extra byte in TWNODE.DAT records in later
+v2 betas, processes accordingly.&nbsp;
+<p>Fixed scan for mines. Now when emptying sector of mines, the sector
+no longer shows up on scan with 0 mines.&nbsp;
+<p>Fixed problem with menu help screens (!) running past end of menu text.&nbsp;
+<p>Computer and Corp menus from citadel won't switch your planet record.&nbsp;
+<p>Fixed problem with Alien ship combat. Damage wasn't being committed
+to the alien record when the alien fled.&nbsp;
+<p>Radio channels are now available from 0 to 60000.&nbsp;
+<p>Major messaging/mail overhaul.&nbsp;
+<p>The messaging system is now seperate from the user mail system. TWSMF.DAT
+is now devoted to game messaging, while TWMAIL.DAT contains all mail correspondence.&nbsp;
+<p>The mail and message files are packed periodically for efficiency.&nbsp;
+<p>For mail, all messages that have been read by the user in that session
+will be removed from the file as the user exits the game. They are physically
+removed, and the file shrinks accordingly.&nbsp;
+<p>For messages, each message has a lifetime of 10 seconds. If the message
+is older than 10 seconds, then it can be removed from the message file
+at the next pack operation. These operations occur when a user exits the
+game, or whenever the message file reaches 100 messages. This may be made
+configurable in the future if necessary. As it is now, the message file
+can never be greater than 101 records in length, or 17271 bytes in length.
+Since the message file handles all interactivity, this will guarantee efficient
+message handling.&nbsp;
+<p>Each user maintains a pointer to the last message processed by its session,
+and all processing occurs from this point forward. This greatly limits
+the possible number of message reads during an interval cycle, so that
+the maximum possible is the number of messages added in 1 second (unless
+this interval is increased). When the file is packed, the user receives
+notification of this, and resyncronizes this pointer. I haven't seen any
+losted messages, duplicate messages, or loss of message syncronization
+since I made this change, but we need to watch out for this. I'm concerned
+that it may happed in rare circumstances.&nbsp;
+<p>If a mail message was added during an active session, but not read,
+it won't be removed on exit. All messages are displayed on logon, so these
+messages will be removed after the next logon/logoff cycle.&nbsp;
+<p>Messages sent to mail via the computer mail system go into mail only,
+but all computer generated messages, like fighter reports, etc, go into
+the mail and are displayed for a user if that user is online. These messages
+are not deleted on exit unless they have been explicitely read from the
+computer mail system. This could be confusing, but it will avoid any loss
+of important information. We can't guarantee just because it goes into
+the real-time messaging file that it has been viewed by the user.&nbsp;
+<p>An online user receives notification upon receiving new mail.&nbsp;
+<p>Hail is now seperate from mail. You can only send a hail to an online
+user. If the user isn't online, the one-line hail will be sent, but will
+"fall on deaf ears". A multi-line hail mode can only be entered if the
+target user is online. These messages ARE NOT ENTERED INTO USER MAIL, so
+you can no longer use this function in place of the computer mail system.
+One-line messages sent to a user that is not online will be lost.&nbsp;
+<p>FedComm/Sub-space/Hail/Mail prompts are now more explicit as to the
+type of messages being entered. This avoids confusion when entering one
+message and jumping into another via global commands.&nbsp;
+<p>Added global chat to tavern.&nbsp;
+<p>Fixed a transfer logic error involving ship to ship transfers like those
+at the corp menu. This involved transfers between ships of different types,
+where the transfer used the boundaries set by the local ship for both,
+allowing the other ship to sometimes exceed it's limits.&nbsp;
+<p>Modified real-time message routine so that it only processes messages
+that have not expired (10 seconds lifetime). Also, put zero-record hold
+in the Add Message routine to syncronize adds and deletes. Now, adds and
+deletes can only occur once at a time, but there is no file locking for
+reads.&nbsp;
+<p>Revised SHARE detection. It is less strict now.&nbsp;
+<p>Fixed last ported report. Should now correctly report the time since
+a trader ported, instead of that they just left.&nbsp;
+<p>Now start in sector 1 if planets not allowed.&nbsp;
+<p>Fixed a ship to ship combat bug related to the corp transfer bug. When
+two unlike ships are in combat, the attacked ship was inheriting the field
+boundaries of the attacker.&nbsp;
+<p>The size of the TW overlay buffer is now dynamically set depending on
+the amount of free memory available to the session. This will give more
+memory to those who have not been able to run the game so far (error 203).
+This buffer was 100K, but can go as low as 45K with out a devastating impact
+on the games performance. If the game does not use EMS or XMS for the overlay
+file, then you should keep this buffer as large as possible.&nbsp;
+<br>&nbsp;
+<p>04/01/97 - v3.00 released&nbsp;
+<p>Can remain in citadel overnight.&nbsp;
+<p>Fixed multiple boundary bugs effecting the last user, ship, sector,
+etc.&nbsp;
+<p>Alien trader and Ferrengi ships are now processed on a time-base rather
+than a turn base. The one-in-X move percent no longer represents a chance
+that the character will move for each player turn, but a chance that the
+character will move every 30 seconds. The next reasonable interval is 70
+seconds, and this may be made configurable, since it would lighten the
+load on slower computers. As it is, there are 10 "banks" of Aliens, Ferrengi,
+and Federation Captains. Each bank attempts movement every 3rd second.
+When there are 50 Ferrengi + 40 Aliens + 3 Federals, 93 non-player characters,
+this averages out to 9.3 ships per bank. This is approximately 3 ships
+attempting movement every second, though movement only occurs every third
+second.&nbsp;
+<p>Planetary Shields can now be destroyed.&nbsp;
+<p>Ships can now be salvaged from combat properly again.&nbsp;
+<p>Fixed incorrect population line on corporation planet list.&nbsp;
+<p>Removed Auto&nbsp;<CR>from Terra colonist pick-up. Should help those
+helpers.&nbsp;
+<p>User record now varies in size according to sectors in game, no wasted
+space.&nbsp;
+<p>Day of week of game now reports correctly.&nbsp;
+<p>Command and Computer Command prompts don't display menu at CR, only
+at ?.&nbsp;
+<br>&nbsp;
+<p>03/05/97&nbsp;
+<p>Planets are once again producing properly.&nbsp;
+<p>Added Surrender to sector fighter menu.&nbsp;
+<p>NO NavHaz can be created at StarDock for any reason.&nbsp;
+<p>Ether-probe and Holoscan won't cause "void" prompt when scanning mined
+sectors.&nbsp;
+<p>Interdictor generators don't function at StarDock and Terra.&nbsp;
+<p>Unoccupied ships can't have Interdictor on.&nbsp;
+<p>Fixed problems with Planetary Transport.&nbsp;
+<p>Must kill trader to get bounty/contract. Not just destroy ship.&nbsp;
+<p>Made some changes to combat routine regarding ship captures. Can't capture
+when the ship is a Scout Marauder or Escape Pod.&nbsp;
+<p>Can't overwrite StarDock with a carry-over created port.&nbsp;
+<p>Created daily event flag to limit certain activities. These are, at
+the moment, curse Grimy Trader, try to break into Corp, and jettison colonists.
+There is room for 13 more such event flags.&nbsp;
+<p>Limited photon-wave effect on planets to those with less than 200 shields.&nbsp;
+<p>Fixed underground name-change routine to handle the 0-4500000 experience
+range. I set the maximum amount to be charged to 999,999,999 since this
+is the maximum that a trader could possibly have onhand.&nbsp;
+<p>For the moment, two different traders can deploy mines of one type each
+in a given sector. To clarify, one trader may deploy Armid mines, while
+another trader has deployed Limpet mines in the same sector.&nbsp;
+<p>Can launch photons in Rylos and Alpha Centauri sectors.&nbsp;
+<p>NavPoint menus only show sector scan if the sector is in FedSpace, the
+sector is your current sector, or you have at least one fighter deployed
+in that sector. Otherwise, it reports "No Scan" for that sector.&nbsp;
+<p>Natural disasters have been stabilized with regard to frequency of visits.
+Now, the chance for a disaster is minimal if the last visit was recent,
+and greater as the length between visits increases. If a planet has a habitability
+of 90, there is a 10% chance of a disaster if the period between visits
+is 1 day. There is a 100% chance of a disaster if the period has been 10
+days. If the period is 11 days, then one disaster will occur, with a 10%
+chance for a second disaster.&nbsp;
+<p>The ports are again upgrading. This was a bug that effected the ability
+to determine a field's maximum value during a locked process, and was probably
+effecting many areas of the game.&nbsp;
+<p>Only taxed once per day, instead of once every time you enter the game.&nbsp;
+<p>If an amount of experience or alignment would put you beyond the limit,
+you are given the boundary value. Before, this would not give any amount
+because it would go beyond the boundary.&nbsp;
+<br>&nbsp;
+<p>02/28/97&nbsp;
+<p>CIM entry now works.&nbsp;
+<p>Earth now takes one turn to load colonists.&nbsp;
+<p>Added multiplayer code for towing. Now, towing is discontinued when
+the tower or towee lands on a planet, port, or dock, or initiates an attack&nbsp;
+<p>Included messages for users to see when towing begins and ends.&nbsp;
+<p>Created new prompt attribute, Escape, so that prompts can be made to
+abort in the case of some event, particularly intended to deal with tow
+bugs. Now, certain prompts can be made to abort whenever the trader is
+towed to another sector, falling back to the previous non- abortive prompt.
+This will solve some nasty problems with prompt "carry-overs", where a
+trader can circumvent a locked-out function by initiating it in a sector
+where the function is not locked out, then being towed into another sector
+to complete the function. An example is the destruction of StarDock, where
+combat is initiated in an adjacent sector, but completed upon towing in
+the StarDock sector.&nbsp;
+<p>NavHaz collisions were overwriting the sector containing the navhaz
+with the sector to which an escape pod escaped. This is fixed now.&nbsp;
+<p>Fighter Xfer for corps now functional.&nbsp;
+<p>When player dies and then reenters, a new ship is created properly now.&nbsp;
+<p>Fixed those annoying messages when a new user starts up.&nbsp;
+<p>Activated abortive prompts, so that certain functions are aborted when
+the trader is towed to another sector&nbsp;
+<p>Added fail-safe record sync check to abort operations which may overwrite
+another record.&nbsp;
+<p>When a trader is online and on a planet, and the planet is blown up
+from under them, they will be dropped to the main command prompt.&nbsp;
+<p>When a trader is online and evicted from a citadel, he is dropped to
+the main command prompt.&nbsp;
+<p>Can now receive port report from auto-pilot prompt.&nbsp;
+<p>Occupied corp ships aren't displayed on the X-Port list.&nbsp;
+<p>Interdicting flag is set to off when purchasing a new ship, and when
+escaping in an escape pod. This solves bugs with interdiction carrying
+over to new ships.&nbsp;
+<p>Density scan showing occupied ships as 40, unoccupied as 38, and cloaked
+ships as 0 with Anom Yes&nbsp;
+<p>Can't upgrade a port that is under construction.&nbsp;
+<p>After blowing up a planet, trader "reenters" sector triggering NavHaz
+check.&nbsp;
+<p>Ports are again fighting back.&nbsp;
+<p>Some locked transactions were not resetting the records after a failed
+attempt. I'm not aware of any bugs stemming from this, but there probably
+are some. It has been fixed.&nbsp;
+<br>&nbsp;
+<p>02/22/97&nbsp;
+<p>Citadel now upgrading correctly for level 2 and beyond!&nbsp;
+<p>Many revision to guarantee identical output between previous DOS versions
+and 2MP.&nbsp;
+<p>Revisions to Interrogation mode: Can now be entered from any prompt,
+but not from within Interrogation. No global functions work in Interrogation
+mode. Interrogation mode can timeout from inactivity. Interrogation mode
+will exit if allotted time expires. For debugging purposes, Interrogation
+mode can be entered with the key sequence of "$%^&amp;*(", or SHIFT-4 through
+SHIFT-9;&nbsp;
+<p>Modified port and planet update functions for 1 second resolution upgrade.&nbsp;
+<p>Fixed a data-conversion bug that inverted the BUYing amount for ports
+when converting from earlier TW data to 2MP data.&nbsp;
+<p>Overhauled "upgrade port" function. Port production is now maxed out
+at 65530.&nbsp;
+<p>"Upgrade port" is now a locked function to avoid multi-player conflicts.&nbsp;
+<p>Finished make-over for TEDIT.&nbsp;
+<p>StarDock now starts at 100% BUY when game is reset.&nbsp;
+<p>Turns return to a player pro-rated at 1 hour intervals.&nbsp;
+<p>Sector Fighter combat is now multiplayer safe.&nbsp;
+<br>&nbsp;
+<p>02/17/97&nbsp;
+<p>All text removed from executables and placed into a data file, STRTABLE.D8A,
+with an index called STRTABLE.NDX. Encrypted to discourage meddling sysops
+from corrupting the string table ;).&nbsp;
+<p>Global commands can only be first character entered on any command line.&nbsp;
+<p>A global commands cannot be called from within itself. For example,
+Who's Playing can be called from within Fed. Comm-Link, but Fed. Comm-Link
+cannot be called from within Fed. Comm-Link.&nbsp;
+<p>Create planet now outputs like previous versions for helper compatibility.&nbsp;
+<p>Long input lines, like non-wrapping chat lines, don't automatically
+continue when max characters are entered. A&nbsp;<CR>must end the line.
+Input typed beyond the max size of the line will not be accepted.&nbsp;
+<p>Refined Gary's auto-entry sector input at main command line so that
+a player cannot enter an invalid sector. For example, if the maximum number
+of sectors in the game is 1000, and a player enters 101, the value is automatically
+accepted since any fourth digit would put the sector over the limit. Also,
+if the user has entered 100, then the only further input accepted would
+be a&nbsp;<CR>,&nbsp;<BS>, or the digit 0, as a 1-9 would put the sector
+over the limit.&nbsp;
+<p>Major revision of input routines to guarantee handling of global commands,
+time-on timeout, inactivity timeout, dropped carrier, etc, at all prompts.
+Watch for and report minor changes in prompt functionality for compatibility
+with helpers.&nbsp;
+<br>&nbsp;
+<p>02/12/97&nbsp;
+<p>Fixed Corp fighters display, now shows corp number and corp name.&nbsp;
+<p>Planet "Take All" command now takes Equipment, Organics, and then Fuel.
+The order was reversed.&nbsp;
+<p>Citadel sector display now shows correct warps when user enters game
+on planet.&nbsp;
+<p>Upgrading citadel now takes correct product amounts, and correct number
+of days.&nbsp;
+<p>Can press space-bar to interrupt autopilot and bring up autopilot menu.&nbsp;
+<p>Grimy Trader now only reports 1 port on a trace, pending Gary's approval.&nbsp;
+<p>Planet scan now shows all totals for Personal and Corp.&nbsp;
+<p>Planet prompt is back to normal.&nbsp;
+<p>Robbing port now functional.&nbsp;
+<br>&nbsp;
+<p>02/06/97&nbsp;
+<p>Added shield totals to Compute/Personal Planet scan and Corp/Corp Planet
+scan.&nbsp;
+<p>Fixed multiple bugs where alignment and/or experience change was not
+being committed to user record.&nbsp;
+<p>Planetary Negotiation now allows maximum credit transfer amount to be
+entered, rather than the traders on-hand credit amount.&nbsp;
+<p>Fixed rare general file bug that kept record changes from committing.&nbsp;
+<p>When buying a ship without trade-in, trader stays in original ship,
+and new ship appears in orbit at stardock.&nbsp;
+<p>When selling an extra ship, asks for verification before completing
+the deal.&nbsp;
+<p>Fixed "retreat from fighters" routine. Can't retreat if previous sector
+was a one-way warp, or if the trader transwarp in from a non-adjacent sector.&nbsp;
+<p>Attacking port won't cause negative stock percentages.&nbsp;
+<p>Warps out of sector show up at Citadel prompt.&nbsp;
+<p>Game pauses after new planet ansi screen.&nbsp;
+<br>&nbsp;
+<p>02/05/97&nbsp;
+<p>Removed sexist reference to trader, using "his" in various locations.&nbsp;
+<p>Traders now recieve full messaging throughout the game, except:&nbsp;
+<br>&nbsp; Start menu - No messaging.&nbsp;
+<br>&nbsp; Planet, port, stardock, etc - No reports of sector activity.&nbsp;
+<br>Note that traders in a citadel will receive full messaging, as if they
+were in the sector off planet. This may change at Gary's request.&nbsp;
+<p>Messages are purged when user exits to Start Menu, instead of when user
+exits the door.&nbsp;
+<p>No more autopilot prompt in destination sector.&nbsp;
+<p>Program should now exit from within any prompt at end of game time.&nbsp;
+<br>&nbsp;
+<p>02/04/97&nbsp;
+<p>Long range scan now reports other users in scanned sectors.&nbsp;
+<p>Corp ships don't revert to personal when player transports in.&nbsp;
+<p>Leave colonists no longer displays "123" prompt.&nbsp;
+<p>Removed confusing message "Leaving Personal Fighters on Corporate Planet"
+from Take/Leave Fighters function. Fighters are always considered to be
+corp or personal depending on Planet or Ship affiliation.&nbsp;
+<p>"Take/Leave Fighters" prompt now only one keypress (no enter required).&nbsp;
+<p>Fixed bug that resulted in multiple instances like the previous error.&nbsp;
+<p>Fixed problem with defensive rating of ports.&nbsp;
+<p>File lock attempts now time-out. Default is a 10 second time-out, but
+this can be altered. Players getting stuck online during a locked-file
+routine won't cause others to get stuck online. After the time-out, they
+will be booted from the game.&nbsp;
+<p>All halts are now accompanied by a write to the TWERR.LOG describing
+the condition of the halt.&nbsp;
+<p>Comm-links and "Who's playing" are now global commands. These can be
+invoked from anywhere in the game except from within a global command,
+"Announcement", "Send Mail", or while viewing docs.&nbsp;
+<p>Changed main menu to seperate global commands.&nbsp;
+<p>Changed comm-link prompts to make it more obvious when they are invoked.&nbsp;
+<p>Fixed "Etherprobe" routine to display something other than your current
+sector.&nbsp;
+<p>Added hidden "Back-track" key from the main command prompt, '&lt;' (or
+just ',' to avoid excessive pressing of the shift key). The routine moves
+your ship to the last sector you visited. This works well for adjacent
+port pairs.&nbsp;
+<p>Fixed "Buy Ship" routine to eliminate record corruption due to dropped
+carrier or system crash.&nbsp;
+<p>New ship created during "Buy Ship" won't be orphaned by a dropped carrier
+or program crash prior to the completion of the routine.&nbsp;
+<p>Player on planet, stardock, or port when program crashes or carrier
+is dropped won't remain hidden. Only players remaining in a citadel will
+stay planet-/ port-side.&nbsp;
+<p>Fixed EXTERN so that it won't end in error if the message or global
+message file is in use when it runs. It reports that the file was locked,
+then continues without purging it.&nbsp;
+<p>EXTERN can now run while users are in the game.&nbsp;
+<br>&nbsp;
+<p>02/02/97&nbsp;
+<p>Long range scan now reports other users in scanned sectors.&nbsp;
+<p>Corp ships don't revert to personal when player transports in.&nbsp;
+<p>Leave colonists no longer displays "123" prompt.&nbsp;
+<p>Removed confusing message "Leaving Personal Fighters on Corporate Planet"
+from Take/Leave Fighters function. Fighters are always considered to be
+corp or personal depending on Planet or Ship affiliation.&nbsp;
+<p>"Take/Leave Fighters" prompt now only one keypress (no enter required).&nbsp;
+<p>Fixed problem with defensive rating of ports.&nbsp;
+<br>&nbsp;
+<p>01/29/97&nbsp;
+<p>Fixed a nasty file access error which could potentially destroy any
+type of game record (ship, user, planet, etc). This should be responsible
+for most of the apparent bad pointer errors that have been cropping up.&nbsp;
+<p>Fixed various problems with destroyed ship routine. Destroyed ships
+weren't being made available as usable ship numbers, user records weren't
+being updated properly, and some other probs I can't remember off hand.
+This should be working much better now, but I can't guarantee it's perfect.
+Keep an eye on it.&nbsp;
+<br>&nbsp;
+<p>01/27/97&nbsp;
+<p>Citadel now reports other traders in the citadell.&nbsp;
+<p>
+<hr WIDTH="100%"><!-- end real stuff --></td>
+</tr>
+
+<tr>
+<td COLSPAN="2">
+<center><font size=-2>Copyright &copy; 2005&nbsp; All Rights Reserved.</font></center>
+</td>
+</tr>
+</table></center>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+Jumpgate LICENSE AND LIMITED WARRANTY 
+This legal document is an agreement between you ("Licensee") and the 
+authors of Jumpgate. 
+
+TRANSFER RESTRICTIONS 
+
+This Software is licensed only to the individual that purchases the 
+original license and may ONLY be transferred after written agreement with 
+the authors of Jumpgate. 
+
+OWNERSHIP OF SOFTWARE 
+
+Title to the Software will at all times remain with the authors of Jumpgate. 
+You may not modify, adapt, translate, reverse engineer, decompile or 
+disassemble the Software or try to break the registration code. 
+
+COPY RESTRICTIONS 
+
+This software and the accompanying written materials are copyrights. 
+Unauthorized copying of the Software or written materials is expressly 
+forbidden.  You will be held legally responsible for any copyright 
+infringement which is caused or encouraged by your failure to abide by the 
+terms of this agreement. 
+
+USE RESTRICTIONS 
+
+The Licensee is obtaining limited rights to use the Jumpgate software.  The 
+Licensee is licensed to use Jumpgate on single or multiple personal 
+computers, as long as the Licensee is the only person to used the 
+registered version of Jumpgate on each of these computers. Jumpgate may send 
+authorization information to an authentication server to confirm 
+valid registration. This information may be in the form of the Jumpgate registration name 
+and/or computer name and/or ip address. You may not adopt, translate, or 
+create derivative works based on the written materials without prior 
+written consent of the Jumpgate authors. 
+
+TERM OF LICENSE 
+
+This License is effective until terminated. This license will terminate 
+immediately without notice from the Jumpgate authors if you fail to comply 
+with any provision of this license.  Upon termination, you must destroy 
+the Software, the written materials, and all copies.  You may terminate 
+the license at any time by destroying the Software, the written materials, 
+and all copies. 
+
+UPDATE POLICY 
+
+The authors of Jumpgate may create, from time to time, updated versions of the 
+Software.  The authors of Jumpgate will make such updates available to all 
+Licensees and might send email upgrade notices. 
+
+LIMITED WARRANTY 
+
+The authors of Jumpgate do not warrant, guarantee or make any representation 
+regarding the use, of the Software or written materials in terms of 
+correctness, accuracy, reliability, currency, or otherwise.  The entire 
+risk, as to the results and performance of the Software, is assumed by 
+you. 
+
+The authors of Jumpgate's entire liability and your exclusive remedy shall be 
+the replacement of any broken or missing files found to be defective on 
+our home page for download by Licensee. 
+
+The above is the only warranty of any kind, either express or implied, 
+statutory or otherwise, including but not limited to the implied 
+warranties of merchantability and fitness for a particular purpose that is 
+made by the authors of Jumpgate on the Software.  No oral or written 
+information or advice given by the authors of Jumpgate, its dealers or 
+distributors shall create a warranty or in any way increase the scope of 
+this warranty and you may not rely on any such information or advice. 
+
+Neither the authors of Jumpgate nor anyone else who has been involved in the 
+creation, production, or delivery of the product shall be liable for any 
+direct, indirect, consequential, or incidental damages (including damages 
+for loss of business profits, business interruption, loss of business 
+information, loss of health or any loss whatsoever) arising out of the use 
+or inability to use such product, even if the authors of Jumpgate has been 
+advised of the possibility of such damages. 
+
+This warranty gives you specific rights.  You may have other rights which 
+vary by state and country, and certain limitations contained in the 
+limited warranty that may not apply to you. 
+
+This agreement be governed by the laws of the state of New York. 

@@ -1,0 +1,68 @@
+/* Written by earth for ATTAC TCP/IP Helper www.tw-attac.com */
+
+CALL ZocRespond "Avoid this sector in the future? (Y", "N"
+CALL ZocRespond "Option? (", "AY99^M"
+CALL ZocRespond "Stop in this sector", "N"
+
+CALL ATTAC_Message("")
+CALL ATTAC_Message("This Photon Player Script")
+CALL ATTAC_Message("Try to be at keys when active")
+CALL ATTAC_Message("")
+
+call zocTimeout(2500)
+if sectortotal="SECTORTOTAL" then sectortotal=ATTAC_GetTotalSectors()
+leaveLoop=0
+
+call ZocRespond("INACTIVITY WARNING:", "#")
+DO FOREVER
+  CALL ZocSend("#")
+  CALL ZocWait("Report Sector ")
+  CALL ZocWait(":")
+  data = ZocLastLine()
+  cursector = substr(data, 1, length(data)-1)
+
+  warp_count = ATTAC_Get_Sector_Info(cursector) 
+  call zocclearbuffer()
+  DO warp = 1 to warp_count 
+    sector = ATTAC_Get_Sector_Info(cursector, warp) 
+    
+    call zocsend sector
+
+    if sectortotal>5000 then do
+      call zocsend "^M"
+    end
+    else do
+      if sector <= 599 then do
+        call zocsend "^M"
+      end
+    end 
+    
+    CALL ZocSend("y")
+    theResult=ZocWaitMux("Locked.","blind")
+    if theResult=0 then do
+      CALL Zocsend("y")
+      leaveLoop=1
+      LEAVE
+    end
+  END
+
+  if leaveLoop=1 then LEAVE   
+END
+
+CALL ZocRespond "age the TransWarp drive?", "N"
+
+call zocsend "cpy" || cursector || "^Mq"
+call ZocWait "<Computer deactivated>"
+call zocwait "Command"
+call zocclearbuffer()
+
+call RingSectorWithFigs_ATTAC_LIBRARY(cursector, 1, "P", "D")
+
+call MoveMe_ATTAC_LIBRARY(cursector, 0)
+
+cycle=1
+cycles=3
+do while cycle<=cycles
+  call zocsend "ay9000^M"
+  cycle=cycle+1
+end

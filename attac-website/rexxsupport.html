@@ -1,0 +1,1615 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+    
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    
+  <meta name="Author" content="earth">
+    
+  <meta name="GENERATOR" content="Mozilla/4.77 [en] (Windows NT 5.0; U) [Netscape]">
+    
+  <meta name="KeyWords" content="Tradewars, helper, attac, twars, tw, tw2002, eis, twgs, twx, twxsync">
+  <title>ATTAC TCP/IP Helper</title>
+</head>
+  <body text="#ffffff" bgcolor="#000000" link="#ffff00" vlink="#c0c0c0" alink="#c0ffc0">
+ &nbsp; 
+<center>
+<table cellspacing="0" width="800">
+ <tbody>
+    <tr>
+ <td align="Center" valign="Top" colspan="2"><img src="attac-main.jpg" height="60" width="600">
+      </td>
+ </tr>
+  <tr>
+ <td colspan="2" align="Center"><a href="index.html"><img src="home-top.gif" border="0" height="27" width="150">
+      </a>
+      <a href="tradewars.html"><img src="tradewars-info-top.gif" border="0" height="27" width="150">
+      </a>
+      <a href="mailto:tradewars@hotmail.com"><img src="contact-us-top.gif" border="0" height="27" width="150">
+      </a>
+ <br>
+ 
+      <hr size="1" width="100%"></td>
+ </tr>
+  <tr>
+ <td align="Left" valign="Top" width="150" background="left_column_lace.gif"><img src="products-off.gif" height="25" width="150">
+      <a href="attac-for-windows.html"><img src="attac-for-windows-off.gif" border="0" height="17" width="150"></a>
+         <a href="twxsync.html"><img src="twxsync.gif" border="0" height="17" width="150"></a>
+      <img src="information-off.gif" height="25" width="150">
+      <a href="what-is-attac.html"><img src="what-is-attac-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="feature-list.html"><img src="feature-list-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="screen-shots.html"><img src="screen-shots-off.gif" border="0" height="17" width="150">
+      </a>
+      <img src="purchase-off.gif" height="25" width="150">
+      <a href="purchase.html"><img src="register-attac-off.gif" border="0" height="17" width="150">
+      </a>
+      <img src="download-off.gif" height="25" width="150">
+      <a href="download.html"><img src="attac-v4-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="scripting.html"><img src="user-scripts-off.gif" border="0" height="17" width="150">
+      </a>
+      <img src="support-off.gif" height="25" width="150">
+      <a href="onlinehelp.html"><img src="onlinehelp-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="http://network54.com/Hide/Forum/27576"><img src="forum.gif" border="0" height="17" width="150">
+      </a>
+      <a href="rexxsupport.html"><img src="rexx-documentation-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="twx.html"><img src="twx-data-format-off.gif" border="0" height="17" width="150">
+      </a>
+      <a href="faq.html"><img src="faq-off.gif" border="0" height="17" width="150">
+      </a>
+      </td>
+  <td align="Left" valign="Top" width="650">
+
+<!-- enter code here --><align ="CENTER"><b><font face="Arial,Helvetica"><font color="#ff6600"><font size="+1">
+   Using Scripts in ATTAC</font></font></font></b> </align>             
+              
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   ATTAC implements REXX scripting standard. Using the Regina REXX interpreter 
+ (<a href="http://www.lightlink.com/hessling/Regina/index.html">http://www.lightlink.com/hessling/Regina/index.html</a>
+    ), ATTAC support all standard REXX constructs.</font></font></font> </p>
+                               
+      <p><b><font face="Arial,Helvetica"><font color="#ff6600"><font size="+1">
+   New ATTAC Subroutines and Functions</font></font></font></b>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_ClearBuffer</b> ([<i>&lt;pos&gt;</i>])</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Clears the data buffer for the ZOC script.&nbsp; If <i>&lt;pos&gt;</i>
+ is  passed, the buffer is only cleared up to that point.&nbsp; All data
+after   that position is still retained.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   NOTE:&nbsp; This buffer is not the same buffer that the Zoc* functions 
+use.&nbsp;  Functions affecting this buffer does not affect the buffer used 
+by the Zoc  functions.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* clear all data up to the 10th character */</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_ClearBuffer(10)</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* now clear the whole buffer */</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_ClearBuffer()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_Get_Sector_Info</b> (<i>&lt;sector&gt;</i> [, <i>&lt;warp_num&gt;</i>
+    ])</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Return information about a sector you have visited.</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   If <i>&lt;warp_num&gt;</i> is not passed, the return value is the number 
+ of warps out of this sector.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   If <i>&lt;warp_num&gt;</i> is passed, return the sector that for the <i>
+  &lt;warp_num&gt;</i> th warp.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Get infromation about sector 1 */</font></font></font> <br>
+          <font color="#ffffff">warp_count = ATTAC_Get_Sector_Info(1)</font>
+    <br>
+          <font color="#ffffff">DO warp = 1 to warp_count</font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; sector = ATTAC_Get_Sector_Info(1, warp)</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_Get_ZTM_Sector_Info </b>(<i>&lt;sector&gt;</i> [, <i>&lt;warp_num&gt;</i>
+    ])</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Return information about a sector from ZTM data.</font></font></font>
+      </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   If <i>&lt;warp_num&gt;</i> is not passed, the return value is the number 
+ of warps out of this sector.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   If <i>&lt;warp_num&gt;</i> is passed, return the sector that for the <i>
+  &lt;warp_num&gt;</i> th warp.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Get infromation about sector 1 */</font></font></font> <br>
+          <font color="#ffffff">warp_count = ATTAC_Get_ZTM_Sector_Info(1)</font>
+     <br>
+          <font color="#ffffff">DO warp = 1 to warp_count</font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; sector = ATTAC_Get_ZTM_Sector_Info(1, warp)</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_GetBestPairPort</b><i>(&lt;type&gt;)</i></font></font></font>  
+    </p>
+                               
+      <p>Return a string of the best pair ports seperated by a space. If
+either port is on the bust list, it is NOT chosen and then next best pair
+is chosen.       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;type&gt;</i> = "1", return the best equipment-organics pair</font></font></font>
+    <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;type&gt;</i> = "2", return the best equipment-fuel pair</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;type&gt;</i> = "3", return the best fuel-organic pair</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* getting the best equipment-organic pair and putting into variables
+sector1,  sector2 */</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_GetBestPairPort(1)</font></font></font> <br>
+    parse var tmp1 sector1 sector2 </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* getting the best equipment-fuel pair and putting into variables sector1, 
+ sector2 */</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_GetBestPairPort(2)</font></font></font> <br>
+    parse var tmp1 sector1 sector2 </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* getting the best organic-fuel pair and putting into variables sector1, 
+ sector2 */</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_GetBestPairPort(3)</font></font></font> <br>
+    parse var tmp1 sector1 sector2 </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_GetBestEvilPairPort</b><i>(&lt;type&gt;)</i></font></font></font>
+         </p>
+                               
+      <p>Return a string of the best EVIL pair ports seperated by a space.
+  If either port is on the bust list, it is NOT chosen and then next best
+pair  is chosen. </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;type&gt;</i> = "1", return the best XXB-XXB pair; REQUIRED. Type must 
+ be 1.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* getting the best XXB-XXB pair and putting into variables sector1, sector2 
+ */</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_GetBestEvilPairPort(1)</font></font></font> <br>
+    parse var tmp1 sector1 sector2 </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_Get_Port_Info</b> (<i>&lt;sector&gt;</i>, <i>&lt;option&gt;</i>)</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Return information about the port in <i>&lt;sector&gt;</i>.&nbsp; If ATTAC 
+ doesn't know about a port in that sector, it returns "Unknown". If there is not Port, it returns "NoPort"</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   The type of information returned is defined by <i>&lt;option&gt;</i>.</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;option&gt;</i> = "TYPE", return the type of port 0-9</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;option&gt;</i> = "FUEL AMOUNT", return the amount of fuel</font></font></font>
+    <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;option&gt;</i> = "FUEL PERCENT", return the percent of fuel</font></font></font>
+    <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;option&gt;</i> = "ORG AMOUNT", return the amount of organics</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;option&gt;</i> = "ORG PERCENT", return the percent of organics</font></font></font>
+    <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;option&gt;</i> = "EQUIP AMOUNT", return the amount of equipment</font></font></font>
+    <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i>
+   &lt;option&gt;</i> = "EQUIP PERCENT", return the percent of equipment</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Get information about the port in sector 1 */</font></font></font>
+      <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   info = ATTAC_Get_Port_Info(sector, "TYPE")</font></font></font>      
+      <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   if info = "Unknown" then signal No_Port</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   if info = "NoPort" then signal No_Port</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("Port in " || sector || " is a " || info)</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   info = ATTAC_Get_Port_Info(sector, "FUEL AMOUNT")</font></font></font>
+       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("Fuel amount = " || info)</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   info = ATTAC_Get_Port_Info(sector, "FUEL PERCENT")</font></font></font>
+         <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("Fuel Percent = " || info)</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   info = ATTAC_Get_Port_Info(sector, "ORG AMOUNT")</font></font></font>
+      <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("Org amount = " || info)</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   info = ATTAC_Get_Port_Info(sector, "ORG PERCENT")</font></font></font>
+       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("Org Percent = " || info)</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   info = ATTAC_Get_Port_Info(sector, "EQUIP AMOUNT")</font></font></font>
+         <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("Equip amount = " || info)</font></font></font>      
+      <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   info = ATTAC_Get_Port_Info(sector, "EQUIP PERCENT")</font></font></font>
+    <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("Equip Percent = " || info)</font></font></font>     
+       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   signal Quit_Script</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   No_Port:</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   call ZocWriteln("No port in sector " || sector)</font></font></font> 
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Quit_Script:</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   EXIT</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   </b></font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+ATTAC_GetTotalSectors</b> ()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Returns the number of sectors in the game, as defined by the user during 
+ the creation of the game.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   totalSectors = ATTAC_GetTotalSectors()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_GetStardockSector </b>()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Returns the sector the stardock is in, as found when playing. If the stardock 
+ sector is unknown, a -1 is returned.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   totalSectors = ATTAC_GetStardockSector()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_GetBuffer</b> ()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Returns the script buffer.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   NOTE:&nbsp; This buffer is not the same buffer that the Zoc* functions 
+use.&nbsp;  Functions affecting this buffer does not affect the buffer used 
+by the Zoc  functions.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   buffer = ATTAC_GetBuffer()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+ATTAC_IsSectorBusted(</b>&lt;sector&gt;<b>)</b></font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Tells you if the you were busted in that&nbsp;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+&lt;sector&gt;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Return Values are:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+-1 = If you enter an invalid sector or unknown<br>
+ &nbsp;0 = Not Busted In &lt;sector&gt;<br>
+ &nbsp;1 = Were Busted In &lt;sector&gt;</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Example:</font></font></font></p>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_IsSectorBusted("294")<br>
+ if tmp1 = 1 then do<br>
+ &nbsp; call ATTAC_Message ("You were busted in this sector")<br>
+ end</font></font></font><br>
+ else do<br>
+ &nbsp; call ATTAC_Message("You were NOT busted in this sector")<br>
+ end<br>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_IsSectorAvoided(</b>&lt;sector&gt;<b>)</b></font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Tells you if the you have avoided that&nbsp;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+&lt;sector&gt;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Return Values are:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+-1 = If you enter an invalid sector or unknown<br>
+ &nbsp;0 = Not Avoided &lt;sector&gt;<br>
+ &nbsp;1 = Avoided &lt;sector&gt;</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Example:</font></font></font></p>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_IsSectorBusted("294")<br>
+ if tmp1 = 1 then do<br>
+ &nbsp; call ATTAC_Message ("This sector is avoided")<br>
+ end</font></font></font><br>
+  else do<br>
+  &nbsp; call ATTAC_Message("This sector is NOT avoided")<br>
+  end
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+ATTAC_HasSectorFig(</b>&lt;Sector&gt;<b>)</b></font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Tells you if a&nbsp;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+&lt;sector&gt;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+ has a fighter and if the fighter is yours, an ally or an enemy fighter.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Return Values are:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+-1 = There are no fighters in the sector or you entered and invalid sector.<br>
+ &nbsp;0 = The is a fighter in the sector and it belongs to you or your corporation.<br>
+ &nbsp;1 = There is an enemy fighter in the sector.<br>
+ &nbsp;2 = There is an allied fighter in the sector.<br>
+      </font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_HasSectorFig()<br>
+ if tmp1 = 1 then do<br>
+ &nbsp; call ATTAC_Message ("Enemy Fighter in Sector")<br>
+ end<br>
+      </font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+ATTAC_Message</b> (&lt;message&gt;,[&lt;color&gt;],[&lt;intro&gt;])</font></font></font></p>
+       
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+ Adds a message to the ATTAC Message Center.</font></font></font></p>
+       
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+ &lt;message&gt; = This is the actual message that gets added.<br>
+ &lt;color&gt; = (Optional) Is the color of the Message. <br>
+ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Choices are: </font></font></font>
+ BLACK, RED, GREEN, YELLOW, BLUE, CYAN, WHITE<br>
+ &lt;intro&gt; = (Optional) This is the little blurb that appears in [...] 
+before the message.<br>
+       </p>
+       
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+ Example:</font></font></font></p>
+       
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_Message("This is a test")<br>
+       </font></font></font></p>
+       
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_Message("This is a test","YELLOW")</font></font></font></p>
+       
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_Message("This is a test","GREEN","My Message")<br>
+              </font></font></font></p>
+      <p></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+ATTAC_SectorFigAmount(</b>&lt;sector&gt;<b>)</b></font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Tells you how many fighters are in a&nbsp;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+&lt;sector&gt;</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Return Values are:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+-1 = There are no fighters in the sector or you entered and invalid sector.<br>
+ &nbsp;OR<br>
+ The number of fighters in the sector<br>
+      </font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_SectorFigAmount("294")<br>
+ if tmp1 = -1 then do<br>
+ &nbsp; call ATTAC_Message ("No Fighters in Sector")<br>
+ end<br>
+else do<br>
+&nbsp; call ATTAC_Message ("There are " || tmp1 || " fighers in sector 294")<br>
+end<br>
+      </font></font></font></p>
+      <p></p>
+      <p></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_SectorFigOwner(</b>&lt;sector&gt;<b>)</b></font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Tells you the name of the owner of the fighters in the&nbsp;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+&lt;sector&gt;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Return Values are:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+"Unknown" = ATTAC doesnt know who the owner of the fighters are.</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+"No Figs" = There are no fighters in the sector.<br>
+"CORP N" = Where N is the corporation number.<br>
+NAME = Where NAME is the name of the owner of the fighters<br>
+"-1" = If you enter an invalid sector.<br>
+      </font></font></font></p>
+      <p></p>
+      <p></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_SectorFigOwner("294")<br>
+ if tmp1 = "No Figs" then do<br>
+ &nbsp; call ATTAC_Message ("No Fighters in Sector")<br>
+ end<br>
+ else do<br>
+ &nbsp; call ATTAC_Message ("There fighter owner is " || tmp1)<br>
+ end<br>
+      </font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_SectorFigType(</b>&lt;sector&gt;<b>)</b></font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Tells you the type of fighters in the&nbsp;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+&lt;sector&gt;</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Return Values are:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+-1 = If you enter an invalid sector or unknown<br>
+&nbsp;0 = Rogue Mercenary<br>
+&nbsp;1 = Toll<br>
+&nbsp;2 = Offensive<br>
+&nbsp;3 = Defensive<br>
+      </font></font></font></p>
+      <p></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Example:</font></font></font></p>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   tmp1 = ATTAC_SectorFigOwner("294")<br>
+ if tmp1 = 1 then do<br>
+ &nbsp; call ATTAC_Message ("Toll Fighters")<br>
+ end<br>
+      </font></font></font>
+      <p></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+ATTAC_StartBuffer</b> ()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Start placing incoming data into the script buffer.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   NOTE:&nbsp; This buffer is not the same buffer that the Zoc* functions 
+use.&nbsp;  Functions affecting this buffer does not affect the buffer used 
+by the Zoc  functions.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_StartBuffer()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_StopBuffer</b> ()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Stop placing incoming data into the script buffer.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   NOTE:&nbsp; This buffer is not the same buffer that the Zoc* functions 
+use.&nbsp;  Functions affecting this buffer does not affect the buffer used 
+by the Zoc  functions.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_StartBuffer()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ATTAC_UpdateCounter</b> ([<i>&lt;inc_val&gt;</i>])</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Update the script counter by <i>&lt;inc_val&gt;</i> or by 1 if <i>&lt;inc_val&gt;</i>
+    is not passed.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Count from 2 - 20 in the script counter */</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   DO 10</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; CALL ATTAC_UpdateCounter(2)</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; CALL ZocDelay(1)</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font></p>
+      <br>
+      <br>
+                               
+      <p><b><font face="Arial,Helvetica"><font color="#ff6600"><font size="+1">
+   Supported ZOC Subroutines and Functions</font></font></font></b>     
+       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocAsk</b> (&lt;<i>title</i>&gt; [, &lt;<i>default</i>&gt;])</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Get the user a question in a dialog box. If &lt;<i>default</i>&gt; is
+provided,  the input box will be preset to that value.</font></font></font>
+       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Sector = ZocAsk ("Which sector would you like to warp to?", "1")</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocAskP </b>(&lt;<i>title</i>&gt; [, &lt;<i>default</i>&gt;])</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Same as ZocAsk except the input box is displayed using the password symbol 
+ (*)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Password = ZocAskP ("Enter your password: ")</font></font></font>    
+  </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocBeep</b> (&lt;<i>n</i>&gt;)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Beep &lt;<i>n&gt;</i> times.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocBeep (3)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocClearBuffer</b> ()</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Clears ATTAC parsing buffer</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocClearBuffer ()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocCls</b> ()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Clear the game window.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocCls ()</font></font></font></p>
+                               
+      <p></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   dosfname</b></font></font></font><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1">
+( &lt;filename&gt;)</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Returns the filename with an absolute path using the ATTAC directory that
+attac.exe is located in.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_Message(dosfname ("script.ini"))</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+This returns "C:\Program Files\ATTAC\script.ini" assuming that attac.exe
+is located in "C</font></font></font><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+:\Program Files\ATTAC"</font></font></font><br>
+      </p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   dosisdir</b></font></font></font><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1">
+(&lt;directory&gt;)</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Returns a 0 or a 1 depending on if the &lt;directory&gt; exists or not</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+&nbsp;0 = The directory does not exist<br>
+ &nbsp;1 = The directory does exist<br>
+      </font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ATTAC_Message(dosisdir ("c:\test"))</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+This returns 0 if the directory does not exist and 1 if it does</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocDelay </b>( [&lt;<i>sec</i>&gt;] )</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Pause the script for &lt;<i>sec</i>&gt; seconds. If &lt;<i>sec</i>&gt;
+is  not provided, pause for 0.2 seconds.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocDelay (5)</font></font></font></p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocGetLine </b>()</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Wait for the next non empty line of text from the game. The received text 
+ can be accessed from ZocLastLine. ZocGetLine waits for line until the timeout 
+ is reach, at which time it returns with "640"</font></font></font>      
+      </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i><u>
+   NOTE</u></i>: Due to different processing, ATTAC does not miss any incoming 
+ data. Thus ZocSynctime is not implemented.</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Timeout = ZocWait ("[Pause]")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Timeout = 640 THEN DO</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; SIGNAL PANIC</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END<br>
+      </font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocGetFileName </b>()</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Opens a Common Dialog box and prompts the user to select a filename. You
+can either select a file or click CANCEL.. If user clicks CANCEL, the string
+##CANCEL## is returned.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+tmp1 = ZocGetFileName()</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   if tmp1 = "##CANCEL##" then do</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp; CALL ATTAC_Message("No file selected")</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+end<br>
+else do<br>
+&nbsp; CALL ATTAC_Message("Filename is: " || tmp1)<br>
+end<br>
+      </font></font></font></p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocLastLine </b>()</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Returns the line of text when the last ZocGetLine / ZocWait / ZocWaitMux 
+ returned.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Timeout = ZocWait ("]:[")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Timeout = 640 THEN DO</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; SIGNAL PANIC</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocWait ("]")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CurrentSector = ZocLastLine()</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Parse trailing "]:[" off of CurrentSector */</font></font></font> 
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocLogname</b> (<i>&lt;filename&gt;</i>)</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Change the name of the log file to <i>&lt;filename&gt;</i>.&nbsp; Only 
+takes  effect after you call ZocLogging(1).</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Create a logfile with the name attac_zoc.log */</font></font></font>
+         <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLogname("attac_zoc.log")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLogging(1)</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocSend("D")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocWait("]:[")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLogging(0)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocLogging</b> (<i>&lt;on_off&gt;</i>)</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Turns the logging on (<i>&lt;on_off&gt;</i> = 1) or off (<i>&lt;on_off&gt;</i>
+     = 0).&nbsp; You can set the name of the log file with ZocLogname.</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Create a logfile with the name attac_zoc.log */</font></font></font>
+         <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLogname("attac_zoc.log")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLogging(1)</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocSend("D")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocWait("]:[")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLogging(0)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocLockKeyboard </b>(&lt;<i>lock</i>&gt;)</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Lock (&lt;<i>lock</i>&gt; = 1) / Unlock (&lt;<i>lock</i>&gt; = 0) the
+keyboard  to prevent the user to send keys while your script is running.</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   The keyboard is automatically unlocked at the termination of the script.</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Prevent the user from typing for 5 seconds */</font></font></font>
+      <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLockKeyboard (1)</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocDelay (5)</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocLockKeyboard (0)        </font></font></font></p>
+      <p></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+Lower </b>(&lt;string&gt;)</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Changes the &lt;string&gt; to lowercase</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+Example:</font></font></font></p>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Prevent the user from typing for 5 seconds */</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+tmp1 = Lower ("THIS Word")</font></font></font><br>
+Call ATTAC_Message(tmp1)<br>
+      <br>
+This should printout "this word" (without quotes)<br>
+               
+      <p><font color="#33ccff"><b>ZocKeyboard(&lt;command&gt;)</b></font></p>
+               
+      <p>This function allows a REXX script to lock/unlock the keyboard.&nbsp;<br>
+   It supports the subcommands LOCK, UNLOCK <br>
+        <br>
+  Example:<br>
+  Call ZocKeyboard("LOCK")</p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocMsgBox </b>(&lt;<i>text</i>&gt; [, &lt;<i>mode</i>&gt;])</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Display a message box containing &lt;<i>text</i>&gt;. The three different 
+ types of message boxes are:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &lt;<i>mode</i>&gt; = 0 Simple dialog box with an OK button</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &lt;<i>mode</i>&gt; = 1 Error dialog box with an OK button</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &lt;<i>mode</i>&gt; = 2 Yes/No dialog box.</font></font></font>      
+      </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   If &lt;<i>mode</i>&gt; is not provided, a simple dialog box with an OK 
+button  is used. The return values are "##OK##", "##YES##", "##NO##".</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   result = ZocMsgBox ("Out of money", 2)</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF result = "##YES##" THEN DO</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; /* Stuff */</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocNotify </b>(&lt;<i>text</i>&gt;)</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Display a temporary window containing &lt;<i>text</i>&gt;. This window 
+is  displayed for 3 seconds.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Sector = Sector + 1</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocNotify ("Warping to sector " || Sector)</font></font></font> 
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocOs </b>()</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Returns the OS name and version. Currently returns only "WINNT 4.00".</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Os = ZocOs ()</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocRequest </b>(&lt;<i>title</i>&gt;,&lt;<i>opt1</i>&gt; [, &lt;<i>opt2</i>
+   &gt; [, &lt;<i>opt3</i>&gt; &#8230; [, &lt;<i>optn</i>&gt;]]])</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Display a list of options for the user to pick from. The number of options 
+ is not limited. The return value is the text of the option chosen.</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Answer = ZocRequest ("Which planet would you like to land on?", "Planet 
+1", "Planet 2", "Planet 3", "Planet 4")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Answer = "Planet 1" THEN DO</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; /* land on planet 1 */</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Answer = "Planet 2" THEN DO</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; /* land on planet 2 */</font></font></font>       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Etc.. */</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocRequestList </b>(&lt;<i>title</i>&gt;,&lt;<i>opt1</i>&gt; [, &lt;<i>
+opt2</i>   &gt; [, &lt;<i>opt3</i>&gt; &#8230; [, &lt;<i>optn</i>&gt;]]])</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Display a requester window with a list of options and return the index
+of the selected option (or -1 for Cancel).&nbsp; If only one option is passed
+to the function, it is considered as a list of choices separated by vertical
+bars.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Answer = ZocRequest ("Which planet would you like to land on?", "Planet 
+1", "Planet 2", "Planet 3", "Planet 4")</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Answer = 1 THEN DO</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; /* land on planet 1 */</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Answer = 2 THEN DO</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; /* land on planet 2 */</font></font></font><br>
+      <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Etc.. */</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocRespond </b>(&lt;<i>prompt</i>&gt; [, &lt;<i>response</i>&gt;])</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   If &lt;<i>response</i>&gt; is provided and doe</font></font></font>ZocClearBuffer<font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+s not equals "", then send  &lt;<i>response</i>&gt; whenever &lt;<i>prompt</i>
+&gt; is encountered, but        <u>ONLY</u> while ZocGetLine, ZocWait, and
+ZocWaitMux are processing.   If &lt;<i>response</i>&gt; is not provided or
+equals "", then this response   is canceled.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><i><u>
+   NOTE</u></i>: This command uses more CPU time than normal. Therefore,
+it  is recommended that you cancel a response as soon as you don't need it
+anymore.</font></font></font>    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* continue past all "[Pause]" until "Command" is reached */</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocRespond ("[Pause]", "^M")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocWait ("Command")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocRespond ("[Pause]")</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocScreen </b>(&lt;<i>x</i>&gt;, &lt;<i>y</i>&gt;, &lt;<i>length</i>&gt;)&nbsp;<br>
+      </font></font></font><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocGetScreen </b></font></font></font>&nbsp;<font face="Arial,Helvetica"><font color="#33ccff"><font size="-1">
+(&lt;<i>x</i>&gt;, &lt;<i>y</i>&gt;, &lt;<i>length</i>&gt;) </font></font></font>
+- <small>(same as ZocScreen)</small><br>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Returns &lt;<i>length</i>&gt; characters on game screen starting at coordinates 
+ &lt;<i>x</i>&gt;,&lt;<i>y</i>&gt;. &lt;<i>x</i>&gt; and &lt;<i>y</i>&gt;
+ start at 0,0 in the upper left hand corner.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Data = ZocScreen(0, 0, 10)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocSend </b>(&lt;<i>text</i>&gt;)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Send &lt;<i>text</i>&gt; to the game. The text in &lt;<i>text</i>&gt;
+is  first expanded inserting the proper control characters in place of the
+control  codes. See below for a list of the command codes and their meanings.</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Send the username and a return key */</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocSend (username || "^M")</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocSendRaw </b>(&lt;<i>text</i>&gt;)</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Same as ZocSend except it doesn't expand &lt;<i>text</i>&gt;.</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Send the username and the string "^M" */</font></font></font>     
+       <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocSendRaw (username || "^M")</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocSetOption </b>(&lt;text&gt;)</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+This Command is accepted but not interpreted.</font></font></font></p>
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1">
+      <b>ZocTimeout </b>(&lt;<i>sec</i>&gt;)</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Set the timeout used by ZocGetLine, ZocWait and ZocWaitMux to &lt;<i>sec</i>
+   &gt; seconds.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   /* Wait for 5 seconds for the text before returning */</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocTimeout (5)</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Timeout = ZocWait (text)</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Timeout = 640 THEN DO</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; SIGNAL PANIC</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocWait </b>(&lt;<i>text</i>&gt;)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Wait for &lt;<i>text</i>&gt; in the input stream before returning. If
+ZocWait  times out, it will return 640.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Timeout = ZocWait (text)</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   IF Timeout = 640 THEN DO</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; SIGNAL PANIC</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocWaitMux </b>(&lt;<i>text1</i>&gt; [, &lt;<i>text2</i>&gt; [, &lt;<i>
+ text3</i>  &gt; &#8230; [, &lt;<i>textn</i>&gt;]]]</font></font></font>      
+      </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Same as ZocWait except wait for multiple inputs. As soon as one of them 
+is found, it returns the index of the &lt;<i>text?</i>&gt; found. (1 for &lt;<i>
+ text1</i>&gt;, 2 for &lt;<i>text2</i>&gt;, etc.) If ZocWaitMux times out,
+it will return 640.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Result = ZocWaitMux ("offer", "not interested")</font></font></font> 
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   SELECT</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; WHEN Result = 0 THEN SIGNAL Offer</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; WHEN Result = 1 THEN SIGNAL Bail</font></font></font>
+    <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   &nbsp;&nbsp;&nbsp; WHEN Result = 640 THEN SIGNAL PANIC</font></font></font>
+     <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   END</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocWrite </b>(&lt;<i>text</i>&gt;)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Write &lt;<i>text</i>&gt; to the screen at the current cursor position. 
+&lt;<i> text</i>&gt; is expanded using control codes. This is similar to the
+REXX command SAY, but it does not place an enter at the end of the line.</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocWrite ("Starting the script! ^M")</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#33ccff"><font size="-1"><b>
+   ZocWriteln </b>(&lt;<i>text</i>&gt;)</font></font></font>       </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Similar to ZocWrite, except it places an enter at the end of the line.&nbsp;</font></font></font>
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Example:</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocWriteln ("Starting the script!")<br>
+        </font></font></font></p>
+               
+      <p><font color="#33ccff"><b>ZocExec &lt;command&gt;, [&lt;viewmode&gt;]</b></font><br>
+        </p>
+               
+      <p>Execute a program directly (ie. without passing it through the shell
+ handler, thus avoiding the black shell window).&nbsp; This does only work
+ for .com and .exe files (not for .cmd and internal commands like DEL, REN
+ etc.).</p>
+               
+      <p>optional viewmode parameter controls how the application window
+is shown:<br>
+  &lt;viewmode&gt; = 0 &nbsp;-&nbsp; normal<br>
+  &lt;viewmode&gt; = 1 &nbsp;-&nbsp; hidden<br>
+  &lt;viewmode&gt; = 2 &nbsp;-&nbsp; minimized<br>
+  &lt;viewmode&gt; = 3 &nbsp;-&nbsp; maximized</p>
+               
+      <p>ZocExec also returns the exit code of the application. <br>
+        <br>
+  Example:<br>
+        </p>
+               
+      <p>CALL ZocExec ("notepad.exe")<br>
+  &nbsp;<br>
+        <font color="#33ccff"><b>ZocGetInfo(&lt;item&gt;)</b></font></p>
+               
+      <p>This function returns information about the current ZOC session.
+ Items: </p>
+               
+      <p>CONNECTEDTO<br>
+  The host or phone number to which we are connected. <br>
+        </p>
+               
+      <p>CURSOR-X<br>
+  The x-position of the cursor (starting with zero). <br>
+        </p>
+               
+      <p>CURSOR-Y<br>
+  The y-position of the cursor (starting with zero). <br>
+        </p>
+               
+      <p>DOWNLOADDIR<br>
+  The default drive and directory for downloads. <br>
+        <br>
+  EXEDIR<br>
+  The drive and directory in which ZOC has been installed. <br>
+        </p>
+               
+      <p>ONLINE<br>
+  Information if ZOC is currently connected to a host: ##YES##,&nbsp; ##NO##,
+ ##UNKNOWN## <br>
+        </p>
+               
+      <p>OSYS<br>
+  Returns a string which indicates the operating system and OS version under
+ which ZOC is running.&nbsp; The string returned is in the form "&lt;osys&gt;
+ &lt;version&gt;" where &lt;osys&gt; is OS2 or WINNT or WIN95. &lt;version&gt;
+ is a three digit number eg. 400 for Windows NT 4.0 or 230 for OS/2 Warp
+(Warp  sees itself as OS/2 V2.30).&nbsp; Windows 95 returns WIN95 400 <br>
+        <br>
+  UPLOADDIR<br>
+  The default drive and directory for uploads. <br>
+        </p>
+               
+      <p>VERSION<br>
+  The current&nbsp;ATTAC version, eg 4.1.5<br>
+        </p>
+               
+      <p>WORKDIR<br>
+  ATTAC's working directory (containing host directory, options, etc). <br>
+        <br>
+  Example:<br>
+  call ATTAC_Message (ZocGetInfo("ONLINE"))<font color="#33ccff"><b>    
+   </b></font></p>
+      <p></p>
+      <font color="#33ccff"><b>ZocGetOption(&lt;item&gt;)<br>
+      </b></font><font color="#33ccff"><b>ZocGetGlobalOption(&lt;item&gt;)</b></font>
+ - <small>(this is the same as ZocGetOption)</small><br>
+      <p>This function returns information about the current options.  Items:
+      </p>
+      <p>VTStripSeq<br>
+Returns: VTStripSeq="yes"<br>
+      </p>
+      <p>CaptDefaultName<br>
+Returns: CaptDefaultName="attac_log_default_name.log"<br>
+      </p>
+      <p>ScriptPath<br>
+Returns: ScriptPath="SCRIPT" <br>
+      </p>
+      <p>CapturePath<br>
+Returns: CapturePath="DATA" <br>
+      <br>
+  DownloadAltPath<br>
+Returns: DownloadAltPath="DATA" <br>
+      </p>
+      <p>ScriptPath<br>
+Returns: ScriptPath="SCRIPT" <br>
+      </p>
+      <p>WindowTitle<br>
+Returns: WindowTitle="%%ZOCORHOST%% %%OPTIONS%%"<br>
+      <br>
+If None of the above options are chosen, the return value is "Invalid ZocGetOption"</p>
+      <p>  Example:<br>
+  call ATTAC_Message (ZocGetOption("ScriptPath"))<font color="#33ccff"><b><br>
+      </b></font></p>
+               
+      <p><font color="#33ccff"><b>ZocReceiveBuf(&lt;buffer size&gt;)<br>
+        </b></font><br>
+  This function makes ZOC collect parts of a session in a memory buffer and
+ returns the previous buffer's contents (if any) as a string. <br>
+  Initially the buffer has a size of zero, which means that no data is collected.&nbsp;
+ To start data collection you need to call the function with the size of
+a  receive buffer.&nbsp;&nbsp; After that the incoming data is collected
+until  the buffer is full or until the function is called again (which will
+retrieve  the buffer contents, empty the buffer and set a new size). <br>
+  A typical call sequence to use ZocReceiveBuf() to retrieve text from a
+database  might look like this: <br>
+        <br>
+  Example:<br>
+  /* make a receive buffer of 256 bytes */<br>
+  CALL ZocTimeout 60<br>
+  CALL ZocReceiveBuf 256<br>
+  CALL ZocSend "d"<br>
+  CALL ZocWait "Command"<br>
+        <br>
+  /* get the description and make a */<br>
+  /* larger buffer to continue with */<br>
+  abst= ZocReceiveBuf(4096)<br>
+  Call ZocMsgBox (abst)<br>
+        </p>
+               
+      <p>CALL ZocSend "i"<br>
+  CALL ZocWait "Command"<br>
+        <br>
+  /* get the contents and discontinue buffering */<br>
+  cont= ZocReceiveBuf(0)<br>
+  Call ZocMsgBox (cont)<br>
+   <br>
+  Note: In the example above, both variables (abst and cont) will start with
+ the word "read" and end with the character "Command" with whatever was received
+ in between. <br>
+        <br>
+  Note: See also ZocWaitForSeq. <br>
+        </p>
+               
+      <p><font color="#33ccff"><b>ZocString(&lt;subcommand&gt;, &lt;inputstring&gt;,
+ &lt;p1&gt;, [&lt;p2&gt;])</b></font></p>
+               
+      <p>This is a function to manipulate a string and return a modified
+copy. The subcommand and the parameters &lt;p1&gt; and &lt;p2&gt; control
+the modification.&nbsp;</p>
+               
+      <p><i>Subcommands: </i><br>
+  PART<br>
+  Return the &lt;p1&gt;th part &lt;inputstring&gt; which is delimited by
+&lt;p2&gt;  (or space if &lt;p2&gt; is omitted), e.G. ZocString("PART", "Anne|Charly|Joe",
+ 2, "|") will return "Charly". <br>
+        </p>
+               
+      <p>PARTCOUNT<br>
+  Return the number of &lt;p2&gt;-delimited parts in &lt;inputstring&gt;, 
+e.G. ZocString("PARTCOUNT", "Anne|Charly|Joe", "|")&nbsp; will return 3. 
+     <br>
+        </p>
+               
+      <p>REPLACE<br>
+  Return a copy of &lt;inputstring&gt; where all ocurrences of &lt;p1&gt; 
+are replaced by &lt;p2&gt;, e.G. betterstr= ZocString("REPLACE", str, "HyperTerminal",
+ "ATTAC") <br>
+        <br>
+  REMOVE<br>
+  Return a copy of &lt;inputstring&gt; where all ocurrences of &lt;p1&gt; 
+are removed, e.G. betterstr= ZocString("REMOVE", str, "HyperTerminal") <br>
+        </p>
+               
+      <p>REMOVECHARS<br>
+  Return a copy of &lt;inputstring&gt; from which all characters of &lt;p1&gt;
+ were removed, e.G. str= ZocString("REMOVECHARS", str, "0123456789"||X2C(09))
+ removes all digits and tab characters from STR. <br>
+        </p>
+               
+      <p><font color="#33ccff"><b>ZocWaitForSeq 1|0</b></font></p>
+               
+      <p>Normally ZocWait commands do not see emulation control codes in
+the data stream.&nbsp; If you need to wait for an emulation control you can
+use this command.&nbsp; This flag also turns on/off filtering of emulation
+controls for ZocReceiveBuf(). <br>
+        </p>
+               
+      <p>Example:&nbsp;</p>
+               
+      <p>/* rexx example */<br>
+  Call ZocWaitForSeq 1<br>
+  Call ZocSend "d"<br>
+  Call ZocWait ("Command")<br>
+  Call ZocMsgBox(ZocLastLine())<br>
+        </p>
+               
+      <p><font color="#33ccff"><b>ZocSyncTime</b></font></p>
+      <p>This Command is NOT implemented. It is just interpreted for compatability
+with with other scripts. ATTAC has no need for this command has it syncronizes
+it's threads.</p>
+      <p><br>
+   </p>
+                               
+      <p><b><font face="Arial,Helvetica"><font color="#ff6600"><font size="+1">
+   Unsupported ZOC Subroutines and Functions</font></font></font></b>   
+   </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   The following ZOC subroutines and functions are not been implemented either 
+ due to no relevance or new different ways of implementing the underling 
+algorithms.</font></font></font>  </p>
+                               
+      <center>                            
+      <table border="1" cellpadding="7" width="590">
+     <tbody>
+              <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocAutoConnect</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocBaud</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocCaptClr</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocCarrier</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocConnect</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocCtrlString</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocCursor</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocDisconnect</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocDownload</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocEndZoc</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocGetOption</font><br>
+            </td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocGetFilenames</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocHfc</font><br>
+              </td>
+            <td valign="Top" width="33%"><font color="#ffffff">ZocGetPhonebk</font></td>
+            <td valign="Top"><font color="#ffffff">ZocLoadOpts</font><br>
+            </td>
+     </tr>
+            <tr>
+           <td valign="Top" width="33%"><font color="#ffffff">ZocPID</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSendBreak</font><br>
+              </td>
+            <td valign="Top"><font color="#ffffff">ZocSendEmulationKey</font><br>
+            </td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocRestimer</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSetAutoAccept</font><br>
+            </td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSetDIPath</font><br>
+            </td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocSendKey</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSetDevParm</font><br>
+            </td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSetEmu</font><br>
+            </td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocSetDevice</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSetUnit</font><br>
+            </td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSetPhonebk</font><br>
+            </td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocSetHost</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSuppressOutput</font><br>
+            </td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocSetUnattended</font><br>
+            </td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocSetTimer</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocShell</font><br>
+            </td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocXferShell</font><br>
+            </td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">ZocUpload</font><br>
+            </td>
+      <td valign="Top" width="33%"><font color="#ffffff">ZocXferDosShell</font><br>
+            </td>
+      <td valign="Top" width="33%"><br>
+              </td>
+     </tr>
+                                                     
+        </tbody>                            
+      </table>
+          </center>
+                                  
+      <p><b><font face="Arial,Helvetica"><font color="#ff6600"><font size="+1">
+   Differences between ZOC and ATTAC</font></font></font></b> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   ATTAC and ZOC have different internal structure that cause slight changes 
+ in the way scripts are executed. The main differences are as follows:</font></font></font>
+     </p>
+                               
+      <p><i><font face="Arial,Helvetica"><font color="#ff0000"><font size="-1">
+   ATTAC does not miss any data due to different threads</font></font></font></i>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   This has been the cause of many problems. Lost data is never a good thing, 
+ and ATTAC avoids this problem by using a more advanced internal algorithm.</font></font></font>
+    </p>
+                               
+      <p><i><font face="Arial,Helvetica"><font color="#ff0000"><font size="-1">
+   ATTAC is more serialized with respect to ZocRespond and ZocGetLine/ZocWait/ZocWaitMux 
+  due to better synchronization handling</font></font></font></i> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   The following code fragment use to work but no longer does due to the
+better  handling of data.</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocRespond ("[Pause]", "^M")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocWait ("[Pause")</font></font></font> <br>
+          <font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocRespond ("[Pause]")</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   This fragment would wait for "[Pause]", send and enter, and continue.
+However,  since the text sent to ZocWait is missing the trailing "]", it
+breaks out  of ZocWait before ZocRespond sees the final "]", and therefore
+the enter is never sent, since ZocRespond only works while ZocGetLine, ZocWait
+or ZocWaitMux  are waiting for data.</font></font></font> </p>
+                               
+      <p><i><font face="Arial,Helvetica"><font size="-1"><font color="#ff0000">
+   ATTAC does not place limits on the number of parameters passed to ZocRequest 
+ or limits on the number of ZocRespond requests</font><font color="#ffffff">
+   .</font></font></font></i> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   This does not effect the execution of scripts, but does allow more flexibility.</font></font></font>
+    </p>
+                               
+      <p><i><font face="Arial,Helvetica"><font color="#ff0000"><font size="-1">
+   ATTAC is stricter in calling ZOC commands.</font></font></font></i>  
+    </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   ATTAC does not support the calling method such as the following:</font></font></font>
+     </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   ZocDelay 2</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   Instead, use the following method</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   CALL ZocDelay(2)</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   OR</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   ZocDelay(2)</font></font></font> </p>
+                               
+      <p><b><font face="Arial,Helvetica"><font color="#ff6600"><font size="+1">
+   Control Codes</font></font></font></b> </p>
+                               
+      <center>                            
+      <table border="1" cellpadding="7" width="590">
+     <tbody>
+              <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Key</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Control Code</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+Code</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">^ char</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^^</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">&nbsp;</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Beep</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^G</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+007</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Backspace</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^H</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+008</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Tab</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^I</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+009</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Esc</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^[</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+027</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Enter</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^M</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+013</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Line Feed</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^J</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+010</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Ctrl+^ (dec 30)</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^~</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">Alt+030</font></td>
+     </tr>
+      <tr>
+     <td valign="Top" width="33%"><font color="#ffffff">Others Hex-xx</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">^(xx) where xx is
+ a  2-digit hex code from 00 to FF</font></td>
+      <td valign="Top" width="33%"><font color="#ffffff">&nbsp;</font></td>
+     </tr>
+                                         
+        </tbody>                            
+      </table>
+          </center>
+                                  
+      <center>                             
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1">
+   ATTAC REXX Scripting reference</font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><a href="http://www.tw-attac.com/">
+   http://www.tw-attac.com/</a>
+          </font></font></font> </p>
+                               
+      <p><font face="Arial,Helvetica"><font color="#ffffff"><font size="-1"><a href="mailto:tradewars@hotmail.com">
+   tradewars@hotmail.com</a>
+          </font></font></font></p>
+          </center>
+     <!-- end real stuff --></td>
+     </tr>
+      <tr>
+     <td colspan="2">                             
+      <center><font size="-2">Copyright &copy; 2005&nbsp; All Rights Reserved.</font></center>
+     </td>
+     </tr>
+                 
+  </tbody>    
+</table>
+    </center>
+        <br>
+   
+</body>
+</html>

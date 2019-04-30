@@ -1,0 +1,24 @@
+/* REXX */
+
+call ATTAC_StartBuffer
+call ZocSend("D")
+call ZocWait("]:[")
+result = ATTAC_GetBuffer()
+call ZocMsgBox(result)
+
+call ZocSend("D")
+call ZocWait("]:[")
+result = ATTAC_GetBuffer()
+call ZocMsgBox(result)
+call ATTAC_ClearBuffer()
+
+call ZocSend("D")
+call ZocWait("]:[")
+result = ATTAC_GetBuffer()
+call ZocMsgBox(result)
+call ATTAC_ClearBuffer(1)
+
+call ZocSend("D")
+call ZocWait("]:[")
+result = ATTAC_GetBuffer()
+call ZocMsgBox(result)

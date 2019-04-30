@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+                
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+                
+  <meta name="Author" content="earth">
+                
+  <meta name="GENERATOR" content="Mozilla/4.77 [en] (Windows NT 5.0; U) [Netscape]">
+                
+  <meta name="KeyWords" content="Tradewars, helper, attac, twx, twxsync, server, twars, tw, tw2002, eis, twgs">
+  <title>ATTAC TCP/IP Helper</title>
+</head>
+  <body text="#ffffff" bgcolor="#000000" link="#ffff00" vlink="#c0c0c0" alink="#c0ffc0">
+    &nbsp;    
+<center>   
+<table cellspacing="0" width="800">
+    <tbody>
+       <tr>
+    <td align="Center" valign="Top" colspan="2"><img src="twxsync-main.jpg" height="80" width="600">
+         </td>
+    </tr>
+     <tr>
+    <td colspan="2" align="Center"><a href="twxsync.html"><img src="home-top.gif" border="0" height="27" width="150">
+         </a>
+        <a href="tradewars.html"><img src="tradewars-info-top.gif" border="0" height="27" width="150">
+         </a>
+        <a href="mailto:tradewars@hotmail.com"><img src="contact-us-top.gif" border="0" height="27" width="150">
+         </a>
+   <br>
+                         
+      <hr size="1" width="100%"></td>
+    </tr>
+     <tr>
+    <td align="Left" valign="Top" width="150" background="left_column_lace.gif">
+	<img src="products-off.gif" height="25" width="150">
+         <a href="attac-for-windows.html"><img src="attac-for-windows-off.gif" border="0" height="17" width="150"></a>
+         <a href="twxsync.html"><img src="twxsync.gif" border="0" height="17" width="150"></a>
+        <img src="information-off.gif" height="25" width="150">
+        <a href="twxsync-screen-shots.html"><img src="screen-shots-off.gif" border="0" height="17" width="150">
+         </a>
+        <img src="purchase-off.gif" height="25" width="150">
+         <a href="twxsync-purchase.html"><img src="twxsync-purchase.gif" border="0" height="17" width="150"></a>
+        <img src="download-off.gif" height="25" width="150">
+         <a href="twxsync-download.html"><img src="twxsync-download.gif" border="0" height="17" width="150"></a>
+        <img src="support-off.gif" height="25" width="150">
+         <a href="twxsync-onlinehelp.html"><img src="twxsync-onlinehelp.gif" border="0" height="17" width="150">
+         </a>
+        <a href="http://network54.com/Hide/Forum/27576"><img src="forum.gif" border="0" height="17" width="150">
+         </a>
+        <a href="twxsync-twx.html"><img src="twx-data-format-off.gif" border="0" height="17" width="150">
+         </a>
+        </td>
+     <td align="Left" valign="Top" width="650">
+<!-- enter code here -->
+
+
+  <p>TWXSync a real-time synchronization server for compatible Tradewars
+  Helpers. When connected to the TWXSync server, your Tradewars client is
+  constantly sending/receiving data to/from teammates connected to that game. </p>
+  
+  <p><font color="#FF6600">How it works</font>: When you
+  create a new game in your helper, you specify the IP address and port of the
+  TWXSync server. Then you select the game you are interested in and that
+  information is then saved in your game configuration.<font='font-size:
+  10.0pt'> <a href="twxsync-detailedConnectionInfo.html">(click here for detailed instructions
+  of how to connect to a TWXSync Server)</a></font><font='font-size:8.0pt'><p></p></font></p>
+  <p><font='font-size:8.0pt'></font></p>
+  <p><font color="#FF6600">Why use it: </font>TWXSync
+  will revolutionize tradewars, the way scripting did. All teammates will
+  instantly have real-time access to ALL other teammate&#8217;s data. As you
+  see a port&#8217;s information, that amounts and percents will instantly be
+  sent to the sync server. Anyone connected to that game will instantly get the
+  information sent to them. If they are offline, then they will get the
+  information when they sign on.</p>
+  
+  <p><font color="#FF6600">More reasons to use it: </font>The
+  TWXSync Server will do real-time bust clearing. This means if I bust at a
+  port, it will show up on my bust list. If someone connected to the sync
+  server busts at that same port, the sync server will receive that information
+  and send it to me. This data, since it is more recent, will clear my bust.
+  This will allow my helper to return to the port. </p>
+  
+  <p><font color="#FF6600">How does it work: </font>The
+  TWXSync server works by sending XML packets to the TWXSync <span class=GramE>Server.</font>
+  Anytime an &#8220;EVENT&#8221; occurs, data is sent to the server. An &#8220;EVENT&#8221;
+  is anything that realizes new data. Examples are moving to a new sector,
+  porting at a port, seeing a player. The server then sees if anyone else is
+  connected to that game. If there are users connected, they will get the data
+  sent directly to them. The TWXSync server also stores the data. This way, if
+  a player is offline, they will get the data when they login.</p>
+  
+  <p><font color="#FF6600">Will it slow my Tradewars game
+  down? </font>It is very unlikely to slow down your playing. The XML packets
+  are very small, usually they are 200-500 bytes and they are compressed using
+  the <a href="http://www.gzip.org/zlib/">zlib algorithm</a>. </p>
+  
+  <p><font color="#FF6600">Is it secure? Can anyone see
+  my data? </font>The data is secure and encrypted. To connect to a game on the
+  server, a password is required. This password is setup by the server admin. The
+  admin running the server also has the ability to terminate any connection at
+  any time.</p>
+  
+  <p><font color="#FF6600">Which helpers are compatible
+  with the TWXSync Server? </font>Currently <a href="http://www.tw-attac.com/">ATTAC</a>
+  is the only helper that is compatible.</p>
+  
+  <p><font color="#FF6600">How does a helper become
+  compatible? </font>Any Tradewars helper can be compatible. There is a
+  standard XML protocol that was created to facilitate connections to the
+  TWXSync server. By following this simple to use protocol, any helper can
+  connect to and communicate with the TWXSync Server. <a
+  href="TWXSync.txt">(click here for protocol)</a><p></p></p>
+  <p><font color="#FF6600"></font></p>
+  <p><font color="#FF6600">How do I configure the TWXSync
+  Server? </font>There is a separate webpage for the instructions<a
+  href="twxsync-onlinehelp.html">(click here for instructions)</a></p>
+  
+  <p><font color="#FF6600">What Tradewars data does the TWXSync server synchronize? </font> The following is the data synchronized
+<UL>
+<LI>All Sector Data - This means any report that runs of sectors is sync'ed (dead ends, bubbles etc...)</LI>
+<LI>All Port Data - This means pair port report, port quantities etc...</LI>
+<LI>Bust List - When you bust, that data is sent to the server and will automatically clear the other players busts for that sector (who are using the TWXSync Server)</LI>
+<LI>Fighter Data</LI>
+<LI>Player Data</LI>
+<LI>Planets are not synchronized</LI>
+
+</UL>
+
+</p>
+
+
+
+
+
+<!-- end real stuff --></p>
+         </td>
+    </tr>
+     <tr>
+    <td colspan="2">                      
+      <center><font size="-2">You are visitor number&nbsp;</font><img src="http://counter.digits.com/wc/-d/4/attac" hspace="4" vspace="2" border="0" height="20" width="75" align="Center">
+                         
+      <p><font size="-2">Copyright &copy; 2005&nbsp; All Rights Reserved.</font></p>
+         </center>
+    </td>
+    </tr>
+             
+  </tbody>   
+</table>
+   </center>
+        
+</body>
+</html>

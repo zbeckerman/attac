@@ -1,0 +1,13 @@
+1. create attac_src directory
+2. copy code there
+3. update the .rc file and move to putty dir. make sure to point the ico files as attac_src/*.ico
+4. update make file with locations for win_res.h and win_res.rc
+4. update make file with locations for win_res.res.o with attac_src/win_res.res.o
+4. update makefile with -lwsock32  -L./attac_src -lregina during compilation
+4. update makefile to include encryptscripts and rename puttytel to attac
+5. delete win_res.h and win_res.rc
+7. update window.c to point to attac_src/win_res.h
+8. update window.c to point to attac_src/attacUtils.h
+9. Add declaration of globalHWnd to window.c
+10. After createwindowex in window.c, add globalHWnd = hwnd;
+11. Update version.c

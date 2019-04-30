@@ -1,0 +1,63 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: TWCommon - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP19C.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "TWCOMMON_EXPORTS" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Data\home\zbeckerman\tradewars\TWCommon\Authorize.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\Common.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\Expat.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\Hash.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\List.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\TWCommon.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\TWXSync.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\UnsignedCharStr.cpp"
+"C:\Data\home\zbeckerman\tradewars\TWCommon\zlibengn.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP19C.tmp" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP19D.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ws2_32.lib rpcrt4.lib ..\releaseDlls\zdll.lib ..\releaseDlls\libexpat.lib /nologo /version:1.0 /dll /incremental:no /pdb:"Release/TWCommon.pdb" /machine:I386 /nodefaultlib:"libcmt" /out:"Release/TWCommon.dll" /implib:"Release/TWCommon.lib" 
+.\Release\Authorize.obj
+.\Release\Common.obj
+.\Release\Expat.obj
+.\Release\Hash.obj
+.\Release\List.obj
+.\Release\TWCommon.obj
+.\Release\TWXSync.obj
+.\Release\UnsignedCharStr.obj
+.\Release\zlibengn.obj
+.\3PP\DES\DES.obj
+.\3PP\DES\DESASM.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSP19D.tmp"
+<h3>Output Window</h3>
+Compiling...
+Authorize.cpp
+C:\Data\home\zbeckerman\tradewars\TWCommon\Authorize.cpp(623) : warning C4244: '=' : conversion from 'unsigned long' to 'char', possible loss of data
+C:\Data\home\zbeckerman\tradewars\TWCommon\Authorize.cpp(625) : warning C4244: '=' : conversion from 'unsigned long' to 'char', possible loss of data
+Common.cpp
+Expat.cpp
+Hash.cpp
+C:\Data\home\zbeckerman\tradewars\TWCommon\Hash.cpp(49) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+List.cpp
+TWCommon.cpp
+TWXSync.cpp
+UnsignedCharStr.cpp
+zlibengn.cpp
+Generating Code...
+Linking...
+   Creating library Release/TWCommon.lib and object Release/TWCommon.exp
+
+
+
+<h3>Results</h3>
+TWCommon.dll - 0 error(s), 3 warning(s)
+</pre>
+</body>
+</html>

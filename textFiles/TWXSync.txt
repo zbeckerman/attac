@@ -1,0 +1,239 @@
+==================
+TWXSync XML format
+==================
+
+Introduction
+------------
+
+This is a first draft of the TWXSync communication protocol.
+All TW data structures will be common with the TWX v2 file format.
+
+The XML format described here should be possible to send in clear
+or compressed using some well known compression standard (like ZIP).
+Encryption of the data could be a future enhancement.
+
+
+Overview
+--------
+
+The general XML syntax for the communication:
+
+### Client ###
+<TWXSync version="1">
+  <Session ... />
+  <Command ... />
+    ...
+  </Command>
+</TWXSync>
+
+### Server ###
+<TWXSync version="1">
+  <Session ... />
+  <Result code="200" text="OK" />
+    ...
+  </Result>
+</TWXSync>
+
+(When the server want to push something to the client, like an update, 
+the roles are reversed)
+
+The Session tag describes which session it is. Since this is a 
+client/server solution,
+we should start by logging in and this tag will then be used to 
+identify the rest of the communication.
+(Theoretically it would be possible to have multiple sessions)
+
+The Command tag tells the server what the client wants to do.
+It may contain additional attributes and data tag structures depending 
+on the command.
+
+The current list of command tags:
+Login, Request, Create, Update
+
+The server will respond with a Result tag that contains a HTTP like 
+return code
+and the corresponding text version. If the command executed successful, 
+the code
+will be 2xx otherwise 4xx or 5xx. The result tag may also contain 
+additinal
+data tag structures depending on the command.
+See this link for codes: 
+http://www.cybraryn.com/support/resources/internet/httpstat.asp
+
+
+Use cases
+---------
+
+Here are some use cases with different commands and possible results:
+
+
+1. LOGIN and create a session.
+   Here we can place some authentication if we want to validate the 
+user.
+   The client should create a unique id, a 128-bit GUID, that will 
+identify the client.
+
+   NOTE: Since this is the first client request, so we don't have a 
+session tag.
+         The response from the server contains the session tag if the 
+login was successful.
+         The client should use this in all future communication in this 
+session. An attribute to Login is check. If you want to check if a password
+is valid, specify check="true" so the GUI of TWXSync does not update.
+The default value of check is false.
+
+### Client ###
+<TWXSync version=\"%d\">
+	<Login id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2" user="earth" password="test" helper="ATTAC" check="false"/>
+</TWXSync>
+
+### Server ###
+<TWXSync version="1">
+  <Session id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2" ... />
+  <Result code="200" text="OK"/>
+</TWXSync>
+or
+<TWXSync version="1">
+  <Session id="-1" ... />
+  <Result code="401" text="Unauthorized"/>
+</TWXSync>
+or
+<TWXSync version="1">
+  <Session id="-1" ... />
+  <Result code="503" text="Service Unavailable"/>
+</TWXSync>
+
+
+
+2. LOGOUT is done by calling 
+	void TWC_TWXSync_Close(long hTWXSync);
+
+
+
+3. REQUEST the list of games the server is currently hosting.
+   Each game is given a unique 128-bit GUID by the server when created.
+   The Game tags contains a data tag structure describing the game
+   like how many sectors, the host address/port and other info.
+   When requesting, we do not care about the session Id of the client.
+
+### Client ###
+<TWXSync version="1">
+  <Session id="0"/>
+  <Request type="GameIndex"/>
+</TWXSync>
+
+
+### Server ###
+<TWXSync version="1">
+  <Session id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2" ... />
+  <Result code="200" text="OK">
+    <GameIndex>
+      <Game id="376836FF-94F9-4B58-9C36-1F7420B70663">
+        <name>Game A</name>
+	<Sectors>5000</Sectors>
+      </Game>
+      <Game id="E295AB5A-C4FB-4897-B454-0BDBDC4F46E5">
+        <name>Game B</name>
+	<Sectors>20000</Sectors>
+      </Game>
+    </GameIndex>
+  </Result>
+</TWXSync>
+
+
+--- THIS IS NOT SUPPORTED ---
+4. CREATE a new game on the server. This would have to be done if the 
+game
+   you are currently in does not exist on the server yet.
+   The server will generate a unique 128-bit GUID as game id.
+
+### Client ###
+<TWXSync version="1">
+  <Session id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2" ... />
+  <Create type="Game">
+    <Game>
+      ...
+    </Game>
+  </Create>
+</TWXSync>
+
+### Server ###
+<TWXSync version="1">
+  <Session id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2" ... />
+  <Result code="201" text="Created">
+    <Game id="376836FF-94F9-4B58-9C36-1F7420B70663" />
+  </Result>
+</TWXSync>
+--- END UNSUPPORTED SECTION ---
+
+
+5. UPDATE data in a game when we know the game id.
+   This request can be done by both the client and the server.
+   The client will send it when new data is discovered and the server
+   will send it when other clients have updated something that needs to
+   be pushed out to the client. The data could be any of the data 
+structures
+   used in the TWX v2 file format. Extensions should be made to both 
+formats.
+
+### Client ###
+<TWXSync version="1">
+	<Session id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2"/>
+	<SectorData>
+		<Sector nr="838" updated="1080869065">
+			<Warps>
+				<Warp>1820</Warp>
+				<Warp>2702</Warp>
+				<Warp>2944</Warp>
+			</Warps>
+		</Sector>
+	</SectorData>
+	</Update>
+</TWXSync>
+
+### Server ###
+<TWXSync version="1">
+  <Session id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2"/>
+  <Result code="200" text="OK"/>
+</TWXSync>
+
+
+
+6. WHEN first connected, the client would want to request the old 
+updates
+   that has occured since the last time it was connected to the server.
+   It would then simply send a Request command and ask for all updates
+   between two dates and all that info will be sent from the server.
+
+   If the type is missing it means all kinds of information.
+   If the begin date is missing it means start from the very beginning.
+   If the end date is missing it means up till now.
+
+### Client ###
+<TWXSync version="1">
+  <Session id="D0F13EF9-7FEB-4FE3-A19C-76B16FDC31C2"/>
+  <Request type="TWXDataRequest" begin="1070000000" end="1080000000" />
+</TWXSync>
+
+### Server ###
+<TWXSync version="1">
+  <Session id="e24366e8-4b24-489d-ac88-95aa81183e6d"/>
+  <Update>
+    <Result code="200" text="OK">
+      <SectorData>		
+	<Sector nr="838" updated="1070869065">
+		<Warps>
+			<Warp>1820</Warp>
+			<Warp>2702</Warp>
+			<Warp>2944</Warp>
+		</Warps>
+	</Sector>
+        <Sector nr="5678" updated="1077225913">
+		<Warps>
+			<Warp>4820</Warp>
+		</Warps>
+        </Sector>
+      </SectorData>
+    </Result>
+  </Update>
+</TWXSync>

@@ -1,0 +1,80 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: JumpgateServer - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Debug/JumpgateServer.res" /d "_DEBUG" "C:\Data\home\zbeckerman\tradewars\JumpgateServer\JumpgateServer.rc"" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPC7.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Fp"Debug/JumpgateServer.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\ADO.cpp"
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\Holder.cpp"
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\JumpgateServer.cpp"
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\List.cpp"
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\TWGame.cpp"
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\TWServer.cpp"
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\xml.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPC7.tmp" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPC8.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\UnsignedCharStr.cpp"
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\zlibengn.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPC8.tmp" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPC9.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Fp"Debug/JumpgateServer.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Data\home\zbeckerman\tradewars\JumpgateServer\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPC9.tmp" 
+Creating temporary file "C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPCA.tmp" with contents
+[
+comctl32.lib ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ..\releaseDlls\zdll.lib ..\releaseDlls\libexpat.lib /nologo /subsystem:windows /pdb:none /debug /machine:I386 /out:"Debug/JumpgateServer.exe" 
+.\Debug\ADO.obj
+.\Debug\Holder.obj
+.\Debug\JumpgateServer.obj
+.\Debug\List.obj
+.\Debug\StdAfx.obj
+.\Debug\TWGame.obj
+.\Debug\TWServer.obj
+.\Debug\UnsignedCharStr.obj
+.\Debug\xml.obj
+.\Debug\zlibengn.obj
+.\Debug\JumpgateServer.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ZBECKE~1\LOCALS~1\Temp\RSPCA.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+ADO.cpp
+c:\data\home\zbeckerman\tradewars\jumpgateserver\debug\msado15.tlh(409) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Holder.cpp
+JumpgateServer.cpp
+c:\data\home\zbeckerman\tradewars\jumpgateserver\debug\msado15.tlh(409) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+List.cpp
+TWGame.cpp
+c:\data\home\zbeckerman\tradewars\jumpgateserver\debug\msado15.tlh(409) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+TWServer.cpp
+c:\data\home\zbeckerman\tradewars\jumpgateserver\debug\msado15.tlh(409) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+xml.cpp
+Generating Code...
+Compiling...
+UnsignedCharStr.cpp
+zlibengn.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+JumpgateServer.exe - 0 error(s), 4 warning(s)
+</pre>
+</body>
+</html>

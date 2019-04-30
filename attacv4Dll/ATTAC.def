@@ -1,0 +1,5 @@
+LIBRARY		ATTAC
+EXPORTS
+	ATTAC_Time								@100
+	ATTAC_XOR								@101
+

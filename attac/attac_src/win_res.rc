@@ -1,0 +1,1626 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winresrc.h"
+#include "win_res.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MAINICON            ICON    DISCARDABLE     "attac.ico"
+IDI_OPENICON            ICON    DISCARDABLE     "openfolder.ico"
+IDI_CFGICON             ICON    DISCARDABLE     "attac.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_POWEREDBYREXX       BITMAP  MOVEABLE PURE   "poweredByRexx.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_ATTAC_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Connect"
+    BEGIN
+        MENUITEM "&Remote System ...",          IDM_REMOTE_SYSTEM
+        MENUITEM "&Disconnect",                 IDM_DISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "&Helper Parses Data",         IDM_HELPERACTIVE
+        MENUITEM SEPARATOR
+        MENUITEM "Re&set Game",                 IDM_RESETGAME
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit",                       IDM_EXIT
+    END
+    POPUP "&ATTAC"
+    BEGIN
+        MENUITEM "&Run User (REXX) Scripts ...\tCtrl+R", IDM_RUN_REXX
+        POPUP "&Calculator"
+        BEGIN
+            MENUITEM "&Quasar Calculator",          IDM_QUASAR_CALCULATOR
+        END
+        MENUITEM "Mo&ve To Sector \tCtrl+O",    IDM_MOVE_TO_SECTOR
+        MENUITEM "&Photon and Move",            IDM_PHOTON_AND_MOVE
+        MENUITEM "&Use Mine Disrupters",        IDM_USE_MINE_DISRUPTERS
+        MENUITEM "&Escape to Sector",           IDM_ATTAC_ESCAPETOSECTOR
+        MENUITEM SEPARATOR
+        MENUITEM "Pa&y Tolls ...",              IDM_PAY_TOLLS
+        MENUITEM "&Blind Twarp Protection",     IDM_BLIND_TWARP_PROTECTION
+        , CHECKED
+        MENUITEM "Sel&f Destruct Protection",   IDM_SELF_DESTRUCT_PROTECTION
+        , CHECKED
+        MENUITEM "&Auto Haggle",                IDM_AUTOHAGGLE, CHECKED
+        MENUITEM SEPARATOR
+        MENUITEM "Sho&w Message Center",        IDM_MESSAGE_CENTER
+        MENUITEM "&Show Status Center",         IDM_STATUS_CENTER
+        MENUITEM "&Macros ...",                 IDM_MACROS
+        MENUITEM "&Options ...",                IDM_OPTIONS
+    END
+    POPUP "&Game Info"
+    BEGIN
+        MENUITEM "Show &Dead End Sectors",      IDM_DEAD_END
+        MENUITEM "Show &Bubbles",               IDM_BUBBLE
+        MENUITEM "Show &Nearest Fighters",      IDM_NEARESTFIGHTERS
+        MENUITEM SEPARATOR
+        MENUITEM "Show Known &Planets",         IDM_PLANET
+        MENUITEM "Show Known &Fighter",         IDM_FIGHTER
+        MENUITEM "Show Blocked Ports (since last CIM)", IDM_BLOCKED_PORTS
+        MENUITEM "Show Avoided Sectors",        IDM_AVOID
+        MENUITEM SEPARATOR
+        MENUITEM "Show &Map",                   IDM_MAP
+        MENUITEM "Show &Sector Information",    IDM_SECTORINFO
+        MENUITEM SEPARATOR
+        MENUITEM "Show Ma&x'ed Ports",          IDM_MAX_PORT
+        MENUITEM "Show Ports &Under Construction", IDM_CONSTRUCTION_PORT
+        MENUITEM "Show Class &0 Ports",         IDM_CLASS0_PORT
+        MENUITEM "Show One &Way Sectors",       IDM_ONEWAY_SECTORS
+    END
+    POPUP "&Planet"
+    BEGIN
+        MENUITEM "&Colonize Planet",            IDM_COLONIZE
+        MENUITEM "&Buy Dump",                   IDM_BUYDUMP
+        MENUITEM "&Sell From Planet to Port",   IDM_SELLPLANETTOPORT
+        MENUITEM "&Planet Bust",                IDM_PLANETBUST
+        MENUITEM "B&uy Planetary Shields",      IDM_BUYPLANETSHIELDS
+        MENUITEM SEPARATOR
+        POPUP "R&esource Mover"
+        BEGIN
+            MENUITEM "&Move Colonists (Same-Multi Sector)", 
+                                                    IDM_MOVECOLONISTS
+            MENUITEM "M&ove Resources (Same-Multi Sector)", 
+                                                    IDM_MOVERESOURCES
+        END
+    END
+    POPUP "&Trading"
+    BEGIN
+        MENUITEM "&Pair Port Trading",          IDM_PAIRPORT_TRADING
+        MENUITEM "&Mega Jettison",              IDM_MEGAJETTISON
+        POPUP "Show Port Type"
+        BEGIN
+            MENUITEM "BBS - Class 1",               IDM_CLASS1
+            MENUITEM "BSB - Class 2",               IDM_CLASS2
+            MENUITEM "SBB - Class 3",               IDM_CLASS3
+            MENUITEM "SSB - Class 4",               IDM_CLASS4
+            MENUITEM "SBS - Class 5",               IDM_CLASS5
+            MENUITEM "BSS - Class 6",               IDM_CLASS6
+            MENUITEM "SSS - Class 7",               IDM_CLASS7
+            MENUITEM "BBB - Class 8",               IDM_CLASS8
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "S&how Pair Ports",            IDM_PAIRPORTS
+        MENUITEM SEPARATOR
+        MENUITEM "World Trade",                 IDM_WORLDTRADE
+    END
+    POPUP "Evil"
+    BEGIN
+        MENUITEM "&Sell Steal Move",            IDM_SSM
+        MENUITEM "S&ell Steal Transport",       IDM_SST
+        MENUITEM SEPARATOR
+        MENUITEM "&Bust List",                  IDM_BUSTLIST
+        MENUITEM "Show Evil Pairs",             IDM_EVILPAIRS
+        MENUITEM SEPARATOR
+        MENUITEM "World SSM",                   IDM_WORLDSSM
+    END
+    POPUP "Mapping"
+    BEGIN
+        MENUITEM "Start &CIM \tCtrl+I",         IDM_CIM
+        MENUITEM "Start &ZTM \tCtrl+W",         IDM_ZTM
+        MENUITEM SEPARATOR
+        MENUITEM "&Auto Explore Universe \tCtrl+E", IDM_AUTOEXPLORE
+        MENUITEM "&Ether Explore Universe",     IDM_ETHEREXPLORE
+        MENUITEM SEPARATOR
+        MENUITEM "&View Ether Explore Log",     IDM_ETHEREXPLORE_LOG
+    END
+    POPUP "Utilities"
+    BEGIN
+        POPUP "Import"
+        BEGIN
+            MENUITEM "&Import TWX v1 Binary File Format (*.twx)", 
+                                                    IDM_IMPORTTWX
+            MENUITEM "I&mport TWX v2 XML File Format (*.twx)", 
+                                                    IDM_IMPORTTWXV2
+            MENUITEM "CIM File in Text Format",     IDM_IMPORTTXTCIM
+        END
+        POPUP "Export"
+        BEGIN
+            MENUITEM "&Export TWX v1 Binary File Format (*.twx)", 
+                                                    IDM_EXPORTTWX
+            MENUITEM "E&xport TWX v2 XML File Format (*.twx)", 
+                                                    IDM_EXPORTTWXV2
+            MENUITEM "Exp&ort Unexplored Sectors from DB", 
+                                                    IDM_EXPORTDBSECTORS
+            MENUITEM "ALL &CIM Data (cim.txt)",     IDM_EXPORTALLCIMDATA
+            MENUITEM "All &Sector Data (sectors.txt)", 
+                                                    IDM_EXPORTALLSECTORDATA
+            MENUITEM "All &Port Data (port.txt)",   IDM_EXPORTALLPORTDATA
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&TWX Sync Connection Configuration", IDM_TWXSYNC
+        MENUITEM "&Remote Connection Viewer",   IDM_REMOTECONNECTION
+        MENUITEM "Tradewars Notes \tCtrl+N",    IDM_TRADEWARS_NOTES
+        MENUITEM "&Print Debug Info To Screen", IDM_DEBUGINFO
+        MENUITEM SEPARATOR
+        MENUITEM "&Switch Databases",           IDM_SWITCHDATABASE
+        MENUITEM "S&et Allies",                 IDM_SETALLIES
+        MENUITEM "Limpit Scanner",              IDM_LIMPITSCANNER
+        POPUP "Sysop Scripts (run from TEdit)"
+        BEGIN
+            MENUITEM "Change ALL Port Amounts",     IDM_SYSOPPORTAMOUNT
+            MENUITEM "Add Players to Closed Game",  IDM_SYSOPADDTOCLOSEDGAME
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Record Fast Macro \tF3",      IDM_RECORDFASTMACRO
+        MENUITEM "Play Fast Macro \tF4",        IDM_PLAYFASTMACRO
+        MENUITEM SEPARATOR
+        POPUP "&Web Resources"
+        BEGIN
+            MENUITEM "http://www.tw-attac.com",     IDM_ATTACHOMEPAGE
+        END
+    END
+    POPUP "Help"
+    BEGIN
+        MENUITEM "&Documentation",              IDM_DOCUMENTATION
+        MENUITEM "&Enter Registration Codes",   IDM_REGISTER
+        MENUITEM SEPARATOR
+        MENUITEM "&About ATTAC",                IDM_ABOUTATTAC
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_ATTAC_ACCELS ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "E",            IDM_AUTOEXPLORE,        VIRTKEY, CONTROL, NOINVERT
+    "I",            IDM_CIM,                VIRTKEY, CONTROL, NOINVERT
+    "N",            IDM_TRADEWARS_NOTES,    VIRTKEY, CONTROL, NOINVERT
+    "O",            IDM_MOVE_TO_SECTOR,     VIRTKEY, CONTROL, NOINVERT
+    "R",            IDM_RUN_REXX,           VIRTKEY, CONTROL, NOINVERT
+    VK_F3,          IDM_RECORDFASTMACRO,    VIRTKEY, NOINVERT
+    VK_F4,          IDM_PLAYFASTMACRO,      VIRTKEY, NOINVERT
+    "W",            IDM_ZTM,                VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAINBOX DIALOG DISCARDABLE  0, 0, 280, 252
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC Configuration"
+CLASS "PuTTYConfigBox"
+FONT 8, "MS Shell Dlg"
+BEGIN
+END
+
+IDD_RECONF DIALOG DISCARDABLE  0, 0, 280, 252
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC Reconfiguration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Apply",IDOK,184,235,44,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,231,235,44,14
+END
+
+IDD_LOGBOX DIALOG DISCARDABLE  100, 20, 300, 119
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC Event Log"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "&Close",IDOK,135,102,44,14
+    PUSHBUTTON      "C&opy",IDN_COPY,81,102,44,14
+    LISTBOX         IDN_LIST,3,3,294,95,LBS_HASSTRINGS | LBS_USETABSTOPS | 
+                    LBS_EXTENDEDSEL | WS_VSCROLL
+END
+
+IDD_REXXASK_PASS DIALOG DISCARDABLE  0, 0, 206, 94
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter REXX Data"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,47,74,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,73,50,14
+    LTEXT           "Enter Value",ID_REXXASKSTATIC,13,7,178,27
+    EDITTEXT        ID_EDITREXXASK,15,39,172,16,ES_PASSWORD | ES_AUTOHSCROLL
+END
+
+IDD_REXXASK DIALOG DISCARDABLE  0, 0, 206, 94
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter REXX Data"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,47,74,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,73,50,14
+    LTEXT           "Enter Value",ID_REXXASKSTATIC,13,7,178,27
+    EDITTEXT        ID_EDITREXXASK,15,39,172,16,ES_AUTOHSCROLL
+END
+
+IDD_REXXREQUEST DIALOG DISCARDABLE  0, 0, 234, 125
+STYLE DS_SYSMODAL | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "ATTAC - REXX Request"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,170,44,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,62,50,14
+    LISTBOX         ID_LISTREXXREQUEST,19,44,141,58,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Select Choice",ID_REXXREQUESTSTATIC,21,17,195,22
+END
+
+IDD_REXXNOTIFY DIALOG DISCARDABLE  0, 0, 186, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "ATTAC - REXX Notify"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "No Text",IDC_REXXNOTIFYSTATIC,16,13,155,49
+END
+
+IDD_SHOW_PP DIALOG DISCARDABLE  0, 0, 460, 201
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Pair Ports"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,390,183,64,14
+    CONTROL         "List1",IDC_SHOW_PP_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,6,19,449,157
+    CONTROL         "Tab1",IDC_SHOW_PP_TAB,"SysTabControl32",0x0,6,4,449,17
+    GROUPBOX        "Options",10001,6,178,372,20
+    LTEXT           "Amount Filter:",10002,21,185,45,8
+    EDITTEXT        IDC_SHOW_PP_FILTER_AMOUNT,67,184,33,12,ES_AUTOHSCROLL
+    LTEXT           "Percent Filter:",10003,119,185,48,8
+    EDITTEXT        IDC_SHOW_PP_FILTER_PERCENT,167,184,37,12,ES_AUTOHSCROLL
+    LTEXT           "Route Sector:",10004,223,186,45,8
+    EDITTEXT        IDC_SHOW_PP_ROUTESECTOR,269,184,39,12,ES_AUTOHSCROLL
+    LTEXT           "Total: 0",IDC_SHOW_PP_COUNT,327,185,45,9
+END
+
+IDD_SHOW_EVIL_PP DIALOG DISCARDABLE  0, 0, 460, 201
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Evil Pair Ports"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,390,183,64,14
+    CONTROL         "List1",IDC_SHOW_EVIL_PP_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,6,4,449,172
+    GROUPBOX        "Options",10005,6,178,372,20
+    LTEXT           "Amount Filter:",10006,21,185,45,8
+    EDITTEXT        IDC_SHOW_EVIL_PP_FILTER_AMOUNT,67,184,33,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Percent Filter:",10007,119,185,48,8
+    EDITTEXT        IDC_SHOW_EVIL_PP_FILTER_PERCENT,167,184,37,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Route Sector:",10008,223,186,45,8
+    EDITTEXT        IDC_SHOW_EVIL_PP_ROUTESECTOR,269,184,39,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Total: 0",IDC_SHOW_EVIL_PP_COUNT,327,185,45,9
+END
+
+IDD_PORTTYPE DIALOG DISCARDABLE  0, 0, 410, 173
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Show Port Type"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,179,152,50,14
+    CONTROL         "List1",IDC_PORTTYPE_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,396,142
+    LTEXT           "Number of ports: 0",IDC_PORTTYPE_COUNT_STATIC,23,155,
+                    140,11
+END
+
+IDD_COLONIZATION DIALOG DISCARDABLE  0, 0, 286, 210
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC - Colonize"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,156,189,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,216,190,50,14
+    GROUPBOX        "Colonization",10009,7,7,272,179
+    LTEXT           "Sector:",10010,13,20,31,13
+    EDITTEXT        IDC_COLONIZE_SECTOR_EDIT,47,18,56,12,ES_AUTOHSCROLL
+    LTEXT           "Cycles:",10011,13,39,34,13
+    EDITTEXT        IDC_COLONIZE_CYCLES_EDIT,47,39,56,12,ES_AUTOHSCROLL
+    LTEXT           "Planet Leaving Colonists On:",10012,111,19,96,13
+    LTEXT           "Planet Taking Fuel Ore From:",10013,111,38,95,13
+    EDITTEXT        IDC_COLONIZE_LEAVECOLOS_EDIT,217,18,48,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_COLONIZE_TAKEFUEL_EDIT,217,39,48,12,ES_AUTOHSCROLL
+    GROUPBOX        "Resource you are colonizing",10014,13,54,253,30,
+                    WS_GROUP
+    CONTROL         "Fuel Ore",IDC_COLONIZE_FUEL_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,27,68,49,10
+    CONTROL         "Organics",IDC_COLONIZE_ORG_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,115,67,54,11
+    CONTROL         "Equipment",IDC_COLONIZE_EQUIP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,195,66,53,12
+    GROUPBOX        "To Terra",10015,14,88,119,47,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_COLONIZE_TOTWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,96,108,10
+    CONTROL         "Planetary Transport",IDC_COLONIZE_TOPWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,109,108,11
+    CONTROL         "Regular Warp",IDC_COLONIZE_TOWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,122,108,11
+    GROUPBOX        "From Terra",10016,144,89,122,45,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_COLONIZE_FROMTWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,150,99,109,11
+    CONTROL         "Regular Warp",IDC_COLONIZE_FROMWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,150,110,102,11
+    GROUPBOX        "Miscellaneous Info",10017,14,139,251,42
+    LTEXT           "Fuel to take for Transwarp/Transport:",10018,35,165,130,
+                    11
+    EDITTEXT        IDC_COLONIZE_FUELAMOUNT_EDIT,173,164,53,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Warp Here Before Going to Terra",10019,35,150,116,11
+    EDITTEXT        IDC_COLONIZE_WARPTO_EDIT,173,147,54,12,ES_AUTOHSCROLL
+END
+
+IDD_BUYDUMP DIALOG DISCARDABLE  0, 0, 303, 194
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC - Buy Dump"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,156,176,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,215,176,50,14
+    GROUPBOX        "Buy Dump",10020,7,7,289,164
+    LTEXT           "Planet Sector:",10021,18,18,45,13
+    EDITTEXT        IDC_BUYDUMP_SECTOR_EDIT,66,17,58,12,ES_AUTOHSCROLL
+    LTEXT           "Port Sector:",10022,18,35,38,13
+    LTEXT           "Planet Dumping Cargo on:",10023,151,18,85,13
+    EDITTEXT        IDC_BUYDUMP_PORT_EDIT,65,33,58,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BUYDUMP_LEAVECARGO_EDIT,238,18,48,12,ES_AUTOHSCROLL
+    GROUPBOX        "Resource you are buying",10024,13,52,276,30,WS_GROUP
+    CONTROL         "Fuel Ore",IDC_BUYDUMP_FUEL_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,27,65,53,12
+    CONTROL         "Organics",IDC_BUYDUMP_ORG_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,125,64,53,12
+    CONTROL         "Equipment",IDC_BUYDUMP_EQUIP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,220,64,53,12
+    GROUPBOX        "To Port",10025,14,86,136,47,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_BUYDUMP_TOTWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,95,108,12
+    CONTROL         "Planetary Transport",IDC_BUYDUMP_TOPWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,107,108,12
+    CONTROL         "Regular Warp",IDC_BUYDUMP_TOWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,119,108,12
+    GROUPBOX        "From Port",10026,155,88,133,45,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_BUYDUMP_FROMTWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,165,98,109,11
+    CONTROL         "Regular Warp",IDC_BUYDUMP_FROMWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,165,110,102,11
+    GROUPBOX        "Miscellaneous Info",10027,14,137,275,30
+    LTEXT           "Fuel for Transwarp:",10028,17,150,62,10
+    EDITTEXT        IDC_BUYDUMP_FUELAMOUNT_EDIT,82,148,28,12,ES_AUTOHSCROLL
+    LTEXT           "Planet Taking Fuel From:",10029,152,37,79,12
+    EDITTEXT        IDC_BUYDUMP_TAKEFUEL_EDIT,238,37,48,12,ES_AUTOHSCROLL
+    LTEXT           "Cycles:",10030,218,150,24,10
+    EDITTEXT        IDC_BUYDUMP_CYCLES_EDIT,245,148,40,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_BUYDUMP_HAGGLE,141,149,69,50,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Haggle:",10031,115,151,25,9
+END
+
+IDD_SELLPLANETTOPORT DIALOG DISCARDABLE  0, 0, 303, 194
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC - Buy Dump"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,156,176,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,215,176,50,14
+    GROUPBOX        "Sell From Planet To Port",10032,7,7,289,164
+    LTEXT           "Planet Sector:",10033,18,18,45,13
+    EDITTEXT        IDC_SELLPLANETTOPORT_SECTOR_EDIT,66,17,58,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Port Sector:",10034,18,35,38,13
+    LTEXT           "Planet Taking Cargo on:",10035,151,18,85,13
+    EDITTEXT        IDC_SELLPLANETTOPORT_PORT_EDIT,65,33,58,12,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_SELLPLANETTOPORT_LEAVECARGO_EDIT,238,18,48,12,
+                    ES_AUTOHSCROLL
+    GROUPBOX        "Resource you are selling",10036,13,52,276,30,WS_GROUP
+    CONTROL         "Fuel Ore",IDC_SELLPLANETTOPORT_FUEL_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,27,65,53,12
+    CONTROL         "Organics",IDC_SELLPLANETTOPORT_ORG_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,125,64,53,12
+    CONTROL         "Equipment",IDC_SELLPLANETTOPORT_EQUIP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,220,64,53,12
+    GROUPBOX        "To Port",10037,14,86,136,47,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_SELLPLANETTOPORT_TOTWARP_RADIO,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,19,95,108,12
+    CONTROL         "Planetary Transport",IDC_SELLPLANETTOPORT_TOPWARP_RADIO,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,19,107,108,12
+    CONTROL         "Regular Warp",IDC_SELLPLANETTOPORT_TOWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,119,108,12
+    GROUPBOX        "From Port",10038,155,88,133,45,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_SELLPLANETTOPORT_FROMTWARP_RADIO,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,165,98,109,11
+    CONTROL         "Regular Warp",IDC_SELLPLANETTOPORT_FROMWARP_RADIO,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,165,110,102,11
+    GROUPBOX        "Miscellaneous Info",10039,14,137,275,30
+    LTEXT           "Fuel for Transwarp:",10040,17,150,62,10
+    EDITTEXT        IDC_SELLPLANETTOPORT_FUELAMOUNT_EDIT,82,148,28,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Planet Taking Fuel From:",10041,152,37,79,12
+    EDITTEXT        IDC_SELLPLANETTOPORT_TAKEFUEL_EDIT,238,37,48,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Cycles:",10042,218,150,24,10
+    EDITTEXT        IDC_SELLPLANETTOPORT_CYCLES_EDIT,245,148,40,12,
+                    ES_AUTOHSCROLL
+    COMBOBOX        IDC_SELLPLANETTOPORT_HAGGLE,141,149,69,50,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Haggle:",10043,115,151,25,9
+END
+
+IDD_PAIR_PORT DIALOG DISCARDABLE  0, 0, 258, 154
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Pair Port Trading"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,142,133,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,199,133,50,14
+    GROUPBOX        "Pair Port Trade",10044,7,7,242,123
+    GROUPBOX        "Current Sector",IDC_CURRENT_GROUP_STATIC,13,22,96,74
+    GROUPBOX        "Other Sector",10045,134,22,109,74
+    CONTROL         "(X) Fuel Ore",IDC_PP_CURRENT_FUEL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,29,38,53,12
+    CONTROL         "(X) Organics",IDC_PP_CURRENT_ORG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,29,57,63,12
+    CONTROL         "(X) Equipment",IDC_PP_CURRENT_EQUIP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,29,76,63,12
+    COMBOBOX        IDC_PP_OTHER_SECTOR,185,20,54,71,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "(X) Fuel Ore",IDC_PP_OTHER_FUEL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,151,38,63,12
+    CONTROL         "(X) Organics",IDC_PP_OTHER_ORG,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,151,57,62,12
+    CONTROL         "(X) Equipment",IDC_PP_OTHER_EQUIP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,151,76,63,12
+    LTEXT           "< -- >",10046,113,38,18,8
+    LTEXT           "< -- >",10047,113,57,18,8
+    LTEXT           "< -- >",10048,113,76,18,8
+    CONTROL         "Haggle",IDC_PP_FORCE_HAGGLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,30,107,75,9
+    LTEXT           "Cycles:",10049,150,107,27,9
+    EDITTEXT        IDC_PP_CYCLES,180,104,48,14,ES_AUTOHSCROLL
+    GROUPBOX        "",10050,14,97,95,24
+    GROUPBOX        "",10051,134,97,107,24
+    LTEXT           "If port doesn't show up properly. Enter it and check only what ports are buying",
+                    10052,8,132,124,17
+END
+
+IDD_CIM_OPTIONS DIALOG DISCARDABLE  0, 0, 96, 77
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "CIM Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,56,37,14
+    PUSHBUTTON      "Cancel",IDCANCEL,51,56,38,14
+    GROUPBOX        "CIM Download",10053,7,7,82,43,WS_GROUP
+    CONTROL         "Sector Data",IDC_CIM_SECTOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,19,18,54,13
+    CONTROL         "Port Data",IDC_CIM_PORT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,19,32,56,13
+END
+
+IDD_STEALMOVE DIALOG DISCARDABLE  0, 0, 242, 151
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Sell Steal Move / Steal Dump Move"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Sector #1",10054,7,7,228,53,WS_GROUP
+    EDITTEXT        IDC_STEALMOVE_SECTOR1,17,20,58,13,ES_AUTOHSCROLL
+    COMBOBOX        IDC_STEALMOVE_CARGO1,17,40,58,60,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Sell to Port After Stealing",IDC_STEALMOVE_SELL1,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,87,20,113,13
+    CONTROL         "Dump On Planet After Stealing",IDC_STEALMOVE_DUMP1,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,87,38,110,15
+    EDITTEXT        IDC_STEALMOVE_PLANET1,199,38,24,13,ES_AUTOHSCROLL
+    GROUPBOX        "Sector #2",10055,7,63,228,53,WS_GROUP
+    EDITTEXT        IDC_STEALMOVE_SECTOR2,17,76,58,13,ES_AUTOHSCROLL
+    COMBOBOX        IDC_STEALMOVE_CARGO2,17,96,58,60,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Sell to Port After Stealing",IDC_STEALMOVE_SELL2,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,87,76,113,13
+    CONTROL         "Dump On Planet After Stealing",IDC_STEALMOVE_DUMP2,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,87,94,110,15
+    EDITTEXT        IDC_STEALMOVE_PLANET2,199,94,24,13,ES_AUTOHSCROLL
+    GROUPBOX        "",10056,7,117,93,26
+    LTEXT           "Cycles",10057,18,127,29,13
+    EDITTEXT        IDC_STEALMOVE_CYCLES,49,124,43,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,113,124,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,177,124,50,14
+END
+
+IDD_SWITCH_DATABASE DIALOG DISCARDABLE  0, 0, 122, 47
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Switch Databases"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,26,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,65,26,50,14
+    COMBOBOX        IDC_SWITCH_DATABASE_NAME,7,7,108,46,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_REGISTRATION DIALOG DISCARDABLE  0, 0, 217, 154
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Registration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,45,133,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,123,133,50,14
+    GROUPBOX        "Registration Information",10058,7,7,203,121
+    LTEXT           "Tradewars ID #3:",10059,13,54,58,13
+    LTEXT           "Tradewars ID #1:",10060,13,21,58,13
+    LTEXT           "Tradewars ID #4:",10061,13,70,58,13
+    LTEXT           "Tradewars ID #2:",10062,13,38,58,13
+    LTEXT           "Registration Code:",10063,13,94,59,12
+    EDITTEXT        IDC_REGISTRATION_ID1,76,19,128,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REGISTRATION_ID2,76,36,128,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REGISTRATION_ID3,76,52,128,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REGISTRATION_ID4,76,68,128,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REGISTRATION_CODE,76,92,128,14,ES_AUTOHSCROLL
+    LTEXT           "TWXSync Code:",-1,17,111,54,10,NOT WS_VISIBLE
+    EDITTEXT        IDC_REGISTRATION_TWXSYNC_CODE,75,109,128,14,
+                    ES_AUTOHSCROLL | NOT WS_VISIBLE
+    LTEXT           "-----------------------------------------------------------------------------------------------",
+                    -1,13,83,194,8
+END
+
+IDD_BUYPLANET_SHIELDS DIALOG DISCARDABLE  0, 0, 286, 178
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC - Buy Planetary Shields"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,155,159,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,215,159,50,14
+    GROUPBOX        "Buy Dump",10064,7,7,273,148
+    LTEXT           "Planet Sector:",10065,18,18,45,13
+    EDITTEXT        IDC_PLANETSHIELDS_PLANETSECTOR,66,17,58,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Port Sector:",10066,18,35,38,13
+    EDITTEXT        IDC_PLANETSHIELDS_PORTSECTOR,65,33,58,12,ES_AUTOHSCROLL
+    LTEXT           "Planet Leaving Shields on:",10067,133,17,85,13
+    EDITTEXT        IDC_PLANETSHIELDS_LEAVESHIELDS,220,17,48,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Planet Taking Fuel From:",10068,134,36,79,12
+    EDITTEXT        IDC_PLANETSHIELDS_TAKEFUEL,220,36,46,12,ES_AUTOHSCROLL
+    LTEXT           "Number of Shields to Buy From Port:",10069,45,56,116,13
+    EDITTEXT        IDC_PLANETSHIELDS_COUNT_SHIELDS,165,54,48,14,
+                    ES_AUTOHSCROLL
+    GROUPBOX        "To Port",10070,16,71,119,47,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_PLANETSHIELDS_TO_TWARP,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,22,79,108,12
+    CONTROL         "Planetary Transport",IDC_PLANETSHIELDS_TO_PWARP,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,22,92,108,12
+    CONTROL         "Regular Warp",IDC_PLANETSHIELDS_TO_WARP,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,22,103,108,12
+    GROUPBOX        "From Port",10071,146,71,122,45,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_PLANETSHIELDS_FROM_TWARP,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,152,79,109,11
+    CONTROL         "Regular Warp",IDC_PLANETSHIELDS_FROM_WARP,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,152,92,102,11
+    GROUPBOX        "Miscellaneous Info",10072,16,121,251,30
+    LTEXT           "Fuel to take for Transwarp",10073,22,134,86,11
+    EDITTEXT        IDC_PLANETSHIELDS_FUELAMOUNT,110,134,53,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Cycles:",1263,174,134,26,13
+    EDITTEXT        IDC_PLANETSHIELDS_CYCLES,204,134,56,12,ES_AUTOHSCROLL
+END
+
+IDD_TOLL_OPTIONS DIALOG DISCARDABLE  0, 0, 196, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "How to deal with fighters"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,40,69,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,99,69,50,14
+    GROUPBOX        "Toll Fighters",10074,7,7,86,56,WS_GROUP
+    CONTROL         "Pay Tolls",IDC_TOLL_OPTIONS_TOLL_PAY,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,13,19,72,11
+    CONTROL         "Kill Toll Fighters",IDC_TOLL_OPTIONS_TOLL_KILL,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,13,31,74,14
+    CONTROL         "Do Not Do Anything",IDC_TOLL_OPTIONS_TOLL_NOTHING,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,13,46,76,13
+    GROUPBOX        "Defensive Fighters",10075,97,7,92,56,WS_GROUP
+    CONTROL         "Kill Defensive Fighters",
+                    IDC_TOLL_OPTIONS_DEFENSIVE_KILL,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,101,17,83,14
+    CONTROL         "Do Not Do Anything",IDC_TOLL_OPTIONS_DEFENSIVE_NOTHING,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,101,33,76,10
+END
+
+IDD_BUBBLE_FINDER DIALOG DISCARDABLE  0, 0, 446, 249
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Bubble Finder"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Find Bubbles",IDOK,265,226,50,14
+    PUSHBUTTON      "Close",IDCANCEL,343,226,50,14
+    GROUPBOX        "User Input",10076,7,4,184,59
+    LTEXT           "Min Sectors:",10077,13,15,42,9
+    EDITTEXT        IDC_BUBBLE_FINDER_MIN,63,13,30,12,ES_AUTOHSCROLL
+    LTEXT           "Max Sectors:",10078,11,32,44,10
+    EDITTEXT        IDC_BUBBLE_FINDER_MAX,63,31,30,12,ES_AUTOHSCROLL
+    GROUPBOX        "Bubble Data",10079,7,68,183,172
+    CONTROL         "List1",IDC_BUBBLE_FINDER_LIST_ENTRANCE,"SysListView32",
+                    LVS_REPORT | WS_BORDER | WS_TABSTOP,15,89,81,125
+    LTEXT           "Bubble Entrance",10080,28,79,56,9
+    CONTROL         "List1",IDC_BUBBLE_FINDER_LIST_SECTORS,"SysListView32",
+                    LVS_REPORT | WS_BORDER | WS_TABSTOP,102,89,81,125
+    LTEXT           "Sectors In Bubble",10081,110,80,61,9
+    LTEXT           "Max Entrances:",10082,100,14,51,10
+    EDITTEXT        IDC_BUBBLE_FINDER_MAX_ENTRANCES,152,13,31,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Entrance Mult:",10083,99,33,48,10
+    EDITTEXT        IDC_BUBBLE_FINDER_ENTRANCE_MULT,152,31,31,12,
+                    ES_AUTOHSCROLL
+    CONTROL         "Use more memory to run faster",
+                    IDC_BUBBLE_FINDER_MEMORY_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,43,49,112,8
+    CTEXT           "Status: Idle",IDC_BUBBLE_FINDER_STATUS,18,218,163,16,
+                    SS_CENTERIMAGE | SS_SUNKEN | WS_BORDER
+END
+
+IDD_QUASAR_CALC DIALOG DISCARDABLE  0, 0, 186, 215
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Quasar Calculator"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Calculate",IDOK,35,194,50,14
+    PUSHBUTTON      "Close",IDCANCEL,105,194,50,14
+    GROUPBOX        "Blasts",10084,7,7,172,81,WS_GROUP
+    LTEXT           "First Blast",10085,20,20,41,10
+    LTEXT           "Second Blast",10086,20,37,51,10
+    EDITTEXT        IDC_QUASAR_CALC_FIRSTBLAST,75,17,82,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_QUASAR_CALC_SECONDBLAST,75,35,82,13,ES_AUTOHSCROLL
+    CONTROL         "Sector",IDC_QUASAR_CALC_SECTOR,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,54,60,10
+    CONTROL         "Atmospheric",IDC_QUASAR_CALC_ATMOSPHERE,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,87,51,78,14
+    COMBOBOX        IDC_QUASAR_CALC_SETTING,16,70,155,37,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Data HERE",IDC_QUASAR_CALC_DATA,7,92,172,95
+END
+
+IDD_SELLTRANSPORT DIALOG DISCARDABLE  0, 0, 243, 237
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Sell Steal Transport"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,57,216,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,136,216,50,14
+    GROUPBOX        "Ship #1",10087,7,7,229,43,WS_GROUP
+    LTEXT           "Number:",10088,16,19,30,11
+    EDITTEXT        IDC_STEALTRANSPORT_SHIP1,52,17,40,12,ES_AUTOHSCROLL
+    LTEXT           "Password:",10089,16,34,36,9
+    EDITTEXT        IDC_STEALTRANSPORT_PASS1,52,33,39,12,ES_AUTOHSCROLL
+    CONTROL         "Sell to Port after Stealing",IDC_STEALTRANSPORT_SELL1,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,18,92,11
+    CONTROL         "Dump on Planet After Stealing",IDC_STEALTRANSPORT_DUMP1,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,32,108,15
+    EDITTEXT        IDC_STEALTRANSPORT_PLANET1,214,32,17,14,ES_AUTOHSCROLL
+    GROUPBOX        "Ship #2",10090,7,52,229,43,WS_GROUP
+    LTEXT           "Number:",10091,16,65,30,11
+    EDITTEXT        IDC_STEALTRANSPORT_SHIP2,52,63,40,12,ES_AUTOHSCROLL
+    LTEXT           "Password:",10092,16,79,36,9
+    EDITTEXT        IDC_STEALTRANSPORT_PASS2,52,79,39,12,ES_AUTOHSCROLL
+    CONTROL         "Sell to Port after Stealing",IDC_STEALTRANSPORT_SELL2,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,63,92,11
+    CONTROL         "Dump on Planet After Stealing",IDC_STEALTRANSPORT_DUMP2,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,78,108,15
+    EDITTEXT        IDC_STEALTRANSPORT_PLANET2,214,78,17,14,ES_AUTOHSCROLL
+    GROUPBOX        "Ship #3",10093,7,98,229,43,WS_GROUP
+    LTEXT           "Number:",10094,16,111,30,11
+    EDITTEXT        IDC_STEALTRANSPORT_SHIP3,52,109,40,12,ES_AUTOHSCROLL
+    LTEXT           "Password:",10095,16,125,36,9
+    EDITTEXT        IDC_STEALTRANSPORT_PASS3,52,125,39,12,ES_AUTOHSCROLL
+    CONTROL         "Sell to Port after Stealing",IDC_STEALTRANSPORT_SELL3,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,109,92,11
+    CONTROL         "Dump on Planet After Stealing",IDC_STEALTRANSPORT_DUMP3,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,122,108,15
+    EDITTEXT        IDC_STEALTRANSPORT_PLANET3,214,122,17,14,ES_AUTOHSCROLL
+    GROUPBOX        "Ship #4",10096,7,144,229,43,WS_GROUP
+    LTEXT           "Number:",10097,16,157,30,11
+    EDITTEXT        IDC_STEALTRANSPORT_SHIP4,52,155,40,12,ES_AUTOHSCROLL
+    LTEXT           "Password:",10098,16,171,36,9
+    EDITTEXT        IDC_STEALTRANSPORT_PASS4,52,171,39,12,ES_AUTOHSCROLL
+    CONTROL         "Sell to Port after Stealing",IDC_STEALTRANSPORT_SELL4,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,155,92,11
+    CONTROL         "Dump on Planet After Stealing",IDC_STEALTRANSPORT_DUMP4,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,99,169,108,15
+    EDITTEXT        IDC_STEALTRANSPORT_PLANET4,214,169,17,14,ES_AUTOHSCROLL
+    GROUPBOX        "",10099,7,189,229,23
+    LTEXT           "Cycles",10100,15,198,29,8
+    EDITTEXT        IDC_STEALTRANSPORT_CYCLES,51,196,39,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_STEALTRANSPORT_STEALING,163,197,60,35,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Stealing:",10101,127,199,28,8
+END
+
+IDD_ZTM DIALOG DISCARDABLE  0, 0, 196, 148
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ZTM"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Start ZTM",IDOK,10,127,50,14
+    PUSHBUTTON      "Reset",IDC_ZTM_RESET,70,126,50,14
+    PUSHBUTTON      "Close",IDCANCEL,130,126,50,14
+    GROUPBOX        "ZTM Choices",10102,7,7,182,98
+    CONTROL         "Map Universe Forward (1->end, 2->end-1)",
+                    IDC_ZTM_FORWARD_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,19,14,166,14
+    CONTROL         "Map Universe Backwards (end->1, end-1->2)",
+                    IDC_ZTM_BACKWARD_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,36,159,18
+    CONTROL         "Map One Way Warps",IDC_ZTM_ONEWAY_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,63,164,15
+    CONTROL         "Map Universe Randomly",IDC_ZTM_RANDOM_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,87,168,16
+    CONTROL         "Progress1",IDC_ZTM_PROGRESS,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,19,110,156,12
+END
+
+IDD_RESOURCEMOVER DIALOG DISCARDABLE  0, 0, 286, 226
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Resource/Colonist Mover"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,157,204,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,217,204,50,14
+    GROUPBOX        "Sector #1",10103,7,7,130,65
+    LTEXT           "Sector:",10104,14,20,25,10
+    EDITTEXT        IDC_MOVER_SECTOR1,94,16,38,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MOVER_LEAVE1,93,35,38,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MOVER_TAKEFUEL1,93,54,38,13,ES_AUTOHSCROLL
+    LTEXT           "Planet Taking Stuff:",10105,13,35,75,9
+    LTEXT           "Planet Taking Fuel:",10106,14,54,63,10
+    GROUPBOX        "Sector #2",10107,143,7,136,65
+    LTEXT           "Sector:",10108,149,19,53,13
+    LTEXT           "Planet Leaving Stuff:",10109,148,37,75,13
+    LTEXT           "Planet Leaving Fuel:",10110,148,54,75,13
+    EDITTEXT        IDC_MOVER_SECTOR2,229,16,42,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MOVER_LEAVE2,229,35,42,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MOVER_TAKEFUEL2,229,54,42,13,ES_AUTOHSCROLL
+    GROUPBOX        "Resource you are colonizing (Check Colonists to move Colonists)",
+                    10111,7,74,272,28,WS_GROUP
+    CONTROL         "Fuel Ore",IDC_MOVER_FUEL_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,17,87,49,10
+    CONTROL         "Organics",IDC_MOVER_ORG_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,86,86,45,11
+    CONTROL         "Equipment",IDC_MOVER_EQUIP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,152,85,47,12
+    CONTROL         "Colonists",IDC_MOVER_COLONISTS_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,222,86,45,11
+    GROUPBOX        "To Terra",10112,7,105,126,50,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_MOVER_TOTWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,127,104,10
+    CONTROL         "Planetary Transport",IDC_MOVER_TOPWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,19,114,108,11
+    CONTROL         "Regular Warp",IDC_MOVER_TOWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,20,140,101,10
+    GROUPBOX        "From Terra",10113,144,105,135,49,WS_GROUP
+    CONTROL         "TransWarp Drive",IDC_MOVER_FROMTWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,149,128,109,10
+    CONTROL         "Planetary Transport",IDC_MOVER_FROMPWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,149,115,108,11
+    CONTROL         "Regular Warp",IDC_MOVER_FROMWARP_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,149,139,102,12
+    GROUPBOX        "Miscellaneous Info",10114,7,156,272,44
+    LTEXT           "Fuel to take for Transwarp/Transport:",10115,35,169,119,
+                    11
+    EDITTEXT        IDC_MOVER_FUELAMOUNT,173,168,53,13,ES_AUTOHSCROLL
+    LTEXT           "Cycles:",10116,129,183,24,9
+    EDITTEXT        IDC_MOVER_CYCLES,173,184,54,12,ES_AUTOHSCROLL
+END
+
+IDD_MEGAJETTISON DIALOG DISCARDABLE  0, 0, 135, 148
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Mega Jettison"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,17,127,40,14
+    PUSHBUTTON      "Cancel",IDCANCEL,78,127,40,14
+    GROUPBOX        "Cargo",10117,7,7,121,82,WS_GROUP
+    CONTROL         "Fuel Ore to buy",IDC_MEGAJETTISON_FUEL_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,21,63,13
+    CONTROL         "Organics to buy",IDC_MEGAJETTISON_ORG_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,39,64,13
+    CONTROL         "Equipment to buy",IDC_MEGAJETTISON_EQUIP_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,57,68,12
+    EDITTEXT        IDC_MEGAJETTISON_FUEL_AMOUNT,93,18,28,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MEGAJETTISON_ORG_AMOUNT,93,37,28,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MEGAJETTISON_EQUIP_AMOUNT,93,56,28,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Defaults",IDC_MEGAJETTISON_DEFAULTS,41,74,50,10
+    CONTROL         "Jettison Cargo",IDC_MEGAJETTISON_JETTISON,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,17,95,68,11
+    CONTROL         "Dump on Planet",IDC_MEGAJETTISON_DUMP,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,17,109,65,9
+    EDITTEXT        IDC_MEGAJETTISON_PLANET,89,107,24,13,ES_AUTOHSCROLL
+    GROUPBOX        "",10118,7,86,121,37,WS_GROUP
+END
+
+IDD_BUSTLIST DIALOG DISCARDABLE  0, 0, 313, 174
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Bust List"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Apply",IDC_BUSTLIST_APPLY,135,152,50,14
+    PUSHBUTTON      "Add Bust",IDC_BUSTLIST_ADD,60,152,50,14
+    PUSHBUTTON      "Close",IDCANCEL,210,152,50,14
+    CONTROL         "List1",IDC_BUSTLIST_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,299,105
+    LTEXT           "Clear Busts More than this number of days old:",10119,
+                    38,123,148,9
+    LTEXT           "Clear the bust in this sector:",10120,96,136,87,10
+    EDITTEXT        IDC_BUSTLIST_DAYS,200,120,45,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_BUSTLIST_SECTOR,200,136,45,13,ES_AUTOHSCROLL
+    GROUPBOX        "Miscellaneous",10121,7,114,299,36
+END
+
+IDD_SHOW_FIGHTERS DIALOG DISCARDABLE  0, 0, 319, 162
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Show Fighters"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,91,141,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,177,141,50,14
+    CONTROL         "List1",IDC_FIGHTERS_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,305,131
+END
+
+IDD_MAXEDPORT DIALOG DISCARDABLE  0, 0, 393, 167
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Max'ed Out Ports"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Refresh",IDOK,126,146,50,14
+    PUSHBUTTON      "Close",IDCANCEL,217,146,50,14
+    CONTROL         "List1",IDC_MAXEDPORT_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,379,89
+    GROUPBOX        "Options",10122,7,97,379,44
+    LTEXT           "Minimum:",10123,111,110,32,11
+    EDITTEXT        IDC_MAXEDPORT_AMOUNT,151,108,52,13,ES_AUTOHSCROLL
+    COMBOBOX        IDC_MAXEDPORT_TYPE,213,108,60,43,CBS_DROPDOWN | 
+                    WS_TABSTOP
+    CTEXT           "",IDC_MAXPORT_COUNT_STATIC,114,126,159,10
+END
+
+IDD_LISTBOX_DATA DIALOG DISCARDABLE  0, 0, 162, 183
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,55,162,50,14
+    LISTBOX         IDC_LISTBOX_DATA,7,7,148,149,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_SECTOR_INFO DIALOG DISCARDABLE  0, 0, 169, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Sector Information"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,34,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,91,34,50,14
+    LTEXT           "Enter Sector to Display:",10124,15,13,76,10
+    EDITTEXT        IDC_SECTOR_INFO_SECTOR,93,11,59,13,ES_AUTOHSCROLL
+END
+
+IDD_DEADEND DIALOG DISCARDABLE  0, 0, 384, 194
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dead Ends"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,159,173,50,14
+    CONTROL         "Tab1",IDC_DEADEND_TAB,"SysTabControl32",0x0,7,7,370,14
+    CONTROL         "List1",IDC_DEADEND_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,21,370,148
+    LTEXT           "Number of Dead Ends: 0",IDC_DEADEND_COUNT_STATIC,31,175,
+                    86,12
+END
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  140, 40, 214, 111
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About ATTAC"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Close",IDOK,159,89,48,14
+    PUSHBUTTON      "View &Licence",IDA_LICENCE,5,89,70,14
+    PUSHBUTTON      "Visit &Web Site",IDA_WEB,83,89,70,14
+    CTEXT           "ATTAC",IDA_TEXT1,10,6,194,8
+    CTEXT           "",IDA_VERSION,10,16,194,16
+    CTEXT           "",IDA_VERSIONREGINA,10,26,194,16
+    CTEXT           "© 2004 Zev Beckerman. All rights reserved.",IDA_TEXT2,
+                    10,38,194,14
+    PUSHBUTTON      "",IDC_POWEREDBYREXX,58,52,101,25,BS_BITMAP | 
+                    WS_CLIPSIBLINGS
+END
+
+IDD_MESSAGECENTER DIALOG DISCARDABLE  0, 0, 447, 71
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Message Center"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_MESSAGECENTER_STATIC,"Static",SS_LEFTNOWORDWRAP | 
+                    WS_BORDER | WS_GROUP,0,2,434,68
+    SCROLLBAR       IDC_MESSAGECENTER_SCROLLBAR,434,1,12,69,SBS_VERT
+END
+
+IDD_ETHERPROBE DIALOG DISCARDABLE  0, 0, 240, 178
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Ether Probe"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,66,157,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,127,157,50,14
+    GROUPBOX        "Options",10125,7,7,226,75,WS_GROUP
+    CONTROL         "Ether Probe Unexplored Sectors",
+                    IDC_ETHERPROBE_UNEXPLORED,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,15,20,117,12
+    CONTROL         "Ether Probe Random Sectors",IDC_ETHERPROBE_RANDOM,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,15,38,107,14
+    CONTROL         "Ether Probe Sectors From File",IDC_ETHERPROBE_FILE,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,16,57,107,13
+    EDITTEXT        IDC_ETHERPROBE_FILE_EDIT,127,57,81,13,ES_AUTOHSCROLL
+    GROUPBOX        "Data to Record",10126,7,86,226,64,WS_GROUP
+    CONTROL         "Class 0 Ports",IDC_ETHERPROBE_CLASS0_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,99,57,12
+    CONTROL         "Class 9 Ports",IDC_ETHERPROBE_CLASS9_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,115,56,12
+    CONTROL         "Beacons",IDC_ETHERPROBE_BEACON_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,131,49,12
+    CONTROL         "Fighters",IDC_ETHERPROBE_FIGHTERS_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,94,97,45,14
+    CONTROL         "Mines",IDC_ETHERPROBE_MINES_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,93,115,44,11
+    CONTROL         "Nav Haz",IDC_ETHERPROBE_NAVHAZ_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,93,131,51,12
+    CONTROL         "Planets",IDC_ETHERPROBE_PLANETS_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,159,99,42,11
+    CONTROL         "Unmanned Ships",IDC_ETHERPROBE_SHIPS_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,159,113,67,12
+    CONTROL         "Traders",IDC_ETHERPROBE_TRADERS_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,160,131,43,12
+    PUSHBUTTON      "",IDC_ETHERPROBE_BROWSE,211,57,16,14,BS_ICON
+END
+
+IDD_ETHERPROBE_LOG DIALOG DISCARDABLE  0, 0, 468, 210
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Ether Probe Log"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,393,16,50,14
+    COMBOBOX        IDC_ETHERPROBE_LOG_FILTERLIST,185,17,190,75,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Filter choices for the ether probe log:",10127,55,17,
+                    122,12
+    LISTBOX         IDC_ETHERPROBE_LOG_LIST,7,53,454,150,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Clear Log",IDC_ETHERPROBE_CLEAR,394,33,49,13
+    COMBOBOX        IDC_ETHERPROBE_DATE,186,35,160,75,CBS_DROPDOWN | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Date to filter on:",10128,118,36,52,12
+END
+
+IDD_SHOWPLANETS DIALOG DISCARDABLE  0, 0, 317, 175
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Show Planets"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,57,154,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,123,154,50,14
+    CONTROL         "List1",IDC_SHOWPLANETS,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,303,142
+END
+
+IDD_ALLIED DIALOG DISCARDABLE  0, 0, 235, 246
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Allies/Enemies"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Apply",IDOK,53,225,50,14
+    PUSHBUTTON      "Close",IDCANCEL,134,225,50,14
+    LTEXT           "Use this to set up your allies. The only thing this affects is toll / defensive fighters you encounter. ATTAC will not kill fighters of traders",
+                    10129,8,4,221,17
+    LTEXT           "Trader:",10130,25,68,25,12
+    LTEXT           "Status:",10131,25,82,24,11
+    COMBOBOX        IDC_ALLIED_TRADER,65,66,138,86,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_ALLIED_STATUS,65,82,138,33,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "This form sets one ally at a time. Set a traders status then hit the apply button. Modiy as many traders as you like. Click close when done.",
+                    10132,8,46,221,18
+    CONTROL         "List1",IDC_ALLIED_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,27,102,176,115
+    LTEXT           "you are allied with. Use the controls below to set up your allies. Be aware that if your ally is in a corp. Then that corp is also your ally.",
+                    10133,7,21,221,17
+END
+
+IDD_NEARESTFIGHTERS DIALOG DISCARDABLE  0, 0, 231, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Nearest Fighters"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,54,79,50,14
+    PUSHBUTTON      "Close",IDCANCEL,127,79,50,14
+    GROUPBOX        "Sector",10133,7,7,217,30
+    LTEXT           "Nearest Fighter Adjacent to Sector:",10134,27,19,117,10
+    EDITTEXT        IDC_NEARESTFIGHTER_SECTOR,151,17,57,14,ES_AUTOHSCROLL
+    CTEXT           "No Data",IDC_NEARESTFIGHTER_DATA,7,41,217,32
+END
+
+IDD_BLOCKED_PORTS DIALOG DISCARDABLE  0, 0, 182, 194
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Ports Blocked by Someone Elses Fighters"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,65,173,50,14
+    CONTROL         "List1",IDC_BLOCKED_PORTS_LIST,"SysListView32",
+                    LVS_REPORT | WS_BORDER | WS_TABSTOP,7,7,168,163
+END
+
+IDD_WARPPATH DIALOG DISCARDABLE  0, 0, 440, 41
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "No Current Warp Path",IDC_WARPPATH,7,7,426,27
+END
+
+IDD_INFO DIALOGEX 0, 0, 72, 319
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Status"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CTEXT           "Sector",10135,2,5,29,8
+    EDITTEXT        IDC_SECTOR,2,15,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    CTEXT           "Turns",10136,35,5,28,8
+    GROUPBOX        "",10137,2,0,69,305
+    EDITTEXT        IDC_TURNS,35,15,31,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    CTEXT           "Exp.",10138,7,30,20,8
+    EDITTEXT        IDC_EXP,2,40,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Alignment",10139,35,31,32,8
+    EDITTEXT        IDC_ALIGN,35,40,32,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Credits",10140,3,59,22,8
+    EDITTEXT        IDC_CREDITS,29,57,38,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Fighters",10141,3,75,26,8
+    EDITTEXT        IDC_FIGS,29,74,37,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    LTEXT           "Shields",10142,3,91,24,8
+    EDITTEXT        IDC_SHIELDS,29,90,37,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    LTEXT           "Total",10143,7,119,17,8
+    EDITTEXT        IDC_MAXHOLDS,31,117,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Empty",10144,7,135,20,8
+    EDITTEXT        IDC_EMPTY,31,133,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Fuel",10145,7,150,14,8
+    EDITTEXT        IDC_FUEL,31,149,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Orgs.",10146,7,167,18,8
+    EDITTEXT        IDC_ORGS,31,165,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Colos.",10147,7,199,20,8
+    EDITTEXT        IDC_COLOS,31,197,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    GROUPBOX        "Holds Status",10148,3,107,63,107
+    LTEXT           "Equip.",10149,7,183,21,8
+    EDITTEXT        IDC_EQUIP,31,181,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Cloaks",10150,6,222,22,8
+    EDITTEXT        IDC_CLOAKS,31,219,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "PTorps",10151,5,237,25,8
+    EDITTEXT        IDC_PHOTON,31,234,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "Probes",10152,5,251,23,8
+    EDITTEXT        IDC_PROBES,31,249,30,14,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    LTEXT           "Mines",10153,5,267,20,8
+    EDITTEXT        IDC_MINES,31,264,30,12,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_TABSTOP
+    CTEXT           "0(s)/0(r)",IDC_TWXSYNC_PACKET_INFO,4,291,65,9
+    LTEXT           "Script Not Running",IDC_SCRIPT,2,307,70,9
+    CTEXT           "TWX Sync Status",-1,8,282,61,8
+END
+
+IDD_MESSAGE DIALOG DISCARDABLE  0, 0, 580, 70
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC Message Center"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_MESSAGES,0,2,578,68,NOT LBS_NOTIFY | 
+                    LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | LBS_NOSEL | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+END
+
+IDD_LICENCEBOX DIALOG DISCARDABLE  50, 50, 226, 297
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "PuTTY Licence"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,97,281,44,14
+    LTEXT           "Copyright © 1997-2002 Simon Tatham",1000,9,46,206,8
+    LTEXT           "Portions copyright Robert de Bath, Joris van Rantwijk, Delian",
+                    1001,9,62,206,8
+    LTEXT           "Delchev, Andreas Schultz, Jeroen Massar, Wez Furlong, Nicolas",
+                    1002,9,70,206,8
+    LTEXT           "Barry, and CORE SDI S.A.",1003,9,78,206,8
+    LTEXT           "Permission is hereby granted, free of charge, to any person",
+                    1004,9,94,206,8
+    LTEXT           "obtaining a copy of this software and associated documentation",
+                    1005,9,102,206,8
+    LTEXT           "files (the ""Software""), to deal in the Software without restriction,",
+                    1006,9,110,206,8
+    LTEXT           "including without limitation the rights to use, copy, modify, merge,",
+                    1007,9,118,206,8
+    LTEXT           "publish, distribute, sublicense, and/or sell copies of the Software,",
+                    1008,9,126,206,8
+    LTEXT           "and to permit persons to whom the Software is furnished to do so,",
+                    1009,9,134,206,8
+    LTEXT           "subject to the following conditions:",1010,9,142,206,8
+    LTEXT           "The above copyright notice and this permission notice shall be",
+                    1011,9,158,206,8
+    LTEXT           "included in all copies or substantial portions of the Software.",
+                    1012,9,166,206,8
+    LTEXT           "THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT",1013,10,
+                    182,206,8
+    LTEXT           "WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,",1014,10,190,
+                    206,8
+    LTEXT           "INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF",1015,10,
+                    198,206,8
+    LTEXT           "MERCHANTABILITY, FITNESS FOR A PARTICULAR",1016,9,206,
+                    206,8
+    LTEXT           "PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE",
+                    1017,10,214,206,8
+    LTEXT           "COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES",
+                    1018,10,223,206,8
+    LTEXT           "OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,",
+                    1019,9,231,206,8
+    LTEXT           "TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN",1020,9,
+                    239,206,8
+    LTEXT           "CONNECTION WITH THE SOFTWARE OR THE USE OR",1021,9,246,
+                    206,8
+    LTEXT           "OTHER DEALINGS IN THE SOFTWARE.",1022,9,254,206,8
+    LTEXT           "The License below is for PuTTY and NOT for ATTAC. ATTAC uses some code from a program called PuTTY; therefore, i have posted the license as required here. This license does NOT apply to ATTAC or to the ATTAC source code",
+                    10154,8,4,205,33
+    LTEXT           "------------------------------------------------------------------------------------------------------",
+                    10155,9,37,206,9
+END
+
+IDD_ATTAC_LICENSE DIALOGEX 0, 0, 215, 250
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ATTAC License"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,49,229,50,14
+    PUSHBUTTON      "Putty License",IDPUTTY,111,229,50,14
+    LTEXT           "Special thanks to Mike Rusaki, whose code i use as a base for the bubble finder!\nRead the License File license.txt or Read it at www.tw-attac.com",
+                    10156,7,7,201,120,0,WS_EX_ACCEPTFILES
+END
+
+IDD_MACRO DIALOG DISCARDABLE  0, 0, 237, 269
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Macros"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Static",10157,7,7,223,49
+    CONTROL         "List1",IDC_MACRO_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,76,223,186
+    PUSHBUTTON      "Add Macro",IDC_MACRO_ADD,16,38,38,12
+    PUSHBUTTON      "Delete Macro",IDC_MACRO_DELETE,125,38,46,12
+    PUSHBUTTON      "Close",IDC_MACRO_CLOSE,183,38,40,12
+    COMBOBOX        IDC_MACRO_FUNCTION,16,21,48,67,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_MACRO_DATA,70,21,153,12,ES_AUTOHSCROLL
+    CTEXT           "Type in any text you wish to be run when you press the selected function key. To run a REXX script, preceed the text with REXX:",
+                    10158,7,57,223,18
+    PUSHBUTTON      "Edit Macro",IDC_MACRO_EDIT,65,38,47,12
+END
+
+IDD_MACRO_EDIT DIALOG DISCARDABLE  0, 0, 186, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Macro"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+    EDITTEXT        IDC_MACROEDIT_EDIT,7,27,115,12,ES_AUTOHSCROLL
+    LTEXT           "Static",IDC_MACROEDIT_CAPTION,7,7,115,13
+END
+
+IDD_MAP DIALOG DISCARDABLE  0, 0, 300, 300
+STYLE WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ATTAC Map"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_FEDCOMM DIALOG DISCARDABLE  0, 0, 265, 45
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Fed Comm"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,151,24,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,208,24,50,14
+    EDITTEXT        IDC_FEDCOMM_EDIT,7,7,251,13,ES_AUTOHSCROLL
+    CONTROL         "Encrypt Communication",IDC_FEDCOMM_ENCRYPT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,26,98,9
+END
+
+IDD_PRIVATECOMM DIALOG DISCARDABLE  0, 0, 265, 45
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Private Comm"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,151,24,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,208,24,50,14
+    EDITTEXT        IDC_PRIVATECOMM_EDIT,7,7,251,13
+    CONTROL         "Encrypt Communication",IDC_PRIVATECOMM_ENCRYPT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,26,98,9
+END
+
+IDD_LIMPITSCANNER DIALOG DISCARDABLE  0, 0, 157, 173
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Limpit Scanner"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Controls",10159,7,7,143,35
+    DEFPUSHBUTTON   "Start",IDC_LIMPITSCANNER_START,16,18,37,14
+    PUSHBUTTON      "Stop",IDC_LIMPITSCANNER_STOP,62,18,34,15
+    PUSHBUTTON      "Close",IDC_LIMPITSCANNER_CLOSE,106,18,35,14
+    CONTROL         "List1",IDC_LIMPITSCANNER_LIST,"SysListView32",
+                    LVS_REPORT | WS_BORDER | WS_TABSTOP,7,46,143,119
+END
+
+IDD_REMOTECONNECTION DIALOG DISCARDABLE  0, 0, 258, 154
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Remote Connection Viewer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,203,134,50,14
+    GROUPBOX        "Active Connections",10160,4,4,249,126
+    CONTROL         "List1",IDC_REMOTECONNECTION_LIST,"SysListView32",
+                    LVS_REPORT | WS_BORDER | WS_TABSTOP,11,18,234,107
+    PUSHBUTTON      "Kill",IDC_REMOTECONNECTION_KILL,152,134,46,14
+    CONTROL         "Enable Remote Connections",IDC_REMOTECONNECTION_ENABLE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,136,104,10
+END
+
+IDD_WORLDTRADE DIALOG DISCARDABLE  0, 0, 158, 222
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "World Trade"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,34,203,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,86,202,47,14
+    LTEXT           "Cycles:",10161,44,177,24,10
+    EDITTEXT        IDC_WORLDTRADE_CYCLES,78,174,40,13,ES_AUTOHSCROLL
+    GROUPBOX        "Drop Fighters While Trading",10162,8,75,144,86
+    CONTROL         "Drop",IDC_WORLDTRADE_DROPFIGS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,21,86,29,11
+    CONTROL         "Haggle",IDC_WORLDTRADE_HAGGLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,93,145,50,11
+    EDITTEXT        IDC_WORLDTRADE_FIGAMOUNT,53,86,17,12,ES_AUTOHSCROLL
+    LTEXT           "Fighter At Each Port",10163,76,87,64,9
+    GROUPBOX        "",10164,8,163,143,34
+    GROUPBOX        "Type",10165,14,105,64,51,WS_GROUP
+    CONTROL         "Toll",IDC_WORLDTRADE_TOLL,"Button",BS_AUTORADIOBUTTON,
+                    22,114,44,8
+    CONTROL         "Offensive",IDC_WORLDTRADE_OFFENSIVE,"Button",
+                    BS_AUTORADIOBUTTON,22,126,51,8
+    CONTROL         "Defensive",IDC_WORLDTRADE_DEFENSIVE,"Button",
+                    BS_AUTORADIOBUTTON,22,138,50,8
+    GROUPBOX        "Owner",10166,84,105,60,34,WS_GROUP
+    CONTROL         "Corporate",IDC_WORLDTRADE_CORPORATE,"Button",
+                    BS_AUTORADIOBUTTON,91,114,46,10
+    CONTROL         "Personal",IDC_WORLDTRADE_PERSONAL,"Button",
+                    BS_AUTORADIOBUTTON,91,126,46,10
+    GROUPBOX        "",10167,5,6,145,65
+    CTEXT           "World Trade will go to each Pair Port on the ATTAC Pair port list and Trade down that port to the minumum percent specified in ATTAC->Options",
+                    10168,13,14,129,34
+    LTEXT           "Pair Type:",10169,12,52,36,11
+    COMBOBOX        IDC_WORLDTRADE_PAIRTYPE,50,52,92,50,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_WORLDSSM DIALOG DISCARDABLE  0, 0, 281, 261
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "World SSM"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,80,243,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,153,243,50,14
+    GROUPBOX        "Purchase Holds",10170,7,7,267,44,WS_GROUP
+    LTEXT           "Stardock",10171,26,20,32,10
+    EDITTEXT        IDC_WORLDSSM_SD,59,19,52,13,ES_AUTOHSCROLL
+    GROUPBOX        "",10172,7,7,267,44,NOT WS_VISIBLE | WS_GROUP
+    CONTROL         "Check2",IDC_WORLDSSM_SD_CHECK,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,114,22,9,8
+    CONTROL         "Check1",IDC_WORLDSSM_CLASS0_CHECK,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,255,20,10,9
+    CTEXT           "OR",10173,133,22,16,10
+    LTEXT           "Class 0 Port",10174,161,20,40,11
+    EDITTEXT        IDC_WORLDSSM_CLASS0,205,19,47,12,ES_AUTOHSCROLL
+    CTEXT           "You Must Enter Either Stardock or Class 0 Port Sector. Check the one to use",
+                    10175,22,36,243,9
+    GROUPBOX        "Ports",10176,7,55,128,101
+    LTEXT           "Equipment Port",10177,19,65,51,10
+    EDITTEXT        IDC_WORLDSSM_EQUIP,79,64,45,12,ES_AUTOHSCROLL
+    LTEXT           "Fuel Port",10178,19,82,37,10
+    EDITTEXT        IDC_WORLDSSM_FUEL,79,80,45,13,ES_AUTOHSCROLL
+    LTEXT           "Planet Sector",10179,148,67,44,11
+    EDITTEXT        IDC_WORLDSSM_PLANETSECTOR,209,65,48,13,ES_AUTOHSCROLL
+    GROUPBOX        "Planet",10180,139,54,135,103
+    LTEXT           "Planet Number",10181,148,82,47,13
+    EDITTEXT        IDC_WORLDSSM_PLANETNUMBER,209,81,47,13,ES_AUTOHSCROLL
+    LTEXT           "You drop cash on this planet every N cycles so if you die, you dont lose all the cash you have made. If planet sector is zero, then it will not drop your cash.",
+                    10182,150,108,110,42
+    GROUPBOX        "Cycles",10183,5,211,267,26
+    LTEXT           "Total Cycles to Run:",10184,15,222,65,11
+    EDITTEXT        IDC_WORLDSSM_CYCLES,83,220,35,12,ES_AUTOHSCROLL
+    LTEXT           "Drop Cash on Planet Every ",10185,137,222,87,11
+    EDITTEXT        IDC_WORLDSSM_DROPCASH,227,220,18,13,ES_AUTOHSCROLL
+    LTEXT           "Cycles",10186,247,222,22,11
+    LTEXT           "You buy Equipment after you bust so you can SSM. The fuel it to TWARP home to drop cash. TWARP Sector is where you go after you drop cash.",
+                    10187,14,116,118,35
+    LTEXT           "TWARP Sector",10188,19,100,53,10
+    CONTROL         "Drop",IDC_WORLDSSM_DROPFIGS_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,76,169,32,10
+    EDITTEXT        IDC_WORLDSSM_TWARP,79,99,45,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WORLDSSM_DROPFIGS_AMOUNT,111,168,20,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Fighter Everywhere",10189,137,170,76,11
+    GROUPBOX        "Drop Fighters",10190,5,158,266,51
+    GROUPBOX        "",10191,15,183,118,22,WS_GROUP
+    CONTROL         "Toll",IDC_WORLDSSM_TOLL,"Button",BS_AUTORADIOBUTTON,144,
+                    191,25,9
+    CONTROL         "Offensive",IDC_WORLDSSM_OFFENSIVE,"Button",
+                    BS_AUTORADIOBUTTON,219,189,45,12
+    CONTROL         "Defensive",IDC_WORLDSSM_DEFENSIVE,"Button",
+                    BS_AUTORADIOBUTTON,172,191,46,8
+    GROUPBOX        "",10192,137,182,129,22,WS_GROUP
+    CONTROL         "Corporate",IDC_WORLDSSM_CORPORATE,"Button",
+                    BS_AUTORADIOBUTTON,25,191,47,8
+    CONTROL         "Personal",IDC_WORLDSSM_PERSONAL,"Button",
+                    BS_AUTORADIOBUTTON,75,190,48,10
+END
+
+IDD_AUTOEXPLORE DIALOG DISCARDABLE  0, 0, 190, 218
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Auto-Explorer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,197,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,89,197,50,14
+    GROUPBOX        "Information",10193,7,7,176,99
+    LTEXT           "Start With Sector: ",10194,33,21,60,9
+    EDITTEXT        IDC_AUTOEXPLORE_STARTSECTOR,96,19,53,13,ES_AUTOHSCROLL
+    CONTROL         "Port && Trade While Exploring",
+                    IDC_AUTOEXPLORE_PORTTRADE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,44,35,108,12
+    CONTROL         "Haggle",IDC_AUTOEXPLORE_HAGGLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,56,49,70,11
+    CONTROL         "Explore ALL Sectors (Even Explored Ones)",
+                    IDC_AUTOEXPLORE_EXPLOREALL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,60,150,14
+    CONTROL         "Avoid Sectors With Planets && Limpits",
+                    IDC_AUTOEXPLORE_PLANETAVOID,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,73,129,14
+    CONTROL         "Avoid Sectors with more than",
+                    IDC_AUTOEXPLORE_MAXFIGSAVOID,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,87,105,14
+    EDITTEXT        IDC_AUTOEXPLORE_NUMFIGSAVOID,122,87,29,12,ES_AUTOHSCROLL
+    LTEXT           "fighters",10195,153,88,23,11
+    GROUPBOX        "Drop Fighters While Exploring",10196,7,109,176,83
+    COMBOBOX        IDC_AUTOEXPLORE_FIGSTYLE,107,121,67,40,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Drop",IDC_AUTOEXPLORE_DROPFIGS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,25,121,29,11
+    EDITTEXT        IDC_AUTOEXPLORE_FIGAMOUNT,59,121,17,12,ES_AUTOHSCROLL
+    LTEXT           "Fighter",10197,79,123,25,9
+    GROUPBOX        "Type",10198,31,138,64,51,WS_GROUP
+    CONTROL         "Toll",IDC_AUTOEXPLORE_TOLL,"Button",BS_AUTORADIOBUTTON,
+                    39,148,44,8
+    CONTROL         "Offensive",IDC_AUTOEXPLORE_OFFENSIVE,"Button",
+                    BS_AUTORADIOBUTTON,39,159,51,8
+    CONTROL         "Defensive",IDC_AUTOEXPLORE_DEFENSIVE,"Button",
+                    BS_AUTORADIOBUTTON,39,172,50,8
+    GROUPBOX        "Owner",10199,101,138,60,34,WS_GROUP
+    CONTROL         "Corporate",IDC_AUTOEXPLORE_CORPORATE,"Button",
+                    BS_AUTORADIOBUTTON,107,148,46,10
+    CONTROL         "Personal",IDC_AUTOEXPLORE_PERSONAL,"Button",
+                    BS_AUTORADIOBUTTON,107,159,44,10
+END
+
+IDD_PLANETBUST DIALOG DISCARDABLE  0, 0, 216, 87
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Planet Bust Script"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,51,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,113,66,50,14
+    CTEXT           "You must be at Stardock for this script to work properly.",
+                    10200,16,7,179,11
+    LTEXT           "Cycles: ",10201,33,41,22,11
+    LTEXT           "Planet Name:",10202,14,23,44,10
+    EDITTEXT        IDC_PLANETBUST_NAME,59,21,143,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PLANETBUST_CYCLES,59,39,48,12,ES_AUTOHSCROLL
+END
+
+IDD_ADDBUST DIALOG DISCARDABLE  0, 0, 125, 52
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Bust"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,19,31,39,14
+    PUSHBUTTON      "Cancel",IDCANCEL,69,31,38,14
+    LTEXT           "Sector",10203,24,13,22,8
+    EDITTEXT        IDC_ADDBUST_SECTOR,56,12,50,13,ES_AUTOHSCROLL
+END
+
+IDD_TWXSYNC DIALOG DISCARDABLE  0, 0, 239, 188
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "TWX Sync Connection Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Save",IDC_TWXSYNC_SAVE,64,167,50,14
+    PUSHBUTTON      "Close",IDCANCEL,129,167,50,14
+    GROUPBOX        "Games On TWX Sync Server",10207,7,7,225,155
+    CONTROL         "List2",IDC_TWXSYNC_GAMELIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,7,17,225,80
+    LTEXT           "Password:",10204,37,115,36,11
+    EDITTEXT        IDC_TWXSYNC_PASSWORD,77,113,57,12,ES_AUTOHSCROLL
+    LTEXT           "Status:",10205,47,130,22,11
+    LTEXT           "Idle",IDC_TWXSYNC_STATUS,77,131,143,10
+    LTEXT           "TWX Sync Game:",10206,14,102,58,8
+    LTEXT           "None Selected",IDC_TWXSYNC_CURRGAME,78,102,148,10
+    PUSHBUTTON      "Resend All Data to Server",IDC_TWXSYNC_RESEND_ALL,77,
+                    145,90,11
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 24
+//
+
+1                       24      MOVEABLE PURE   "attac.mft"
+IDR_DEFAULT1 24 DISCARDABLE 
+BEGIN
+
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winresrc.h""\r\n"
+    "#include ""win_res.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_REGISTRATION, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 135
+    END
+
+    IDD_INFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        BOTTOMMARGIN, 316
+    END
+
+    IDD_TWXSYNC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 232
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 181
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

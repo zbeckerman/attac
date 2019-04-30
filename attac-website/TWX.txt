@@ -1,0 +1,141 @@
+Trade Wars Export file format (TWX)
+===================================
+
+File version: 1
+
+Copyright (C)2000 SWATH & ATTAC
+The format is free to use by anyone.
+For more information please contact us:
+
+SWATH
+Site:   http://www.swath.net
+E-mail: support@swath.net
+
+ATTAC
+Site:   http://www.tw-attac.com
+E-mail: tradewars@hotmail.com
+
+
+The TWX file structure
+----------------------
+
+TWX_FILE_HEADER
+n*TWX_SECTOR
+
+n = The total number of sectors.
+
+
+Data structures (presented in C/C++)
+------------------------------------
+
+All integers are signed and have the following sizes:
+
+char  - 1 byte  (-1, 0 - +127)
+short - 2 bytes (-32768 - +32767)
+long  - 4 bytes (-2147483648 - +2147483647)
+
+The binary stored integers should have TCP/IP network order.
+Use functions like htons(), htonl(), ntohs() and ntohl()
+to convert numbers from host byte order to network order
+and vice versa.
+Example: 0x12345678 should be stored as 0x12 0x34 0x56 0x78
+
+typedef struct {		// Size: 256 bytes
+	char id[4];		// File ID: "TWEX"
+	long time_created;	// Timestamp when created (See TS)
+	long ver;		// File version (See VE)
+	long sectors;		// Total number of sectors
+	long stardock;		// StarDock location (-1=Unknown)
+	long cls0port_sol;	// Class 0 port: Sol (-1=Unknown)
+	long cls0port_alpha;	// Class 0 port: Alpha Centauri (-1=Unknown)
+	long cls0port_rylos;	// Class 0 port: Rylos (-1=Unknown)
+	long crc32;		// Checksum (See CH)
+	char reserved[220];	// Reserved for future use (Set to 0)
+} TWX_FILE_HEADER;
+
+typedef struct {		// Size: 96 bytes
+	char info;		// Sector info (See SI)
+	char navhaz;		// NavHaz percentage (0-100) (-1=Unknown)
+	short reserved2;	// Reserved for future use (Set to 0)
+	long sector_update;	// Timestamp from last sector update
+				//  (0=Never updated) (See TS and USI)
+	long ftrs;		// Fighters (-1=Unknown)
+	short ftr_owner;	// Fighter owner (Reserved, set to -1)
+	char ftr_type;		// Fighter type (1=Toll, 2=Offensive, 3=Defensive,
+				//  0=Merchenary, -1=Unknown)
+	char anom;		// Anomality (0=No, 1=Yes, -1=Unknown)
+	short armids;		// Armid mines (-1=Unknown)
+	short armid_owner;	// Armid owner (Reserved, set to -1)
+	short limpets;		// Limpet mines (-1=Unknown)
+	short limpet_owner;	// Limpet owner (Reserved, set to -1)
+	long port_amt[3];	// Port amount [FOE] (-1=Unknown)
+	char port_per[3];	// Port percentage [FOE] (0-100) (-1=Unknown)
+	char warps;		// # of warp sectors (-1=Unknown)
+	long warp_sect[6];	// Warp sectors
+	long port_update;	// Timestamp from last port update
+				//  (0=Never updated) (See TS and USI)
+	long density;		// Sector density (-1=Unknown)
+	char reserved[24];	// Reserved for future use (Set to 0)
+} TWX_SECTOR;
+
+
+Extra field information
+-----------------------
+
+=== TS ===
+A standard timestamp like the one returned from the C function time().
+The number of seconds elapsed since midnight (00:00:00), January 1, 1970,
+coordinated universal time.
+
+=== VE ===
+The file version.
+All helpers should control the file version and if you don't support
+the version you should not import the file. If you support a certain
+version you should support all previous versions too since they will
+be a subset of the later version.
+
+=== CH ===
+The 32-bit checksum is calculated using XOR. Look at the file as
+a big array of 4 byte longs. XOR all those together with the crc32
+field set to 0. The result should be written to the crc32 field.
+When checking the checksum you simply perform the XOR for the
+whole file including the crc32 field. The result should be 0 (zero).
+If not, the file is corrupted and should not be imported.
+
+=== SI ===
+0-9 = Port class 0-9
+10  = Empty (no port)
+11  = Unexplored
+12  = Port destroyed
++16 = Port under construction (16+class)
+Examples:
+ 2 = Class 2 port (BSB)
+18 = Class 2 port (BSB) under construction
+
+=== USI ===
+This section describes when to update the timestamps for a sector.
+It is important to follow these rules since it would affect
+the merge of sector info when doing an import of a TWX file.
+Initially both sector_update and port_update should be set to 0.
+
+Unexplored sector (info == 11):
+-If you update the sector warps when info=11, that means that you are
+ entering ZTM data. When importing an unexplored sector the timestamp
+ should not be used since all sector warps are correct and should be merged.
+ When updating the sector with known data (info != 11), you should overwrite
+ the sector and write a new timestamp.
+
+Visited, Scanned or E-Probed sector (info != 11):
+-Now, the complete sector info is revealed. Update the sector_update timestamp.
+ Only explored sectors that are newer can overwrite this kind of sector.
+ Note that the port data should be handled separately, using port_update.
+
+When you visit a port in a sector or get a port report:
+-Now, you will get the complete port info.
+ Update the port_update timestamp.
+
+CIM download:
+-A CIM download does only contain known sectors.
+ Therefore you will only get new port info.
+ (All the sector warps are already known)
+ If new port info is stored, update the port_update timestamp.

@@ -1,0 +1,60 @@
+/* rexx */
+/* earth - www.tw-attac.com   */
+
+Call ZocRespond "Option? (A,D,", "A99^M" 
+Call ZocRespond "Avoid this sector in the", "N"
+Call ZocRespond "Stop in this sector", "N"
+
+/* attac_arg1 - sector */
+
+sector = attac_arg1
+
+sectortotal = ATTAC_GetTotalSectors() 
+IF sectortotal = "" THEN sectortotal = ZocAsk("How many sectors are in this game?", sectortotal) 
+
+IF sector = "ATTAC_ARG1" THEN DO
+ sector = ZocAsk("What sector should we escape to?","")
+END
+
+call ZocSend sector
+if sectortotal>5000 then do    
+	call zocsend "^M"   
+end   
+else do     
+	if sector <= 599 then do      
+		call zocsend "^M"     
+	end   
+end
+
+result = ZocWaitMux("engage the TransWarp drive","shortest path")
+IF result = 0 THEN Do
+  CALL ZocSend "y"
+  result1 = ZocWaitMux("this jump blind","You do not have enough","TransWarp Locked")
+
+  IF result1=0 THEN DO
+    Call ZocSend "n"
+  END
+  IF result1 =0 | result1=1 THEN DO
+    call ZocSend sector
+    if sectortotal>5000 then do    
+	call zocsend "^M"   
+    end   
+    else do     
+	if sector <= 599 then do      
+		call zocsend "^M"     
+	end   
+    end
+    Call ZocSend "n"
+    Call ZocSend "e"
+  END
+  IF result1 =2 THEN DO
+    CALL ZocSend "y"
+  END
+END
+IF result = 1 THEN Do
+  CALL ZocSend "e"
+END
+
+result =  ZocWaitMux("NavPoint (","Sector  : " || sector)
+IF result = 0 THEN CALL ZocSend "q"
+

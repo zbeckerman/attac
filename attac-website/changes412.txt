@@ -1,0 +1,11 @@
+- i fixed so many memory bugs that i can not even list them :)
+  if i did, the list would be like 10 items longer. ATTAC should be much more stable now.
+- updated database loader so that it recreates files that dont exist.
+- backup/restore corrupted databases automatically
+- added owner to planet display
+- added the graphical mapper :)
+- added port type to show maxed ports
+- fixed bug in colonize planet script
+- added drop fig option to autoexplorer
+- added limpit mine scanner.
+- fixed twx export bug

@@ -1,0 +1,23 @@
+-The set allies wasnt working correct since the corp number is not being parsed properly.
+-The user names that being parsed into the DB was messed up.
+-Autoexplorer only set personal figs 
+-colonizer and a few other scripts dont work on unlimited turn games.
+-if you import/export a twx file, then the current path of attac gets messed up and you cannot run any scripts and the DB path gets changed.
+-attac now parses CLV (doesnt not crash on split screens)
+-fixed the message center so that you can scroll now.
+-added ability to turn off the parsing engine on attac if you do not want to use it.
+-added ATTAC_GetBestPairPort and ATTAC_GetBestEvilPairPort to REXX. These were in version v3.1.1 and in v4 beta X but i must have missed adding them. (ATTAC_GetBestEvilPairPort gets latest port NOT on your bust list)
+-modified start up connection screen so that if you modify ANY attac data, you are prompted to save if you just hit open to connect to the game
+-modified show max ports to include the port type
+-added option to make the message center and GUI window detachable
+-added option to use popup comm windows so you can talk when scripts are running.
+-added macros 
+-fixed buy dump so that you can choose how to haggle (best, worst, none)
+-added import cim in text format
+-added export of unexplored sectors from DB (so you can use for etherprobe explore)
+-fixed parsing bugs here and there.
+-added bounds checking to parsing (to prevent memory errors)
+-added sort to all listview forms :)
+-fixed sending ^@ with a CR. no longer sends the ^@
+-prompt for fig type and owner in autoexplorer
+-no longer adds Federals to planet display.

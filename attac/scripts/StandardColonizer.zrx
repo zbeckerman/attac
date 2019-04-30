@@ -1,0 +1,408 @@
+/* REXX script to colonize a planet for good and evil players. */
+/* Written by earth for ATTAC TCP/IP Helper */
+/* http://www.tw-attac.com  */
+
+
+Call ZocRespond "Option? (A,D,", "A20^M" 
+Call ZocRespond "Avoid this sector in the", "N"
+CALL ZocRespond "[Pause]", " "
+CALL ZocRespond "make this jump blind?", "n"
+
+/*
+  attac_arg1 = sector
+  attac_arg2 = cycles
+  attac_arg3 = leavecolonists
+  attac_arg4 = takefuel
+  attac_arg5 = fuelamount
+  attac_arg6 = warptobeforeterra
+  attac_arg7 = resourceToLeave
+  attac_arg8 = wayToTerra
+  attac_arg9 = wayFromTerra
+*/
+
+terra = "1"
+
+warp1 = "Regular Warping"
+warp2 = "Transwarp"
+warp3 = "Planetary Transport"
+
+/* Stop colonizer if you see this */
+/* BadPeople = "[4]," */
+BadPeople = "[put a corp number here],"
+
+sector = attac_arg1
+IF sector = "ATTAC_ARG1" THEN DO
+  CALL ZocSend "d"
+  CALL ZocWait "]:["
+  sector = GrabIt("]")
+END
+
+safemode = "No"
+/*
+safemode = ZocRequest("See who is online each pass (Press #)", "No", "Yes")
+IF safemode = "" THEN SIGNAL Abend
+*/
+
+sectortotal = ATTAC_GetTotalSectors() 
+IF sectortotal = "" THEN sectortotal = ZocAsk("How many sectors are in this game?", sectortotal) 
+IF sectortotal = "" THEN SIGNAL Abend
+
+ptthere = attac_arg8
+IF ptthere = "ATTAC_ARG8" then do
+	ptthere = ZocRequest("How do you want to move there?", warp1, warp2, warp3)
+	IF ptthere = "" THEN SIGNAL Abend
+END
+
+ptback = attac_arg9
+IF ptback = "ATTAC_ARG9" then do
+	ptback = ZocRequest("How do you want to moveback?", warp1, warp2)
+	IF ptback = "" THEN SIGNAL Abend
+END
+
+
+CALL ZocSend "s"
+hasHoloScanner = ZocWaitMux("You don't have", "Density Scan", "Select (H)olo")
+if hasHoloScanner=2 then do
+  CALL ZocSend "q"
+end
+
+
+CALL ZocSend "l"
+NoPScan = ZocWaitMux("free cargo holds", "Registry#")
+CALL ZocSend "q^M"
+
+planet=attac_arg4
+jump = attac_arg6
+IF ptthere = warp2 | ptthere = warp3 THEN DO
+  IF jump = "ATTAC_ARG6" THEN DO
+	jump = "1"
+	jump = ZocAsk("Which sector would like to twarp before warping to Terra (1=straight to terra)", jump)
+	IF jump = "" THEN SIGNAL Abend
+  END
+END
+
+IF ptthere = warp2 | ptthere = warp3 | ptback = warp2 THEN DO
+  IF NoPScan = 1 THEN DO
+    IF planet = "ATTAC_ARG4" then DO
+	    planet = ZocAsk("Get fuel from which planet?", "")
+	    IF planet = "" THEN DO
+	      SIGNAL Abend
+	    END
+    END
+  END
+END
+
+IF NoPScan = 1 THEN DO
+  drop = attac_arg3
+  IF drop = "ATTAC_ARG3" then DO
+    drop = ZocAsk("Drop colonists on which planet?", planet)
+    IF drop = "" THEN DO
+      SIGNAL Abend
+    END
+  END
+END
+
+IF ptthere = warp1 THEN DO
+  planet = drop
+  jump=1
+END
+
+CALL ZocSend "d"
+CALL ZocWait "]:["
+currentSector = GrabIt("]")
+
+
+testTwarpSector = getTestTwarpSector(currentSector)
+
+CALL ZocSend "m" || testTwarpSector || "^M"
+call attac_message("Checking for Transwarp Drive")
+hasTwarpDrive = ZocWaitMux("shortest path","engage the TransWarp")
+
+if hasTwarpDrive=1 then do
+  CALL ZocSend "NN"
+  call attac_message("Active Transwarp drive found")
+end
+else do
+  CALL ZocSend "N"
+  call attac_message("No Active Transwarp drive found")
+end
+
+
+group = attac_arg7
+IF group = "ATTAC_ARG7" THEN DO
+  group = ZocAsk("Which production group should we put colonists in?", "1")
+  IF group = "" THEN DO
+    SIGNAL Abend
+  END
+END
+
+/* this is so we can automatically stop the colonizer if we see an enemy */
+stopme = 0
+
+fuel = 0
+
+
+IF attac_arg5 = "ATTAC_ARG5" | attac_arg5= "AUTO" THEN DO
+  IF ptthere = warp2 | ptback = warp2 THEN DO
+    CALL ZocSend "c"
+    call ZocWait "Computer activated"
+  END
+  IF ptthere = warp2 THEN DO
+    CALL ZocSend "f"
+    CALL ZocSend sector
+    CALL ZocSend "^M"
+    CALL ZocSend jump
+    call ZocClearBuffer()
+    CALL ZocSend "^M"
+    CALL ZocWait "shortest path ("
+    CALL ZocWait " hops,"
+    data = zoclastline()
+    data = substr(data, 1, length(data)-6)
+    fuel = fuel + (data *3)
+  END
+
+  IF ptback = warp2 THEN DO
+    CALL ZocSend "f"
+    CALL ZocSend terra
+    CALL ZocSend "^M"
+    CALL ZocSend sector
+    call ZocClearBuffer()
+    CALL ZocSend "^M"
+    CALL ZocWait "shortest path ("
+    CALL ZocWait " hops,"
+    data = zoclastline()
+    data = substr(data, 1, length(data)-6)
+    fuel = fuel + (data *3)
+    CALL ZocSend "q"
+    call ZocWait "<Computer deactivated>"
+  END
+  IF ptthere = warp2 & ptback = warp1 THEN DO 
+    CALL ZocSend "q"
+    call ZocWait "<Computer deactivated>"	
+  END
+END
+ELSE DO
+  fuel = attac_arg5
+END
+
+loops = attac_arg2
+IF loops = "ATTAC_ARG2" THEN DO
+  loops = ZocAsk("How many loops should we do?", "")
+  IF loops < 1 THEN DO
+    SIGNAL Abend
+  END
+END
+
+call ATTAC_SetCounterMax(loops)
+
+DO x = loops to 1 BY -1
+
+  IF safemode = "Yes" THEN DO
+
+
+    CALL ZocSend "#"
+    CALL ZocWait "Who's Playing"
+    CALL ZocWait "^M"
+
+    final_result = "Who's Playing"
+    DO FOREVER
+      result = ZocWaitMux("^M", "]:[")
+      
+      IF result = 0 THEN DO
+        result2 = ZocLastLine()
+        IF LENGTH(result2) <> 1 THEN DO
+          result2 = SUBSTR(result2, 1, LENGTH(result2) - 1)
+          final_result = final_result || ", " || result2
+        END
+      END
+
+      IF result = 1 THEN DO
+        LEAVE
+      END
+    END
+    call ATTAC_Message(final_result || " -- " || x || " cycles left")
+  END
+  CALL ZocSend "l"
+  IF NoPScan = 1 THEN DO
+    CALL ZocSend drop
+    CALL ZocSend "^M"
+  END
+
+  CALL ZocSend "snl"
+  CALL ZocSend group
+  CALL ZocSend "^M"
+  call zocwait "Planet command"
+
+  IF planet <> drop THEN DO
+    CALL ZocSend "q"
+    CALL ZocSend "l"
+    IF NoPScan = 1 THEN DO
+      CALL ZocSend planet
+      CALL ZocSend "^M"
+    END
+  END
+
+  if stopme = 1 then do
+   Call ZocSend "d"
+   result = ZocWait("Planet command")
+   CALL ZocSend "d"
+   CALL ZocNotify ("Corp " || BadPeople " member is online. Stopping colonizer.")
+   signal RunLikeHell
+  end 
+
+  IF ptthere = warp2 | ptback = warp2 THEN DO
+    CALL ZocSend "tnt1"
+    CALL ZocSend fuel
+    CALL ZocSend "^M"
+    call zocwait "You load the"
+  END
+
+  IF ptthere = warp1 THEN DO
+    CALL ZocSend "q"
+    CALL ZocWait "Blasting off from"
+    CALL ZocSend("M" || jump || "^M")
+    result1 = ZocWaitMux("the TransWarp drive?","Engage the Autopilot?","Sector  : " || sector2)
+    if result1 = 0 THEN DO
+      CALL ZocSend "ne"
+      call zocwait "Arriving sector"
+    END
+    if result1 = 1 THEN DO
+      CALL ZocSend "e"
+      call zocwait "Arriving sector"
+    END
+    if result1 = 2 THEN DO
+	/* nothing */
+      CALL ZocSend ""
+    END
+  END
+  IF ptthere = warp2 THEN DO
+    CALL ZocSend "q"
+/*    CALL ZocWait "Blasting off from"*/
+
+    if hasTwarpDrive = 1 THEN DO
+	CALL ZocSend("M" || jump || "^MY")
+        CALL ZocWait "Locating beam pinpointed"
+        CALL ZocSend "y"
+/*zev	MoveMe_ATTAC_LIBRARY(jump, 1) */
+    END
+    else do
+      call attac_message("You cannnot select transwarp drive if you do not have one")
+      exit
+    end
+  END
+  IF ptthere = warp3 THEN DO
+    CALL ZocSend "c"
+    CALL ZocWait "Citadel treasury"
+    CALL ZocSend "b"
+    CALL ZocWait "has a range of"
+    CALL ZocSend jump || "^M"
+    CALL ZocWait "Locating beam pinpointed"
+    CALL ZocSend "y"
+  END
+
+
+  IF jump <> 1 THEN DO  
+    CALL ZocSend terra
+    CALL ZocSend "^M"
+    result = ZocWaitMux("engage the TransWarp","Sector  : " || terra)
+    IF result=0 then DO
+      CALL ZocSend "n"
+      CALL ZocWait "Engage the Autopilot?"
+      CALL ZocSend "e"
+      result = ZocWaitMux("Autopilot disengaging.", BadPeople) 
+
+      IF result = 1 THEN DO
+       stopme = 1
+       result = ZocWait("Autopilot disengaging.")
+      END
+      IF result = 2 THEN DO
+        /* we are already at the sector */
+      END
+    end
+    IF result = 640 THEN SIGNAL Abend
+
+  END
+
+  CALL ZocSend "l"
+
+  if hasHoloScanner=2 then do
+    CALL ZocSend "1^M^M^M"
+  end
+  else do
+    CALL ZocSend "^M^M"
+  end
+
+  result=ZocWaitMux("deducted, ","leave the planet")
+/*
+  if result=0 then do
+    turns = GrabIt(" ")
+    IF turns < 10 THEN x = 1
+  end
+*/
+  CALL ATTAC_UpdateCounter(1)
+
+  CALL ZocSend("M" || sector || "^M")
+
+  IF ptback = warp1 THEN DO
+    result = ZocWaitMux("the TransWarp drive?","Engage the Autopilot?","Sector  : " || sector)
+    SELECT
+      WHEN result = 0 THEN DO
+        CALL ZocSend "ne"
+      	call zocwait "Arriving sector"
+      END
+      WHEN result = 1 THEN DO
+        CALL ZocSend "e"
+ 	call zocwait "Arriving sector"
+      END
+      WHEN result = 2 THEN DO
+ /* nothing */
+      END
+    END
+  END
+  IF ptback = warp2 THEN DO
+    if hasTwarpDrive = 1 THEN DO
+      CALL ZocSend "y"
+      CALL ZocWait "Locating beam pinpointed"
+      CALL ZocSend "y"
+    END
+    else do
+      call attac_message("You cannnot select transwarp drive if you do not have one")
+      exit
+    end
+  END
+END
+
+CALL ZocSend "l"
+IF NoPScan = 1 THEN DO
+  CALL ZocSend drop
+  CALL ZocSend "^M"
+END
+CALL ZocSend "snl"
+CALL ZocSend group
+CALL ZocSend "^M"
+CALL ZocSend "q"
+CALL ZocSend "d"
+EXIT
+
+Abend:
+  CALL ZocMsgBox "Script ended abnormally.", 1
+  EXIT
+
+RunLikeHell:
+  CALL ZocMsgBox "Script stopped since someone from corp #" || BadPeople || " is online.", 1
+  EXIT
+
+GrabIt:
+  ARG delimiter
+  it = ""
+  CALL ZocWait delimiter
+  buffer = ZocLastLine()
+  DO ptr = 1 TO LENGTH(buffer)
+    ch = SUBSTR(buffer, ptr, 1)
+    IF ch <> delimiter THEN DO
+      IF ch <> "," THEN it = it || ch
+    END
+  END
+RETURN it
+
+

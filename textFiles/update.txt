@@ -1,0 +1,29 @@
+4.1.8^ATTAC Version 4.1.8 has been released!
+
+New features are...
+
+* Support for TWX file format version 2 using XML 
+* Upgraded the telnet engine to PuTTY .56
+* Upgraded version of REGINA to 3.3 (REXX parsing engine)
+* Fixed "phantom" sector bug that ports/sectors were randomly showing up in the wrong sectors
+* Fixed bug with WorldTrade that gave you an error that the port was a class 0 port
+* Fixed a bug in ZocWaitMux that occured very rarely
+* Fixes to world Trade
+* Fixed colonizer when planet was 1 hop from Terra
+* Modified ZocWaitMux so if it accepts only one string, it will break it into N parts delimited by a pipe sign (|)
+* Added ZocListFiles to the REXX API
+* Added Ability to Reset Games
+* Changed Auto Explorer to better detect enemy fighters
+* Changed Message if you are unregistered and the scripts stops due to that
+* Moved ATTAC data files to a datafiles directory
+* Moved ATTAC scripts files to a scripts directory
+* Using the menus no longer locks the display window
+* Using Microsoft Visual C++ as the compiler instead of GCC
+* Fixed bug in CIM parsing when telnet BINARY Sub-negotiation was enabled.
+* World Trade/World SSM no longer drop figs if they belong to you
+* Messages greater than the length of the message center window are now placed on multiple lines
+* Added Tradewars Notes. Keep notes about all your games.
+* Real time data syncronization enabled
+* Other bug fixes
+
+Go to http://www.tw-attac.com to download the newest version

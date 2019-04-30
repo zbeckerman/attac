@@ -1,0 +1,130 @@
+/* mega-jettison */
+/* written by earth - www.tw-attac.com */
+
+/*
+  attac_arg1 = fuelamount
+  attac_arg2 = orgamount
+  attac_arg3 = equipamount
+  attac_arg4 = type (dump/jettison)
+  attac_arg5 = planet
+  attac_arg6 = cycles
+*/
+
+sector1=""
+sector2=""
+
+fuel="Fuel Ore"
+org="Organics"
+equip="Equipment"
+
+fuelholds = attac_arg1
+orgholds = attac_arg2
+equipholds = attac_arg3
+
+type = attac_arg4
+planet = attac_arg5
+
+IF type = "DUMP" THEN DO
+  CALL ZocSend "l"
+  NoPScan = ZocWaitMux("free cargo holds", "Registry#")
+  CALL ZocSend "q^M"
+END 
+
+IF type = "ATTAC_ARG4" THEN DO
+  type = ZocRequest("What are we doing in sector","JETT","DUMP")
+  IF type="DUMP" THEN DO
+    planet = attac_arg5
+    IF planet = "ATTAC_ARG5" THEN planet = ZocAsk("What planet are we dumping onto")
+  END
+END
+
+if fuelholds="ATTAC_ARG1" THEN fuelholds=27
+if orgholds="ATTAC_ARG2" THEN orgholds=16
+if equipholds="ATTAC_ARG3" THEN equipholds=10
+
+cycle=0
+cycles = attac_arg6
+if cycles = "ATTAC_ARG6" THEN DO
+  cycles = ZocAsk("How many cycles do you want to run","100")
+  if cycles =0 then do
+    call _quit "No cycles selected"
+  end
+END
+
+buyType=""
+if fuelholds>0 then buyType=buyType || "FUELORE"
+if orgholds>0 then buyType=buyType || "ORGANICS"
+if equipholds>0 then buyType=buyType || "EQUIPMENT"
+
+do until cycle=cycles
+  callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("NONE","BEST",fuelholds,orgholds,equipholds,buyType)
+  /* break out of loop if done */
+  if callerresult =1 then do
+    dead=0
+  end
+
+  /* keep cycling here when  you get rejected */
+  do while dead=1
+    dead = 0
+    call ATTAC_Message("Your offer was just rejected at port " || sector1)
+    callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("NONE","BEST",fuelholds,orgholds,equipholds,buyType)
+    /* break out of loop if done */
+    if callerresult = 1 then do
+      dead = 0
+    end
+  end
+
+  IF type = "JETT" THEN DO
+    call zocsend "jy"
+    call zocwait "jettisoned."
+  END
+  IF type = "DUMP" THEN DO
+    call DUMPTOPLANET(planet)
+    call zocwait "Blasting off"
+  END 
+
+ 
+  cycle = cycle + 1
+  call attac_updatecounter(1)
+end /* do */
+
+call _quit "Mega Jettison Completed"
+
+exit
+
+_quit:
+  message = arg(1)
+  call attac_message(message)
+  exit
+return ""
+
+/* start function library */
+
+
+
+DUMPTOPLANET:
+  planet=arg(1)
+
+  CALL ZocSend "l"
+
+  IF NoPScan=1 THEN DO
+    CALL ZocSend planet || "^M"
+    CALL ZocWait ("free cargo holds")
+  END
+
+  IF fuelholds>0 THEN DO
+    CALL ZocSend "tnl1"
+    call ZocSend "^M"
+  END
+  IF orgholds>0 THEN DO
+    CALL ZocSend "tnl2"
+    call ZocSend "^M"
+  END
+  IF equipholds>0 THEN DO
+    CALL ZocSend "tnl3"
+    call ZocSend "^M"
+  END
+
+  CALL ZocSend "q"
+
+RETURN ""

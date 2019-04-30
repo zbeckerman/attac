@@ -1,0 +1,47 @@
+/* REXX */
+
+sector = ZocAsk("Which sector would you like the information on? ")
+
+warps = ATTAC_Get_Sector_Info(sector)
+if warps = 0 then signal Unknown
+call ZocWriteln("Sector " || sector || " has " || warps || " warps")
+
+do warp_num = 1 to warps
+  warp = ATTAC_Get_Sector_Info(sector, warp_num)
+  call ZocWriteln("Warp #" || warp_num || ": " || warp)
+end
+
+info = ATTAC_Get_Port_Info(sector, "TYPE")
+if info = "Unknown" then signal No_Port
+
+call ZocWriteln("Port in " || sector || " is a " || info)
+
+info = ATTAC_Get_Port_Info(sector, "FUEL AMOUNT")
+call ZocWriteln("Fuel amount = " || info)
+
+info = ATTAC_Get_Port_Info(sector, "FUEL PERCENT")
+call ZocWriteln("Fuel amount = " || info)
+
+info = ATTAC_Get_Port_Info(sector, "ORG AMOUNT")
+call ZocWriteln("Org amount = " || info)
+
+info = ATTAC_Get_Port_Info(sector, "ORG PERCENT")
+call ZocWriteln("Org amount = " || info)
+
+info = ATTAC_Get_Port_Info(sector, "EQUIP AMOUNT")
+call ZocWriteln("Equip amount = " || info)
+
+info = ATTAC_Get_Port_Info(sector, "EQUIP PERCENT")
+call ZocWriteln("Equip Percent = " || info)
+
+signal Quit_Script
+
+Unknown:
+call ZocWriteln("Nothing known about sector " || sector)
+signal Quit_Script
+
+No_Port:
+
+call ZocWriteln("No port in sector " || sector)
+
+Quit_Script:

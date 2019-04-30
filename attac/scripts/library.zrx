@@ -1,0 +1,1052 @@
+/* This is the ATTAC REXX Library */
+
+PORT_AND_TRADE_ATTAC_LIBRARY:
+  /* arg(1) is what you are buying
+     arg(2) is what you are selling */
+  selling=arg(1)
+  buying=arg(2)
+  buyingFuelAmount=arg(3)
+  buyingOrgAmount=arg(4)
+  buyingEquipAmount=arg(5)
+  currentCargo=arg(6)
+  sellingFuelAmount=arg(7)
+  portReturnValue = 0
+
+  if minPortAmount="MINPORTAMOUNT" then minPortAmount=20
+  typeOfPortTxt=""
+  minAmountReached=0
+  sellCount=0
+
+  call ZocClearBuffer()
+  CALL ZocSend "p"
+  theResult= zocwaitmux("There is no port in this sector","Captain! Are you sure you wa","choice")
+  if theResult=0 then do
+    call attac_message("There is no port in sector " || sector1)
+    return (1)
+  end
+  if theResult=1 then do
+    call attac_message("The port in sector " || sector1 || " was recently destroyed")
+    call zocsend "^M"
+    return (1)
+  end
+  if theResult=640 then do
+    call attac_message("The port in sector " || sector1 || " is corrupted due to a bug in TWGS. Destroy it or notify sysop!")
+    call zocsend "^M"
+    return (1)
+  end
+  CALL ZocSend "t"
+
+  theResult =  zocwaitmux("Trading %","credits per point")
+  if theResult=1 then do
+    call attac_message("The port in sector " || sector1 || " is a class 0/9. This port is skipped")
+    call zocsend "q"
+    return (1)
+  end  
+  call ATTAC_ClearBuffer()
+  counter=0
+  FuelAmount=0
+  OrgAmount=0
+  EquipAmount=0
+
+  theResult = ZocWaitMux("You have","You don't have anything they want, and", "Selling  ", "Buying   ","Command [TL=","credits per fighter")
+  if theResult=1 then do
+    call attac_message("The port in sector " || sector1 || " is not buying/selling what you have!")
+    return (1)
+  end
+  if theResult=4 then do
+    call attac_message("The port in sector " || sector1 || " is corrupted due to a bug in TWGS. Destroy it or notify sysop!")
+    return (1)
+  end
+
+  if theResult=5 then do
+    call attac_message("The port in sector " || sector1 || " is a class 0 port, ATTAC will not trade here")
+    call zocsend "q"
+    return (1)
+  end
+
+  do while theResult=2 | theResult=3
+    if theResult=2 then do
+      typeOfPortTxt =  typeOfPortTxt || "S"
+    end
+    else do
+      typeOfPortTxt =  typeOfPortTxt || "B"
+    end
+    call zocwait ("   ")
+    theData = zoclastline()
+    if theData="" then do
+      call zocwait ("   ")
+      theData = zoclastline()
+    end
+
+    if counter=0 then do
+       FuelAmount = STRIP(theData, 'B',' ')
+    end
+    if counter=1 then do
+       OrgAmount = STRIP(theData, 'B',' ')
+    end
+    if counter=2 then do
+       EquipAmount = STRIP(theData, 'B',' ')
+    end 
+
+    call zocwait ("%    ")
+    percentLeft = zoclastline()
+    if percentLeft="0      0%" then do
+      percentLeft="0%"
+    end
+
+    if counter=0 then do
+      FuelPercentLeft = STRIP(percentLeft, 'B',' ')
+      FuelPercentLeft = STRIP(FuelPercentLeft, 'B','%')
+    end
+    if counter=1 then do
+      OrgPercentLeft = STRIP(percentLeft, 'B',' ')
+      OrgPercentLeft = STRIP(OrgPercentLeft, 'B','%')
+    end
+    if counter=2 then do
+      EquipPercentLeft = STRIP(percentLeft, 'B',' ')
+      EquipPercentLeft = STRIP(EquipPercentLeft, 'B','%')
+    end
+
+    counter = counter+1
+    theResult = ZocWaitMux("You have","You don't have anything they want, and", "Selling  ", "Buying   ")
+  end
+
+  typeOfPort = GETPORTTYPE_ATTAC_LIBRARY(typeOfPortTxt)
+
+  if typeOfPort=-1 then do
+	call attac_message("typeOfPortTxt: " || typeOfPortTxt)
+    call attac_message("The port (" || typeOfPortTxt || ") in sector " || sector1 || " unknown, ATTAC will not trade here")
+    call zocsend "^M^M^M^M"
+    return (1)
+  end
+
+  call ZocWait " credits and "
+  call ZocWait " empty"
+  data = zoclastline()
+  emptyHolds = substr(data, 1, length(data)-6)
+
+  do FOREVER
+    /*selling =0 buying=1 */
+    buyingSelling = ZocWaitMux("are selling up to ","are buying up to ","Command [TL=")
+    if buyingSelling=2 then LEAVE
+    call ZocWait "."
+    data = zoclastline()
+    availableProduct = substr(data, 1, length(data)-1)
+    if buyingSelling=1 then do
+      call ZocWait "You have "
+      call ZocWait " in"
+      data = zoclastline()
+      emptyHolds = substr(data, 1, length(data)-3)
+    end
+
+    if buying="NONE" & buyingSelling=0 then do
+      if buyingSelling=0 then do
+        call ZocSend "0^M"
+      end
+    end
+    else do
+      if typeOfPort=4 & FuelAmount>0 & OrgAmount>0 & buyingSelling=0 & buying ^= "FUELORE"  & buying ^= "ALL" then do
+        call ZocSend "0^M"
+        buyingSelling = ZocWaitMux("are selling up to ","are buying up to ","Command [TL=")
+        if buyingSelling=2 then return (2)
+      end
+      if typeOfPort=5 & FuelAmount>0 & EquipAmount>0 & buyingSelling=0 & buying ^= "FUELORE" & buying ^= "ALL" then do
+        call ZocSend "0^M"
+        buyingSelling = ZocWaitMux("are selling up to ","are buying up to ","Command [TL=")
+        if buyingSelling=2 then return (2)
+      end
+      if typeOfPort=6 & OrgAmount>0 & EquipAmount>0 & buyingSelling=0 & buying ^= "ORGANICS" & buying ^= "ALL" then do
+        call ZocSend "0^M"
+        buyingSelling = ZocWaitMux("are selling up to ","are buying up to ","Command [TL=")
+        if buyingSelling=2 then return (2)
+      end
+      if typeOfPort=7 & FuelAmount>0 & OrgAmount>0 & buyingSelling=0 & buying = "ORGANICS" & buying ^= "ALL" then do
+        call ZocSend "0^M"
+        buyingSelling = ZocWaitMux("are selling up to ","are buying up to ","Command [TL=")
+        if buyingSelling=2 then return (2)
+      end
+      else if typeOfPort=7 & FuelAmount>0 & OrgAmount>0 & EquipAmount>0 & buyingSelling=0 & buying = "EQUIPMENT" & buying ^= "ALL" then do
+        call ZocSend "0^M0^M"
+        buyingSelling = ZocWaitMux("are selling up to ","are buying up to ","Command [TL=")
+        if buyingSelling=2 then return (2)
+        call zocwait "cargo holds."
+      end
+
+      call ZocClearBuffer()
+
+      /* buying cargo */
+      if buyingSelling=0 & typeOfPort=1 & buyingEquipAmount>=0 then do
+        call ZocSend buyingEquipAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=2 & buyingOrgAmount>=0 then do
+        call ZocSend buyingOrgAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=3 & buyingFuelAmount>=0 then do
+        call ZocSend buyingFuelAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=4 & buyingFuelAmount>=0 & sellCount=0 then do
+        call ZocSend buyingFuelAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=4 & buyingOrgAmount>=0  & sellCount=1 then do
+        call ZocSend buyingOrgAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=5 & buyingFuelAmount>=0 & sellCount=0 then do
+        call ZocSend buyingFuelAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=5 & buyingEquipAmount>=0  & sellCount=1 then do
+        call ZocSend buyingEquipAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=6 & buyingOrgAmount>=0 & sellCount=0 then do
+        call ZocSend buyingOrgAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=6 & buyingEquipAmount>=0  & sellCount=1 then do
+        call ZocSend buyingEquipAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=7 & buyingFuelAmount>=0 & sellCount=0 then do
+        call ZocSend buyingFuelAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=7 & buyingOrgAmount>=0  & sellCount=1 then do
+        call ZocSend buyingOrgAmount || "^M"
+      end
+      else if buyingSelling=0 & typeOfPort=7 & buyingEquipAmount>=0  & sellCount=2 then do
+        call ZocSend buyingEquipAmount || "^M"
+      end
+      /*selling cargo*/
+      else if buyingSelling=1 & typeOfPort=1 & sellingFuelAmount>=0 then do
+        call ZocSend sellingFuelAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=1 & sellingOrgAmount>=0 then do
+        call ZocSend sellingOrgAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=2 & sellingFuelAmount>=0 then do
+        call ZocSend sellingFuelAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=2 & sellingEquipAmount>=0 then do
+        call ZocSend sellingEquipAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=3 & sellingOrgAmount>=0 then do
+        call ZocSend sellingOrgAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=3 & sellingEquipAmount>=0 then do
+        call ZocSend sellingEquipAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=4 & sellingEquipAmount>=0 then do
+        call ZocSend sellingEquipAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=5 & sellingOrgAmount>=0 then do
+        call ZocSend sellingOrgAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=6 & sellingEquipAmount>=0 then do
+        call ZocSend sellingEquipAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=8 & sellingFuelAmount>=0 then do
+        call ZocSend sellingFuelAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=8 & sellingOrgAmount>=0 then do
+        call ZocSend sellingOrgAmount || "^M"
+      end
+      else if buyingSelling=1 & typeOfPort=8 & sellingEquipAmount>=0 then do
+        call ZocSend sellingEquipAmount || "^M"
+      end
+      else do
+        call ZocSend "^M"
+      end
+       
+      theResult1=ZocWaitMux("sell them for ","buy them for ","Command [TL=","empty cargo holds")
+
+      if theResult1 <3 then do
+        if theResult=2 then return (2)
+        offer=GETITALL_ATTAC_LIBRARY(0,0)
+	if worstPricePercent="WORSTPRICEPERCENT" then do
+          if pos("FUELORE", currentCargo) >0 & FuelPercentLeft < minPortAmount then do
+            Call ATTAC_Message ("Minimum Amount ("|| minPortAmount || "%) at Port Reached for Fuel Ore. Paired Port Done")
+            portReturnValue=3
+          end
+          if pos("ORGANICS", currentCargo) >0 & OrgPercentLeft < minPortAmount then do
+            Call ATTAC_Message ("Minimum Amount ("|| minPortAmount || "%) at Port Reached for Organics. Paired Port Done")
+            portReturnValue=3
+          end
+          if pos("EQUIPMENT", currentCargo) >0 & EquipPercentLeft < minPortAmount then do
+            Call ATTAC_Message ("Minimum Amount ("|| minPortAmount || "%) at Port Reached for Equipment. Paired Port Done")
+            portReturnValue=3
+          end
+	end
+        leaveHaggle=0
+        if buyingSelling=0 then do
+          call BUYHAGGLE_ATTAC_LIBRARY (offer)
+          if leaveHaggle=1 then LEAVE
+        end
+        else do
+          call SELLHAGGLE_ATTAC_LIBRARY (offer)
+          if leaveHaggle=1 then LEAVE
+        end
+      end
+    end
+
+    sellCount = sellCount + 1
+  end
+return portReturnValue
+
+GETPORTTYPE_ATTAC_LIBRARY:
+portType = arg(1)
+
+if portType="BBS" then   RETURN 1
+if portType="BSB" then   RETURN 2
+if portType="SBB" then   RETURN 3
+if portType="SSB" then   RETURN 4
+if portType="SBS" then   RETURN 5
+if portType="BSS" then   RETURN 6
+if portType="SSS" then   RETURN 7
+if portType="BBB" then   RETURN 8
+
+RETURN -1
+
+SELLHAGGLE_ATTAC_LIBRARY:
+  offer1=arg(1)
+
+  haggle106=offer1%(94/100)-1
+  haggle106=trunc(haggle106,0)
+  haggle105=offer1%(95/100)-1
+  haggle105=trunc(haggle105,0)
+  haggle104=offer1%(96/100)-1
+  haggle104=trunc(haggle104,0)
+  haggle103=offer1%(97/100)-1
+  haggle103=trunc(haggle103,0)
+  haggle102=offer1%(98/100)-1
+  haggle102=trunc(haggle102,0)
+  haggle101=offer1%(99/100)-1
+  haggle101=trunc(haggle101,0)
+  haggle100=offer1%(100/100)
+  haggle100=trunc(haggle100,0)
+
+  if worldHaggle =0 then do
+    call zocsend haggle100
+  end
+  else do
+    call zocsend haggle105
+  end
+
+  call zocsend "^M"
+
+  a=3
+  DO WHILE a<>0
+    theResult= ZocWaitMux("You have", "buy them for ","final offer","We're not int")
+    SELECT
+      WHEN theResult=0 THEN x=2
+      WHEN theResult=1 THEN x=1
+      WHEN theResult=2 THEN x=1
+      WHEN theResult=3 THEN x=3
+      OTHERWISE x=1
+    END
+    if x=1 then DO
+      if a=4 then do
+        call zocsend haggle105
+        call zocsend "^M"
+      end
+      if a=3 then do
+        call zocsend haggle104
+        call zocsend "^M"
+      end
+      if a=2 then do
+        call zocsend haggle103
+        call zocsend "^M"
+      end
+      if a=1 then do
+        call zocsend haggle102
+        call zocsend "^M"
+      end
+      if a=0 then do
+        call zocsend haggle101
+        call zocsend "^M"
+      end
+      a = a - 1
+    end
+    if x=2 then do
+      a = 0
+      dead = 0
+      return(0)
+    end
+    if x=3 then do
+      dead = 1
+      theResult = -1
+      DO while theResult <> 0
+        theResult = ZocWaitMux("Command [TL=","are selling up to ","are buying up to ")
+        if theResult = 1 | theResult = 2 then do
+          call ZocSend("0^M")
+        end
+      end
+      leaveHaggle=1
+      return (1)
+    end
+  END
+
+RETURN (0)
+
+
+BUYHAGGLE_ATTAC_LIBRARY:
+
+  offer2=arg(1)
+  haggle106=offer2*94/100-1
+  haggle106=trunc(haggle106,0)
+  haggle105=offer2*95/100-1
+  haggle105=trunc(haggle105,0)
+  haggle104=offer2*96/100-1
+  haggle104=trunc(haggle104,0)
+  haggle103=offer2*97/100-1
+  haggle103=trunc(haggle103,0)
+  haggle102=offer2*98/100-1
+  haggle102=trunc(haggle102,0)
+  haggle101=offer2*99/100-1
+  haggle101=trunc(haggle101,0)
+  haggle100=offer2*100/100
+  haggle100=trunc(haggle100,0)
+
+  if worldHaggle =0 then do
+    call zocsend haggle100
+  end
+  else if worstPricePercent<>"WORSTPRICEPERCENT" then do
+    call zocsend trunc(haggle100*(worstPricePercent/100)-1)
+  end
+  else do
+    call zocsend haggle105
+  end
+  call zocsend "^M"
+
+  a = 3
+  DO WHILE a <> 0
+    theResult= ZocWaitMux("You have", "sell them for ","final offer","We're not int")
+    SELECT
+      WHEN theResult=0 THEN x=2
+      WHEN theResult=1 THEN x=1
+      WHEN theResult=2 THEN x=1
+      WHEN theResult=3 THEN x=3
+      OTHERWISE x=1
+    END
+
+    if x = 1 then DO
+      if a = 4 then do
+        call zocsend haggle105
+        call zocsend "^M"
+      end
+      if a = 3 then do
+        call zocsend haggle104
+        call zocsend "^M"
+      end
+      if a = 2 then do
+        call zocsend haggle103
+        call zocsend "^M"
+      end
+      if a = 1 then do
+        call zocsend haggle102
+        call zocsend "^M"
+      end
+      if a = 0 then do
+        call zocsend haggle101
+        call zocsend "^M"
+      end
+      a = a - 1
+    end
+
+    if x = 2 then do
+      a = 0
+      dead = 0
+      return 0
+    end
+    if x = 3 then do
+      dead = 1
+      theResult = -1
+      DO while theResult <> 0
+        theResult = ZocWaitMux("Command [TL=","are selling up to ","are buying up to ")
+        if theResult = 1 | theResult = 2 then do
+          call ZocSend("0^M")
+        end
+      end
+      leaveHaggle=1
+      return (1)
+    end
+  END
+RETURN 0
+
+
+GETITALL_ATTAC_LIBRARY:
+  holdfinal=""
+  call zocwait " credits"
+  holds=zoclastline()
+  DO addchar=1 to length(holds)-8
+    holdsit=substr(holds,addchar,1)
+    if holdsit<>"," then do
+      holdfinal=holdfinal||holdsit
+    end
+  END
+RETURN holdfinal
+
+
+MoveMe_ATTAC_LIBRARY:
+  MoveTo = arg(1)
+  TransWarp = arg(2)
+  dFigs = arg(3)
+  dMines = arg(4)
+  dFigType = arg(5)
+  dFigOwner = arg(6)
+  dFigAmount = arg(7)
+  dMineType = arg(8)
+  dMineOwner = arg(9)
+  dMineAmount = arg(10)
+  dHoloScan = arg(11)
+
+
+  if dFigs="" then dFigs=0
+  if dMines="" then dMines=0
+
+  if sectortotal="SECTORTOTAL" then sectortotal=ATTAC_GetTotalSectors()
+
+  call ZocSend(MoveTo)
+
+  if sectortotal>5000 then do
+    call zocsend "^M"
+  end
+  else do
+    if MoveTo <= 599 then do
+      call zocsend "^M"
+    end
+  end
+
+  IF TransWarp = 0 THEN DO
+    theResult2 = ZocWaitMux("engage the TransWarp drive", "The shortest path", "Sector  :", "really want to warp there?", "You are already","Avoid this sector in the","No route within")
+    IF theResult2 = 4 THEN DO
+	theResult2 = 2
+	call zocsend "d"
+    END
+    IF theResult2 = 5 THEN DO
+      theResult2=2
+    END
+    IF theResult2 = 3 THEN DO
+      CALL ZocSend("N")
+      RETURN 2
+    END
+    theResult3=0
+    IF theResult2 = 0 THEN DO
+      CALL ZocSend "N"
+      theResult3= ZocWaitMux("The shortest path","No route within")
+    END
+    IF theResult2 = 6 | theResult3=1 THEN DO
+      CALL ZocSend("N")
+      RETURN 2
+    END
+
+    IF theResult2 \= 2 THEN DO
+      CALL Move_Step_ATTAC_LIBRARY(MoveTo, dFigs, dMines, dFigType, dFigOwner, dFigAmount, dMineType, dMineOwner, dMineAmount)
+    END
+    ELSE DO
+      holoScan=0
+      if ZocWaitMux("1^M","2^M","3^M","4^M","5^M","6^M","7^M","8^M","9^M","0^M","- (",") -") \= 0 then holoScan=1
+      call ZocWait ("Command")
+
+      IF dHoloScan ^="0" & holoScan=1 & lower(hasholoScan)=lower("HASHOLOSCAN") THEN DO
+        CALL ZocSend("SH")
+        CALL ZocWait("Select (H)olo Scan or (D)ensity Scan")
+      END
+
+      if dFigs=1 then CALL DropFigs_ATTAC_LIBRARY(MoveTo, dFigType, dFigOwner, dFigAmount)
+      if dMines=1 then CALL DropMines_ATTAC_LIBRARY(MoveTo, dMineType, dMineOwner, dMineAmount)
+    END
+  END
+  ELSE
+  DO
+    theResult2 = ZocWaitMux("engage the TransWarp drive", "The shortest path", "Sector  :", "really want to warp there?", "You are already")
+    IF theResult2 = 4 THEN theResult2 = 2
+    IF theResult2 = 3 THEN DO
+      CALL ZocSend("N")
+      RETURN 2
+    END
+    IF theResult2 = 0 THEN DO
+      CALL ZocSend("Y")
+      theResult3 = ZocWaitMux("No locating beam", "not have enough Fuel Ore", "TransWarp Locked.")
+      IF theResult3 = 0 THEN DO
+        CALL ATTAC_Message("WARNING: You can not blind transwarp")
+        RETURN 1
+      END
+      IF theResult3 = 1 THEN DO
+        CALL ATTAC_Message("STOPPED: Not enough fuel")
+        RETURN 1
+      END
+      IF theResult3 = 2 THEN DO
+        CALL ZocSend("Y")
+      END
+
+      theResult4= ZocWaitMux("Command [TL=","Avoid this sector in the")
+      if theResult4=1 then call ZocSend "N"
+    END
+    IF theResult2 = 1 THEN DO
+      CALL Move_Step_ATTAC_LIBRARY(MoveTo, dFigs, dMines)
+    END
+
+    IF theResult2 = 2 THEN DO
+      holoScan=0
+ /*     if ZocWaitMux("1^M","2^M","3^M","4^M","5^M","6^M","7^M","8^M","9^M","0^M","- (",") -") \= 0 then holoScan=1
+*/
+      call ZocWait "Warps to Sector"
+
+      IF holoScan=1 & lower(hasholoScan)=lower("HASHOLOSCAN") THEN DO
+        CALL ZocSend("SH")
+        CALL ZocWait("Select (H)olo Scan or (D)ensity Scan")
+      END
+
+      if dFigs=1 then CALL DropFigs_ATTAC_LIBRARY(MoveTo, dFigType, dFigOwner, dFigAmount)
+      if dMines=1 then CALL DropMines_ATTAC_LIBRARY(MoveTo, dMineType, dMineOwner, dMineAmount)
+    END
+  END
+RETURN 0
+
+Move_Step_ATTAC_LIBRARY:
+  MoveTo = arg(1)
+  dFigs = arg(2)
+  dMines = arg(3)
+  dFigType = arg(4)
+  dFigOwner = arg(5)
+  dFigAmount = arg(6)
+  dMineType = arg(7)
+  dMineOwner = arg(8)
+  dMineAmount = arg(9)
+
+  CALL ZocWait("is:")
+
+  sec_cnt_ATTAC_LIBRARY = 0;
+  DO FOREVER
+
+    theResult2 = ZocWaitMux(" > ", " >^M", "Engage")
+    SELECT
+     WHEN theResult2 = 0 THEN x=1
+     WHEN theResult2 = 1 THEN x=1
+     WHEN theResult2 = 2 THEN x=2
+     OTHERWISE x=2
+    END
+
+    if x=1 then do
+      tmpString=""
+      finalString=""
+      sec_cnt_ATTAC_LIBRARY = sec_cnt_ATTAC_LIBRARY + 1
+      tmpString = zoclastline()
+      tmpString = substr(tmpString, 1, length(tmpString)-3)
+
+      DO addchar=1 to length(tmpString)
+       holdsit=substr(tmpString,addchar,1)
+       if holdsit<>"(" & holdsit<>")" & holdsit<>" " & holdsit<>"^M" then DO
+         finalString=finalString||holdsit
+       end
+      END
+      sec.sec_cnt_ATTAC_LIBRARY = finalString
+    end
+
+    if x=2 then do
+      sec_cnt_ATTAC_LIBRARY = sec_cnt_ATTAC_LIBRARY + 1
+      finalString=""
+      tmpString = moveTo
+      DO addchar=1 to length(tmpString)
+       holdsit=substr(tmpString,addchar,1)
+       if holdsit<>"(" & holdsit<>")" & holdsit<>" " & holdsit<>"^M" then DO
+         finalString=finalString||holdsit
+       end
+      END
+
+      sec.sec_cnt_ATTAC_LIBRARY = finalString
+      LEAVE
+    end
+  end
+
+  CALL ZocSend("N")
+
+  do innerloop = 2 to sec_cnt_ATTAC_LIBRARY		
+    call zocclearbuffer()
+    planetAvoid=0
+    call ZocSend(sec.innerloop)	
+    call checksizeenter(sec.innerloop)
+    hasPort_ATTAC_LIBRARY=0
+    theResult4 = ZocWaitMux("]:[" || sec.innerloop || "]","Ports   : ","Planets : ","Avoid this sector in the","(Under Construction -")
+
+    do while theResult4>0
+      if theResult4=1 then do
+        hasPort_ATTAC_LIBRARY=1
+ 	isDestroyed_ATTAC_LIBRARY=ZocWaitMux(", Class ","<=-DANGER-=>")
+ 	if isDestroyed_ATTAC_LIBRARY=0 then do
+ 	  call zocwait ")" 
+  	  portstring_ATTAC_LIBRARY= zoclastline() 
+	  porttype_ATTAC_LIBRARY = GETPORTTYPE(substr(portstring_ATTAC_LIBRARY, 4,3)) 
+        end
+	else do  
+   	  hasPort_ATTAC_LIBRARY=0
+ 	end
+    
+        if porttype_ATTAC_LIBRARY<=0 then do
+          hasPort_ATTAC_LIBRARY=0
+	end
+      end
+      if theResult4=2 then do
+        if avoidPlanets=1 then do
+  	  planetAvoid=sec.innerloop
+        end
+      end
+      if theResult4=3 then do
+        call ZocClearBuffer()
+        call ZocSend "N"
+      end
+      if theResult4=4 then do
+        hasPort_ATTAC_LIBRARY=0            
+      end
+          
+      theResult4 = ZocWaitMux("]:[" || sec.innerloop || "]","Ports   : ","Planets : ","Avoid this sector in the","(Under Construction -")
+    end
+
+    holoScan=1
+
+
+    sectorCount_ATTAC_LIBRARY= densityScan(sec.innerloop)
+
+    i=0
+    avoidingAdjacent_ATTAC_LIBRARY=0
+    do while i < sectorCount_ATTAC_LIBRARY
+	 /* scanarray = 1-sector 2-density 3-warps 4-navhaz 5-anom */
+      if scanarray.2.i >=500 then do
+        holoScan=1
+      end
+      else if scanarray.4.i >0 then do
+        avoidarray.numavoids=scanarray.1.i
+        numavoids=numavoids+1	
+        avoidingAdjacent_ATTAC_LIBRARY=avoidingAdjacent_ATTAC_LIBRARY+1
+      end
+      else if scanarray.5.i ="Y" then do
+        avoidarray.numavoids=scanarray.1.i
+        numavoids=numavoids+1
+	avoidingAdjacent_ATTAC_LIBRARY=avoidingAdjacent_ATTAC_LIBRARY+1
+      end
+      i=i+1
+    end
+    if avoidingAdjacent_ATTAC_LIBRARY =sectorCount_ATTAC_LIBRARY then do
+      call attac_message ("No valid sectors to warp to")
+      exit
+    end
+
+    if holoScan=1 then call doholoScan(sec.innerloop, sec.innerloop)
+
+    if trademove = 1 & hasPort_ATTAC_LIBRARY=1 & sec.innerloop ^= stardock then do
+      dead=0
+      callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","BEST","-1","-1","-1","BEST")
+
+      /* break out of loop if done */
+      if callerresult =1 then do
+        dead=0
+      end
+
+      /* keep cycling here when  you get rejected */
+      do while dead=1
+        dead = 0
+        call ATTAC_Message("Your offer was just rejected at port " || sec.innerloop)
+        callerresult = PORT_AND_TRADE_ATTAC_LIBRARY("BEST","BEST","-1","-1","-1","BEST")
+        /* break out of loop if done */
+        if callerresult = 1 then do
+          dead = 0
+        end
+      end
+    end
+
+    if dfig=1 then do
+      ptype=ATTAC_Get_Port_info(sec.innerloop,"TYPE")
+      if _in(ptype,1,2,3,4,5,6,7,8) then do
+        CALL DropFigs_ATTAC_LIBRARY(sec.innerloop, dFigType, dFigOwner, dFigAmount)
+	if dMines=1 then CALL DropMines_ATTAC_LIBRARY(sec.innerloop, dMineType, dMineOwner, dMineAmount)
+      end
+    end
+
+    if dfig=2 then do
+      CALL DropFigs_ATTAC_LIBRARY(sec.innerloop, dFigType, dFigOwner, dFigAmount)
+      if dMines=1 then CALL DropMines_ATTAC_LIBRARY(sec.innerloop, dMineType, dMineOwner, dMineAmount)
+    end
+
+    if innerloop^=sec_cnt_ATTAC_LIBRARY then next=innerloop+1
+    i=0
+    do while i<numavoids & numavoids ^= "NUMAVOIDS"
+      if avoidarray.i=sec.next & sec.next>0 then do
+	call attac_message("Skipping " || exploresector || " since " || sec.next || " is in the path and it is not a safe sector")
+        innerloop=sec_cnt_ATTAC_LIBRARY
+      end
+      i=i+1
+    end
+
+    if (avoidfignum>0 & planetAvoid>1) | planetAvoid>0 then do
+      call avoidsector(planetAvoid)		
+      innerloop=sec_cnt_ATTAC_LIBRARY			
+      avoidarray.numavoids=sec.next	
+      numavoids=numavoids+1			
+    end
+
+  end
+
+RETURN
+
+CheckSizeEnter:
+sectorEnter=arg(1)
+  if sectortotal="SECTORTOTAL" then sectortotal=ATTAC_GetTotalSectors()
+  if sectortotal>5000 then do
+    call ZocSend("^M")
+  END
+  else do
+    if sectorEnter <= 599 then do
+      call ZocSend("^M")
+    END
+  END
+RETURN
+
+
+DropFigs_ATTAC_LIBRARY:
+  sector_ATTAC_LIBRARY = arg(1)
+  type_ATTAC_LIBRARY = arg(2)
+  owner_ATTAC_LIBRARY= arg(3)
+  amount_ATTAC_LIBRARY= arg(4)
+
+  if ATTAC_HasSectorFig(sectorFig) ^=0 & ATTAC_HasSectorFig(sectorFig) ^= 2 then do  
+    if stardock="STARDOCK" then stardock=ATTAC_GetStardockSector()
+
+    if owner_ATTAC_LIBRARY="" then owner_ATTAC_LIBRARY="C"
+    if amount_ATTAC_LIBRARY="" then amount_ATTAC_LIBRARY="1"
+    if type_ATTAC_LIBRARY="" then type_ATTAC_LIBRARY="T"
+
+    if sector_ATTAC_LIBRARY > 10 & sector_ATTAC_LIBRARY \= stardock then do
+      call ZocSend "f"
+      theResult=zocwaitmux("not under your control","defending this sector")
+      if theResult=1 then do
+        call ZocSend amount_ATTAC_LIBRARY || "^M" || owner_ATTAC_LIBRARY || type_ATTAC_LIBRARY
+        call ZocWait "in close support"
+      end
+    end
+  end
+return
+
+
+DropMines_ATTAC_LIBRARY:
+
+  sector_ATTAC_LIBRARY = arg(1)
+  type_ATTAC_LIBRARY= arg(2)
+  owner_ATTAC_LIBRARY= arg(3)
+  amount_ATTAC_LIBRARY=arg(4)
+
+  if stardock="STARDOCK" then stardock=ATTAC_GetStardockSector()
+
+  if type_ATTAC_LIBRARY="" then type_ATTAC_LIBRARY="1"
+  if owner_ATTAC_LIBRARY="" then owner_ATTAC_LIBRARY="C"
+  if amount_ATTAC_LIBRARY="" then amount_ATTAC_LIBRARY="1"
+
+  if sector_ATTAC_LIBRARY > 10 & sector_ATTAC_LIBRARY \= stardock then do
+    call ZocSend "h" || type_ATTAC_LIBRARY
+    theResult2=ZocWaitMux("not under your","mines available")
+    if theResult2 = 1 then do
+      call ZocSend amount_ATTAC_LIBRARY || "^M" || owner_ATTAC_LIBRARY
+
+      theResult1 = ZocWaitMux("that many mines","on board")
+      if theResult1 = 0 then do
+        if type_ATTAC_LIBRARY=1 then do
+          call attac_message("You are attempting to drop armid mines in sector " || sector_ATTAC_LIBRARY || " but you have none on board")
+        end
+        else do
+          call attac_message("You are attempting to drop limpit mines in sector " || sector_ATTAC_LIBRARY || " but you have none on board")
+        end
+      end
+    end
+    else do
+      call attac_message("The mines in sector " || sector_ATTAC_LIBRARY || " are not under your control")
+    end
+  end
+
+return
+
+RingSectorWithFigs_ATTAC_LIBRARY:
+
+  sector_ATTAC_LIBRARY = arg(1)
+  figcount_ATTAC_LIBRARY = arg(2)
+  figowner_ATTAC_LIBRARY = arg(3)
+  figtype_ATTAC_LIBRARY = arg(4)
+  if sectortotal="SECTORTOTAL" then sectortotal=ATTAC_GetTotalSectors()
+
+  warp_count_ATTAC_LIBRARY = ATTAC_Get_Sector_Info(sector_ATTAC_LIBRARY) 
+
+  DO warp_ATTAC_LIBRARY = 1 to warp_count_ATTAC_LIBRARY
+    cursector_ATTAC_LIBRARY = ATTAC_Get_Sector_Info(sector_ATTAC_LIBRARY, warp_ATTAC_LIBRARY) 
+
+    call zocsend cursector_ATTAC_LIBRARY
+ 
+    if sectortotal>5000 then do
+      call zocsend "^M"
+    end
+    else do
+      if cursector_ATTAC_LIBRARY <= 599 then do
+        call zocsend "^M"
+      end
+    end 
+
+    result_ATTAC_LIBRARY = ZocWaitMux("Sector  : "||cursector_ATTAC_LIBRARY,"xpress","You are already in that sector","engage the TransWarp")
+
+    if result_ATTAC_LIBRARY=1 then do
+      call zocsend "e"
+      call ZocWait "Arriving sector"
+    end
+
+    if result_ATTAC_LIBRARY=3 then do
+      call zocsend "ne"
+      call ZocWait "Arriving sector"
+    end
+
+    call zocsend "f"
+    call ZocWait "defending this sector?"
+    call zocsend figcount_ATTAC_LIBRARY || "^M"
+    call zocsend figowner_ATTAC_LIBRARY
+    call zocsend figtype_ATTAC_LIBRARY
+
+    call ZocWait "Command [TL="
+  END 
+return
+
+densityScan:	/* function fills arrays with details about the surrounding sectors */
+  ATTAC_theSector = arg(1)
+  call ZocClearBuffer
+  call ZocSend("sd") 
+  call ZocWait("------^M") 
+  a=0
+  do forever
+    call ZocWait("^M")
+    pstr=ZocLastLine()
+    if length(pstr)<=1 then do
+	call ZocWait("]:[" || ATTAC_theSector || "]")
+	return a
+    end
+    
+    call justnums(substr(pstr, 8, 6)) 
+    scanarray.1.a = finalstr        /* scanarray = 1-sector 2-density 3-warps 4-navhaz 5-anom */
+    call justnums(substr(pstr, 28, 6)) 
+    scanarray.2.a = finalstr 
+    call justnums(substr(pstr, 43, 1)) 
+    scanarray.3.a = finalstr 
+    call justnums(substr(pstr, 59, 3)) 
+    scanarray.4.a = finalstr 
+    scanarray.5.a = substr(pstr, 74, 1)  /* either o or s */ 
+    a=a+1
+  end 
+return a
+
+
+doholoScan:
+  avoidSec=0
+  theSector = arg(1)
+  nextSector = arg(2)
+  call ZocClearBuffer
+  call ZocSend("SH")
+  /* this clears the buffer until the scan */
+  call zocwait ("Long Range Scan")
+
+  skipSector=0
+  do FOREVER
+
+
+    if theSector=0 then do
+      returnVal=ZocWaitMux("]:[","Planets : ","Sector  : ","Fighters: ")
+    end
+    else do
+      returnVal=ZocWaitMux("]:[" || theSector || "]","Planets : ","Sector  : ","Fighters: ")
+    end
+
+    if returnVal=0 then LEAVE
+    else if returnVal=1 & avoidPlanets=1 then do
+      planetAvoid=avoidSec
+      call attac_message ("Sector " || avoidSec || " has a planet in it")
+      if nextSector=avoidSec then skipSector=1
+    end
+    else if returnVal=1 then do
+	/* do nothing here */
+    end
+    else if returnVal=2 then do
+	theResult=ZocWaitMux("in")
+	if theResult=640 then do
+ 	  LEAVE
+ 	end
+	data = zoclastline()
+        avoidSec = substr(data, 1, length(data)-2)
+    end
+    else if returnVal=3 & avoidingNFigs=1 then do
+	theResult=ZocWait("(")
+        if theResult=640 then LEAVE
+	data = zoclastline()
+ 	data = substr(data, 1, length(data)-1)
+	data =ZocString("REMOVECHARS",data,",")
+
+	if data > avoidfignum then do
+          planetAvoid=avoidSec
+	  call attac_message ("Sector " || avoidSec || " has " || data || " fighters in it")
+          if nextSector=avoidSec then skipSector=1
+	end
+    end
+    else if returnVal=3 then do
+	/* do nothing here */
+    end
+    else do
+      call attac_message ("Holo scan timeout")
+      LEAVE
+    end
+  end
+
+
+return
+
+avoidsector:						/* function adds next sector to avoid list if enemy figs in it */
+  nextsector=arg(1) 
+  if nextsector>1 then do
+    call ATTAC_Message("Avoiding " || nextsector)
+    ZocSend("cv") 
+    ZocSend(nextsector || "^M") 
+    ZocSend("Q") 
+    ZocWait("Computer deactivated") 
+  end
+return 
+
+getTestTwarpSector:
+   t_cursector=arg(1) 
+   t_new_sector=1
+   t_result=1    
+   do while t_result\=0
+     t_warp_count = ATTAC_Get_Sector_Info(t_cursector) 
+     t_result=0
+     DO t_warp = 1 to t_warp_count 
+       t_sector = ATTAC_Get_Sector_Info(t_cursector, t_warp) 
+       if t_sector==t_new_sector then t_result=1
+     END 
+     if t_result==1 then t_new_sector=t_new_sector+1
+   end
+
+return (t_new_sector)
+
+_in: 	
+ ir=0 					
+ ii=2 
+ if (arg(1)=="") | (arg(2)=="") then idone=1 
+ else idone=0 
+ do while \idone 
+  if arg(1)==arg(ii) then do 
+   ir=1 
+   idone=1 
+  end /* if */ 
+  ii=ii+1 
+  if arg(ii)=="" then idone=1 
+ end /* do while */ 
+return(ir)
+
+
+
+justnums:
+  finalstr=""                           
+  tempstr = arg(1) 
+  do addchar=1 to length(tempstr) 
+    holdsit=substr(tempstr,addchar,1) 
+    if holdsit="(" then uethissec=1      
+    if _in(holdsit,1,2,3,4,5,6,7,8,9,0) then finalstr=finalstr||holdsit 
+  end 
+return(finalstr)
+
+
+return

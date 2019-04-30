@@ -1,0 +1,260 @@
+/* REXX script to colonize a planet. */
+
+CALL ZocRespond "[Pause]", " "
+CALL ZocRespond "make this jump blind?", "n"
+CALL ZocTimeout 30
+
+CALL ZocSend "v"
+ans=zocwaitmux("ports")
+SELECT
+ WHEN ans=0 THEN tsectors=_stripnum2(zoclastline())
+ WHEN ans=640 THEN SIGNAL Abend
+END
+tsectors = RIGHT(tsectors, 5)
+
+CALL ZocSend "d"
+CALL ZocWait "]:["
+sector = GrabIt("]")
+
+safemode = ZocRequest("Run in SAFE mode? (See who is online each pass)", "Yes", "No")
+IF safemode = "" THEN SIGNAL Abend
+
+jump = "1"
+jump = ZocAsk("What is your jump point?", jump)
+IF jump = "" THEN SIGNAL Abend
+
+CALL ZocSend "l"
+NoPScan = ZocWaitMux("Planet command", "which planet")
+CALL ZocSend "q^M"
+
+IF NoPScan = 1 THEN DO
+  planet = ZocAsk("Get fuel from which planet?", "")
+  IF planet = "" THEN DO
+    SIGNAL Abend
+  END
+END
+
+pt = ZocRequest("Use planet transporter?", "Yes", "No")
+IF pt = "" THEN SIGNAL Abend
+
+IF NoPScan = 1 THEN DO
+  drop = ZocAsk("Drop colonists on which planet?", planet)
+  IF drop = "" THEN DO
+    SIGNAL Abend
+  END
+END
+
+group = ZocAsk("Which production group should we put colonists in?", "1")
+IF group = "" THEN DO
+  SIGNAL Abend
+END
+
+fuel = 0
+CALL ZocSend "c"
+IF pt <> "Yes" THEN DO
+  CALL ZocSend "f"
+  CALL ZocSend sector
+  CALL ZocSend "^M"
+  CALL ZocSend jump
+  CALL ZocSend "^M"
+  CALL ZocWait "is:"
+  DO FOREVER
+    result = ZocWaitMux(">", "?")
+    SELECT
+      WHEN result = 0 THEN fuel = fuel + 3
+      WHEN result = 1 THEN LEAVE
+    END
+  END
+END
+CALL ZocSend "f"
+CALL ZocSend "1"
+CALL ZocSend "^M"
+CALL ZocSend sector
+CALL ZocSend "^M"
+CALL ZocWait "is:"
+
+DO FOREVER
+  result = ZocWaitMux(">", "?")
+  SELECT
+    WHEN result = 0 THEN fuel = fuel + 3
+    WHEN result = 1 THEN LEAVE
+  END
+END
+CALL ZocSend "q"
+
+loops = ZocAsk("How many loops should we do?", "")
+IF loops < 1 THEN DO
+  SIGNAL Abend
+END
+
+DO x = loops to 1 BY -1
+  IF safemode = "Yes" THEN DO
+    CALL ZocSend "#"
+    CALL ZocDelay 2
+  END
+  CALL ZocSend "l"
+  IF NoPScan = 1 THEN DO
+    CALL ZocSend drop
+    CALL ZocSend "^M"
+  END
+
+  CALL ZocSend "snl"
+  CALL ZocSend group
+  CALL ZocSend "^M"
+
+  IF planet <> drop THEN DO
+    CALL ZocSend "q"
+    CALL ZocSend "l"
+    IF NoPScan = 1 THEN DO
+      CALL ZocSend planet
+      CALL ZocSend "^M"
+    END
+  END
+
+  CALL ZocSend "tnt1"
+  CALL ZocSend fuel
+  CALL ZocSend "^M"
+  IF pt = "No" THEN DO
+    CALL ZocSend "q"
+    CALL ZocWait "Command [TL="
+    CALL ZocSend jump
+    CALL ZocSend "^M"
+    result = ZocWaitMux("engage the TransWarp", "Engage the Autopilot?")
+    SELECT
+      WHEN result = 0 THEN DO
+        CALL ZocSend "y"
+        CALL ZocWait "shall we engage?"
+          CALL ZocSend "y"
+      END
+      WHEN result = 1 THEN DO
+        CALL ZocSend "e"
+      END
+    END
+  END
+  ELSE DO
+    CALL ZocSend "c"
+    CALL ZocWait "Citadel command"
+    CALL ZocSend "b"
+    CALL ZocWait "what sector"
+    CALL ZocSend jump
+    CALL ZocSend "^M"
+    CALL ZocWait "engage?"
+    CALL ZocSend "y"
+    CALL ZocWait "Command ["
+  END
+
+  IF jump <> 1 THEN DO  
+    CALL ZocSend "1"
+    CALL ZocSend "^M"
+    CALL ZocWait "engage the TransWarp"
+    CALL ZocSend "n"
+    CALL ZocWait "Engage the Autopilot?"
+    CALL ZocSend "e"
+    CALL ZocWait "Autopilot disengaging."
+  END
+  
+  CALL ZocSend "l"
+  result = ZocWaitMux("which planet", "leave")
+  SELECT
+    WHEN result = 0 THEN DO
+      CALL ZocSend "1^M"
+      CALL ZocSend "^M"
+      CALL ZocSend "^M"
+    END
+    WHEN result = 1 THEN DO
+      CALL ZocSend "^M"
+      CALL ZocSend "^M"
+    END
+    WHEN result = 640 THEN SIGNAL Abend
+  END
+
+  CALL ZocWait "deducted, "
+  turns = GrabIt(" ")
+  IF turns < 10 THEN x = 1
+  CALL ZocNotify x
+  CALL ZocSend sector
+  IF tsectors < 10000 & sector > 999 THEN DO
+  END
+  ELSE DO
+    CALL ZocSend "^M"
+  END
+  result = ZocWaitMux("engage the TransWarp", "Engage the Autopilot?")
+  SELECT
+    WHEN result = 0 THEN DO
+      CALL ZocSend "y"
+      CALL ZocWait "shall we engage?"
+      CALL ZocSend "y"
+    END
+    WHEN result = 1 THEN DO
+      CALL ZocSend "e"
+    END
+  END
+END
+
+CALL ZocSend "l"
+IF NoPScan = 1 THEN DO
+  CALL ZocSend drop
+  CALL ZocSend "^M"
+END
+CALL ZocSend "snl"
+CALL ZocSend group
+CALL ZocSend "^M"
+CALL ZocSend "q"
+CALL ZocSend "d"
+CALL ZocNotify "Done colonizing."
+EXIT
+
+Abend:
+  CALL ZocMsgBox "Script ended abnormally.", 1
+  EXIT
+
+GrabIt:
+  ARG delimiter
+  it = ""
+  CALL ZocWait delimiter
+  buffer = ZocLastLine()
+  DO ptr = 1 TO LENGTH(buffer)
+    ch = SUBSTR(buffer, ptr, 1)
+    IF ch <> delimiter THEN DO
+      IF ch <> "," THEN it = it || ch
+    END
+  END
+RETURN it
+
+gety:
+  xy = ZocCursor()
+  PARSE VALUE xy WITH x y
+  return y
+
+getx:
+  xy = ZocCursor()
+  PARSE VALUE xy WITH x y
+  return x
+
+_stripnum2: /* strip everything but numerals */
+ stnum=""
+ do sti=1 to length(arg(1))
+  stchar=substr(arg(1),sti,1)
+  if _in(stchar,1,2,3,4,5,6,7,8,9,0) then stnum=stnum||stchar
+ end /* do */
+return stnum
+
+_in:
+ ir=0
+ ii=2
+
+ if (arg(1)=="") | (arg(2)=="") then idone=1
+ else idone=0
+
+ do while \idone
+  if arg(1)==arg(ii) then do
+   ir=1
+   idone=1
+  end /* if */
+  ii=ii+1
+  if arg(ii)=="" then idone=1
+ end /* do while */
+return ir
+
+_quit:
+EXIT
